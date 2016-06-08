@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -13,15 +14,32 @@ namespace LeisureComplexServer
     {
         protected override Task OnMessage(MessageEventArgs e)
         {
-            Send("HelloWorld");
+
+            // Send("HelloWorld");
+            Console.WriteLine("收到连接");
+
+            StreamReader reader = new StreamReader(e.Data);
+
+            Console.WriteLine(reader.ReadToEnd());
+
             return base.OnMessage(e);
         }
+
+
+        protected override Task OnOpen()
+        {
+            Console.WriteLine(this.Id);
+            Console.WriteLine("Open");
+            return base.OnOpen();
+        }
+
     }
     class Program
     {
         static void Main(string[] args)
         {
-            var wssv = new WebSocketServer(IPAddress.Parse("127.0.0.1"),9333);
+            var wssv = new WebSocketServer(IPAddress.Parse("192.168.0.105"), 9001);
+           
             wssv.AddWebSocketService<Laputa>("/Laputa");
             wssv.Start();
             Console.WriteLine("启动成功");
