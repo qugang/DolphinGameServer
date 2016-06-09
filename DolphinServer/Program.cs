@@ -66,15 +66,7 @@ namespace LeisureComplexServer
 
 
             Console.WriteLine(DateTime.Now - dt);
-
-
-            //var wssv = new WebSocketServer(IPAddress.Parse("192.168.0.105"), 9001);
-
-            //wssv.AddWebSocketService<Laputa>("/Laputa");
-            //wssv.Start();
-            //Console.WriteLine("启动成功");
-            //Console.ReadKey(true);
-            //wssv.Stop();
+            
         }
     }
 }
