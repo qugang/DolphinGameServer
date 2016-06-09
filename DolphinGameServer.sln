@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DolphinServer", "DolphinSer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogLib", "LogLib\LogLib.csproj", "{7A48EB3E-7772-471B-9B64-715909AA0619}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DolphinCommonUtil", "DolphinCommon\DolphinCommonUtil.csproj", "{DEEA5DCC-3E77-456A-A745-06B87A8256FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{7A48EB3E-7772-471B-9B64-715909AA0619}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A48EB3E-7772-471B-9B64-715909AA0619}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A48EB3E-7772-471B-9B64-715909AA0619}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEEA5DCC-3E77-456A-A745-06B87A8256FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEEA5DCC-3E77-456A-A745-06B87A8256FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEEA5DCC-3E77-456A-A745-06B87A8256FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEEA5DCC-3E77-456A-A745-06B87A8256FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

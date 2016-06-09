@@ -1,8 +1,11 @@
-﻿using System;
+﻿using DolphinDB.Redis;
+using DolphinServer.Entity;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using WebSocketSharp;
@@ -38,13 +41,40 @@ namespace LeisureComplexServer
     {
         static void Main(string[] args)
         {
-            var wssv = new WebSocketServer(IPAddress.Parse("192.168.0.105"), 9001);
-           
-            wssv.AddWebSocketService<Laputa>("/Laputa");
-            wssv.Start();
-            Console.WriteLine("启动成功");
-            Console.ReadKey(true);
-            wssv.Stop();
+
+            RedisContext context = RedisContext.CreateRedisContext("localhost,allowAdmin=true", Assembly.GetAssembly(typeof(Program)));
+
+            DateTime dt = DateTime.Now;
+
+            //for (int i = 0; i < 100000; i++)
+            //{
+            //    GameUser user = new GameUser();
+            //    user.UserID = Guid.NewGuid().ToString();
+            //    user.UserName = "qugang";
+            //    context.AddHashEntity(user);
+            //}
+
+
+            Console.WriteLine(DateTime.Now - dt);
+
+
+            dt = DateTime.Now;
+            foreach (var row in context.FindEntityAll<GameUser>())
+            {
+
+            }
+
+
+            Console.WriteLine(DateTime.Now - dt);
+
+
+            //var wssv = new WebSocketServer(IPAddress.Parse("192.168.0.105"), 9001);
+
+            //wssv.AddWebSocketService<Laputa>("/Laputa");
+            //wssv.Start();
+            //Console.WriteLine("启动成功");
+            //Console.ReadKey(true);
+            //wssv.Stop();
         }
     }
 }

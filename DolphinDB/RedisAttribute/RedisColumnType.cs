@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace DolphinDB.Redis
 {
-    public class RedisColumnKey : Attribute
+    public enum RedisColumnType
     {
-
+        RedisKey,
+        RedisScore,
+        RedisColumn
     }
 }

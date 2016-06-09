@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace DolphinDB.Redis
 {
-    public class RedisColumn : Attribute
+    public class RedisTableAttribute : Attribute
     {
-
     }
 }

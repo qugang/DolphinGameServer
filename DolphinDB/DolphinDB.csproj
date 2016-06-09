@@ -44,16 +44,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RedisAttribute\RedisDynamicMethodEmit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Redis\RedisColumn.cs" />
-    <Compile Include="Redis\RedisColumnScore.cs" />
+    <Compile Include="RedisAttribute\RedisColumnAttribute.cs" />
+    <Compile Include="RedisAttribute\RedisColumnType.cs" />
     <Compile Include="Redis\RedisContext.cs" />
-    <Compile Include="Redis\RedisColumnKey.cs" />
+    <Compile Include="RedisAttribute\RedisTableAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\DolphinCommon\DolphinCommonUtil.csproj">
+      <Project>{deea5dcc-3e77-456a-a745-06b87a8256fb}</Project>
+      <Name>DolphinCommonUtil</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
