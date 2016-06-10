@@ -25,6 +25,8 @@ namespace DolphinNetWork
 
         public string Sign { get; set; }
 
+        public GameSession Session { get; set; }
+
         public Dictionary<string, string> HttpQueryString { get; set; }
     }
 }

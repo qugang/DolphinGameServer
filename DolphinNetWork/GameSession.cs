@@ -10,6 +10,8 @@ namespace DolphinNetWork
     {
         public Guid SessionId { get; set; }
 
+        public IGameUser User { get; set; }
+
         public GameSessionState SessionState { get; set; }
         public static GameSession NewSession()
         {
@@ -19,5 +21,7 @@ namespace DolphinNetWork
         {
             return new GameSession { SessionId = session, SessionState = GameSessionState.OnLine };
         }
+
+
     }
 }

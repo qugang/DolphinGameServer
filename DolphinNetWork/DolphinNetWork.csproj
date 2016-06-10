@@ -51,6 +51,8 @@
     <Compile Include="GameSession.cs" />
     <Compile Include="GameSessionManager.cs" />
     <Compile Include="GameSessionState.cs" />
+    <Compile Include="GameUserState.cs" />
+    <Compile Include="IGameUser.cs" />
     <Compile Include="WebSocketPackage.cs" />
     <Compile Include="WebSocketServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

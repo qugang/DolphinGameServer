@@ -15,7 +15,7 @@ namespace DolphinServer.Controller
 
         }
 
-        public override void ProcessAction()
+        public override byte[] ProcessAction()
         {
             throw new NotImplementedException();
         }
