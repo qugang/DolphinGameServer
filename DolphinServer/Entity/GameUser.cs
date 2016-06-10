@@ -25,5 +25,10 @@ namespace DolphinServer.Entity
 
         [RedisColumn(RedisColumnType.RedisColumn)]
         public GameUserState UserState { get; set; }
+
+        public bool Login(string uid)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

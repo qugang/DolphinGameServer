@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,6 +9,22 @@ namespace Free.Dolphin.Core
 {
     public class ControllerContext
     {
+        private static Func<object> _gameUserFunc = null;
+        public static void InitGameUserType<T>()
+        {
+            _gameUserFunc = CreateInstanceDelegate<T>();
+        }
+
+        private static Func<object> CreateInstanceDelegate<T>()
+        {
+            var construtor = typeof(T).GetConstructor(null);
+            NewExpression newExp = Expression.New(construtor, null);
+            Expression<Func<object>> lambdaExp =
+                Expression.Lambda<Func<object>>(newExp, null);
+            Func<object> func = lambdaExp.Compile();
+            return func;
+        }
+
         internal ControllerContext(Dictionary<string, string> keyValue)
         {
             this.HttpQueryString = keyValue;
@@ -16,8 +33,13 @@ namespace Free.Dolphin.Core
             this.Uid = HttpQueryString["Uid"].ToString();
             this.Sign = HttpQueryString["Sign"].ToString();
             this.Pwd = HttpQueryString["Pwd"].ToString();
+            
+            if (!String.IsNullOrEmpty(this.Uid))
+            {
+                IGameUser user = (IGameUser)_gameUserFunc();
+                user.Login(this.Uid);
+            }
 
-            //TODO IGameUser如何初始化
 
         }
         public int ProtocolNumber { get; set; }

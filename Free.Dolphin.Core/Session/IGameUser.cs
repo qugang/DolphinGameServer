@@ -13,5 +13,7 @@ namespace Free.Dolphin.Core
         Guid Sid { get; set; }
         DateTime OnlimeDate { get; set; }
         GameUserState UserState { get; set; }
+
+        Boolean Login(string uid);
     }
 }

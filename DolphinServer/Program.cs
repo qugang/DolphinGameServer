@@ -18,6 +18,7 @@ namespace LeisureComplexServer
         {
             RedisContext.InitRedisContext("localhost,allowAdmin=true", Assembly.GetAssembly(typeof(Program)));
             ControllerFactory.InitController(Assembly.GetAssembly(typeof(Program)));
+            ControllerContext.InitGameUserType<GameUser>();
             WebSocketServer.Init("192.168.0.105", 9001);
             Console.ReadKey();
 
