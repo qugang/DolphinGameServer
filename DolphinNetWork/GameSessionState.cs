@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace DolphinNetWork
 {
-    public class AuthAttribute : Attribute
+    public enum GameSessionState
     {
-
+        OnLine,
+        OffLine
     }
 }

@@ -70,6 +70,7 @@ namespace DolphinDB.Redis
         }
 
 
+        //TODO: 修改序列化的方式
         public async void AddHashEntityAsync(object entity)
         {
             await Task.Run(() =>
@@ -99,7 +100,9 @@ namespace DolphinDB.Redis
 
         public IEnumerable<T> FindEntityAll<T>()
         {
-            foreach (var row in RedisDb.HashGetAll(typeof(T).Name))
+            Task<HashEntry[]> task = RedisDb.HashGetAllAsync(typeof(T).Name);
+            Task.WaitAll(task);
+            foreach (var row in task.Result)
             {
                 yield return (T)SerializerUtil.BinaryDeserialize(row.Value);
             }

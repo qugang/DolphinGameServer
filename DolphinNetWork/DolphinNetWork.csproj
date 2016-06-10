@@ -44,10 +44,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActionPackage.cs" />
-    <Compile Include="AuthAttribute.cs" />
-    <Compile Include="DolphinWebSocket.cs" />
+    <Compile Include="ControllAttribute\ControllerAuthAttribute.cs" />
+    <Compile Include="Controller\ControllerBase.cs" />
+    <Compile Include="Controller\ControllerContext.cs" />
+    <Compile Include="ControllAttribute\ControllerProtocolAttribute.cs" />
+    <Compile Include="GameSession.cs" />
+    <Compile Include="GameSessionManager.cs" />
+    <Compile Include="GameSessionState.cs" />
+    <Compile Include="WebSocketPackage.cs" />
+    <Compile Include="WebSocketServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Controller\ControllerFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -14,6 +14,8 @@ namespace DolphinNetWork
     {
         protected override Task OnClose(CloseEventArgs e)
         {
+
+            //TODO: 客户端断开连接时如何处理Session
             return base.OnClose(e);
         }
 
@@ -24,6 +26,13 @@ namespace DolphinNetWork
 
         protected override Task OnMessage(MessageEventArgs e)
         {
+            Dictionary<string, string> keyValue = WebSocketPackage.UnPackage(e.Data);
+
+            ControllerContext context = new ControllerContext(keyValue);
+
+            GameSession session = GameSessionManager.UpdateOrAddSession(context.Sid);
+
+            ControllerFactory.CreateController(context).ProcessAction();
             return base.OnMessage(e);
         }
 
@@ -33,11 +42,11 @@ namespace DolphinNetWork
         }
     }
 
-    public class DolphinWebSocket
+    public class WebSocketServer
     {
-        public void Init()
+        public static void Init(string ip, int port)
         {
-            var wssv = new WebSocketServer(IPAddress.Parse("192.168.0.105"), 9001);
+            var wssv = new WebSocketSharp.Server.WebSocketServer(IPAddress.Parse(ip), port);
             wssv.AddWebSocketService<DefaultBehavior>("/");
             wssv.Start();
         }
