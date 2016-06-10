@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebSocketSharp;
 
 namespace Free.Dolphin.Core
 {
@@ -11,6 +12,8 @@ namespace Free.Dolphin.Core
         public Guid SessionId { get; set; }
 
         public IGameUser User { get; set; }
+
+        public WebSocket SocketClient { get; set; }
 
         public GameSessionState SessionState { get; set; }
         public static GameSession NewSession()

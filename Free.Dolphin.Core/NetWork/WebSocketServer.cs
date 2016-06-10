@@ -29,8 +29,9 @@ namespace Free.Dolphin.Core
             Dictionary<string, string> keyValue = WebSocketPackage.UnPackage(e.Data);
 
             ControllerContext context = new ControllerContext(keyValue);
-
+            
             GameSession session = GameSessionManager.UpdateOrAddSession(context.Sid);
+            session.SocketClient = Context.WebSocket;
             context.Session = session;
             ControllerBase controller = ControllerFactory.CreateController(context);
             if (controller.IsAuth() && !controller.IsLogin())
