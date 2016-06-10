@@ -18,7 +18,7 @@ namespace LeisureComplexServer
         static void Main(string[] args)
         {
             
-            RedisContext context = RedisContext.CreateRedisContext("localhost,allowAdmin=true", Assembly.GetAssembly(typeof(Program)));
+          
             ControllerFactory.InitController(Assembly.GetAssembly(typeof(Program)));
             WebSocketServer.Init("192.168.0.105", 9001);
             Console.ReadKey();

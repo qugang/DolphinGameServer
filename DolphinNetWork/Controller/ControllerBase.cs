@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DolphinDB.Redis;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -10,6 +11,7 @@ namespace DolphinNetWork
     public abstract class ControllerBase
     {
         protected ControllerContext Context { get; set; }
+        
 
         public ControllerBase(ControllerContext context)
         {

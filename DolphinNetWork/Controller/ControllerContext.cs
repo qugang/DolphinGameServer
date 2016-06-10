@@ -15,6 +15,7 @@ namespace DolphinNetWork
             this.Sid = Guid.Parse(HttpQueryString["Sid"].ToString());
             this.Uid = HttpQueryString["Uid"].ToString();
             this.Sign = HttpQueryString["Sign"].ToString();
+            this.Pwd = HttpQueryString["Pwd"].ToString();
 
         }
         public int ProtocolNumber { get; set; }
@@ -22,6 +23,8 @@ namespace DolphinNetWork
         public Guid Sid { get; set; }
 
         public string Uid { get; set; }
+
+        public string Pwd { get; set; }
 
         public string Sign { get; set; }
 

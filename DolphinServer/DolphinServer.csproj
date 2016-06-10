@@ -55,7 +55,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\GameController.cs" />
+    <Compile Include="Controller\Controller1001.cs" />
+    <Compile Include="Controller\Controller1002.cs" />
     <Compile Include="Entity\GameUser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

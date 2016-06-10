@@ -20,6 +20,7 @@ namespace DolphinDB.Redis
 
         static Dictionary<Type, RedisDynamicMethodEmit> _tableCache = new Dictionary<Type, RedisDynamicMethodEmit>();
         static Dictionary<Type, RedisDynamicMethodEmit> _rankCache = new Dictionary<Type, RedisDynamicMethodEmit>();
+        public static RedisContext GlobalContext = RedisContext.CreateRedisContext("localhost,allowAdmin=true", Assembly.GetAssembly(typeof(Program)));
 
         protected static ConnectionMultiplexer RedisConnection { get; private set; }
 
