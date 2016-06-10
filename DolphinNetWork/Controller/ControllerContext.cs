@@ -17,6 +17,8 @@ namespace DolphinNetWork
             this.Sign = HttpQueryString["Sign"].ToString();
             this.Pwd = HttpQueryString["Pwd"].ToString();
 
+            //TODO IGameUser如何初始化
+
         }
         public int ProtocolNumber { get; set; }
 
