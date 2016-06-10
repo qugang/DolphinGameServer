@@ -1,5 +1,5 @@
 # Dolphin 介绍
-简单MVC模式手游框架
+简单MVC模式手游服务端框架
 
 ## Documentations
 暂缺
