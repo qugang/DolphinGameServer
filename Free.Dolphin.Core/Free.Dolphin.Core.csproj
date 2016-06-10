@@ -4,17 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D3C0D87C-E6F4-424F-BA11-587E13AF5404}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{099B1703-E9E8-47D9-A851-19AC11C66C4A}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DolphinServer</RootNamespace>
-    <AssemblyName>DolphinServer</AssemblyName>
+    <RootNamespace>Free.Dolphin.Core</RootNamespace>
+    <AssemblyName>Free.Dolphin.Core</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -33,12 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Google.ProtocolBuffers, Version=2.4.1.555, Culture=neutral, PublicKeyToken=55f7125234beb589, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.ProtocolBuffers.2.4.1.555\lib\net40\Google.ProtocolBuffers.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Google.ProtocolBuffers.Serialization, Version=2.4.1.555, Culture=neutral, PublicKeyToken=55f7125234beb589, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.ProtocolBuffers.2.4.1.555\lib\net40\Google.ProtocolBuffers.Serialization.dll</HintPath>
+    <Reference Include="StackExchange.Redis, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\StackExchange.Redis.1.1.603\lib\net46\StackExchange.Redis.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -55,20 +48,32 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\Controller1001.cs" />
-    <Compile Include="Controller\Controller1002.cs" />
-    <Compile Include="Entity\GameUser.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Controller\ControllAttribute\ControllerAuthAttribute.cs" />
+    <Compile Include="Controller\ControllerBase.cs" />
+    <Compile Include="Controller\ControllerContext.cs" />
+    <Compile Include="Controller\ControllAttribute\ControllerProtocolAttribute.cs" />
+    <Compile Include="Redis\RedisAttribute\RedisColumnAttribute.cs" />
+    <Compile Include="Redis\RedisAttribute\RedisColumnType.cs" />
+    <Compile Include="Redis\RedisAttribute\RedisDynamicMethodEmit.cs" />
+    <Compile Include="Redis\RedisAttribute\RedisTableAttribute.cs" />
+    <Compile Include="Redis\RedisContext.cs" />
+    <Compile Include="Session\GameSession.cs" />
+    <Compile Include="Session\GameSessionManager.cs" />
+    <Compile Include="Session\GameSessionState.cs" />
+    <Compile Include="Session\GameUserState.cs" />
+    <Compile Include="Session\IGameUser.cs" />
+    <Compile Include="NetWork\WebSocketPackage.cs" />
+    <Compile Include="NetWork\WebSocketServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Controller\ControllerFactory.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Free.Dolphin.Core\Free.Dolphin.Core.csproj">
-      <Project>{099b1703-e9e8-47d9-a851-19ac11c66c4a}</Project>
-      <Name>Free.Dolphin.Core</Name>
+    <ProjectReference Include="..\Free.Dolphin.Common\Free.Dolphin.Common.csproj">
+      <Project>{deea5dcc-3e77-456a-a745-06b87a8256fb}</Project>
+      <Name>Free.Dolphin.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
