@@ -1,4 +1,5 @@
-﻿using Free.Dolphin.Core;
+﻿using DolphinServer.Entity;
+using Free.Dolphin.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace DolphinServer.Controller
         public override byte[] ProcessAction()
         {
             string number = this.Context.HttpQueryString["RoomNumber"];
-
+            
             throw new NotImplementedException();
         }
     }

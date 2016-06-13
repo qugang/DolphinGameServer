@@ -93,6 +93,13 @@ namespace Free.Dolphin.Core
             });
         }
 
+        public long IncrHashEntity(object entity)
+        {
+            Type t = entity.GetType();
+            var key = _tableCache[t].GetValue(entity).ToString();
+            return RedisDb.HashIncrement(t.Name, key);
+        }
+
         public T FindHashEntityByKey<T>(string key)
         {
             return (T)SerializerUtil.BinaryDeserialize(RedisDb.HashGet(typeof(T).Name, key));

@@ -57,10 +57,8 @@
     <Compile Include="Redis\RedisAttribute\RedisDynamicMethodEmit.cs" />
     <Compile Include="Redis\RedisAttribute\RedisTableAttribute.cs" />
     <Compile Include="Redis\RedisContext.cs" />
-    <Compile Include="Service\GameService.cs" />
     <Compile Include="Session\GameSession.cs" />
     <Compile Include="Session\GameSessionManager.cs" />
-    <Compile Include="Session\GameSessionState.cs" />
     <Compile Include="Session\GameUserState.cs" />
     <Compile Include="Session\IGameUser.cs" />
     <Compile Include="NetWork\WebSocketPackage.cs" />

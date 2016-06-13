@@ -15,7 +15,8 @@ namespace Free.Dolphin.Core
     {
         protected override Task OnClose(CloseEventArgs e)
         {
-            //TODO: 客户端断开连接时如何处理Session
+            GameSessionManager.RemoveSession(Context.WebSocket);
+            
             return base.OnClose(e);
         }
 
@@ -30,8 +31,7 @@ namespace Free.Dolphin.Core
 
             ControllerContext context = new ControllerContext(keyValue);
             
-            GameSession session = GameSessionManager.UpdateOrAddSession(context.Sid);
-            session.SocketClient = Context.WebSocket;
+            GameSession session = GameSessionManager.UpdateOrAddSession(Context.WebSocket);
             context.Session = session;
             ControllerBase controller = ControllerFactory.CreateController(context);
             if (controller.IsAuth() && !controller.IsLogin())

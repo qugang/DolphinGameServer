@@ -59,11 +59,11 @@
     <Compile Include="Controller\Controller1002.cs" />
     <Compile Include="Controller\Controller1003.cs" />
     <Compile Include="Controller\ControllerType.cs" />
-    <Compile Include="Entity\GameRoom.cs" />
     <Compile Include="Entity\GameUser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service\GameRoomService.cs" />
+    <Compile Include="Service\GameRoom.cs" />
+    <Compile Include="Service\GameRoomManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

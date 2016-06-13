@@ -11,19 +11,17 @@ namespace Free.Dolphin.Core
     {
         internal GameSession() {
         }
-        public Guid SessionId { get; set; }
 
         public IGameUser User { get; set; }
 
         public WebSocket SocketClient { get; set; }
 
-        public GameSessionState SessionState { get; set; }
-
-        internal static GameSession Parse(Guid session)
+        public static GameSession Parse(WebSocket socket)
         {
-            return new GameSession { SessionId = session, SessionState = GameSessionState.OnLine };
+            GameSession session = new GameSession();
+            session.SocketClient = socket;
+            session.User = null;
+            return session;
         }
-
-
     }
 }

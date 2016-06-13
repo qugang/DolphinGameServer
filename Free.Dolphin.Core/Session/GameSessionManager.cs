@@ -4,29 +4,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebSocketSharp;
 
 namespace Free.Dolphin.Core
 {
     public class GameSessionManager
     {
-        private static ConcurrentDictionary<Guid, GameSession> _sessions = new ConcurrentDictionary<Guid, GameSession>();
+        private static ConcurrentDictionary<WebSocket, GameSession> _sessions = new ConcurrentDictionary<WebSocket, GameSession>();
 
-        public static GameSession UpdateOrAddSession(Guid sessionId)
+        public static GameSession UpdateOrAddSession(WebSocket socket)
         {
-            return _sessions.AddOrUpdate(sessionId, GameSession.Parse(sessionId), (sessionKey, gameSession) =>
+            return _sessions.AddOrUpdate(socket, GameSession.Parse(socket), (sessionKey, gameSession) =>
              {
-                 gameSession.SessionState = GameSessionState.OnLine;
                  return gameSession;
              });
         }
 
-        public static GameSession RemoveSession(Guid sessionId)
+        public static GameSession RemoveSession(WebSocket socket)
         {
             GameSession session = new GameSession();
-            _sessions.TryRemove(sessionId, out session);
+            _sessions.TryRemove(socket, out session);
             return session;
         }
-
-
     }
 }
