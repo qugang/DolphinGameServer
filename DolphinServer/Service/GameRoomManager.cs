@@ -19,7 +19,7 @@ namespace DolphinServer.Service
 
             GameRoom room = new GameRoom();
             room.RoomId = roomId;
-            room.UserID.Add(user);
+            room.players.Add(user);
         }
 
         public static GameRoom JoinRoom(GameSession user, int roomID)
@@ -28,7 +28,7 @@ namespace DolphinServer.Service
             rooms.TryGetValue(roomID, out room);
             if (room != null)
             {
-                room.UserID.Add(user);
+                room.players.Add(user);
                 return room;
             }
             else
@@ -55,7 +55,7 @@ namespace DolphinServer.Service
             }
             else
             {
-                room.UserID.Remove(userID);
+                room.players.Remove(userID);
             }
             return room;
         }

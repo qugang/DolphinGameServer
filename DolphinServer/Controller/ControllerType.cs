@@ -19,6 +19,27 @@ namespace DolphinServer.Controller
         /// <summary>
         /// 加入房间
         /// </summary>
-        Controller1003 = 1003
+        Controller1003 = 1003,
+        /// <summary>
+        /// 解散房间
+        /// </summary>
+        Controller1004 = 1004,
+        /// <summary>
+        /// 游戏准备
+        /// </summary>
+        Controller1005 = 1005,
+        /// <summary>
+        /// 发牌
+        /// </summary>
+        Controller1006 = 1006,
+        /// <summary>
+        /// 摸牌
+        /// </summary>
+        Controller1007 = 1007,
+
+        /// <summary>
+        /// 胡牌
+        /// </summary>
+        Controller1008 = 1008
     }
 }

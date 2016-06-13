@@ -47,6 +47,22 @@ namespace Free.Dolphin.Core
             return _controllerInitCache[context.ProtocolNumber](context);
         }
 
+        public static async void SendController(List<GameSession> session, int protocol, Dictionary<string, string> keyValue)
+        {
+            foreach (var row in session)
+            {
+                await Task.Factory.StartNew(() =>
+                {
+                    ControllerContext context = new ControllerContext(keyValue);
+                    ControllerBase controller = CreateController(context);
+                    byte[] sendByte = controller.ProcessAction();
+                    row.SocketClient.Send(sendByte);
+                }
+                );
+            }
+        }
+
+
 
 
     }

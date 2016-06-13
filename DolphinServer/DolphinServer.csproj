@@ -58,6 +58,11 @@
     <Compile Include="Controller\Controller1001.cs" />
     <Compile Include="Controller\Controller1002.cs" />
     <Compile Include="Controller\Controller1003.cs" />
+    <Compile Include="Controller\Controller1004.cs" />
+    <Compile Include="Controller\Controller1005.cs" />
+    <Compile Include="Controller\Controller1006.cs" />
+    <Compile Include="Controller\Controller1007.cs" />
+    <Compile Include="Controller\Controller1008.cs" />
     <Compile Include="Controller\ControllerType.cs" />
     <Compile Include="Entity\GameUser.cs" />
     <Compile Include="Program.cs" />
