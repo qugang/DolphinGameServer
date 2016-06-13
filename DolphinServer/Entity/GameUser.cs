@@ -26,9 +26,22 @@ namespace DolphinServer.Entity
         [RedisColumn(RedisColumnType.RedisColumn)]
         public GameUserState UserState { get; set; }
 
-        public bool Login(string uid)
+        [RedisColumn(RedisColumnType.RedisColumn)]
+        public String Name { get; set; }
+
+        public bool Login(string uid, string pwd)
         {
-            throw new NotImplementedException();
+            //TODO 对this 如何赋值
+            GameUser user = RedisContext.GlobalContext.FindHashEntityByKey<GameUser>(uid);
+            if (user != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
     }
 }

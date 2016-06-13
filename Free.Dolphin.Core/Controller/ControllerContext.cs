@@ -37,7 +37,7 @@ namespace Free.Dolphin.Core
             if (!String.IsNullOrEmpty(this.Uid))
             {
                 IGameUser user = (IGameUser)_gameUserFunc();
-                user.Login(this.Uid);
+                user.Login(this.Uid,this.Pwd);
             }
 
 

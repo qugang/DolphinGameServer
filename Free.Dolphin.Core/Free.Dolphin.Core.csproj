@@ -57,6 +57,7 @@
     <Compile Include="Redis\RedisAttribute\RedisDynamicMethodEmit.cs" />
     <Compile Include="Redis\RedisAttribute\RedisTableAttribute.cs" />
     <Compile Include="Redis\RedisContext.cs" />
+    <Compile Include="Service\GameService.cs" />
     <Compile Include="Session\GameSession.cs" />
     <Compile Include="Session\GameSessionManager.cs" />
     <Compile Include="Session\GameSessionState.cs" />
@@ -76,6 +77,7 @@
       <Name>Free.Dolphin.Common</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

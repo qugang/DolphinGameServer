@@ -11,7 +11,7 @@ namespace DolphinServer.Controller
     /// <summary>
     /// 用户登录
     /// </summary>
-    [ControllerProtocol(1001)]
+    [ControllerProtocol((int)ControllerType.Controller1001)]
     public class Controller1001 : ControllerBase
     {
         public Controller1001(ControllerContext context) : base(context)
@@ -22,7 +22,6 @@ namespace DolphinServer.Controller
         public override byte[] ProcessAction()
         {
             GameUser user = RedisContext.GlobalContext.FindHashEntityByKey<GameUser>(Context.Uid);
-
             if (user == null)
             {
                 user = new GameUser();

@@ -14,6 +14,8 @@ namespace Free.Dolphin.Core
         DateTime OnlimeDate { get; set; }
         GameUserState UserState { get; set; }
 
-        Boolean Login(string uid);
+        String Name { get; set; }
+
+        Boolean Login(string uid, string pwd);
     }
 }

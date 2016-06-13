@@ -8,19 +8,17 @@ using System.Threading.Tasks;
 namespace DolphinServer.Controller
 {
     /// <summary>
-    /// 创建房间
+    /// 加入房间
     /// </summary>
-    [ControllerProtocol((int)ControllerType.Controller1002)]
-    public class Controller1002 : ControllerBase
+    [ControllerProtocol((int)ControllerType.Controller1003)]
+    public class Controller1003 : ControllerBase
     {
-        public Controller1002(ControllerContext context) : base(context)
+        public Controller1003(ControllerContext context) : base(context)
         {
         }
 
         public override byte[] ProcessAction()
         {
-            string number = this.Context.HttpQueryString["RoomNumber"];
-
             throw new NotImplementedException();
         }
     }
