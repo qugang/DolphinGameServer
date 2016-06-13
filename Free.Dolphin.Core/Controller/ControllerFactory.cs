@@ -56,6 +56,10 @@ namespace Free.Dolphin.Core
                     ControllerContext context = new ControllerContext(keyValue);
                     ControllerBase controller = CreateController(context);
                     byte[] sendByte = controller.ProcessAction();
+                    List<byte> list = new List<byte>();
+                    list.Add((byte)(protocol >> 8));
+                    list.Add((byte)(protocol & 0xFF));
+                    list.AddRange(sendByte);
                     row.SocketClient.Send(sendByte);
                 }
                 );

@@ -16,7 +16,7 @@ namespace Free.Dolphin.Core
         protected override Task OnClose(CloseEventArgs e)
         {
             GameSessionManager.RemoveSession(Context.WebSocket);
-            
+
             return base.OnClose(e);
         }
 
@@ -30,7 +30,7 @@ namespace Free.Dolphin.Core
             Dictionary<string, string> keyValue = WebSocketPackage.UnPackage(e.Data);
 
             ControllerContext context = new ControllerContext(keyValue);
-            
+
             GameSession session = GameSessionManager.UpdateOrAddSession(Context.WebSocket);
             context.Session = session;
             ControllerBase controller = ControllerFactory.CreateController(context);
@@ -41,6 +41,10 @@ namespace Free.Dolphin.Core
             else
             {
                 byte[] sendByte = controller.ProcessAction();
+                List<byte> list = new List<byte>();
+                list.Add((byte)(context.ProtocolNumber >> 8));
+                list.Add((byte)(context.ProtocolNumber & 0xFF));
+                list.AddRange(sendByte);
                 Send(sendByte);
             }
             return base.OnMessage(e);
