@@ -44,7 +44,7 @@ namespace Free.Dolphin.Core
 
         internal static ControllerBase CreateController(ControllerContext context)
         {
-            return _controllerInitCache[context.ProtocolNumber](context);
+            return _controllerInitCache[context.ProtocolId](context);
         }
 
         public static async void SendController(List<GameSession> session, int protocol, Dictionary<string, string> keyValue)
@@ -60,7 +60,7 @@ namespace Free.Dolphin.Core
                     list.Add((byte)(protocol >> 8));
                     list.Add((byte)(protocol & 0xFF));
                     list.AddRange(sendByte);
-                    row.SocketClient.Send(sendByte);
+                    row.SocketClient.Send(list.ToArray());
                 }
                 );
             }

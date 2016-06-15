@@ -67,6 +67,8 @@
     <Compile Include="Entity\GameUser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProtoEntity\A1001Response.cs" />
+    <Compile Include="ProtoEntity\A9999DataErrorResponse.cs" />
     <Compile Include="Service\GameRoom.cs" />
     <Compile Include="Service\GameRoomManager.cs" />
   </ItemGroup>
@@ -75,13 +77,20 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Free.Dolphin.Common\Free.Dolphin.Common.csproj">
+      <Project>{DEEA5DCC-3E77-456A-A745-06B87A8256FB}</Project>
+      <Name>Free.Dolphin.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Free.Dolphin.Core\Free.Dolphin.Core.csproj">
       <Project>{099b1703-e9e8-47d9-a851-19ac11c66c4a}</Project>
       <Name>Free.Dolphin.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="ProtoEntity\" />
+    <Content Include="ProtoEntity\A1001Response.txt" />
+    <Content Include="ProtoEntity\A9999DataErrorResponse.txt" />
+    <Content Include="ProtoEntity\cmd.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

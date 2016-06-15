@@ -1,4 +1,5 @@
 ﻿using DolphinServer.Entity;
+using DolphinServer.Service;
 using Free.Dolphin.Core;
 using System;
 using System.Collections.Generic;
@@ -20,8 +21,9 @@ namespace DolphinServer.Controller
 
         public override byte[] ProcessAction()
         {
-            string number = this.Context.HttpQueryString["RoomNumber"];
+            GameRoom room = GameRoomManager.CreateRoom(Context.Session);
             
+
             throw new NotImplementedException();
         }
     }

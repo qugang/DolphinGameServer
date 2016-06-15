@@ -16,6 +16,7 @@ namespace Free.Dolphin.Common
         static LogManager()
         {
             Trace.Listeners.Add(new FileTraceListener());
+            Trace.Listeners.Add(new ConsoleTraceListener());
         }
     }
 

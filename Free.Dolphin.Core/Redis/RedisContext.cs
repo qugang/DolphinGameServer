@@ -102,7 +102,12 @@ namespace Free.Dolphin.Core
 
         public T FindHashEntityByKey<T>(string key)
         {
-            return (T)SerializerUtil.BinaryDeserialize(RedisDb.HashGet(typeof(T).Name, key));
+            var entity = RedisDb.HashGet(typeof(T).Name, key);
+            if (!entity.IsNull)
+            {
+                return (T)SerializerUtil.BinaryDeserialize(RedisDb.HashGet(typeof(T).Name, key));
+            }
+            return default(T);
         }
 
         public IEnumerable<T> FindEntityAll<T>()

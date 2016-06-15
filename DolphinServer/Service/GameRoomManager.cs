@@ -13,13 +13,15 @@ namespace DolphinServer.Service
     {
         static ConcurrentDictionary<int, GameRoom> rooms = new ConcurrentDictionary<int, GameRoom>();
 
-        public static void CreateRoom(GameSession user)
+        public static GameRoom CreateRoom(GameSession user)
         {
             int roomId = rooms.Max(p => p.Key);
 
             GameRoom room = new GameRoom();
             room.RoomId = roomId;
             room.players.Add(user);
+            rooms.TryAdd(roomId, room);
+            return room;
         }
 
         public static GameRoom JoinRoom(GameSession user, int roomID)

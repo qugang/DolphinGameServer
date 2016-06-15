@@ -15,6 +15,9 @@ namespace DolphinServer.Entity
         public string Uid { get; set; }
 
         [RedisColumn(RedisColumnType.RedisColumn)]
+        public string WeChatID { get; set; }
+
+        [RedisColumn(RedisColumnType.RedisColumn)]
         public string Pwd { get; set; }
 
         [RedisColumn(RedisColumnType.RedisColumn)]
@@ -28,20 +31,5 @@ namespace DolphinServer.Entity
 
         [RedisColumn(RedisColumnType.RedisColumn)]
         public String Name { get; set; }
-
-        public bool Login(string uid, string pwd)
-        {
-            //TODO 对this 如何赋值
-            GameUser user = RedisContext.GlobalContext.FindHashEntityByKey<GameUser>(uid);
-            if (user != null)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-
-        }
     }
 }

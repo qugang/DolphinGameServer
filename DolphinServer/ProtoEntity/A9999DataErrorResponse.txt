@@ -1,0 +1,6 @@
+syntax = "proto2";
+option csharp_namespace = "DolphinServer.ProtoEntity";
+message A9999DataErrorResponse{
+  required string ErrorInfo = 1;
+  required int32 ErrorCode = 2;
+}

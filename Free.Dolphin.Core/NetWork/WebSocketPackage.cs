@@ -9,12 +9,10 @@ namespace Free.Dolphin.Core
 {
     internal class WebSocketPackage
     {
-        internal static Dictionary<string, string> UnPackage(Stream data)
+        internal static Dictionary<string, string> UnPackage(string context)
         {
             Dictionary<string, string> dic = new Dictionary<string, string>();
-            StreamReader sr = new StreamReader(data,Encoding.UTF8);
-
-            string str = sr.ReadToEnd();
+            string str = System.Web.HttpUtility.UrlDecode(context.Replace("?d=", ""));
 
             foreach (var row in str.Split('&'))
             {

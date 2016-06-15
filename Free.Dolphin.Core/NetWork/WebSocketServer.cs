@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Free.Dolphin.Common.Util;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -22,42 +23,60 @@ namespace Free.Dolphin.Core
 
         protected override Task OnError(ErrorEventArgs e)
         {
+            byte[] array =  WebSocketServer.OnErrorMessage(e.Message, e.Exception);
             return base.OnError(e);
         }
 
         protected override Task OnMessage(MessageEventArgs e)
         {
-            Dictionary<string, string> keyValue = WebSocketPackage.UnPackage(e.Data);
-
-            ControllerContext context = new ControllerContext(keyValue);
-
-            GameSession session = GameSessionManager.UpdateOrAddSession(Context.WebSocket);
-            context.Session = session;
-            ControllerBase controller = ControllerFactory.CreateController(context);
-            if (controller.IsAuth() && !controller.IsLogin())
+            try
             {
-                //TODO : 没有登录处理
+                string message = StreamUtil.ReadStringToEnd(e.Data);
+                WebSocketServer.OnRevice(message);
+                Dictionary<string, string> keyValue = WebSocketPackage.UnPackage(message);
+                ControllerContext context = new ControllerContext(keyValue);
+                GameSession session = GameSessionManager.UpdateOrAddSession(Context.WebSocket);
+                context.Session = session;
+                ControllerBase controller = ControllerFactory.CreateController(context);
+                if (controller.IsAuth() && !controller.IsLogin())
+                {
+                    //TODO : 没有登录处理
+                }
+                else
+                {
+                    byte[] sendByte = controller.ProcessAction();
+                    List<byte> list = new List<byte>();
+                    list.Add((byte)(context.ProtocolId >> 8));
+                    list.Add((byte)(context.ProtocolId & 0xFF));
+                    list.AddRange(sendByte);
+                    WebSocketServer.OnSend(list.ToArray());
+                    Send(list.ToArray());
+                }
             }
-            else
+            catch (Exception ex)
             {
-                byte[] sendByte = controller.ProcessAction();
-                List<byte> list = new List<byte>();
-                list.Add((byte)(context.ProtocolNumber >> 8));
-                list.Add((byte)(context.ProtocolNumber & 0xFF));
-                list.AddRange(sendByte);
-                Send(sendByte);
+                Error("处理请求出错", ex);
             }
             return base.OnMessage(e);
         }
 
         protected override Task OnOpen()
         {
+            WebSocketServer.OnOpen(Context.UserEndPoint.ToString());
             return base.OnOpen();
         }
     }
 
     public class WebSocketServer
     {
+
+        public static Func<string,Exception,byte[]> OnErrorMessage { get; set; }
+
+        public static Action<string> OnRevice { get; set; }
+
+        public static Action<Byte[]> OnSend { get; set; }
+
+        public static Action<string> OnOpen { get; set; }
         public static void Init(string ip, int port)
         {
             var wssv = new WebSocketSharp.Server.WebSocketServer(IPAddress.Parse(ip), port);
