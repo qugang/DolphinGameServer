@@ -24,6 +24,7 @@ namespace Free.Dolphin.Core
         protected override Task OnError(ErrorEventArgs e)
         {
             byte[] array =  WebSocketServer.OnErrorMessage(e.Message, e.Exception);
+            Send(array);
             return base.OnError(e);
         }
 

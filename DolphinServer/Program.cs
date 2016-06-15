@@ -28,7 +28,7 @@ namespace LeisureComplexServer
                 LogManager.Log.Error(message, exption);
                 A9999DataErrorResponse.Builder response = A9999DataErrorResponse.CreateBuilder();
                 response.ErrorCode = 999;
-                response.ErrorInfo = "服务器繁忙";
+                response.ErrorInfo = "服务器繁忙!";
                 List<byte> list = new List<byte>();
                 list.Add((byte)(9999 >> 8));
                 list.Add((byte)(9999 & 0xFF));
