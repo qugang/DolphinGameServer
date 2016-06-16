@@ -31,5 +31,18 @@ namespace DolphinServer.Entity
 
         [RedisColumn(RedisColumnType.RedisColumn)]
         public String Name { get; set; }
+        
+        IGameUser IGameUser.Login(string uid, string pwd)
+        {
+            if (uid != null)
+            {
+                GameUser user = RedisContext.GlobalContext.FindHashEntityByKey<GameUser>(uid);
+                return user;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using DolphinServer.Entity;
+using DolphinServer.ProtoEntity;
 using DolphinServer.Service;
 using Free.Dolphin.Core;
 using System;
@@ -17,14 +18,15 @@ namespace DolphinServer.Controller
     {
         public Controller1002(ControllerContext context) : base(context)
         {
+
         }
 
         public override byte[] ProcessAction()
         {
             GameRoom room = GameRoomManager.CreateRoom(Context.Session);
-            
-
-            throw new NotImplementedException();
+            A1002Response.Builder response = A1002Response.CreateBuilder();
+            response.RoomID = room.RoomId;
+            return response.Build().ToByteArray();
         }
     }
 }

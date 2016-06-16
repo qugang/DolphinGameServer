@@ -41,7 +41,21 @@ namespace Free.Dolphin.Core
                 ControllerBase controller = ControllerFactory.CreateController(context);
                 if (controller.IsAuth() && !controller.IsLogin())
                 {
-                    //TODO : 没有登录处理
+                    //TODO : 处理断线从新登陆
+                    if (controller.Login())
+                    {
+                        byte[] sendByte = controller.ProcessAction();
+                        List<byte> list = new List<byte>();
+                        list.Add((byte)(context.ProtocolId >> 8));
+                        list.Add((byte)(context.ProtocolId & 0xFF));
+                        list.AddRange(sendByte);
+                        WebSocketServer.OnSend(list.ToArray());
+                        Send(list.ToArray());
+                    }
+                    else
+                    {
+                        Error("断线重登处理失败", new Exception("断线重登处理失败"));
+                    }
                 }
                 else
                 {

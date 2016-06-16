@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,8 +10,24 @@ namespace Free.Dolphin.Core
 {
     public abstract class ControllerBase
     {
+        private static Func<object> _gameUserFunc = null;
+        public static void InitGameUserType<T>()
+        {
+            _gameUserFunc = CreateInstanceDelegate<T>();
+        }
+
+        private static Func<object> CreateInstanceDelegate<T>()
+        {
+            var construtor = typeof(T).GetConstructor(new Type[] { });
+            NewExpression newExp = Expression.New(construtor, null);
+            Expression<Func<object>> lambdaExp =
+                Expression.Lambda<Func<object>>(newExp, null);
+            Func<object> func = lambdaExp.Compile();
+            return func;
+        }
+
         protected ControllerContext Context { get; set; }
-        
+
 
         public ControllerBase(ControllerContext context)
         {
@@ -27,6 +44,30 @@ namespace Free.Dolphin.Core
         public Boolean IsAuth()
         {
             return this.GetType().GetCustomAttribute<ControllerAuthAttribute>() == null ? false : true;
+        }
+
+        public Boolean Login()
+        {
+            string uid = null;
+            string pwd = null;
+            if (Context.HttpQueryString.ContainsKey("Uid"))
+            {
+                uid = Context.HttpQueryString[uid];
+            }
+            if (Context.HttpQueryString.ContainsKey("Pwd"))
+            {
+                pwd = null;
+            }
+            var user = (_gameUserFunc() as IGameUser).Login(uid, pwd);
+            if (user == null)
+            {
+                return false;
+            }
+            else
+            {
+                Context.Session.User = user;
+                return true;
+            }
         }
     }
 }

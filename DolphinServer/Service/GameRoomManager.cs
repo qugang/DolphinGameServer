@@ -5,6 +5,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace DolphinServer.Service
@@ -13,15 +14,21 @@ namespace DolphinServer.Service
     {
         static ConcurrentDictionary<int, GameRoom> rooms = new ConcurrentDictionary<int, GameRoom>();
 
+        private static int maxRoomeId = 0;
+
         public static GameRoom CreateRoom(GameSession user)
         {
-            int roomId = rooms.Max(p => p.Key);
-
             GameRoom room = new GameRoom();
-            room.RoomId = roomId;
+            room.RoomId = getRoomId();
+            room.players = new List<GameSession>();
             room.players.Add(user);
-            rooms.TryAdd(roomId, room);
+            rooms.TryAdd(room.RoomId, room);
             return room;
+        }
+
+        private static int getRoomId()
+        {
+            return Interlocked.Increment(ref maxRoomeId);
         }
 
         public static GameRoom JoinRoom(GameSession user, int roomID)

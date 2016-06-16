@@ -9,21 +9,6 @@ namespace Free.Dolphin.Core
 {
     public class ControllerContext
     {
-        private static Func<object> _gameUserFunc = null;
-        public static void InitGameUserType<T>()
-        {
-            _gameUserFunc = CreateInstanceDelegate<T>();
-        }
-
-        private static Func<object> CreateInstanceDelegate<T>()
-        {
-            var construtor = typeof(T).GetConstructor(new Type[] { });
-            NewExpression newExp = Expression.New(construtor, null);
-            Expression<Func<object>> lambdaExp =
-                Expression.Lambda<Func<object>>(newExp, null);
-            Func<object> func = lambdaExp.Compile();
-            return func;
-        }
 
         internal ControllerContext(Dictionary<string, string> keyValue)
         {

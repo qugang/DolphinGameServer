@@ -68,6 +68,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProtoEntity\A1001Response.cs" />
+    <Compile Include="ProtoEntity\A1002Response.cs" />
     <Compile Include="ProtoEntity\A9999DataErrorResponse.cs" />
     <Compile Include="Service\GameRoom.cs" />
     <Compile Include="Service\GameRoomManager.cs" />
@@ -89,6 +90,7 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="ProtoEntity\A1001Response.txt" />
+    <Content Include="ProtoEntity\A1002Response.txt" />
     <Content Include="ProtoEntity\A9999DataErrorResponse.txt" />
     <Content Include="ProtoEntity\cmd.txt" />
   </ItemGroup>

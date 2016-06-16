@@ -15,6 +15,8 @@ namespace Free.Dolphin.Core
         GameUserState UserState { get; set; }
 
         String Name { get; set; }
-        
+
+        IGameUser Login(string uid,string pwd);
+
     }
 }
