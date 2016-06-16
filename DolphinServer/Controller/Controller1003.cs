@@ -1,4 +1,6 @@
-﻿using Free.Dolphin.Core;
+﻿using DolphinServer.ProtoEntity;
+using DolphinServer.Service;
+using Free.Dolphin.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +13,7 @@ namespace DolphinServer.Controller
     /// 加入房间
     /// </summary>
     [ControllerProtocol((int)ControllerType.Controller1003)]
+    [ControllerAuth]
     public class Controller1003 : ControllerBase
     {
         public Controller1003(ControllerContext context) : base(context)
@@ -19,7 +22,20 @@ namespace DolphinServer.Controller
 
         public override byte[] ProcessAction()
         {
-            throw new NotImplementedException();
+            Boolean isSucess = GameRoomManager.JoinRoom(Context.Session, int.Parse(Context.HttpQueryString["RoomID"]));
+
+            A1002Response.Builder response = A1002Response.CreateBuilder();
+            if (isSucess)
+            {
+                GameRoom room = GameRoomManager.CreateRoom(Context.Session);
+                return response.Build().ToByteArray();
+            }
+            else
+            {
+                response.ErrorCode = 2;
+                response.ErrorInfo = ErrorInfo.ErrorDic[2];
+                return response.Build().ToByteArray();
+            }
         }
     }
 }

@@ -52,11 +52,11 @@ namespace Free.Dolphin.Core
             string pwd = null;
             if (Context.HttpQueryString.ContainsKey("Uid"))
             {
-                uid = Context.HttpQueryString[uid];
+                uid = Context.HttpQueryString["Uid"];
             }
             if (Context.HttpQueryString.ContainsKey("Pwd"))
             {
-                pwd = null;
+                pwd = Context.HttpQueryString["Pwd"];
             }
             var user = (_gameUserFunc() as IGameUser).Login(uid, pwd);
             if (user == null)

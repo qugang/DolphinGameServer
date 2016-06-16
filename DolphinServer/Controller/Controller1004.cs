@@ -11,6 +11,7 @@ namespace DolphinServer.Controller
     /// 解散房间
     /// </summary>
     [ControllerProtocol((int)ControllerType.Controller1004)]
+    [ControllerAuth]
     public class Controller1004 : ControllerBase
     {
         public Controller1004(ControllerContext context) : base(context)

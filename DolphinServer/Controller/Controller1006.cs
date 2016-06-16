@@ -11,6 +11,7 @@ namespace DolphinServer.Controller
     ///  发牌
     /// </summary>
     [ControllerProtocol((int)ControllerType.Controller1006)]
+    [ControllerAuth]
     public class Controller1006 : ControllerBase
     {
         public Controller1006(ControllerContext context) : base(context)

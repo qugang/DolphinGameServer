@@ -31,18 +31,18 @@ namespace DolphinServer.Service
             return Interlocked.Increment(ref maxRoomeId);
         }
 
-        public static GameRoom JoinRoom(GameSession user, int roomID)
+        public static Boolean JoinRoom(GameSession user, int roomID)
         {
             GameRoom room = null;
             rooms.TryGetValue(roomID, out room);
             if (room != null)
             {
                 room.players.Add(user);
-                return room;
+                return true;
             }
             else
             {
-                return null;
+                return false;
             }
         }
 
