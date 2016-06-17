@@ -65,6 +65,7 @@
     <Compile Include="Controller\Controller1008.cs" />
     <Compile Include="Controller\ControllerType.cs" />
     <Compile Include="Controller\ErrorInfo.cs" />
+    <Compile Include="Entity\GameRank.cs" />
     <Compile Include="Entity\GameUser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

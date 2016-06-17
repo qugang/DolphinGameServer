@@ -22,7 +22,7 @@ namespace LeisureComplexServer
             RedisContext.InitRedisContext("localhost,allowAdmin=true", Assembly.GetAssembly(typeof(Program)));
             ControllerFactory.InitController(Assembly.GetAssembly(typeof(Program)));
             ControllerBase.InitGameUserType<GameUser>();
-            WebSocketServer.Init("192.168.0.105", 9001);
+            WebSocketServer.Init("192.168.0.103", 9001);
             WebSocketServer.OnErrorMessage = (message, exption) =>
             {
                 LogManager.Log.Error(message, exption);

@@ -15,9 +15,6 @@ namespace DolphinServer.Entity
         public string Uid { get; set; }
 
         [RedisColumn(RedisColumnType.RedisColumn)]
-        public string WeChatID { get; set; }
-
-        [RedisColumn(RedisColumnType.RedisColumn)]
         public string Pwd { get; set; }
 
         [RedisColumn(RedisColumnType.RedisColumn)]
@@ -31,6 +28,9 @@ namespace DolphinServer.Entity
 
         [RedisColumn(RedisColumnType.RedisColumn)]
         public String Name { get; set; }
+
+        [RedisColumn(RedisColumnType.RedisColumn)]
+        public String HatImage { get; set; }
         
         IGameUser IGameUser.Login(string uid, string pwd)
         {
