@@ -17,8 +17,9 @@ namespace Free.Dolphin.Core
 
         }
 
-        static Dictionary<Type, RedisDynamicMethodEmit> _tableCache = new Dictionary<Type, RedisDynamicMethodEmit>();
-        static Dictionary<Type, RedisDynamicMethodEmit> _rankCache = new Dictionary<Type, RedisDynamicMethodEmit>();
+        static Dictionary<Type, RedisDynamicMethodEmit> _keyCache = new Dictionary<Type, RedisDynamicMethodEmit>();
+        static Dictionary<Type, RedisDynamicMethodEmit> _scoreCache = new Dictionary<Type, RedisDynamicMethodEmit>();
+        static Dictionary<Type, Func<object>> _objectCache = new Dictionary<Type, Func<object>>();
         public static RedisContext GlobalContext { get; private set; }
 
         protected static ConnectionMultiplexer RedisConnection { get; private set; }
@@ -41,14 +42,20 @@ namespace Free.Dolphin.Core
                 RedisTableAttribute rt = row.GetCustomAttribute<RedisTableAttribute>();
                 if (rt != null)
                 {
-                    if (!_tableCache.ContainsKey(row))
+
+                    if (!_objectCache.ContainsKey(row))
+                    {
+                        _objectCache.Add(row, RedisDynamicMethodEmit.CreateInstanceDelegate(row));
+                    }
+
+                    if (!_keyCache.ContainsKey(row))
                     {
                         foreach (var propertie in row.GetProperties())
                         {
                             RedisColumnAttribute redisColumn = propertie.GetCustomAttribute<RedisColumnAttribute>();
                             if (redisColumn != null && redisColumn.ColumnType == RedisColumnType.RedisKey)
                             {
-                                _tableCache.Add(row,
+                                _keyCache.Add(row,
                                 new RedisDynamicMethodEmit(
                                      RedisDynamicMethodEmit.CreatePropertyGetter(propertie),
                                      RedisDynamicMethodEmit.CreatePropertySetter(propertie),
@@ -57,7 +64,7 @@ namespace Free.Dolphin.Core
                             }
                             if (redisColumn != null && redisColumn.ColumnType == RedisColumnType.RedisScore)
                             {
-                                _rankCache.Add(row, new RedisDynamicMethodEmit(
+                                _scoreCache.Add(row, new RedisDynamicMethodEmit(
                                      RedisDynamicMethodEmit.CreatePropertyGetter(propertie),
                                      RedisDynamicMethodEmit.CreatePropertySetter(propertie),
                                      redisColumn.ColumnType
@@ -76,7 +83,7 @@ namespace Free.Dolphin.Core
             await Task.Run(() =>
             {
                 Type t = entity.GetType();
-                var key = _tableCache[t].GetValue(entity).ToString();
+                var key = _keyCache[t].GetValue(entity).ToString();
 
                 RedisDb.HashSet(t.Name, new HashEntry[] {
                 new HashEntry(key, SerializerUtil.BinarySerialize(entity))
@@ -86,7 +93,7 @@ namespace Free.Dolphin.Core
         public void AddHashEntity(object entity)
         {
             Type t = entity.GetType();
-            var key = _tableCache[t].GetValue(entity).ToString();
+            var key = _keyCache[t].GetValue(entity).ToString();
 
             RedisDb.HashSet(t.Name, new HashEntry[] {
                 new HashEntry(key, SerializerUtil.BinarySerialize(entity))
@@ -96,7 +103,7 @@ namespace Free.Dolphin.Core
         public long IncrHashEntity(object entity)
         {
             Type t = entity.GetType();
-            var key = _tableCache[t].GetValue(entity).ToString();
+            var key = _keyCache[t].GetValue(entity).ToString();
             return RedisDb.HashIncrement(t.Name, key);
         }
 
@@ -120,26 +127,39 @@ namespace Free.Dolphin.Core
             }
         }
 
+        public IEnumerable<T> FindSoredEntity<T>(int take) {
+            Type type = typeof(T);
+            foreach (var row in RedisDb.SortedSetRangeByRankWithScores(type.Name,0,take))
+            {
+                object o = _objectCache[type]();
+                _scoreCache[type].SetValue(o, row.Score);
+                _keyCache[type].SetValue(o, row.Element.ToString());
+                yield return (T)o;
+            }
+        }
+
 
         public void AddSortedSetEntity(object entity)
         {
             Type t = entity.GetType();
-            var key = _tableCache[t].GetValue(entity).ToString();
-            var score = (int)_rankCache[t].GetValue(entity);
-            RedisDb.SortedSetAdd(t.Name, key, score);
+            var element = _keyCache[t].GetValue(entity).ToString();
+            var score = (int)_scoreCache[t].GetValue(entity);
+            RedisDb.SortedSetAdd(t.Name,new SortedSetEntry[] {
+                new SortedSetEntry(element,score)
+            });
         }
 
         public void DeleteHashEntity(object entity)
         {
             Type t = entity.GetType();
-            var key = _tableCache[t].GetValue(entity).ToString();
+            var key = _keyCache[t].GetValue(entity).ToString();
             RedisDb.HashDelete(t.Name, key);
         }
 
         public void DeleteSortedSetEntity(object entity)
         {
             Type t = entity.GetType();
-            var key = _tableCache[t].GetValue(entity).ToString();
+            var key = _keyCache[t].GetValue(entity).ToString();
             RedisDb.SortedSetRemove(t.Name, key);
         }
     }

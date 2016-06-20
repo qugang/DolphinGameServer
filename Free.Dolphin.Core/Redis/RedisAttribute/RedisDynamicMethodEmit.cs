@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
@@ -18,6 +19,16 @@ namespace Free.Dolphin.Core
 
     public class RedisDynamicMethodEmit
     {
+        public static Func<object> CreateInstanceDelegate(Type type)
+        {
+            var construtor = type.GetConstructor(new Type[] { });
+
+            NewExpression newExp = Expression.New(construtor);
+            Expression<Func<object>> lambdaExp =
+                Expression.Lambda<Func<object>>(newExp);
+            Func<object> func = lambdaExp.Compile();
+            return func;
+        }
 
         public RedisDynamicMethodEmit(GetValueDelegate getValue, SetValueDelegate setValue, RedisColumnType columnType)
         {
@@ -29,27 +40,7 @@ namespace Free.Dolphin.Core
         public SetValueDelegate SetValue { get; private set; }
 
         public RedisColumnType ColumnType { get; private set; }
-
-        public static CtorDelegate CreateConstructor(ConstructorInfo constructor)
-        {
-            if (constructor == null)
-                throw new ArgumentNullException("constructor");
-            if (constructor.GetParameters().Length > 0)
-                throw new NotSupportedException("不支持有参数的构造函数。");
-
-            DynamicMethod dm = new DynamicMethod(
-                "ctor",
-                constructor.DeclaringType,
-                Type.EmptyTypes,
-                true);
-
-            ILGenerator il = dm.GetILGenerator();
-            il.Emit(OpCodes.Nop);
-            il.Emit(OpCodes.Newobj, constructor);
-            il.Emit(OpCodes.Ret);
-
-            return (CtorDelegate)dm.CreateDelegate(typeof(CtorDelegate));
-        }
+        
 
         public static MethodDelegate CreateMethod(MethodInfo method)
         {
@@ -183,7 +174,7 @@ namespace Free.Dolphin.Core
 
             return (SetValueDelegate)dm.CreateDelegate(typeof(SetValueDelegate));
         }
-        
+
 
 
         public static GetValueDelegate CreateFieldGetter(FieldInfo field)

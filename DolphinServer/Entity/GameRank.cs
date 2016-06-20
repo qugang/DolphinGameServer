@@ -8,12 +8,33 @@ using System.Threading.Tasks;
 namespace DolphinServer.Entity
 {
     [RedisTableAttribute(), Serializable]
-    public class GameRank
+    public class GameRankWeek
     {
         [RedisColumn(RedisColumnType.RedisKey)]
         public string Uid { get; set; }
 
-        [RedisColumn(RedisColumnType.RedisColumn)]
+        [RedisColumn(RedisColumnType.RedisScore)]
+        public int Score { get; set; }
+    }
+
+    [RedisTableAttribute(), Serializable]
+    public class GameRankDay
+    {
+        [RedisColumn(RedisColumnType.RedisKey)]
+        public string Uid { get; set; }
+
+        [RedisColumn(RedisColumnType.RedisScore)]
+        public int Score { get; set; }
+    }
+
+
+    [RedisTableAttribute(), Serializable]
+    public class GameRankMonth
+    {
+        [RedisColumn(RedisColumnType.RedisKey)]
+        public string Uid { get; set; }
+
+        [RedisColumn(RedisColumnType.RedisScore)]
         public int Score { get; set; }
     }
 }

@@ -40,6 +40,22 @@ namespace DolphinServer.Controller
         /// <summary>
         /// 胡牌
         /// </summary>
-        Controller1008 = 1008
+        Controller1008 = 1008,
+
+        /// <summary>
+        /// 查询日排行榜
+        /// </summary>
+        Controller1009 = 1009,
+
+        /// <summary>
+        /// 查询周排行榜
+        /// </summary>
+        Controller1010 = 1010,
+
+
+        /// <summary>
+        /// 查询月排行榜
+        /// </summary>
+        Controller1011 = 1011,
     }
 }
