@@ -34,6 +34,10 @@ namespace Free.Dolphin.Core
             {
                 string message = StreamUtil.ReadStringToEnd(e.Data);
                 WebSocketServer.OnRevice(message);
+                if (message == "ping")
+                {
+                    return base.OnMessage(e);
+                }
                 Dictionary<string, string> keyValue = WebSocketPackage.UnPackage(message);
                 ControllerContext context = new ControllerContext(keyValue);
                 GameSession session = GameSessionManager.UpdateOrAddSession(Context.WebSocket);
