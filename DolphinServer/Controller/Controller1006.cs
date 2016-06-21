@@ -1,4 +1,5 @@
-﻿using Free.Dolphin.Core;
+﻿using DolphinServer.ProtoEntity;
+using Free.Dolphin.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,16 @@ namespace DolphinServer.Controller
 
         public override byte[] ProcessAction()
         {
-            throw new NotImplementedException();
+            //var cards = (this.Context.ObjectContext as int[]);
+
+            //A1006Response.Builder response = A1006Response.CreateBuilder();
+            //response.Player1 = Player.CreateBuilder().AddRangeCard(cards.Take(14)).Build();
+            //response.Player2 = Player.CreateBuilder().AddRangeCard(cards.Skip(14).Take(13)).Build();
+            //response.Player3 = Player.CreateBuilder().AddRangeCard(cards.Skip(27).Take(13)).Build();
+            //response.Player4 = Player.CreateBuilder().AddRangeCard(cards.Skip(40).Take(13)).Build();
+
+            // return response.Build().ToByteArray();
+            return null;
         }
     }
 }

@@ -31,15 +31,16 @@ namespace DolphinServer.ProtoEntity {
       static A1002Response() {
         byte[] descriptorData = global::System.Convert.FromBase64String(
             string.Concat(
-              "ChFBMTAwMlJlc3BvbnNlLnR4dCJFCg1BMTAwMlJlc3BvbnNlEhEKCUVycm9y", 
+              "ChFBMTAwMlJlc3BvbnNlLnR4dCJXCg1BMTAwMlJlc3BvbnNlEhEKCUVycm9y", 
               "SW5mbxgBIAEoCRIRCglFcnJvckNvZGUYAiABKAUSDgoGUm9vbUlEGAMgASgF", 
-            "QhyqAhlEb2xwaGluU2VydmVyLlByb3RvRW50aXR5"));
+              "EhAKCFJvb21UeXBlGAQgASgFQhyqAhlEb2xwaGluU2VydmVyLlByb3RvRW50", 
+            "aXR5"));
         pbd::FileDescriptor.InternalDescriptorAssigner assigner = delegate(pbd::FileDescriptor root) {
           descriptor = root;
           internal__static_A1002Response__Descriptor = Descriptor.MessageTypes[0];
           internal__static_A1002Response__FieldAccessorTable = 
               new pb::FieldAccess.FieldAccessorTable<global::DolphinServer.ProtoEntity.A1002Response, global::DolphinServer.ProtoEntity.A1002Response.Builder>(internal__static_A1002Response__Descriptor,
-                  new string[] { "ErrorInfo", "ErrorCode", "RoomID", });
+                  new string[] { "ErrorInfo", "ErrorCode", "RoomID", "RoomType", });
           pb::ExtensionRegistry registry = pb::ExtensionRegistry.CreateInstance();
           RegisterAllExtensions(registry);
           return registry;
@@ -57,8 +58,8 @@ namespace DolphinServer.ProtoEntity {
   public sealed partial class A1002Response : pb::GeneratedMessage<A1002Response, A1002Response.Builder> {
     private A1002Response() { }
     private static readonly A1002Response defaultInstance = new A1002Response().MakeReadOnly();
-    private static readonly string[] _a1002ResponseFieldNames = new string[] { "ErrorCode", "ErrorInfo", "RoomID" };
-    private static readonly uint[] _a1002ResponseFieldTags = new uint[] { 16, 10, 24 };
+    private static readonly string[] _a1002ResponseFieldNames = new string[] { "ErrorCode", "ErrorInfo", "RoomID", "RoomType" };
+    private static readonly uint[] _a1002ResponseFieldTags = new uint[] { 16, 10, 24, 32 };
     public static A1002Response DefaultInstance {
       get { return defaultInstance; }
     }
@@ -109,6 +110,16 @@ namespace DolphinServer.ProtoEntity {
       get { return roomID_; }
     }
 
+    public const int RoomTypeFieldNumber = 4;
+    private bool hasRoomType;
+    private int roomType_;
+    public bool HasRoomType {
+      get { return hasRoomType; }
+    }
+    public int RoomType {
+      get { return roomType_; }
+    }
+
     public override bool IsInitialized {
       get {
         return true;
@@ -126,6 +137,9 @@ namespace DolphinServer.ProtoEntity {
       }
       if (hasRoomID) {
         output.WriteInt32(3, field_names[2], RoomID);
+      }
+      if (hasRoomType) {
+        output.WriteInt32(4, field_names[3], RoomType);
       }
       UnknownFields.WriteTo(output);
     }
@@ -152,6 +166,9 @@ namespace DolphinServer.ProtoEntity {
       }
       if (hasRoomID) {
         size += pb::CodedOutputStream.ComputeInt32Size(3, RoomID);
+      }
+      if (hasRoomType) {
+        size += pb::CodedOutputStream.ComputeInt32Size(4, RoomType);
       }
       size += UnknownFields.SerializedSize;
       memoizedSerializedSize = size;
@@ -284,6 +301,9 @@ namespace DolphinServer.ProtoEntity {
         if (other.HasRoomID) {
           RoomID = other.RoomID;
         }
+        if (other.HasRoomType) {
+          RoomType = other.RoomType;
+        }
         this.MergeUnknownFields(other.UnknownFields);
         return this;
       }
@@ -337,6 +357,10 @@ namespace DolphinServer.ProtoEntity {
             }
             case 24: {
               result.hasRoomID = input.ReadInt32(ref result.roomID_);
+              break;
+            }
+            case 32: {
+              result.hasRoomType = input.ReadInt32(ref result.roomType_);
               break;
             }
           }
@@ -407,6 +431,26 @@ namespace DolphinServer.ProtoEntity {
         PrepareBuilder();
         result.hasRoomID = false;
         result.roomID_ = 0;
+        return this;
+      }
+
+      public bool HasRoomType {
+        get { return result.hasRoomType; }
+      }
+      public int RoomType {
+        get { return result.RoomType; }
+        set { SetRoomType(value); }
+      }
+      public Builder SetRoomType(int value) {
+        PrepareBuilder();
+        result.hasRoomType = true;
+        result.roomType_ = value;
+        return this;
+      }
+      public Builder ClearRoomType() {
+        PrepareBuilder();
+        result.hasRoomType = false;
+        result.roomType_ = 0;
         return this;
       }
     }

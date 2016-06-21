@@ -4,4 +4,5 @@ message A1002Response{
 	optional string ErrorInfo = 1;
 	optional int32 ErrorCode = 2;
 	optional int32 RoomID = 3;
+	optional int32 RoomType = 4;
 }

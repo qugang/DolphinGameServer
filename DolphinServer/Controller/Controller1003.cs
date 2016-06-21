@@ -22,12 +22,12 @@ namespace DolphinServer.Controller
 
         public override byte[] ProcessAction()
         {
-            Boolean isSucess = GameRoomManager.JoinRoom(Context.Session, int.Parse(Context.HttpQueryString["RoomID"]));
+            Boolean isSucess = CsGameRoomManager.JoinRoom(Context.Session.User, int.Parse(Context.HttpQueryString["RoomID"]));
 
             A1002Response.Builder response = A1002Response.CreateBuilder();
             if (isSucess)
             {
-                GameRoom room = GameRoomManager.CreateRoom(Context.Session);
+                CsMjGameRoom room = CsGameRoomManager.CreateRoom(Context.Session.User);
                 return response.Build().ToByteArray();
             }
             else

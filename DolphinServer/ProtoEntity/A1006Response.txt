@@ -1,0 +1,14 @@
+syntax = "proto2";
+option csharp_namespace = "DolphinServer.ProtoEntity";
+message A1006Response{
+	optional string ErrorInfo = 1;
+	optional int32 ErrorCode = 2;
+	optional Player Player1 = 3;
+	optional Player Player2 = 4;
+	optional Player Player3 = 5;
+	optional Player Player4 = 6;
+}
+
+message Player{
+	repeated int32 Card = 1;
+}

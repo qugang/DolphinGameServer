@@ -1,5 +1,6 @@
 ﻿protoc -I=C:\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity --csharp_out=C:\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\ C:\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\A1001Response.txt
 protoc -I=C:\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity --csharp_out=C:\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\ C:\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\A1002Response.txt
 protoc -I=C:\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity --csharp_out=C:\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\ C:\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\A1003Response.txt
+protoc -I=C:\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity --csharp_out=C:\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\ C:\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\A1006Response.txt
 protoc -I=C:\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity --csharp_out=C:\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\ C:\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\A1009Response.txt
 protoc -I=C:\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity --csharp_out=C:\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\ C:\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\A9999DataErrorResponse.txt

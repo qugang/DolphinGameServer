@@ -57,7 +57,7 @@ namespace Free.Dolphin.Common
             using (MemoryStream ms = new MemoryStream())
             {
                 BinaryFormatter b = new BinaryFormatter();
-                b.Serialize(ms, o);
+                b.Serialize(ms,o);
                 return ms.ToArray();
             }
         }

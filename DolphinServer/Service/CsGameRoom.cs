@@ -10,7 +10,7 @@ namespace DolphinServer.Service
     /// <summary>
     /// 长沙麻将房间管理
     /// </summary>
-    public class GameRoom
+    public class CsMjGameRoom
     {
 
         /// <summary>
@@ -21,9 +21,11 @@ namespace DolphinServer.Service
         /// <summary>
         /// 玩家集合
         /// </summary>
-        public List<GameSession> players { get; set; }
+        public Queue<CsGamePlayer> players { get; set; }
 
-        public ushort[] cardArray = {
+        int cardIndex = 0;
+
+        public int[] cardArray = {
             0,1,2,3,4,5,6,7,8,
             0,1,2,3,4,5,6,7,8,
             0,1,2,3,4,5,6,7,8,
@@ -38,18 +40,25 @@ namespace DolphinServer.Service
             0 | 0x80,1 | 0x80,2 | 0x80,3 | 0x80,4 | 0x80,5 | 0x80,6 | 0x80,7 | 0x80,8 | 0x80
         };
 
-        public void ReLoad()
+        public void Begin()
         {
-
+            cardIndex = 0;
+            RandCard();
+            SendCard();
         }
 
+        public void ReLoad()
+        {
+            cardIndex = 0;
+            players.Enqueue(players.Dequeue());
+            RandCard();
+            SendCard();
+        }
 
-        int index = 0;
-
-        public void RandCard()
+        private void RandCard()
         {
             Random rd = new Random();
-            List<ushort> list = new List<ushort>();
+            List<int> list = new List<int>();
             for (int i = 0; i < cardArray.Length; i++)
             {
                 int index = rd.Next(0, cardArray.Length - 1 - i);
@@ -61,18 +70,21 @@ namespace DolphinServer.Service
 
         public int ReadCard()
         {
-            if (index == cardArray.Length)
+            if (cardIndex == cardArray.Length)
             {
                 throw new Exception("牌已经摸完");
             }
 
-            var tempCard = cardArray[index];
-            index++;
+            var tempCard = cardArray[cardIndex];
+            cardIndex++;
             return tempCard;
         }
 
-        public void SendCard()
+        private void SendCard()
         {
+
+          //  ControllerFactory.SendController(players.ToList().ConvertAll(p => p.PlayerSession), 1006, cardArray.Take(53).ToArray());
+
         }
     }
 }

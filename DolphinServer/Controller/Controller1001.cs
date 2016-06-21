@@ -31,6 +31,7 @@ namespace DolphinServer.Controller
                 RedisContext.GlobalContext.AddHashEntity(user);
             }
             Context.Session.User = user;
+            GameSessionManager.AddSessionWithUser(Context.Session, user.Uid);
             A1001Response.Builder response = A1001Response.CreateBuilder();
             response.Uid = user.Uid;
             return response.Build().ToByteArray();

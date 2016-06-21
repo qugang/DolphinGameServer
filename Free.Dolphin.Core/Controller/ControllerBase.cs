@@ -58,6 +58,7 @@ namespace Free.Dolphin.Core
             else
             {
                 Context.Session.User = user;
+                GameSessionManager.AddSessionWithUser(Context.Session, user.Uid);
                 return true;
             }
         }

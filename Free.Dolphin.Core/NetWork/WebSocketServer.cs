@@ -44,8 +44,7 @@ namespace Free.Dolphin.Core
                 }
                 Dictionary<string, string> keyValue = WebSocketPackage.UnPackage(message);
                 ControllerContext context = new ControllerContext(keyValue);
-                GameSession session = GameSessionManager.UpdateOrAddSession(Context.WebSocket);
-                context.Session = session;
+                context.Session = GameSessionManager.GetSession(Context.WebSocket);
                 ControllerBase controller = ControllerFactory.CreateController(context);
                 if (controller.IsAuth() && !controller.IsLogin())
                 {
@@ -84,6 +83,7 @@ namespace Free.Dolphin.Core
 
         protected override Task OnOpen()
         {
+            GameSessionManager.AddSession(GameSession.Parse(Context.WebSocket));
             WebSocketServer.OnOpen(Context.UserEndPoint.ToString());
             return base.OnOpen();
         }

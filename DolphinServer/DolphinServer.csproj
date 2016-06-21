@@ -75,10 +75,12 @@
     <Compile Include="ProtoEntity\A1001Response.cs" />
     <Compile Include="ProtoEntity\A1002Response.cs" />
     <Compile Include="ProtoEntity\A1003Response.cs" />
+    <Compile Include="ProtoEntity\A1006Response.cs" />
     <Compile Include="ProtoEntity\A1009Response.cs" />
     <Compile Include="ProtoEntity\A9999DataErrorResponse.cs" />
-    <Compile Include="Service\GameRoom.cs" />
-    <Compile Include="Service\GameRoomManager.cs" />
+    <Compile Include="Service\CsGamePlayer.cs" />
+    <Compile Include="Service\CsGameRoom.cs" />
+    <Compile Include="Service\CsGameRoomManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -99,6 +101,7 @@
     <Content Include="ProtoEntity\A1001Response.txt" />
     <Content Include="ProtoEntity\A1002Response.txt" />
     <Content Include="ProtoEntity\A1003Response.txt" />
+    <Content Include="ProtoEntity\A1006Response.txt" />
     <Content Include="ProtoEntity\A1009Response.txt" />
     <Content Include="ProtoEntity\A9999DataErrorResponse.txt" />
     <Content Include="ProtoEntity\cmd.txt" />
