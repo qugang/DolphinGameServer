@@ -29,11 +29,7 @@ namespace LeisureComplexServer
                 A9999DataErrorResponse.Builder response = A9999DataErrorResponse.CreateBuilder();
                 response.ErrorCode = 999;
                 response.ErrorInfo = "服务器繁忙!";
-                List<byte> list = new List<byte>();
-                list.Add((byte)(9999 >> 8));
-                list.Add((byte)(9999 & 0xFF));
-                list.AddRange(response.Build().ToByteArray());
-                return list.ToArray();
+                return response.Build().ToByteArray();
             };
 
             WebSocketServer.OnRevice = (message) =>
