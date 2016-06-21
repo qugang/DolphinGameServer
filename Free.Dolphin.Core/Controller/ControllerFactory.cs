@@ -12,7 +12,7 @@ namespace Free.Dolphin.Core
     public class ControllerFactory
     {
 
-        private static Dictionary<int, Func<object, object>> _controllerInitCache = new Dictionary<int, Func<object, object>>();
+        private static Dictionary<int, Func<ControllerContext, object>> _controllerInitCache = new Dictionary<int, Func<ControllerContext, object>>();
 
         public static void InitController(Assembly assembly)
         {
@@ -24,7 +24,7 @@ namespace Free.Dolphin.Core
 
                     if (ca != null)
                     {
-                        _controllerInitCache.Add(ca.ProtocolNumber, ReflectionUtil.CreateInstanceDelegate(row,typeof(ControllerContext)));
+                        _controllerInitCache.Add(ca.ProtocolNumber, ReflectionUtil.CreateInstanceDelegate<ControllerContext>(row));
                     }
                 }
             }

@@ -41,7 +41,6 @@ namespace Free.Dolphin.Core
                 ControllerBase controller = ControllerFactory.CreateController(context);
                 if (controller.IsAuth() && !controller.IsLogin())
                 {
-                    //TODO : 处理断线从新登陆
                     if (controller.Login())
                     {
                         byte[] sendByte = controller.ProcessAction();

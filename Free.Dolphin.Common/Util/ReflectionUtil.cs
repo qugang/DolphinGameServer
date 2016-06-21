@@ -28,15 +28,16 @@ namespace Free.Dolphin.Common.Util
             return func;
         }
 
-        public static Func<object, object> CreateInstanceDelegate(Type type, Type paramType)
+        public static Func<T, object> CreateInstanceDelegate<T>(Type type)
         {
+            Type paramType = typeof(T);
             var construtor = type.GetConstructor(new Type[] { paramType });
             var param = new ParameterExpression[] { Expression.Parameter(paramType, "arg") };
 
             NewExpression newExp = Expression.New(construtor, param);
-            Expression<Func<object, object>> lambdaExp =
-                Expression.Lambda<Func<object, object>>(newExp, param);
-            Func<object, object> func = lambdaExp.Compile();
+            Expression<Func<T, object>> lambdaExp =
+                Expression.Lambda<Func<T, object>>(newExp, param);
+            Func<T, object> func = lambdaExp.Compile();
             return func;
         }
 
