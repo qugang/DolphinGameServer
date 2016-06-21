@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Free.Dolphin.Common.Util;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -13,18 +14,9 @@ namespace Free.Dolphin.Core
         private static Func<object> _gameUserFunc = null;
         public static void InitGameUserType<T>()
         {
-            _gameUserFunc = CreateInstanceDelegate<T>();
+            _gameUserFunc = ReflectionUtil.CreateInstanceDelegate(typeof(T));
         }
-
-        private static Func<object> CreateInstanceDelegate<T>()
-        {
-            var construtor = typeof(T).GetConstructor(new Type[] { });
-            NewExpression newExp = Expression.New(construtor, null);
-            Expression<Func<object>> lambdaExp =
-                Expression.Lambda<Func<object>>(newExp, null);
-            Func<object> func = lambdaExp.Compile();
-            return func;
-        }
+        
 
         protected ControllerContext Context { get; set; }
 

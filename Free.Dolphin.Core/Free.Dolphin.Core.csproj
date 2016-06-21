@@ -57,7 +57,6 @@
     <Compile Include="Controller\ControllAttribute\ControllerProtocolAttribute.cs" />
     <Compile Include="Redis\RedisAttribute\RedisColumnAttribute.cs" />
     <Compile Include="Redis\RedisAttribute\RedisColumnType.cs" />
-    <Compile Include="Redis\RedisAttribute\RedisDynamicMethodEmit.cs" />
     <Compile Include="Redis\RedisAttribute\RedisTableAttribute.cs" />
     <Compile Include="Redis\RedisContext.cs" />
     <Compile Include="Session\GameSession.cs" />

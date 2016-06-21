@@ -1,4 +1,5 @@
 ﻿using Free.Dolphin.Common;
+using Free.Dolphin.Common.Util;
 using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
@@ -17,8 +18,8 @@ namespace Free.Dolphin.Core
 
         }
 
-        static Dictionary<Type, RedisDynamicMethodEmit> _keyCache = new Dictionary<Type, RedisDynamicMethodEmit>();
-        static Dictionary<Type, RedisDynamicMethodEmit> _scoreCache = new Dictionary<Type, RedisDynamicMethodEmit>();
+        static Dictionary<Type, ReflectionUtil> _keyCache = new Dictionary<Type, ReflectionUtil>();
+        static Dictionary<Type, ReflectionUtil> _scoreCache = new Dictionary<Type, ReflectionUtil>();
         static Dictionary<Type, Func<object>> _objectCache = new Dictionary<Type, Func<object>>();
         public static RedisContext GlobalContext { get; private set; }
 
@@ -45,7 +46,7 @@ namespace Free.Dolphin.Core
 
                     if (!_objectCache.ContainsKey(row))
                     {
-                        _objectCache.Add(row, RedisDynamicMethodEmit.CreateInstanceDelegate(row));
+                        _objectCache.Add(row, ReflectionUtil.CreateInstanceDelegate(row));
                     }
 
                     if (!_keyCache.ContainsKey(row))
@@ -56,18 +57,16 @@ namespace Free.Dolphin.Core
                             if (redisColumn != null && redisColumn.ColumnType == RedisColumnType.RedisKey)
                             {
                                 _keyCache.Add(row,
-                                new RedisDynamicMethodEmit(
-                                     RedisDynamicMethodEmit.CreatePropertyGetter(propertie),
-                                     RedisDynamicMethodEmit.CreatePropertySetter(propertie),
-                                     redisColumn.ColumnType
+                                new ReflectionUtil(
+                                     ReflectionUtil.CreatePropertyGetter(propertie),
+                                     ReflectionUtil.CreatePropertySetter(propertie)
                                      ));
                             }
                             if (redisColumn != null && redisColumn.ColumnType == RedisColumnType.RedisScore)
                             {
-                                _scoreCache.Add(row, new RedisDynamicMethodEmit(
-                                     RedisDynamicMethodEmit.CreatePropertyGetter(propertie),
-                                     RedisDynamicMethodEmit.CreatePropertySetter(propertie),
-                                     redisColumn.ColumnType
+                                _scoreCache.Add(row, new ReflectionUtil(
+                                     ReflectionUtil.CreatePropertyGetter(propertie),
+                                     ReflectionUtil.CreatePropertySetter(propertie)
                                      ));
                             }
                         }

@@ -55,6 +55,7 @@
     <Compile Include="Log\LogManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\ByteUtil.cs" />
+    <Compile Include="Util\ReflectionUtil.cs" />
     <Compile Include="Util\SerializerUtil.cs" />
     <Compile Include="Util\StreamUtil.cs" />
     <Compile Include="Util\ZipUtil.cs" />

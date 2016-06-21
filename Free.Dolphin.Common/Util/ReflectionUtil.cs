@@ -7,17 +7,15 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Free.Dolphin.Core
+namespace Free.Dolphin.Common.Util
 {
-    public delegate object CtorDelegate();
-
     public delegate object MethodDelegate(object target, object[] args);
 
     public delegate object GetValueDelegate(object target);
 
     public delegate void SetValueDelegate(object target, object arg);
 
-    public class RedisDynamicMethodEmit
+    public class ReflectionUtil
     {
         public static Func<object> CreateInstanceDelegate(Type type)
         {
@@ -30,17 +28,26 @@ namespace Free.Dolphin.Core
             return func;
         }
 
-        public RedisDynamicMethodEmit(GetValueDelegate getValue, SetValueDelegate setValue, RedisColumnType columnType)
+        public static Func<object, object> CreateInstanceDelegate(Type type, Type paramType)
+        {
+            var construtor = type.GetConstructor(new Type[] { paramType });
+            var param = new ParameterExpression[] { Expression.Parameter(paramType, "arg") };
+
+            NewExpression newExp = Expression.New(construtor, param);
+            Expression<Func<object, object>> lambdaExp =
+                Expression.Lambda<Func<object, object>>(newExp, param);
+            Func<object, object> func = lambdaExp.Compile();
+            return func;
+        }
+
+        public ReflectionUtil(GetValueDelegate getValue, SetValueDelegate setValue)
         {
             this.SetValue = setValue;
             this.GetValue = getValue;
-            this.ColumnType = columnType;
         }
         public GetValueDelegate GetValue { get; private set; }
         public SetValueDelegate SetValue { get; private set; }
 
-        public RedisColumnType ColumnType { get; private set; }
-        
 
         public static MethodDelegate CreateMethod(MethodInfo method)
         {
@@ -48,7 +55,7 @@ namespace Free.Dolphin.Core
 
             DynamicMethod dm = new DynamicMethod("DynamicMethod", typeof(object),
                 new Type[] { typeof(object), typeof(object[]) },
-                typeof(RedisDynamicMethodEmit), true);
+                typeof(ReflectionUtil), true);
 
             ILGenerator il = dm.GetILGenerator();
 
