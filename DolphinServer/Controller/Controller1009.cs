@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace DolphinServer.Controller
 {
     /// <summary>
-    /// 查询日排行榜
+    /// 打牌
     /// </summary>
     [ControllerProtocol((int)ControllerType.Controller1009)]
     [ControllerAuth]
@@ -22,17 +22,7 @@ namespace DolphinServer.Controller
 
         public override byte[] ProcessAction()
         {
-            A1009Response.Builder response = A1009Response.CreateBuilder();
-            //TODO:添加头像 与查询效率问题
-            foreach (var row in RedisContext.GlobalContext.FindSoredEntity<GameRankDay>(10))
-            {
-                GameUser user = RedisContext.GlobalContext.FindHashEntityByKey<GameUser>(row.Uid);
-                var rank = Rank.CreateBuilder();
-                rank.Uid = user.Uid;
-                rank.Score = row.Score;
-                response.AddRanks(rank);
-            }
-            return response.Build().ToByteArray();
+
         }
     }
 }

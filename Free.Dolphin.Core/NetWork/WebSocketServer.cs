@@ -23,7 +23,7 @@ namespace Free.Dolphin.Core
 
         protected override Task OnError(ErrorEventArgs e)
         {
-            byte[] array =  WebSocketServer.OnErrorMessage(e.Message, e.Exception);
+            byte[] array = WebSocketServer.OnErrorMessage(e.Message, e.Exception);
             List<byte> list = new List<byte>();
             list.Add((byte)(9999 >> 8));
             list.Add((byte)(9999 & 0xFF));
@@ -92,7 +92,7 @@ namespace Free.Dolphin.Core
     public class WebSocketServer
     {
 
-        public static Func<string,Exception,byte[]> OnErrorMessage { get; set; }
+        public static Func<string, Exception, byte[]> OnErrorMessage { get; set; }
 
         public static Action<string> OnRevice { get; set; }
 
@@ -104,6 +104,20 @@ namespace Free.Dolphin.Core
             var wssv = new WebSocketSharp.Server.WebSocketServer(IPAddress.Parse(ip), port);
             wssv.AddWebSocketService<DefaultBehavior>("/");
             wssv.Start();
+        }
+
+        public async static void SendPackgeWithUser(string uid, int protocol, byte[] sendByte)
+        {
+            await Task.Factory.StartNew(() =>
+            {
+
+                List<byte> list = new List<byte>();
+                list.Add((byte)(protocol >> 8));
+                list.Add((byte)(protocol & 0xFF));
+                list.AddRange(sendByte);
+
+                GameSessionManager.GetWebSocketWithUser(uid).Send(list.ToArray());
+            });
         }
     }
 }

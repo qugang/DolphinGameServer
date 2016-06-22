@@ -1,5 +1,7 @@
-﻿using DolphinServer.ProtoEntity;
+﻿using DolphinServer.Entity;
+using DolphinServer.ProtoEntity;
 using DolphinServer.Service;
+using DolphinServer.Service.Mj;
 using Free.Dolphin.Core;
 using System;
 using System.Collections.Generic;
@@ -22,12 +24,12 @@ namespace DolphinServer.Controller
 
         public override byte[] ProcessAction()
         {
-            Boolean isSucess = CsGameRoomManager.JoinRoom(Context.Session.User, int.Parse(Context.HttpQueryString["RoomID"]));
+            Boolean isSucess = CsGameRoomManager.JoinRoom(Context.Session.User as GameUser, int.Parse(Context.HttpQueryString["RoomID"]));
 
             A1002Response.Builder response = A1002Response.CreateBuilder();
             if (isSucess)
             {
-                CsMjGameRoom room = CsGameRoomManager.CreateRoom(Context.Session.User);
+                CsMjGameRoom room = CsGameRoomManager.CreateRoom(Context.Session.User as GameUser);
                 return response.Build().ToByteArray();
             }
             else
