@@ -15,10 +15,10 @@ namespace DolphinServer.Service.Mj
     {
         protected override void SendCard()
         {
-            Player down = Player.CreateBuilder().AddRangeCard(cardArray.Take(14)).Build();
-            Player rigth = Player.CreateBuilder().AddRangeCard(cardArray.Skip(14).Take(13)).Build();
-            Player top = Player.CreateBuilder().AddRangeCard(cardArray.Skip(27).Take(13)).Build();
-            Player left = Player.CreateBuilder().AddRangeCard(cardArray.Skip(40).Take(13)).Build();
+            Player down = ProtoEntity.Player.CreateBuilder().AddRangeCard(cardArray.Take(14)).Build();
+            Player rigth = ProtoEntity.Player.CreateBuilder().AddRangeCard(cardArray.Skip(14).Take(13)).Build();
+            Player top = ProtoEntity.Player.CreateBuilder().AddRangeCard(cardArray.Skip(27).Take(13)).Build();
+            Player left = ProtoEntity.Player.CreateBuilder().AddRangeCard(cardArray.Skip(40).Take(13)).Build();
 
             var response = A1006Response.CreateBuilder();
             response.Player1 = down;
@@ -45,7 +45,7 @@ namespace DolphinServer.Service.Mj
             response3.Player3 = rigth;
             response3.Player4 = top;
 
-            WebSocketServer.SendPackgeWithUser(this.player.Value.PlayerUser.Uid, 1006, response.Build().ToByteArray());
+            WebSocketServer.SendPackgeWithUser(this.Player.Value.PlayerUser.Uid, 1006, response.Build().ToByteArray());
             //TODO： 测试先发一个人
 
             //WebSocketServer.SendPackgeWithUser(this.player.Next.Value.PlayerUser.Uid, 1006, response1.Build().ToByteArray());
@@ -53,23 +53,107 @@ namespace DolphinServer.Service.Mj
             //WebSocketServer.SendPackgeWithUser(this.player.Next.Next.Value.PlayerUser.Uid, 1006, response3.Build().ToByteArray());
 
         }
-        
+
+        /// <summary>
+        /// 开局第一次胡
+        /// </summary>
+        /// <param name="uid"></param>
+        public void FistHu(string uid)
+        {
+            LinkedListNode<CsGamePlayer> node = FindPlayer(uid);
+            node.Value.ResetEvent.Set();
+        }
+
+        public void Hu(string uid, int card)
+        {
+            LinkedListNode<CsGamePlayer> node = FindPlayer(uid);
+            node.Value.ResetEvent.Set();
+
+            this.Player = this.Player;
+        }
+
+        public void Chi(string uid, int card)
+        {
+            LinkedListNode<CsGamePlayer> node = FindPlayer(uid);
+
+            foreach (var row in Players)
+            {
+                if ((row.CheckGang(card) ||
+                    row.CheckPeng(card) ||
+                    row.CheckHu(card)) && row.PlayerUser.Uid != uid)
+                {
+                    row.ResetEvent.WaitOne();
+                }
+            }
+        }
+
+        public void Gang(string uid, int card)
+        {
+
+            LinkedListNode<CsGamePlayer> node = FindPlayer(uid);
+
+            foreach (var row in Players)
+            {
+                if ((row.CheckHu(card)) && row.PlayerUser.Uid != uid)
+                {
+                    row.ResetEvent.WaitOne();
+                }
+            }
+        }
+
+        public void Peng(string uid, int card)
+        {
+            LinkedListNode<CsGamePlayer> node = FindPlayer(uid);
+
+            foreach (var row in Players)
+            {
+                if ((row.CheckGang(card) || row.CheckHu(card)) && row.PlayerUser.Uid != uid)
+                {
+                    row.ResetEvent.WaitOne();
+                }
+            }
+        }
+
+        public void Mo(string uid, int card)
+        {
+        }
+
+        public void Da(string uid, int card)
+        {
+            LinkedListNode<CsGamePlayer> node = FindPlayer(uid);
+
+
+            this.Player = this.Player.Next;
+
+
+        }
+
+        public void FristDa(string uid, int card)
+        {
+            LinkedListNode<CsGamePlayer> node = FindPlayer(uid);
+
+            foreach (var row in Players)
+            {
+                if ((row.CheckKaiJuHu()) && row.PlayerUser.Uid != uid)
+                {
+                    row.ResetEvent.WaitOne();
+                }
+            }
+        }
+
+
         /// <summary>
         /// 出牌接收
         /// </summary>
         /// <param name="uid">用户ID</param>
         /// <param name="card">牌</param>
-        public void OutCard(string uid,int card) {
-
-            foreach (var row in this.players)
-            {
-                if(row.u)
-            }
-
-            var player = this.players.Where(p => p.PlayerUser.Uid == uid).FirstOrDefault();
-            player.OutCard(card);
-            player.
-            
+        public void OutCard(string uid, int card, List<int> huArray)
+        {
+            // var player = this.Player.Where(p => p.PlayerUser.Uid == uid).FirstOrDefault();
+            //player.OutCard(card);
         }
     }
+
+
+
 }

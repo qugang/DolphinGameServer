@@ -9,13 +9,33 @@ namespace DolphinServer.Service.Mj
     public abstract class MjGameRoomBase
     {
         public int RoomId { get; set; }
-
         /// <summary>
         /// 玩家集合
         /// </summary>
-        public LinkedList<CsGamePlayer> players { get; set; }
+        public LinkedList<CsGamePlayer> Players { get; set; }
 
-        protected LinkedListNode<CsGamePlayer> player { get; set; }
+        protected LinkedListNode<CsGamePlayer> Player { get; set; }
+
+        public LinkedListNode<CsGamePlayer> FindPlayer(string uid) {
+            LinkedListNode<CsGamePlayer> next = Players.First;
+            for (int i = 0; i < Players.Count; i++)
+            {
+                if (next.Value.PlayerUser.Uid == uid)
+                {
+                    return next;
+                }
+                next = next.Next;
+            }
+            return null;
+        }
+
+        public void SetPlayerReadyFalse()
+        {
+            foreach (var row in Players)
+            {
+                row.IsReady = false;
+            }
+        }
 
 
 
@@ -41,7 +61,7 @@ namespace DolphinServer.Service.Mj
         public virtual void BeginGame()
         {
             cardIndex = 0;
-            this.player = this.players.First;
+            this.Player = this.Players.First;
             RandCard();
             SendCard();
         }
@@ -79,6 +99,10 @@ namespace DolphinServer.Service.Mj
             cardIndex++;
             return tempCard;
         }
+
+       
+        
+
 
     }
 }

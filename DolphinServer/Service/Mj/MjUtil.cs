@@ -31,7 +31,7 @@ namespace DolphinServer.Service.Mj
             return value + 16 * number;
         }
 
-        public static int SubItemNumber(this int value ,int number)
+        public static int SubItemNumber(this int value, int number)
         {
             return value - 16 * number;
         }
@@ -47,7 +47,7 @@ namespace DolphinServer.Service.Mj
             return (value & 0xF) + 1;
         }
 
-        public static void RemoveCardItem(this List<int> array,int card)
+        public static void RemoveCardItem(this List<int> array, int card)
         {
             int index = array.FindIndex(p => p.GetItemValue() == card.GetItemValue());
 
@@ -76,9 +76,16 @@ namespace DolphinServer.Service.Mj
             }
             else
             {
-                array[index].AddItemNumber(1);
+                array[index] = array[index].AddItemNumber(1);
             }
         }
-        
+
+        public static int FindJiang(this List<int> array,int number)
+        {
+            return array.FindIndex(p => (p.GetItemValue() == 2 ||
+                                   p.GetItemValue() == 5 ||
+                                    p.GetItemValue() == 8) && number % 3 == 2 && p.GetItemNumber() == 2);
+        }
+
     }
 }

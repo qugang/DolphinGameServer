@@ -13,15 +13,15 @@ namespace DolphinServer.Service.Mj
     public static class CsGameRoomManager
     {
         static ConcurrentDictionary<int, CsMjGameRoom> rooms = new ConcurrentDictionary<int, CsMjGameRoom>();
-
+        
         private static int maxRoomeId = 0;
 
         public static CsMjGameRoom CreateRoom(GameUser user)
         {
             CsMjGameRoom room = new CsMjGameRoom();
             room.RoomId = getRoomId();
-            room.players = new LinkedList<CsGamePlayer>();
-            room.players.AddLast(new CsGamePlayer(user));
+            room.Players = new LinkedList<CsGamePlayer>();
+            room.Players.AddLast(new CsGamePlayer(user));
             rooms.TryAdd(room.RoomId, room);
             room.BeginGame();
             return room;
@@ -38,9 +38,9 @@ namespace DolphinServer.Service.Mj
             rooms.TryGetValue(roomID, out room);
             if (room != null)
             {
-                room.players.AddLast(new CsGamePlayer(user));
+                room.Players.AddLast(new CsGamePlayer(user));
 
-                if (room.players.All(p => p.IsReady))
+                if (room.Players.All(p => p.IsReady))
                 {
 
                     //TODO: 重置房间号

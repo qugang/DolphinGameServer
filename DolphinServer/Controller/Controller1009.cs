@@ -22,7 +22,7 @@ namespace DolphinServer.Controller
 
         public override byte[] ProcessAction()
         {
-
+            return null;
         }
     }
 }
