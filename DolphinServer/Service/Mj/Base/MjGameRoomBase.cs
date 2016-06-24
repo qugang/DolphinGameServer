@@ -82,12 +82,19 @@ namespace DolphinServer.Service.Mj
 
         int cardIndex = 0;
 
-        public virtual void BeginGame()
+        public virtual void BeginGame(string userId)
         {
-            cardIndex = 0;
-            this.Player = this.Players.First;
-            RandCard();
-            SendCard();
+            LinkedListNode<CsGamePlayer> player = FindPlayer(userId);
+
+            player.Value.IsReady = true;
+
+            if (Players.All(p => p.IsReady))
+            {
+                cardIndex = 0;
+                this.Player = this.Players.First;
+                RandCard();
+                SendCard();
+            }
         }
 
         public virtual void ReLoadGame()

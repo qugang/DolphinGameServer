@@ -1,4 +1,6 @@
-﻿using Free.Dolphin.Core;
+﻿using DolphinServer.Entity;
+using DolphinServer.Service.Mj;
+using Free.Dolphin.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +22,8 @@ namespace DolphinServer.Controller
 
         public override byte[] ProcessAction()
         {
-            throw new NotImplementedException();
+            CsGameRoomManager.Ready(int.Parse(Context.HttpQueryString["RoomID"]), Context.Session.User as GameUser);
+            return null;
         }
     }
 }

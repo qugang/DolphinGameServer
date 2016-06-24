@@ -66,12 +66,15 @@ namespace Free.Dolphin.Core
                 else
                 {
                     byte[] sendByte = controller.ProcessAction();
-                    List<byte> list = new List<byte>();
-                    list.Add((byte)(context.ProtocolId >> 8));
-                    list.Add((byte)(context.ProtocolId & 0xFF));
-                    list.AddRange(sendByte);
-                    WebSocketServer.OnSend(list.ToArray());
-                    Send(list.ToArray());
+                    if (sendByte != null)
+                    {
+                        List<byte> list = new List<byte>();
+                        list.Add((byte)(context.ProtocolId >> 8));
+                        list.Add((byte)(context.ProtocolId & 0xFF));
+                        list.AddRange(sendByte);
+                        WebSocketServer.OnSend(list.ToArray());
+                        Send(list.ToArray());
+                    }
                 }
             }
             catch (Exception ex)

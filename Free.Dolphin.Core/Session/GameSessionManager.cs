@@ -29,9 +29,9 @@ namespace Free.Dolphin.Core
 
         public static GameSession AddSessionWithUser(GameSession session, string userId)
         {
-            return _users.AddOrUpdate(userId, session, (oSession, nSession) =>
+            return _users.AddOrUpdate(userId, session, (key, oSession) =>
             {
-                return nSession;
+                return session;
             });
         }
 

@@ -13,7 +13,7 @@ namespace DolphinServer.Service.Mj
     public static class CsGameRoomManager
     {
         static ConcurrentDictionary<int, CsMjGameRoom> rooms = new ConcurrentDictionary<int, CsMjGameRoom>();
-        
+
         private static int maxRoomeId = 0;
 
         public static CsMjGameRoom CreateRoom(GameUser user)
@@ -23,8 +23,14 @@ namespace DolphinServer.Service.Mj
             room.Players = new LinkedList<CsGamePlayer>();
             room.Players.AddLast(new CsGamePlayer(user));
             rooms.TryAdd(room.RoomId, room);
-            room.BeginGame();
             return room;
+        }
+
+        public static void Ready(int roomId, GameUser user)
+        {
+            CsMjGameRoom room = null;
+            rooms.TryGetValue(roomId, out room);
+            room.BeginGame(user.Uid);
         }
 
         private static int getRoomId()
