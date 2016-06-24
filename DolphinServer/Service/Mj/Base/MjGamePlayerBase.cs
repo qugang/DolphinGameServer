@@ -11,7 +11,13 @@ namespace DolphinServer.Service.Mj
     public abstract class MjGamePlayerBase
     {
 
-        public AutoResetEvent ResetEvent = new AutoResetEvent(false);
+        public ManualResetEvent ResetEvent = new ManualResetEvent(false);
+
+
+        /// <summary>
+        /// 玩家分数
+        /// </summary>
+        public int Score { get; set; }
 
         /// <summary>
         /// 手上的牌

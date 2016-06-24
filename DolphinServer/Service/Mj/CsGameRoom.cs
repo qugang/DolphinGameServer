@@ -64,17 +64,30 @@ namespace DolphinServer.Service.Mj
             node.Value.ResetEvent.Set();
         }
 
-        public void Hu(string uid, int card)
+        public void ZiMo(string uid, int card)
         {
             LinkedListNode<CsGamePlayer> node = FindPlayer(uid);
-            node.Value.ResetEvent.Set();
 
             this.Player = this.Player;
+        }
+
+        public void ZhuoPao(string uid)
+        {
+            LinkedListNode<CsGamePlayer> node = FindPlayer(uid);
+
+            this.SetCurrentCardIsUse();
+
+            node.Value.ResetEvent.Set();
+
+            SetCurrentCardIsUse();
+
+
         }
 
         public void Chi(string uid, int card)
         {
             LinkedListNode<CsGamePlayer> node = FindPlayer(uid);
+            
 
             foreach (var row in Players)
             {
@@ -85,13 +98,19 @@ namespace DolphinServer.Service.Mj
                     row.ResetEvent.WaitOne();
                 }
             }
+
+            //牌未被彭吃杠
+            if (!CurrentCardIsUse())
+            {
+
+            }
+
+            SetCurrentCardIsUse();
         }
 
         public void Gang(string uid, int card)
         {
-
             LinkedListNode<CsGamePlayer> node = FindPlayer(uid);
-
             foreach (var row in Players)
             {
                 if ((row.CheckHu(card)) && row.PlayerUser.Uid != uid)
@@ -99,12 +118,19 @@ namespace DolphinServer.Service.Mj
                     row.ResetEvent.WaitOne();
                 }
             }
+
+            //牌未被胡
+            if (!CurrentCardIsUse())
+            {
+
+            }
+
+            SetCurrentCardIsUse();
         }
 
         public void Peng(string uid, int card)
         {
             LinkedListNode<CsGamePlayer> node = FindPlayer(uid);
-
             foreach (var row in Players)
             {
                 if ((row.CheckGang(card) || row.CheckHu(card)) && row.PlayerUser.Uid != uid)
@@ -112,20 +138,44 @@ namespace DolphinServer.Service.Mj
                     row.ResetEvent.WaitOne();
                 }
             }
+
+            //牌未被杠或胡
+            if (!CurrentCardIsUse())
+            {
+
+            }
+
+            SetCurrentCardIsUse();
         }
 
-        public void Mo(string uid, int card)
+        public void Mo(string uid)
         {
+            LinkedListNode<CsGamePlayer> node = FindPlayer(uid);
+            int card = this.ReadCard();
+
         }
 
         public void Da(string uid, int card)
         {
             LinkedListNode<CsGamePlayer> node = FindPlayer(uid);
+            this.CurrentCard = card;
 
-
-            this.Player = this.Player.Next;
-
-
+            foreach (var row in Players)
+            {
+                if ((row.CheckGang(card) ||
+                    row.CheckPeng(card) ||
+                    row.CheckHu(card) ||
+                    row.CheckChi(card)) && row.PlayerUser.Uid != uid)
+                {
+                    row.ResetEvent.WaitOne();
+                }
+            }
+            //牌未被彭吃杠
+            if (!CurrentCardIsUse())
+            {
+                this.Player = this.Player.Next;
+                Mo(this.Player.Value.PlayerUser.Uid);
+            }
         }
 
         public void FristDa(string uid, int card)
@@ -141,17 +191,6 @@ namespace DolphinServer.Service.Mj
             }
         }
 
-
-        /// <summary>
-        /// 出牌接收
-        /// </summary>
-        /// <param name="uid">用户ID</param>
-        /// <param name="card">牌</param>
-        public void OutCard(string uid, int card, List<int> huArray)
-        {
-            // var player = this.Player.Where(p => p.PlayerUser.Uid == uid).FirstOrDefault();
-            //player.OutCard(card);
-        }
     }
 
 

@@ -14,9 +14,33 @@ namespace DolphinServer.Service.Mj
         /// </summary>
         public LinkedList<CsGamePlayer> Players { get; set; }
 
+        /// <summary>
+        /// 当前打出的牌
+        /// </summary>
+        protected int CurrentCard { get; set; }
+
+        protected void SetCurrentCardIsUse()
+        {
+            this.CurrentCard = this.CurrentCard | 0x200;
+        }
+
+        protected void ClaerCurrentCardIsUse()
+        {
+            this.CurrentCard = this.CurrentCard & 0x1FF;
+        }
+
+        protected Boolean CurrentCardIsUse()
+        {
+            if ((this.CurrentCard & 0x200) > 0)
+                return true;
+            return false;
+        }
+
+
         protected LinkedListNode<CsGamePlayer> Player { get; set; }
 
-        public LinkedListNode<CsGamePlayer> FindPlayer(string uid) {
+        public LinkedListNode<CsGamePlayer> FindPlayer(string uid)
+        {
             LinkedListNode<CsGamePlayer> next = Players.First;
             for (int i = 0; i < Players.Count; i++)
             {
@@ -100,8 +124,9 @@ namespace DolphinServer.Service.Mj
             return tempCard;
         }
 
-       
-        
+
+
+
 
 
     }
