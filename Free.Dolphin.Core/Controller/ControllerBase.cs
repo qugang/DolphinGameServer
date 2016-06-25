@@ -1,4 +1,5 @@
 ﻿using Free.Dolphin.Common.Util;
+using Free.Dolphin.Core.Session;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,7 +59,7 @@ namespace Free.Dolphin.Core
             else
             {
                 Context.Session.User = user;
-                GameSessionManager.AddSessionWithUser(Context.Session, user.Uid);
+                GameUserManager.AddOrUpdateUser(user.Uid, Context.Session);
                 return true;
             }
         }

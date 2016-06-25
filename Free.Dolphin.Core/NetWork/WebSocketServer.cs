@@ -1,4 +1,5 @@
 ﻿using Free.Dolphin.Common.Util;
+using Free.Dolphin.Core.Session;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -119,7 +120,7 @@ namespace Free.Dolphin.Core
                 list.Add((byte)(protocol & 0xFF));
                 list.AddRange(sendByte);
 
-                GameSessionManager.GetWebSocketWithUser(uid).Send(list.ToArray());
+                GameUserManager.SendPackgeWithUser(uid,list.ToArray());
             });
         }
     }

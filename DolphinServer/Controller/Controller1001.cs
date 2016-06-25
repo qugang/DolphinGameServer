@@ -1,6 +1,7 @@
 ﻿using DolphinServer.Entity;
 using DolphinServer.ProtoEntity;
 using Free.Dolphin.Core;
+using Free.Dolphin.Core.Session;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +32,7 @@ namespace DolphinServer.Controller
                 RedisContext.GlobalContext.AddHashEntity(user);
             }
             Context.Session.User = user;
-            GameSessionManager.AddSessionWithUser(Context.Session, user.Uid);
+            GameUserManager.AddOrUpdateUser(user.Uid, Context.Session);
             A1001Response.Builder response = A1001Response.CreateBuilder();
             response.Uid = user.Uid;
             return response.Build().ToByteArray();

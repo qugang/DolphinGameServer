@@ -61,6 +61,7 @@
     <Compile Include="Redis\RedisContext.cs" />
     <Compile Include="Session\GameSession.cs" />
     <Compile Include="Session\GameSessionManager.cs" />
+    <Compile Include="Session\GameUserManager.cs" />
     <Compile Include="Session\GameUserState.cs" />
     <Compile Include="Session\IGameUser.cs" />
     <Compile Include="NetWork\WebSocketPackage.cs" />
