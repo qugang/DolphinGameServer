@@ -29,6 +29,8 @@ namespace DolphinServer.Controller
             A1002Response.Builder response = A1002Response.CreateBuilder();
             response.RoomID = room.RoomId;
             response.RoomType = int.Parse(Context.HttpQueryString["RoomType"]);
+            
+
             return response.Build().ToByteArray();
         }
     }

@@ -49,10 +49,6 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="websocket-sharp.clone, Version=1.0.2.39869, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\websocket-sharp.clone.3.0.0\lib\net45\websocket-sharp.clone.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\Controller1001.cs" />
@@ -60,8 +56,8 @@
     <Compile Include="Controller\Controller1003.cs" />
     <Compile Include="Controller\Controller1004.cs" />
     <Compile Include="Controller\Controller1005.cs" />
-    <Compile Include="Controller\Controller1007.cs" />
     <Compile Include="Controller\Controller1008.cs" />
+    <Compile Include="Controller\Controller1007.cs" />
     <Compile Include="Controller\Controller1009.cs" />
     <Compile Include="Controller\Controller1010.cs" />
     <Compile Include="Controller\Controller1011.cs" />
@@ -74,7 +70,10 @@
     <Compile Include="ProtoEntity\A1001Response.cs" />
     <Compile Include="ProtoEntity\A1002Response.cs" />
     <Compile Include="ProtoEntity\A1003Response.cs" />
+    <Compile Include="ProtoEntity\A1005Response.cs" />
     <Compile Include="ProtoEntity\A1006Response.cs" />
+    <Compile Include="ProtoEntity\A1007Response.cs" />
+    <Compile Include="ProtoEntity\A1008Response.cs" />
     <Compile Include="ProtoEntity\A1009Response.cs" />
     <Compile Include="ProtoEntity\A9999DataErrorResponse.cs" />
     <Compile Include="Service\Mj\CsGamePlayer.cs" />
@@ -103,7 +102,10 @@
     <Content Include="ProtoEntity\A1001Response.txt" />
     <Content Include="ProtoEntity\A1002Response.txt" />
     <Content Include="ProtoEntity\A1003Response.txt" />
+    <Content Include="ProtoEntity\A1005Response.txt" />
     <Content Include="ProtoEntity\A1006Response.txt" />
+    <Content Include="ProtoEntity\A1007Response.txt" />
+    <Content Include="ProtoEntity\A1008Response.txt" />
     <Content Include="ProtoEntity\A1009Response.txt" />
     <Content Include="ProtoEntity\A9999DataErrorResponse.txt" />
     <Content Include="ProtoEntity\cmd.txt" />

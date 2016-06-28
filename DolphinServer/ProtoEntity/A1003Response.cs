@@ -21,6 +21,8 @@ namespace DolphinServer.ProtoEntity {
       #region Static variables
       internal static pbd::MessageDescriptor internal__static_A1003Response__Descriptor;
       internal static pb::FieldAccess.FieldAccessorTable<global::DolphinServer.ProtoEntity.A1003Response, global::DolphinServer.ProtoEntity.A1003Response.Builder> internal__static_A1003Response__FieldAccessorTable;
+      internal static pbd::MessageDescriptor internal__static_A1003User__Descriptor;
+      internal static pb::FieldAccess.FieldAccessorTable<global::DolphinServer.ProtoEntity.A1003User, global::DolphinServer.ProtoEntity.A1003User.Builder> internal__static_A1003User__FieldAccessorTable;
       #endregion
       #region Descriptor
       public static pbd::FileDescriptor Descriptor {
@@ -31,15 +33,21 @@ namespace DolphinServer.ProtoEntity {
       static A1003Response() {
         byte[] descriptorData = global::System.Convert.FromBase64String(
             string.Concat(
-              "ChFBMTAwM1Jlc3BvbnNlLnR4dCI1Cg1BMTAwM1Jlc3BvbnNlEhEKCUVycm9y", 
-              "SW5mbxgBIAEoCRIRCglFcnJvckNvZGUYAiABKAVCHKoCGURvbHBoaW5TZXJ2", 
-            "ZXIuUHJvdG9FbnRpdHk="));
+              "ChFBMTAwM1Jlc3BvbnNlLnR4dCJQCg1BMTAwM1Jlc3BvbnNlEhEKCUVycm9y", 
+              "SW5mbxgBIAEoCRIRCglFcnJvckNvZGUYAiABKAUSGQoFVXNlcnMYAyADKAsy", 
+              "Ci5BMTAwM1VzZXIiVQoJQTEwMDNVc2VyEgsKA1VpZBgBIAEoCRIQCghIYXRJ", 
+              "bWFnZRgCIAEoCRIMCgRTb3JlGAMgASgFEg4KBlpodWFuZxgEIAEoBRILCgNT", 
+            "ZXgYBSABKAVCHKoCGURvbHBoaW5TZXJ2ZXIuUHJvdG9FbnRpdHk="));
         pbd::FileDescriptor.InternalDescriptorAssigner assigner = delegate(pbd::FileDescriptor root) {
           descriptor = root;
           internal__static_A1003Response__Descriptor = Descriptor.MessageTypes[0];
           internal__static_A1003Response__FieldAccessorTable = 
               new pb::FieldAccess.FieldAccessorTable<global::DolphinServer.ProtoEntity.A1003Response, global::DolphinServer.ProtoEntity.A1003Response.Builder>(internal__static_A1003Response__Descriptor,
-                  new string[] { "ErrorInfo", "ErrorCode", });
+                  new string[] { "ErrorInfo", "ErrorCode", "Users", });
+          internal__static_A1003User__Descriptor = Descriptor.MessageTypes[1];
+          internal__static_A1003User__FieldAccessorTable = 
+              new pb::FieldAccess.FieldAccessorTable<global::DolphinServer.ProtoEntity.A1003User, global::DolphinServer.ProtoEntity.A1003User.Builder>(internal__static_A1003User__Descriptor,
+                  new string[] { "Uid", "HatImage", "Sore", "Zhuang", "Sex", });
           pb::ExtensionRegistry registry = pb::ExtensionRegistry.CreateInstance();
           RegisterAllExtensions(registry);
           return registry;
@@ -57,8 +65,8 @@ namespace DolphinServer.ProtoEntity {
   public sealed partial class A1003Response : pb::GeneratedMessage<A1003Response, A1003Response.Builder> {
     private A1003Response() { }
     private static readonly A1003Response defaultInstance = new A1003Response().MakeReadOnly();
-    private static readonly string[] _a1003ResponseFieldNames = new string[] { "ErrorCode", "ErrorInfo" };
-    private static readonly uint[] _a1003ResponseFieldTags = new uint[] { 16, 10 };
+    private static readonly string[] _a1003ResponseFieldNames = new string[] { "ErrorCode", "ErrorInfo", "Users" };
+    private static readonly uint[] _a1003ResponseFieldTags = new uint[] { 16, 10, 26 };
     public static A1003Response DefaultInstance {
       get { return defaultInstance; }
     }
@@ -99,6 +107,18 @@ namespace DolphinServer.ProtoEntity {
       get { return errorCode_; }
     }
 
+    public const int UsersFieldNumber = 3;
+    private pbc::PopsicleList<global::DolphinServer.ProtoEntity.A1003User> users_ = new pbc::PopsicleList<global::DolphinServer.ProtoEntity.A1003User>();
+    public scg::IList<global::DolphinServer.ProtoEntity.A1003User> UsersList {
+      get { return users_; }
+    }
+    public int UsersCount {
+      get { return users_.Count; }
+    }
+    public global::DolphinServer.ProtoEntity.A1003User GetUsers(int index) {
+      return users_[index];
+    }
+
     public override bool IsInitialized {
       get {
         return true;
@@ -113,6 +133,9 @@ namespace DolphinServer.ProtoEntity {
       }
       if (hasErrorCode) {
         output.WriteInt32(2, field_names[0], ErrorCode);
+      }
+      if (users_.Count > 0) {
+        output.WriteMessageArray(3, field_names[2], users_);
       }
       UnknownFields.WriteTo(output);
     }
@@ -136,6 +159,9 @@ namespace DolphinServer.ProtoEntity {
       }
       if (hasErrorCode) {
         size += pb::CodedOutputStream.ComputeInt32Size(2, ErrorCode);
+      }
+      foreach (global::DolphinServer.ProtoEntity.A1003User element in UsersList) {
+        size += pb::CodedOutputStream.ComputeMessageSize(3, element);
       }
       size += UnknownFields.SerializedSize;
       memoizedSerializedSize = size;
@@ -172,6 +198,7 @@ namespace DolphinServer.ProtoEntity {
       return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
     }
     private A1003Response MakeReadOnly() {
+      users_.MakeReadOnly();
       return this;
     }
 
@@ -265,6 +292,9 @@ namespace DolphinServer.ProtoEntity {
         if (other.HasErrorCode) {
           ErrorCode = other.ErrorCode;
         }
+        if (other.users_.Count != 0) {
+          result.users_.Add(other.users_);
+        }
         this.MergeUnknownFields(other.UnknownFields);
         return this;
       }
@@ -314,6 +344,10 @@ namespace DolphinServer.ProtoEntity {
             }
             case 16: {
               result.hasErrorCode = input.ReadInt32(ref result.errorCode_);
+              break;
+            }
+            case 26: {
+              input.ReadMessageArray(tag, field_name, result.users_, global::DolphinServer.ProtoEntity.A1003User.DefaultInstance, extensionRegistry);
               break;
             }
           }
@@ -366,8 +400,501 @@ namespace DolphinServer.ProtoEntity {
         result.errorCode_ = 0;
         return this;
       }
+
+      public pbc::IPopsicleList<global::DolphinServer.ProtoEntity.A1003User> UsersList {
+        get { return PrepareBuilder().users_; }
+      }
+      public int UsersCount {
+        get { return result.UsersCount; }
+      }
+      public global::DolphinServer.ProtoEntity.A1003User GetUsers(int index) {
+        return result.GetUsers(index);
+      }
+      public Builder SetUsers(int index, global::DolphinServer.ProtoEntity.A1003User value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.users_[index] = value;
+        return this;
+      }
+      public Builder SetUsers(int index, global::DolphinServer.ProtoEntity.A1003User.Builder builderForValue) {
+        pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
+        PrepareBuilder();
+        result.users_[index] = builderForValue.Build();
+        return this;
+      }
+      public Builder AddUsers(global::DolphinServer.ProtoEntity.A1003User value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.users_.Add(value);
+        return this;
+      }
+      public Builder AddUsers(global::DolphinServer.ProtoEntity.A1003User.Builder builderForValue) {
+        pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
+        PrepareBuilder();
+        result.users_.Add(builderForValue.Build());
+        return this;
+      }
+      public Builder AddRangeUsers(scg::IEnumerable<global::DolphinServer.ProtoEntity.A1003User> values) {
+        PrepareBuilder();
+        result.users_.Add(values);
+        return this;
+      }
+      public Builder ClearUsers() {
+        PrepareBuilder();
+        result.users_.Clear();
+        return this;
+      }
     }
     static A1003Response() {
+      object.ReferenceEquals(global::DolphinServer.ProtoEntity.Proto.A1003Response.Descriptor, null);
+    }
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+  public sealed partial class A1003User : pb::GeneratedMessage<A1003User, A1003User.Builder> {
+    private A1003User() { }
+    private static readonly A1003User defaultInstance = new A1003User().MakeReadOnly();
+    private static readonly string[] _a1003UserFieldNames = new string[] { "HatImage", "Sex", "Sore", "Uid", "Zhuang" };
+    private static readonly uint[] _a1003UserFieldTags = new uint[] { 18, 40, 24, 10, 32 };
+    public static A1003User DefaultInstance {
+      get { return defaultInstance; }
+    }
+
+    public override A1003User DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+
+    protected override A1003User ThisMessage {
+      get { return this; }
+    }
+
+    public static pbd::MessageDescriptor Descriptor {
+      get { return global::DolphinServer.ProtoEntity.Proto.A1003Response.internal__static_A1003User__Descriptor; }
+    }
+
+    protected override pb::FieldAccess.FieldAccessorTable<A1003User, A1003User.Builder> InternalFieldAccessors {
+      get { return global::DolphinServer.ProtoEntity.Proto.A1003Response.internal__static_A1003User__FieldAccessorTable; }
+    }
+
+    public const int UidFieldNumber = 1;
+    private bool hasUid;
+    private string uid_ = "";
+    public bool HasUid {
+      get { return hasUid; }
+    }
+    public string Uid {
+      get { return uid_; }
+    }
+
+    public const int HatImageFieldNumber = 2;
+    private bool hasHatImage;
+    private string hatImage_ = "";
+    public bool HasHatImage {
+      get { return hasHatImage; }
+    }
+    public string HatImage {
+      get { return hatImage_; }
+    }
+
+    public const int SoreFieldNumber = 3;
+    private bool hasSore;
+    private int sore_;
+    public bool HasSore {
+      get { return hasSore; }
+    }
+    public int Sore {
+      get { return sore_; }
+    }
+
+    public const int ZhuangFieldNumber = 4;
+    private bool hasZhuang;
+    private int zhuang_;
+    public bool HasZhuang {
+      get { return hasZhuang; }
+    }
+    public int Zhuang {
+      get { return zhuang_; }
+    }
+
+    public const int SexFieldNumber = 5;
+    private bool hasSex;
+    private int sex_;
+    public bool HasSex {
+      get { return hasSex; }
+    }
+    public int Sex {
+      get { return sex_; }
+    }
+
+    public override bool IsInitialized {
+      get {
+        return true;
+      }
+    }
+
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      CalcSerializedSize();
+      string[] field_names = _a1003UserFieldNames;
+      if (hasUid) {
+        output.WriteString(1, field_names[3], Uid);
+      }
+      if (hasHatImage) {
+        output.WriteString(2, field_names[0], HatImage);
+      }
+      if (hasSore) {
+        output.WriteInt32(3, field_names[2], Sore);
+      }
+      if (hasZhuang) {
+        output.WriteInt32(4, field_names[4], Zhuang);
+      }
+      if (hasSex) {
+        output.WriteInt32(5, field_names[1], Sex);
+      }
+      UnknownFields.WriteTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        return CalcSerializedSize();
+      }
+    }
+
+    private int CalcSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (hasUid) {
+        size += pb::CodedOutputStream.ComputeStringSize(1, Uid);
+      }
+      if (hasHatImage) {
+        size += pb::CodedOutputStream.ComputeStringSize(2, HatImage);
+      }
+      if (hasSore) {
+        size += pb::CodedOutputStream.ComputeInt32Size(3, Sore);
+      }
+      if (hasZhuang) {
+        size += pb::CodedOutputStream.ComputeInt32Size(4, Zhuang);
+      }
+      if (hasSex) {
+        size += pb::CodedOutputStream.ComputeInt32Size(5, Sex);
+      }
+      size += UnknownFields.SerializedSize;
+      memoizedSerializedSize = size;
+      return size;
+    }
+    public static A1003User ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static A1003User ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static A1003User ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static A1003User ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static A1003User ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static A1003User ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    public static A1003User ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    public static A1003User ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    public static A1003User ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static A1003User ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private A1003User MakeReadOnly() {
+      return this;
+    }
+
+    public static Builder CreateBuilder() { return new Builder(); }
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    public static Builder CreateBuilder(A1003User prototype) {
+      return new Builder(prototype);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    public sealed partial class Builder : pb::GeneratedBuilder<A1003User, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(A1003User cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+
+      private bool resultIsReadOnly;
+      private A1003User result;
+
+      private A1003User PrepareBuilder() {
+        if (resultIsReadOnly) {
+          A1003User original = result;
+          result = new A1003User();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+
+      protected override A1003User MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+
+      public override pbd::MessageDescriptor DescriptorForType {
+        get { return global::DolphinServer.ProtoEntity.A1003User.Descriptor; }
+      }
+
+      public override A1003User DefaultInstanceForType {
+        get { return global::DolphinServer.ProtoEntity.A1003User.DefaultInstance; }
+      }
+
+      public override A1003User BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+
+      public override Builder MergeFrom(pb::IMessage other) {
+        if (other is A1003User) {
+          return MergeFrom((A1003User) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+
+      public override Builder MergeFrom(A1003User other) {
+        if (other == global::DolphinServer.ProtoEntity.A1003User.DefaultInstance) return this;
+        PrepareBuilder();
+        if (other.HasUid) {
+          Uid = other.Uid;
+        }
+        if (other.HasHatImage) {
+          HatImage = other.HatImage;
+        }
+        if (other.HasSore) {
+          Sore = other.Sore;
+        }
+        if (other.HasZhuang) {
+          Zhuang = other.Zhuang;
+        }
+        if (other.HasSex) {
+          Sex = other.Sex;
+        }
+        this.MergeUnknownFields(other.UnknownFields);
+        return this;
+      }
+
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        pb::UnknownFieldSet.Builder unknownFields = null;
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_a1003UserFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _a1003UserFieldTags[field_ordinal];
+            else {
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                if (unknownFields != null) {
+                  this.UnknownFields = unknownFields.Build();
+                }
+                return this;
+              }
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              break;
+            }
+            case 10: {
+              result.hasUid = input.ReadString(ref result.uid_);
+              break;
+            }
+            case 18: {
+              result.hasHatImage = input.ReadString(ref result.hatImage_);
+              break;
+            }
+            case 24: {
+              result.hasSore = input.ReadInt32(ref result.sore_);
+              break;
+            }
+            case 32: {
+              result.hasZhuang = input.ReadInt32(ref result.zhuang_);
+              break;
+            }
+            case 40: {
+              result.hasSex = input.ReadInt32(ref result.sex_);
+              break;
+            }
+          }
+        }
+
+        if (unknownFields != null) {
+          this.UnknownFields = unknownFields.Build();
+        }
+        return this;
+      }
+
+
+      public bool HasUid {
+        get { return result.hasUid; }
+      }
+      public string Uid {
+        get { return result.Uid; }
+        set { SetUid(value); }
+      }
+      public Builder SetUid(string value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasUid = true;
+        result.uid_ = value;
+        return this;
+      }
+      public Builder ClearUid() {
+        PrepareBuilder();
+        result.hasUid = false;
+        result.uid_ = "";
+        return this;
+      }
+
+      public bool HasHatImage {
+        get { return result.hasHatImage; }
+      }
+      public string HatImage {
+        get { return result.HatImage; }
+        set { SetHatImage(value); }
+      }
+      public Builder SetHatImage(string value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasHatImage = true;
+        result.hatImage_ = value;
+        return this;
+      }
+      public Builder ClearHatImage() {
+        PrepareBuilder();
+        result.hasHatImage = false;
+        result.hatImage_ = "";
+        return this;
+      }
+
+      public bool HasSore {
+        get { return result.hasSore; }
+      }
+      public int Sore {
+        get { return result.Sore; }
+        set { SetSore(value); }
+      }
+      public Builder SetSore(int value) {
+        PrepareBuilder();
+        result.hasSore = true;
+        result.sore_ = value;
+        return this;
+      }
+      public Builder ClearSore() {
+        PrepareBuilder();
+        result.hasSore = false;
+        result.sore_ = 0;
+        return this;
+      }
+
+      public bool HasZhuang {
+        get { return result.hasZhuang; }
+      }
+      public int Zhuang {
+        get { return result.Zhuang; }
+        set { SetZhuang(value); }
+      }
+      public Builder SetZhuang(int value) {
+        PrepareBuilder();
+        result.hasZhuang = true;
+        result.zhuang_ = value;
+        return this;
+      }
+      public Builder ClearZhuang() {
+        PrepareBuilder();
+        result.hasZhuang = false;
+        result.zhuang_ = 0;
+        return this;
+      }
+
+      public bool HasSex {
+        get { return result.hasSex; }
+      }
+      public int Sex {
+        get { return result.Sex; }
+        set { SetSex(value); }
+      }
+      public Builder SetSex(int value) {
+        PrepareBuilder();
+        result.hasSex = true;
+        result.sex_ = value;
+        return this;
+      }
+      public Builder ClearSex() {
+        PrepareBuilder();
+        result.hasSex = false;
+        result.sex_ = 0;
+        return this;
+      }
+    }
+    static A1003User() {
       object.ReferenceEquals(global::DolphinServer.ProtoEntity.Proto.A1003Response.Descriptor, null);
     }
   }

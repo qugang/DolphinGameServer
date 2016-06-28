@@ -72,7 +72,7 @@ namespace DolphinServer.Service.Mj
             this.IsReady = true;
         }
 
-        public void SetCard(List<int> card)
+        public void InitCard(int[] card)
         {
             this.Cards = new List<int>();
             this.wCards = new List<int>();
@@ -119,7 +119,7 @@ namespace DolphinServer.Service.Mj
         {
             List<int> tempArray = this.Cards.ToList();
 
-            int index = tempArray.FindIndex(p => p.GetItemNumber() == card);
+            int index = tempArray.FindIndex(p => p.GetItemValue() == card.GetItemValue());
 
             if (index == -1)
             {
@@ -128,7 +128,7 @@ namespace DolphinServer.Service.Mj
                 {
                     return a.GetItemValue() - b.GetItemValue();
                 });
-                index = tempArray.FindIndex(p => p.GetItemNumber() == card);
+                index = tempArray.FindIndex(p => p.GetItemValue() == card.GetItemValue());
             }
 
             if (index + 2 < tempArray.Count)

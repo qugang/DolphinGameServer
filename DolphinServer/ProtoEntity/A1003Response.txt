@@ -3,4 +3,13 @@ option csharp_namespace = "DolphinServer.ProtoEntity";
 message A1003Response{
 	optional string ErrorInfo = 1;
 	optional int32 ErrorCode = 2;
+	repeated A1003User Users = 3;
+}
+
+message A1003User{
+	optional string Uid = 1;
+	optional string HatImage = 2;
+	optional int32 Sore = 3; 
+	optional int32 Zhuang = 4;
+	optional int32 Sex = 5;
 }

@@ -26,11 +26,12 @@ namespace DolphinServer.Service.Mj
             return room;
         }
 
-        public static void Ready(int roomId, GameUser user)
+        public static CsMjGameRoom Ready(int roomId, GameUser user)
         {
             CsMjGameRoom room = null;
             rooms.TryGetValue(roomId, out room);
             room.BeginGame(user.Uid);
+            return room;
         }
 
         private static int getRoomId()
@@ -38,25 +39,25 @@ namespace DolphinServer.Service.Mj
             return Interlocked.Increment(ref maxRoomeId);
         }
 
-        public static Boolean JoinRoom(GameUser user, int roomID)
+        public static CsMjGameRoom GetRoomById(int roomId) {
+            CsMjGameRoom room = null;
+            rooms.TryGetValue(roomId, out room);
+            return room;
+        }
+
+        public static CsMjGameRoom JoinRoom(GameUser user, int roomID)
         {
             CsMjGameRoom room = null;
             rooms.TryGetValue(roomID, out room);
             if (room != null)
             {
                 room.Players.AddLast(new CsGamePlayer(user));
-
-                if (room.Players.All(p => p.IsReady))
-                {
-
-                    //TODO: 重置房间号
-                }
-
-                return true;
+                room.BeginGame(user.Uid);
+                return room;
             }
             else
             {
-                return false;
+                return room;
             }
         }
 

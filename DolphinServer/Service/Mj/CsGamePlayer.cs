@@ -54,7 +54,7 @@ namespace DolphinServer.Service.Mj
         {
             int count = 0;
             this.Cards.ForEach(p => {
-                if (p.GetItemValue() >= 3)
+                if (p.GetItemNumber() >= 3)
                 {
                     count++;
                 }
@@ -72,27 +72,7 @@ namespace DolphinServer.Service.Mj
         /// <returns></returns>
         public Boolean CheckQueYiSe()
         {
-            Boolean isT = false;
-            Boolean isW = false;
-            Boolean isS = false;
-
-            this.Cards.ForEach(p =>
-            {
-                if (p.GetItemType() == 0)
-                {
-                    isW = true;
-                }
-                if (p.GetItemType() == 1)
-                {
-                    isT = true;
-                }
-                if (p.GetItemType() == 2)
-                {
-                    isS = true;
-                }
-            });
-
-            if (!isW || !isT || !isS)
+            if (this.wNumber == 0 || this.tNumber == 0 || this.sNumber == 0)
             {
                 return true;
             }

@@ -24,20 +24,29 @@ namespace DolphinServer.Controller
 
         public override byte[] ProcessAction()
         {
-            Boolean isSucess = CsGameRoomManager.JoinRoom(Context.Session.User as GameUser, int.Parse(Context.HttpQueryString["RoomID"]));
+            CsMjGameRoom room = CsGameRoomManager.JoinRoom(Context.Session.User as GameUser, int.Parse(Context.HttpQueryString["RoomID"]));
 
-            A1002Response.Builder response = A1002Response.CreateBuilder();
-            if (isSucess)
+            A1003Response.Builder response = A1003Response.CreateBuilder();
+
+            if (room != null)
             {
-                CsMjGameRoom room = CsGameRoomManager.CreateRoom(Context.Session.User as GameUser);
-                return response.Build().ToByteArray();
+                foreach (var row in room.Players)
+                {
+                    var builder = A1003User.CreateBuilder();
+                    builder.Uid = row.PlayerUser.Uid;
+                    builder.Sore = 1000;
+                    builder.HatImage = "";
+                    builder.Sex = 0;
+                    response.AddUsers(builder.Build());
+                }
+
+                foreach (var row in room.Players)
+                {
+                    WebSocketServer.SendPackgeWithUser(row.PlayerUser.Uid, 1003, response.Build().ToByteArray());
+                }
             }
-            else
-            {
-                response.ErrorCode = 2;
-                response.ErrorInfo = ErrorInfo.ErrorDic[2];
-                return response.Build().ToByteArray();
-            }
+            return null;
         }
+        
     }
 }

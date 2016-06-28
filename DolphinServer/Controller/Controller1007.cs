@@ -1,4 +1,7 @@
-﻿using Free.Dolphin.Core;
+﻿using DolphinServer.Entity;
+using DolphinServer.ProtoEntity;
+using DolphinServer.Service.Mj;
+using Free.Dolphin.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +11,8 @@ using System.Threading.Tasks;
 namespace DolphinServer.Controller
 {
     /// <summary>
-    /// 摸牌
+    /// 第一次打牌
+    /// 因为开局打牌需要判断是否胡缺一色等,所以走不同的协议
     /// </summary>
     [ControllerProtocol((int)ControllerType.Controller1007)]
     [ControllerAuth]
@@ -20,7 +24,15 @@ namespace DolphinServer.Controller
 
         public override byte[] ProcessAction()
         {
-            throw new NotImplementedException();
+            int card = int.Parse(Context.HttpQueryString["Card"]);
+            string uid = Context.Session.User.Uid;
+            int roomId = int.Parse(Context.HttpQueryString["RoomID"]);
+
+            CsMjGameRoom room = CsGameRoomManager.GetRoomById(roomId);
+            room.FristDa(uid, card);
+            
+
+            return null;
         }
     }
 }

@@ -7,6 +7,7 @@ message A1006Response{
 	optional Player Player2 = 4;
 	optional Player Player3 = 5;
 	optional Player Player4 = 6;
+	optional string ZhuangUid = 7;
 }
 
 message Player{

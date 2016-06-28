@@ -1,5 +1,4 @@
-﻿using DolphinServer.Entity;
-using DolphinServer.ProtoEntity;
+﻿using DolphinServer.Service.Mj;
 using Free.Dolphin.Core;
 using System;
 using System.Collections.Generic;
@@ -10,7 +9,7 @@ using System.Threading.Tasks;
 namespace DolphinServer.Controller
 {
     /// <summary>
-    /// 打牌
+    /// 过牌
     /// </summary>
     [ControllerProtocol((int)ControllerType.Controller1009)]
     [ControllerAuth]
@@ -22,6 +21,11 @@ namespace DolphinServer.Controller
 
         public override byte[] ProcessAction()
         {
+            string uid = Context.Session.User.Uid;
+            int roomId = int.Parse(Context.HttpQueryString["RoomID"]);
+            CsMjGameRoom room = CsGameRoomManager.GetRoomById(roomId);
+            room.Guo(uid);
+
             return null;
         }
     }

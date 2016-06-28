@@ -33,18 +33,18 @@ namespace DolphinServer.ProtoEntity {
       static A1006Response() {
         byte[] descriptorData = global::System.Convert.FromBase64String(
             string.Concat(
-              "ChFBMTAwNlJlc3BvbnNlLnR4dCKdAQoNQTEwMDZSZXNwb25zZRIRCglFcnJv", 
+              "ChFBMTAwNlJlc3BvbnNlLnR4dCKwAQoNQTEwMDZSZXNwb25zZRIRCglFcnJv", 
               "ckluZm8YASABKAkSEQoJRXJyb3JDb2RlGAIgASgFEhgKB1BsYXllcjEYAyAB", 
               "KAsyBy5QbGF5ZXISGAoHUGxheWVyMhgEIAEoCzIHLlBsYXllchIYCgdQbGF5", 
-              "ZXIzGAUgASgLMgcuUGxheWVyEhgKB1BsYXllcjQYBiABKAsyBy5QbGF5ZXIi", 
-              "FgoGUGxheWVyEgwKBENhcmQYASADKAVCHKoCGURvbHBoaW5TZXJ2ZXIuUHJv", 
-            "dG9FbnRpdHk="));
+              "ZXIzGAUgASgLMgcuUGxheWVyEhgKB1BsYXllcjQYBiABKAsyBy5QbGF5ZXIS", 
+              "EQoJWmh1YW5nVWlkGAcgASgJIhYKBlBsYXllchIMCgRDYXJkGAEgAygFQhyq", 
+            "AhlEb2xwaGluU2VydmVyLlByb3RvRW50aXR5"));
         pbd::FileDescriptor.InternalDescriptorAssigner assigner = delegate(pbd::FileDescriptor root) {
           descriptor = root;
           internal__static_A1006Response__Descriptor = Descriptor.MessageTypes[0];
           internal__static_A1006Response__FieldAccessorTable = 
               new pb::FieldAccess.FieldAccessorTable<global::DolphinServer.ProtoEntity.A1006Response, global::DolphinServer.ProtoEntity.A1006Response.Builder>(internal__static_A1006Response__Descriptor,
-                  new string[] { "ErrorInfo", "ErrorCode", "Player1", "Player2", "Player3", "Player4", });
+                  new string[] { "ErrorInfo", "ErrorCode", "Player1", "Player2", "Player3", "Player4", "ZhuangUid", });
           internal__static_Player__Descriptor = Descriptor.MessageTypes[1];
           internal__static_Player__FieldAccessorTable = 
               new pb::FieldAccess.FieldAccessorTable<global::DolphinServer.ProtoEntity.Player, global::DolphinServer.ProtoEntity.Player.Builder>(internal__static_Player__Descriptor,
@@ -66,8 +66,8 @@ namespace DolphinServer.ProtoEntity {
   public sealed partial class A1006Response : pb::GeneratedMessage<A1006Response, A1006Response.Builder> {
     private A1006Response() { }
     private static readonly A1006Response defaultInstance = new A1006Response().MakeReadOnly();
-    private static readonly string[] _a1006ResponseFieldNames = new string[] { "ErrorCode", "ErrorInfo", "Player1", "Player2", "Player3", "Player4" };
-    private static readonly uint[] _a1006ResponseFieldTags = new uint[] { 16, 10, 26, 34, 42, 50 };
+    private static readonly string[] _a1006ResponseFieldNames = new string[] { "ErrorCode", "ErrorInfo", "Player1", "Player2", "Player3", "Player4", "ZhuangUid" };
+    private static readonly uint[] _a1006ResponseFieldTags = new uint[] { 16, 10, 26, 34, 42, 50, 58 };
     public static A1006Response DefaultInstance {
       get { return defaultInstance; }
     }
@@ -148,6 +148,16 @@ namespace DolphinServer.ProtoEntity {
       get { return player4_ ?? global::DolphinServer.ProtoEntity.Player.DefaultInstance; }
     }
 
+    public const int ZhuangUidFieldNumber = 7;
+    private bool hasZhuangUid;
+    private string zhuangUid_ = "";
+    public bool HasZhuangUid {
+      get { return hasZhuangUid; }
+    }
+    public string ZhuangUid {
+      get { return zhuangUid_; }
+    }
+
     public override bool IsInitialized {
       get {
         return true;
@@ -174,6 +184,9 @@ namespace DolphinServer.ProtoEntity {
       }
       if (hasPlayer4) {
         output.WriteMessage(6, field_names[5], Player4);
+      }
+      if (hasZhuangUid) {
+        output.WriteString(7, field_names[6], ZhuangUid);
       }
       UnknownFields.WriteTo(output);
     }
@@ -209,6 +222,9 @@ namespace DolphinServer.ProtoEntity {
       }
       if (hasPlayer4) {
         size += pb::CodedOutputStream.ComputeMessageSize(6, Player4);
+      }
+      if (hasZhuangUid) {
+        size += pb::CodedOutputStream.ComputeStringSize(7, ZhuangUid);
       }
       size += UnknownFields.SerializedSize;
       memoizedSerializedSize = size;
@@ -350,6 +366,9 @@ namespace DolphinServer.ProtoEntity {
         if (other.HasPlayer4) {
           MergePlayer4(other.Player4);
         }
+        if (other.HasZhuangUid) {
+          ZhuangUid = other.ZhuangUid;
+        }
         this.MergeUnknownFields(other.UnknownFields);
         return this;
       }
@@ -435,6 +454,10 @@ namespace DolphinServer.ProtoEntity {
               }
               input.ReadMessage(subBuilder, extensionRegistry);
               Player4 = subBuilder.BuildPartial();
+              break;
+            }
+            case 58: {
+              result.hasZhuangUid = input.ReadString(ref result.zhuangUid_);
               break;
             }
           }
@@ -645,6 +668,27 @@ namespace DolphinServer.ProtoEntity {
         PrepareBuilder();
         result.hasPlayer4 = false;
         result.player4_ = null;
+        return this;
+      }
+
+      public bool HasZhuangUid {
+        get { return result.hasZhuangUid; }
+      }
+      public string ZhuangUid {
+        get { return result.ZhuangUid; }
+        set { SetZhuangUid(value); }
+      }
+      public Builder SetZhuangUid(string value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasZhuangUid = true;
+        result.zhuangUid_ = value;
+        return this;
+      }
+      public Builder ClearZhuangUid() {
+        PrepareBuilder();
+        result.hasZhuangUid = false;
+        result.zhuangUid_ = "";
         return this;
       }
     }
