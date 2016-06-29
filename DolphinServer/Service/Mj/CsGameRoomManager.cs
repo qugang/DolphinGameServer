@@ -51,8 +51,7 @@ namespace DolphinServer.Service.Mj
             rooms.TryGetValue(roomID, out room);
             if (room != null)
             {
-                room.Players.AddLast(new CsGamePlayer(user));
-                room.BeginGame(user.Uid);
+                room.JoinRoom(user);
                 return room;
             }
             else

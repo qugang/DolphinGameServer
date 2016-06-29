@@ -11,8 +11,7 @@ using System.Threading.Tasks;
 namespace DolphinServer.Controller
 {
     /// <summary>
-    /// 第一次打牌
-    /// 因为开局打牌需要判断是否胡缺一色等,所以走不同的协议
+    /// 打牌
     /// </summary>
     [ControllerProtocol((int)ControllerType.Controller1007)]
     [ControllerAuth]

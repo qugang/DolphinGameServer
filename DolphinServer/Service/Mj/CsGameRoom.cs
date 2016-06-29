@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Free.Dolphin.Common.Util;
 namespace DolphinServer.Service.Mj
 {
     /// <summary>
@@ -14,6 +14,10 @@ namespace DolphinServer.Service.Mj
     /// </summary>
     public class CsMjGameRoom : MjGameRoomBase
     {
+        /// <summary>
+        /// 是否开局，因为开局需要检查碰碰胡邓
+        /// </summary>
+        private Boolean isFrist = false;
         protected override void SendCard()
         {
             var downArray = cardArray.Take(14).ToArray();
@@ -61,11 +65,12 @@ namespace DolphinServer.Service.Mj
             response3.Player3 = rigth;
             response3.Player4 = top;
 
-            WebSocketServer.SendPackgeWithUser(this.Player.Value.PlayerUser.Uid, 1006, response.Build().ToByteArray());
-            WebSocketServer.SendPackgeWithUser(this.Player.Next.Value.PlayerUser.Uid, 1006, response1.Build().ToByteArray());
-            WebSocketServer.SendPackgeWithUser(this.Player.Next.Next.Value.PlayerUser.Uid, 1006, response2.Build().ToByteArray());
-            WebSocketServer.SendPackgeWithUser(this.Player.Next.Next.Next.Value.PlayerUser.Uid, 1006, response3.Build().ToByteArray());
-            this.cardIndex = 52;
+            WebSocketServerWrap.SendPackgeWithUser(this.Player.Value.PlayerUser.Uid, 1006, response.Build().ToByteArray());
+            WebSocketServerWrap.SendPackgeWithUser(this.Player.NextOrFirst().Value.PlayerUser.Uid, 1006, response1.Build().ToByteArray());
+            WebSocketServerWrap.SendPackgeWithUser(this.Player.NextOrFirst().NextOrFirst().Value.PlayerUser.Uid, 1006, response2.Build().ToByteArray());
+            WebSocketServerWrap.SendPackgeWithUser(this.Player.NextOrFirst().NextOrFirst().NextOrFirst().Value.PlayerUser.Uid, 1006, response3.Build().ToByteArray());
+            this.cardIndex += 53;
+            isFrist = true;
 
         }
 
@@ -163,8 +168,11 @@ namespace DolphinServer.Service.Mj
 
         public void Mo(string uid)
         {
+            LogManager.Log.Debug("开始摸牌");
             LinkedListNode<CsGamePlayer> node = FindPlayer(uid);
             int card = this.ReadCard();
+
+            node.Value.AddCard(card);
 
 
             A1008Response.Builder response = A1008Response.CreateBuilder();
@@ -175,47 +183,29 @@ namespace DolphinServer.Service.Mj
 
             foreach (var row in Players)
             {
-                WebSocketServer.SendPackgeWithUser(row.PlayerUser.Uid, 1008, responseArray);
+                WebSocketServerWrap.SendPackgeWithUser(row.PlayerUser.Uid, 1008, responseArray);
             }
+            LogManager.Log.Debug("摸牌结束");
 
         }
-
-        public void Da(string uid, int card)
-        {
-            LinkedListNode<CsGamePlayer> node = FindPlayer(uid);
-            this.CurrentCard = card;
-
-            foreach (var row in Players)
-            {
-                if ((row.CheckGang(card) ||
-                    row.CheckPeng(card) ||
-                    row.CheckHu(card) ||
-                    row.CheckChi(card)) && row.PlayerUser.Uid != uid)
-                {
-                    row.ResetEvent.WaitOne();
-                }
-            }
-            //牌未被彭吃杠
-            if (!CurrentCardIsUse())
-            {
-
-                this.Player = this.Player.Next;
-                Mo(this.Player.Value.PlayerUser.Uid);
-            }
-        }
-
+        
         public void FristDa(string uid, int card)
         {
             LinkedListNode<CsGamePlayer> node = FindPlayer(uid);
 
-            foreach (var row in Players)
+            if (this.isFrist)
             {
-                if ((row.CheckKaiJuHu()) && row.PlayerUser.Uid != uid)
+                foreach (var row in Players)
                 {
-                    LogManager.Log.Debug(row.PlayerUser.Uid + "wait");
-                    row.ResetEvent.WaitOne();
+                    if ((row.CheckKaiJuHu()) && row.PlayerUser.Uid != uid)
+                    {
+                        LogManager.Log.Debug("开局胡等待" +  row.PlayerUser.Uid + "wait");
+                        row.ResetEvent.WaitOne();
+                        LogManager.Log.Debug("开局胡等待处理完毕" + row.PlayerUser.Uid + "wait");
+                    }
                 }
             }
+            this.isFrist = false;
             node.Value.OutCard(card);
 
             LogManager.Log.Debug("通过开局胡检查");
@@ -228,19 +218,45 @@ namespace DolphinServer.Service.Mj
 
             foreach (var row in Players)
             {
-                WebSocketServer.SendPackgeWithUser(row.PlayerUser.Uid, 1007, responseArray);
                 row.ResetEvent.Reset();
+                WebSocketServerWrap.SendPackgeWithUser(row.PlayerUser.Uid, 1007, responseArray);
             }
-            
+
+            var prePlayer = this.Player.NextOrFirst();
+            LogManager.Log.Debug("检查吃" + prePlayer.Value.PlayerUser.Uid + "是否可以吃" + card.GetItemValue() +"类型" +card.GetItemValue());
+
+            if (prePlayer.Value.CheckChi(card))
+            {
+                LogManager.Log.Debug("吃" + prePlayer.Value.PlayerUser.Uid);
+                prePlayer.Value.ResetEvent.WaitOne();
+            }
 
             foreach (var row in Players)
             {
-                if (row.PlayerUser.Uid != uid && (row.CheckGang(card) ||
-                    row.CheckPeng(card) ||
-                    row.CheckHu(card) ||
-                    row.CheckChi(card)) )
+                if (row.PlayerUser.Uid != this.Player.Value.PlayerUser.Uid)
                 {
-                    row.ResetEvent.WaitOne();
+                    if (row.CheckGang(card))
+                    {
+
+                        LogManager.Log.Debug("杠等待" + row.PlayerUser.Uid + "牌：" + card.GetItemValue());
+                        row.ResetEvent.WaitOne();
+                        LogManager.Log.Debug("杠等待完毕" + row.PlayerUser.Uid + "牌：" + card.GetItemValue());
+                        continue;
+                    }
+                    if (row.CheckPeng(card))
+                    {
+                        LogManager.Log.Debug("碰等待" + row.PlayerUser.Uid + "牌：" + card.GetItemValue());
+                        row.ResetEvent.WaitOne();
+                        LogManager.Log.Debug("碰等待完毕" + row.PlayerUser.Uid + "牌：" + card.GetItemValue());
+                        continue;
+                    }
+                    if (row.CheckHu(card))
+                    {
+                        LogManager.Log.Debug("胡等待" + row.PlayerUser.Uid + "牌：" + card.GetItemValue());
+                        row.ResetEvent.WaitOne();
+                        LogManager.Log.Debug("胡等待完毕" + row.PlayerUser.Uid + "牌：" + card.GetItemValue());
+                        continue;
+                    }
                 }
             }
 
@@ -249,7 +265,7 @@ namespace DolphinServer.Service.Mj
             //牌未被彭吃杠
             if (!CurrentCardIsUse())
             {
-                this.Player = this.Player.Next;
+                this.Player = this.Player.NextOrFirst();
                 Mo(this.Player.Value.PlayerUser.Uid);
             }
         }

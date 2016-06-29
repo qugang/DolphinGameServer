@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Fleck, Version=0.13.0.57, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fleck.0.13.0.57\lib\net40\Fleck.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="StackExchange.Redis, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\StackExchange.Redis.1.1.603\lib\net46\StackExchange.Redis.dll</HintPath>
       <Private>True</Private>
@@ -43,10 +47,6 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="websocket-sharp.clone, Version=1.0.2.27032, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\websocket-sharp.clone.2.0.0\lib\net45\websocket-sharp.clone.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cache\MemoryCacheAttribute.cs" />

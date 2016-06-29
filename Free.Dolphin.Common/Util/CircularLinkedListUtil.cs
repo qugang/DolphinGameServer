@@ -8,14 +8,14 @@ namespace Free.Dolphin.Common.Util
 {
     public static class CircularLinkedListUtil
     {
-        public static LinkedListNode<object> NextOrFirst(this LinkedListNode<object> current)
+        public static LinkedListNode<T> NextOrFirst<T>(this LinkedListNode<T> current)
         {
             if (current.Next == null)
                 return current.List.First;
             return current.Next;
         }
 
-        public static LinkedListNode<object> PreviousOrLast(this LinkedListNode<object> current)
+        public static LinkedListNode<T> PreviousOrLast<T>(this LinkedListNode<T> current)
         {
             if (current.Previous == null)
                 return current.List.Last;

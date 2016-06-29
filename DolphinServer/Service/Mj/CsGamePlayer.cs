@@ -11,7 +11,7 @@ namespace DolphinServer.Service.Mj
 {
 
     public class CsGamePlayer : MjGamePlayerBase
-    { 
+    {
         public CsGamePlayer(GameUser gameSession) : base(gameSession)
         {
 
@@ -25,20 +25,29 @@ namespace DolphinServer.Service.Mj
         /// <returns></returns>
         public Boolean CheckSiXi()
         {
-            if (this.Cards.Exists(p => p.GetItemNumber() == 4))
+            if (this.wCards.Exists(p => p.GetItemNumber() == 4))
+            {
+                return true;
+            }
+            if (this.tCards.Exists(p => p.GetItemNumber() == 4))
+            {
+                return true;
+            }
+            if (this.sCards.Exists(p => p.GetItemNumber() == 4))
             {
                 return true;
             }
             return false;
         }
-
         /// <summary>
         /// 检查板板胡
         /// </summary>
         /// <returns></returns>
         public Boolean CheckBanBanHu()
         {
-            if (this.Cards.All(p => p.GetItemValue() != 2 && p.GetItemValue() != 5 && p.GetItemValue() != 8))
+            if (this.wCards.All(p => p.GetItemValue() != 2 && p.GetItemValue() != 5 && p.GetItemValue() != 8)
+                && this.tCards.All(p => p.GetItemValue() != 2 && p.GetItemValue() != 5 && p.GetItemValue() != 8)
+                && this.sCards.All(p => p.GetItemValue() != 2 && p.GetItemValue() != 5 && p.GetItemValue() != 8))
             {
                 return true;
             }
@@ -53,7 +62,22 @@ namespace DolphinServer.Service.Mj
         public Boolean CheckLiuLiuShun()
         {
             int count = 0;
-            this.Cards.ForEach(p => {
+            this.wCards.ForEach(p =>
+            {
+                if (p.GetItemNumber() >= 3)
+                {
+                    count++;
+                }
+            });
+            this.tCards.ForEach(p =>
+            {
+                if (p.GetItemNumber() >= 3)
+                {
+                    count++;
+                }
+            });
+            this.sCards.ForEach(p =>
+            {
                 if (p.GetItemNumber() >= 3)
                 {
                     count++;
@@ -79,6 +103,7 @@ namespace DolphinServer.Service.Mj
             return false;
         }
 
+
         /// <summary>
         /// 此胡是为了检测开局胡
         /// </summary>
@@ -93,6 +118,5 @@ namespace DolphinServer.Service.Mj
             }
             return false;
         }
-
     }
 }

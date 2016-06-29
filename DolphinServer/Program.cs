@@ -22,8 +22,8 @@ namespace LeisureComplexServer
             RedisContext.InitRedisContext("localhost,allowAdmin=true", Assembly.GetAssembly(typeof(Program)));
             ControllerFactory.InitController(Assembly.GetAssembly(typeof(Program)));
             ControllerBase.InitGameUserType<GameUser>();
-            WebSocketServer.Init("192.168.0.103", 9001);
-            WebSocketServer.OnErrorMessage = (message, exption) =>
+            WebSocketServerWrap.Init("192.168.0.103", 9001);
+            WebSocketServerWrap.OnErrorMessage = (message, exption) =>
             {
                 LogManager.Log.Error(message, exption);
                 A9999DataErrorResponse.Builder response = A9999DataErrorResponse.CreateBuilder();
@@ -32,19 +32,24 @@ namespace LeisureComplexServer
                 return response.Build().ToByteArray();
             };
 
-            WebSocketServer.OnRevice = (message) =>
+            WebSocketServerWrap.OnRevice = (message) =>
             {
                 LogManager.Log.Debug("收到消息:" + message);
             };
 
-            WebSocketServer.OnSend = (message) =>
+            WebSocketServerWrap.OnSend = (message) =>
             {
                 LogManager.Log.Debug("发送消息:" + ByteUtil.ByteToHex(message));
             };
 
-            WebSocketServer.OnOpen = (message) =>
+            WebSocketServerWrap.OnOpen = (message) =>
             {
                 LogManager.Log.Debug("收到连接:" + message);
+            };
+
+            WebSocketServerWrap.OnClose = (message) =>
+            {
+                LogManager.Log.Debug("客户端断开:" + message);
             };
 
             LogManager.Log.Info("服务器启动成功端口9001");

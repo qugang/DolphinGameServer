@@ -1,7 +1,9 @@
-﻿using System;
+﻿using DolphinServer.Entity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace DolphinServer.Service.Mj
@@ -9,6 +11,7 @@ namespace DolphinServer.Service.Mj
     public abstract class MjGameRoomBase
     {
         public int RoomId { get; set; }
+        private SpinLock roomLock = new SpinLock();
         /// <summary>
         /// 玩家集合
         /// </summary>
@@ -136,6 +139,23 @@ namespace DolphinServer.Service.Mj
             foreach (var row in this.Players)
             {
                 row.ResetEvent.Set();
+            }
+        }
+
+        public void JoinRoom(GameUser user) {
+
+            bool llNodeListLocked = false;
+            try
+            {
+                roomLock.Enter(ref llNodeListLocked);
+                this.Players.AddLast(new CsGamePlayer(user));
+                this.BeginGame(user.Uid);
+
+            }
+            finally
+            {
+                if (llNodeListLocked)
+                    roomLock.Exit();
             }
         }
     }

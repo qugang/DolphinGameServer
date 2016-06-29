@@ -36,6 +36,11 @@ namespace DolphinServer.Service.Mj
             return value - 16 * number;
         }
 
+        public static int GetItemTypeValue(this int value)
+        {
+            return value & 0x180;
+        }
+
 
         public static int ClearItemNumber(this int value)
         {
@@ -49,7 +54,8 @@ namespace DolphinServer.Service.Mj
 
         public static void RemoveCardItem(this List<int> array, int card)
         {
-            int index = array.FindIndex(p => p.GetItemValue() == card.GetItemValue());
+            int index = array.FindIndex(p => p.GetItemValue() == card.GetItemValue() && 
+                                             p.GetItemType() == card.GetItemType());
 
             if (index == -1)
             {
@@ -68,7 +74,7 @@ namespace DolphinServer.Service.Mj
 
         public static void AddCardItem(this List<int> array, int card)
         {
-            int index = array.FindIndex(p => p.GetItemValue() == card.GetItemValue());
+            int index = array.FindIndex(p => p.GetItemValue() == card.GetItemValue() && p.GetItemType() == card.GetItemType());
 
             if (index == -1)
             {

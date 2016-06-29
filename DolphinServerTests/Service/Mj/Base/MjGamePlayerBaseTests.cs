@@ -58,10 +58,23 @@ namespace DolphinServer.Service.Mj.Tests
         {
             CsGamePlayer player = new CsGamePlayer(null);
             player.InitCard(new int[] {
+            1|0x10,2|0x10,6|0x10,7|0x10,8|0x10
+            });
+
+            Boolean result = player.CheckChi(5 | 0x10);
+
+            Assert.AreEqual(result, true);
+        }
+
+        [TestMethod()]
+        public void CheckPengTest()
+        {
+            CsGamePlayer player = new CsGamePlayer(null);
+            player.InitCard(new int[] {
             0|0x10,0|0x10,0|0x10,1|0x10,2|0x10,3|0x10,4|0x10,5|0x10,6|0x10,7|0x10,7|0x10,7|0x10,8|0x10
             });
 
-            Boolean result = player.CheckHu(1 | 0x10);
+            Boolean result = player.CheckPeng(0 | 0x10);
 
             Assert.AreEqual(result, true);
         }
