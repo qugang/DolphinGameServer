@@ -95,7 +95,7 @@ namespace DolphinServer.Service.Mj
             }
         }
 
-        private void SortCards()
+        protected void SortCards()
         {
             this.wCards.Sort((a, b) =>
             {
@@ -120,14 +120,17 @@ namespace DolphinServer.Service.Mj
             if (type == 0)
             {
                 this.wCards.RemoveCardItem(card);
+                this.wNumber--;
             }
             else if (type == 1)
             {
                 this.tCards.RemoveCardItem(card);
+                this.tNumber--;
             }
             else
             {
                 this.sCards.RemoveCardItem(card);
+                this.sNumber--;
             }
             SortCards();
         }
@@ -139,14 +142,17 @@ namespace DolphinServer.Service.Mj
             if (type == 0)
             {
                 this.wCards.AddCardItem(card);
+                this.wNumber++;
             }
             else if (type == 1)
             {
                 this.tCards.AddCardItem(card);
+                this.tNumber++;
             }
             else
             {
                 this.sCards.AddCardItem(card);
+                this.sNumber++;
             }
             SortCards();
         }
@@ -284,33 +290,30 @@ namespace DolphinServer.Service.Mj
 
 
         /// <summary>
-        /// 检查胡,没有检查清一色，考虑效率问题，具体需要测试
+        /// 检查胡,没有检查清一色
         /// </summary>
         /// <param name="card"></param>
         /// <returns></returns>
-        public Boolean CheckHu(int card)
+        public virtual Boolean CheckHu()
         {
-
-            PushCard(card);
+            
 
             if (this.wNumber == 1 || this.tNumber == 1 || this.sNumber == 1)
             {
-                PopCard(card);
                 return false;
             }
 
             if (this.wNumber == 14 || this.tNumber == 14 || this.sNumber == 14)
             {
                 var result = CheckQingYiSe();
-                PopCard(card);
                 return result;
             }
 
             if (this.CheckXiaoQiDui())
             {
-                PopCard(card);
                 return true;
             }
+            
 
             int wJiangPos = this.wCards.FindJiang(this.wNumber);
             int tJiangPos = this.tCards.FindJiang(this.tNumber);
@@ -320,28 +323,21 @@ namespace DolphinServer.Service.Mj
                 tJiangPos == -1 &&
                 sJiangPos == -1)
             {
-                PopCard(card);
                 return false;
             }
 
             if (!CheckHuParam(this.wCards, wJiangPos))
             {
-                PopCard(card);
                 return false;
             }
-            if (!CheckHuParam(this.tCards, wJiangPos))
+            if (!CheckHuParam(this.tCards, tJiangPos))
             {
-                PopCard(card);
                 return false;
             }
             if (!CheckHuParam(this.sCards, sJiangPos))
             {
-                PopCard(card);
                 return false;
             }
-
-            PopCard(card);
-
             return true;
         }
 
@@ -377,7 +373,13 @@ namespace DolphinServer.Service.Mj
             return false;
         }
 
-        private void PushCard(int card)
+        public void Chi(int card,int card1,int card2) {
+            this.OutCard(card1);
+            this.OutCard(card2);
+            this.ChiCards.AddRange(new int[] { card, card1, card2});
+        }
+
+        protected void PushCard(int card)
         {
 
             var tempType = card.GetItemType();
@@ -399,7 +401,7 @@ namespace DolphinServer.Service.Mj
             }
         }
 
-        private void PopCard(int card)
+        protected void PopCard(int card)
         {
             var tempType = card.GetItemType();
 
@@ -494,6 +496,58 @@ namespace DolphinServer.Service.Mj
                 return true;
             }
             return false;
+        }
+
+        public string PrintCards()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("万");
+            foreach (var row in this.wCards)
+            {
+                for (int i = 0; i < row.GetItemNumber(); i++)
+                {
+
+                    sb.Append(row.GetItemValue() );
+                }
+            }
+
+            sb.Append("筒");
+            foreach (var row in this.tCards)
+            {
+                for (int i = 0; i < row.GetItemNumber(); i++)
+                {
+
+                    sb.Append(row.GetItemValue());
+                }
+            }
+
+            sb.Append("索");
+            foreach (var row in this.sCards)
+            {
+                for (int i = 0; i < row.GetItemNumber(); i++)
+                {
+
+                    sb.Append(row.GetItemValue());
+                }
+            }
+            sb.Append("总张数: " +(this.wNumber + this.tNumber + this.sNumber));
+            return sb.ToString();
+        }
+
+        private string GetCardTypeForString(int type)
+        {
+            if (type == 0)
+            {
+                return "万";
+            }
+            else if (type == 1)
+            {
+                return "筒";
+            }
+            else
+            {
+                return "索";
+            }
         }
 
 

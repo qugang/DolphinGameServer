@@ -28,7 +28,7 @@ namespace DolphinServer.Controller
             int roomId = int.Parse(Context.HttpQueryString["RoomID"]);
 
             CsMjGameRoom room = CsGameRoomManager.GetRoomById(roomId);
-            room.FristDa(uid, card);
+            room.Da(uid, card);
             
 
             return null;

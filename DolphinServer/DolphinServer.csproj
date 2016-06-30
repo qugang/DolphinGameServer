@@ -60,7 +60,7 @@
     <Compile Include="Controller\Controller1007.cs" />
     <Compile Include="Controller\Controller1009.cs" />
     <Compile Include="Controller\Controller1010.cs" />
-    <Compile Include="Controller\Controller1011.cs" />
+    <Compile Include="Controller\Controller1011bak.cs" />
     <Compile Include="Controller\ControllerType.cs" />
     <Compile Include="Controller\ErrorInfo.cs" />
     <Compile Include="Entity\GameRank.cs" />
@@ -74,7 +74,7 @@
     <Compile Include="ProtoEntity\A1006Response.cs" />
     <Compile Include="ProtoEntity\A1007Response.cs" />
     <Compile Include="ProtoEntity\A1008Response.cs" />
-    <Compile Include="ProtoEntity\A1009Response.cs" />
+    <Compile Include="ProtoEntity\A1010Response.cs" />
     <Compile Include="ProtoEntity\A9999DataErrorResponse.cs" />
     <Compile Include="Service\Mj\CsGamePlayer.cs" />
     <Compile Include="Service\Mj\CsGameRoom.cs" />
@@ -106,7 +106,8 @@
     <Content Include="ProtoEntity\A1006Response.txt" />
     <Content Include="ProtoEntity\A1007Response.txt" />
     <Content Include="ProtoEntity\A1008Response.txt" />
-    <Content Include="ProtoEntity\A1009Response.txt" />
+    <Content Include="ProtoEntity\A1009Responsebak.txt" />
+    <Content Include="ProtoEntity\A1010Response.txt" />
     <Content Include="ProtoEntity\A9999DataErrorResponse.txt" />
     <Content Include="ProtoEntity\cmd.txt" />
   </ItemGroup>

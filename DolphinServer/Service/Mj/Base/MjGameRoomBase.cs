@@ -18,26 +18,13 @@ namespace DolphinServer.Service.Mj
         public LinkedList<CsGamePlayer> Players { get; set; }
 
         /// <summary>
-        /// 当前打出的牌
+        /// 打出的牌的状态
         /// </summary>
-        protected int CurrentCard { get; set; }
-
-        protected void SetCurrentCardIsUse()
+        protected OutCardState OutCardState
         {
-            this.CurrentCard = this.CurrentCard | 0x200;
+            get; set;
         }
 
-        protected void ClaerCurrentCardIsUse()
-        {
-            this.CurrentCard = this.CurrentCard & 0x1FF;
-        }
-
-        protected Boolean CurrentCardIsUse()
-        {
-            if ((this.CurrentCard & 0x200) > 0)
-                return true;
-            return false;
-        }
 
 
         protected LinkedListNode<CsGamePlayer> Player { get; set; }
@@ -135,14 +122,16 @@ namespace DolphinServer.Service.Mj
             return tempCard;
         }
 
-        public void SetAllResetEvent() {
+        public void SetAllResetEvent()
+        {
             foreach (var row in this.Players)
             {
                 row.ResetEvent.Set();
             }
         }
 
-        public void JoinRoom(GameUser user) {
+        public void JoinRoom(GameUser user)
+        {
 
             bool llNodeListLocked = false;
             try
@@ -159,4 +148,13 @@ namespace DolphinServer.Service.Mj
             }
         }
     }
+}
+
+public enum OutCardState
+{
+    Normal = 0,
+    Chi,
+    Peng,
+    Gang,
+    Hu
 }

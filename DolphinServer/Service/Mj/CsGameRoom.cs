@@ -15,7 +15,7 @@ namespace DolphinServer.Service.Mj
     public class CsMjGameRoom : MjGameRoomBase
     {
         /// <summary>
-        /// 是否开局，因为开局需要检查碰碰胡邓
+        /// 是否开局，因为开局需要检查碰碰胡等
         /// </summary>
         private Boolean isFrist = false;
         protected override void SendCard()
@@ -34,7 +34,7 @@ namespace DolphinServer.Service.Mj
             Players.First.Next.Value.InitCard(rigthArray);
             Players.First.Next.Next.Value.InitCard(topArray);
             Players.First.Next.Next.Next.Value.InitCard(leftArray);
-            
+
 
             var response = A1006Response.CreateBuilder();
             response.ZhuangUid = this.Player.Value.PlayerUser.Uid;
@@ -87,22 +87,21 @@ namespace DolphinServer.Service.Mj
         public void ZiMo(string uid, int card)
         {
             LinkedListNode<CsGamePlayer> node = FindPlayer(uid);
-
             this.Player = this.Player;
+            this.OutCardState = OutCardState.Hu;
+            node.Value.ResetEvent.Set();
         }
 
         public void ZhuoPao(string uid)
         {
             LinkedListNode<CsGamePlayer> node = FindPlayer(uid);
-            this.SetCurrentCardIsUse();
-            this.SetAllResetEvent();
+            this.OutCardState = OutCardState.Hu;
+            node.Value.ResetEvent.Set();
         }
 
-        public void Chi(string uid, int card)
+        public void Chi(string uid, int card, int card1, int card2)
         {
             LinkedListNode<CsGamePlayer> node = FindPlayer(uid);
-
-
             foreach (var row in Players)
             {
                 if ((row.CheckGang(card) ||
@@ -114,14 +113,22 @@ namespace DolphinServer.Service.Mj
             }
 
             //牌未被彭吃杠
-            if (!CurrentCardIsUse())
+            if (this.OutCardState == OutCardState.Normal)
             {
-
+                node.Value.Chi(card, card1, card2);
+                A1010Response.Builder response = A1010Response.CreateBuilder();
+                response.Uid = node.Value.PlayerUser.Uid;
+                response.Card = card;
+                response.Card1 = card1;
+                response.Card2 = card2;
+                var array = response.Build().ToByteArray();
+                foreach (var row in this.Players)
+                {
+                    WebSocketServerWrappe.SendPackgeWithUser(row.PlayerUser.Uid, 1010, array);
+                }
+                this.OutCardState = OutCardState.Chi;
             }
-
-            SetCurrentCardIsUse();
-
-            this.SetAllResetEvent();
+            node.Value.ResetEvent.Set();
         }
 
         public void Gang(string uid, int card)
@@ -136,13 +143,11 @@ namespace DolphinServer.Service.Mj
             }
 
             //牌未被胡
-            if (!CurrentCardIsUse())
+            if (this.OutCardState == OutCardState.Normal)
             {
-
+                this.OutCardState = OutCardState.Gang;
             }
-
-            SetCurrentCardIsUse();
-            this.SetAllResetEvent();
+            node.Value.ResetEvent.Set();
         }
 
         public void Peng(string uid, int card)
@@ -150,20 +155,18 @@ namespace DolphinServer.Service.Mj
             LinkedListNode<CsGamePlayer> node = FindPlayer(uid);
             foreach (var row in Players)
             {
-                if (row.PlayerUser.Uid != uid &&(row.CheckGang(card) || row.CheckHu(card)))
+                if (row.PlayerUser.Uid != uid && (row.CheckGang(card) || row.CheckHu(card)))
                 {
                     row.ResetEvent.WaitOne();
                 }
             }
 
             //牌未被杠或胡
-            if (!CurrentCardIsUse())
+            if (this.OutCardState == OutCardState.Normal)
             {
-
+                this.OutCardState = OutCardState.Peng;
             }
-
-            SetCurrentCardIsUse();
-            this.SetAllResetEvent();
+            node.Value.ResetEvent.Set();
         }
 
         public void Mo(string uid)
@@ -171,6 +174,8 @@ namespace DolphinServer.Service.Mj
             LogManager.Log.Debug("开始摸牌");
             LinkedListNode<CsGamePlayer> node = FindPlayer(uid);
             int card = this.ReadCard();
+
+            LogManager.Log.Debug("摸到牌" + card.GetItemValue() + "牌类型" + card.GetItemType());
 
             node.Value.AddCard(card);
 
@@ -188,8 +193,8 @@ namespace DolphinServer.Service.Mj
             LogManager.Log.Debug("摸牌结束");
 
         }
-        
-        public void FristDa(string uid, int card)
+
+        public void Da(string uid, int card)
         {
             LinkedListNode<CsGamePlayer> node = FindPlayer(uid);
 
@@ -199,7 +204,7 @@ namespace DolphinServer.Service.Mj
                 {
                     if ((row.CheckKaiJuHu()) && row.PlayerUser.Uid != uid)
                     {
-                        LogManager.Log.Debug("开局胡等待" +  row.PlayerUser.Uid + "wait");
+                        LogManager.Log.Debug("开局胡等待" + row.PlayerUser.Uid + "wait");
                         row.ResetEvent.WaitOne();
                         LogManager.Log.Debug("开局胡等待处理完毕" + row.PlayerUser.Uid + "wait");
                     }
@@ -207,6 +212,7 @@ namespace DolphinServer.Service.Mj
             }
             this.isFrist = false;
             node.Value.OutCard(card);
+            this.OutCardState = OutCardState.Normal;
 
             LogManager.Log.Debug("通过开局胡检查");
 
@@ -223,59 +229,51 @@ namespace DolphinServer.Service.Mj
             }
 
             var prePlayer = this.Player.NextOrFirst();
-            LogManager.Log.Debug("检查吃" + prePlayer.Value.PlayerUser.Uid + "是否可以吃" + card.GetItemValue() +"类型" +card.GetItemValue());
+            LogManager.Log.Debug("检查吃" + prePlayer.Value.PlayerUser.Uid + "是否可以吃" + card.GetItemValue() + "类型" + card.GetItemType());
 
             if (prePlayer.Value.CheckChi(card))
             {
                 LogManager.Log.Debug("吃" + prePlayer.Value.PlayerUser.Uid);
                 prePlayer.Value.ResetEvent.WaitOne();
+                if (this.OutCardState != OutCardState.Normal)
+                {
+                    return;
+                }
             }
 
             foreach (var row in Players)
             {
+                LogManager.Log.Debug("手上的牌" + row.PrintCards());
+
                 if (row.PlayerUser.Uid != this.Player.Value.PlayerUser.Uid)
                 {
-                    if (row.CheckGang(card))
+                    if (row.CheckGang(card) || row.CheckPeng(card) || row.CheckHu(card))
                     {
 
-                        LogManager.Log.Debug("杠等待" + row.PlayerUser.Uid + "牌：" + card.GetItemValue());
+                        LogManager.Log.Debug("等待玩家操作" + row.PlayerUser.Uid + "牌：" + card.GetItemValue());
                         row.ResetEvent.WaitOne();
-                        LogManager.Log.Debug("杠等待完毕" + row.PlayerUser.Uid + "牌：" + card.GetItemValue());
-                        continue;
-                    }
-                    if (row.CheckPeng(card))
-                    {
-                        LogManager.Log.Debug("碰等待" + row.PlayerUser.Uid + "牌：" + card.GetItemValue());
-                        row.ResetEvent.WaitOne();
-                        LogManager.Log.Debug("碰等待完毕" + row.PlayerUser.Uid + "牌：" + card.GetItemValue());
-                        continue;
-                    }
-                    if (row.CheckHu(card))
-                    {
-                        LogManager.Log.Debug("胡等待" + row.PlayerUser.Uid + "牌：" + card.GetItemValue());
-                        row.ResetEvent.WaitOne();
-                        LogManager.Log.Debug("胡等待完毕" + row.PlayerUser.Uid + "牌：" + card.GetItemValue());
+                        LogManager.Log.Debug("等待玩家操作完毕" + row.PlayerUser.Uid + "牌：" + card.GetItemValue());
+                        if (this.OutCardState != OutCardState.Normal)
+                        {
+                            return;
+                        }
                         continue;
                     }
                 }
             }
 
             LogManager.Log.Debug("吃彭杠检查完毕");
-
-            //牌未被彭吃杠
-            if (!CurrentCardIsUse())
-            {
-                this.Player = this.Player.NextOrFirst();
-                Mo(this.Player.Value.PlayerUser.Uid);
-            }
+            this.Player = this.Player.NextOrFirst();
+            Mo(this.Player.Value.PlayerUser.Uid);
         }
 
-        public void Guo(string uid) {
+        public void Guo(string uid)
+        {
             LinkedListNode<CsGamePlayer> node = FindPlayer(uid);
             LogManager.Log.Debug(node.Value.PlayerUser.Uid + "过");
             node.Value.ResetEvent.Set();
         }
-        
+
 
     }
 

@@ -118,5 +118,26 @@ namespace DolphinServer.Service.Mj
             }
             return false;
         }
+
+        public Boolean CheckJiangJiangHu()
+        {
+            if (this.wCards.All(p => p.GetItemValue() == 2 || p.GetItemValue() == 5 || p.GetItemValue() == 8) &&
+               this.tCards.All(p => p.GetItemValue() == 2 || p.GetItemValue() == 5 || p.GetItemValue() == 8) &&
+               this.sCards.All(p => p.GetItemValue() == 2 || p.GetItemValue() == 5 || p.GetItemValue() == 8))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public Boolean CheckHu(int card)
+        {
+            PushCard(card);
+            this.SortCards();
+            var result = CheckJiangJiangHu();
+            result = base.CheckHu();
+            PopCard(card);
+            return result;
+        }
     }
 }
