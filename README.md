@@ -14,7 +14,7 @@ windows
 * Redis : StackExchange.Redis Git https://github.com/StackExchange/StackExchange.Redis
 
 ### Protocols
-* WebSocket: websocket-sharp Git https://github.com/sta/websocket-sharp
+* WebSocket: Fleck Git https://github.com/statianzo/Fleck
 
 
 ### Server Dev Framework
