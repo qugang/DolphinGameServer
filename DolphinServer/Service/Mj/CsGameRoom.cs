@@ -65,10 +65,10 @@ namespace DolphinServer.Service.Mj
             response3.Player3 = rigth;
             response3.Player4 = top;
 
-            WebSocketServerWrap.SendPackgeWithUser(this.Player.Value.PlayerUser.Uid, 1006, response.Build().ToByteArray());
-            WebSocketServerWrap.SendPackgeWithUser(this.Player.NextOrFirst().Value.PlayerUser.Uid, 1006, response1.Build().ToByteArray());
-            WebSocketServerWrap.SendPackgeWithUser(this.Player.NextOrFirst().NextOrFirst().Value.PlayerUser.Uid, 1006, response2.Build().ToByteArray());
-            WebSocketServerWrap.SendPackgeWithUser(this.Player.NextOrFirst().NextOrFirst().NextOrFirst().Value.PlayerUser.Uid, 1006, response3.Build().ToByteArray());
+            WebSocketServerWrappe.SendPackgeWithUser(this.Player.Value.PlayerUser.Uid, 1006, response.Build().ToByteArray());
+            WebSocketServerWrappe.SendPackgeWithUser(this.Player.NextOrFirst().Value.PlayerUser.Uid, 1006, response1.Build().ToByteArray());
+            WebSocketServerWrappe.SendPackgeWithUser(this.Player.NextOrFirst().NextOrFirst().Value.PlayerUser.Uid, 1006, response2.Build().ToByteArray());
+            WebSocketServerWrappe.SendPackgeWithUser(this.Player.NextOrFirst().NextOrFirst().NextOrFirst().Value.PlayerUser.Uid, 1006, response3.Build().ToByteArray());
             this.cardIndex += 53;
             isFrist = true;
 
@@ -183,7 +183,7 @@ namespace DolphinServer.Service.Mj
 
             foreach (var row in Players)
             {
-                WebSocketServerWrap.SendPackgeWithUser(row.PlayerUser.Uid, 1008, responseArray);
+                WebSocketServerWrappe.SendPackgeWithUser(row.PlayerUser.Uid, 1008, responseArray);
             }
             LogManager.Log.Debug("摸牌结束");
 
@@ -219,7 +219,7 @@ namespace DolphinServer.Service.Mj
             foreach (var row in Players)
             {
                 row.ResetEvent.Reset();
-                WebSocketServerWrap.SendPackgeWithUser(row.PlayerUser.Uid, 1007, responseArray);
+                WebSocketServerWrappe.SendPackgeWithUser(row.PlayerUser.Uid, 1007, responseArray);
             }
 
             var prePlayer = this.Player.NextOrFirst();

@@ -22,8 +22,8 @@ namespace LeisureComplexServer
             RedisContext.InitRedisContext("localhost,allowAdmin=true", Assembly.GetAssembly(typeof(Program)));
             ControllerFactory.InitController(Assembly.GetAssembly(typeof(Program)));
             ControllerBase.InitGameUserType<GameUser>();
-            WebSocketServerWrap.Init("192.168.0.103", 9001);
-            WebSocketServerWrap.OnErrorMessage = (message, exption) =>
+            WebSocketServerWrappe.Init("192.168.0.103", 9001);
+            WebSocketServerWrappe.OnErrorMessage = (message, exption) =>
             {
                 LogManager.Log.Error(message, exption);
                 A9999DataErrorResponse.Builder response = A9999DataErrorResponse.CreateBuilder();
@@ -32,22 +32,22 @@ namespace LeisureComplexServer
                 return response.Build().ToByteArray();
             };
 
-            WebSocketServerWrap.OnRevice = (message) =>
+            WebSocketServerWrappe.OnRevice = (message) =>
             {
                 LogManager.Log.Debug("收到消息:" + message);
             };
 
-            WebSocketServerWrap.OnSend = (message) =>
+            WebSocketServerWrappe.OnSend = (message) =>
             {
                 LogManager.Log.Debug("发送消息:" + ByteUtil.ByteToHex(message));
             };
 
-            WebSocketServerWrap.OnOpen = (message) =>
+            WebSocketServerWrappe.OnOpen = (message) =>
             {
                 LogManager.Log.Debug("收到连接:" + message);
             };
 
-            WebSocketServerWrap.OnClose = (message) =>
+            WebSocketServerWrappe.OnClose = (message) =>
             {
                 LogManager.Log.Debug("客户端断开:" + message);
             };

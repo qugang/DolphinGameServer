@@ -42,7 +42,7 @@ namespace DolphinServer.Controller
 
                 foreach (var row in room.Players)
                 {
-                    WebSocketServerWrap.SendPackgeWithUser(row.PlayerUser.Uid, 1003, response.Build().ToByteArray());
+                    WebSocketServerWrappe.SendPackgeWithUser(row.PlayerUser.Uid, 1003, response.Build().ToByteArray());
                 }
             }
             return null;

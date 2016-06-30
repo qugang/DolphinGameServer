@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Free.Dolphin.Core
 {
-    public class WebSocketServerWrap
+    public class WebSocketServerWrappe
     {
 
         public static Func<string, Exception, byte[]> OnErrorMessage { get; set; }
@@ -32,20 +32,20 @@ namespace Free.Dolphin.Core
                 socket.OnOpen = () =>
                 {
                     GameSessionManager.AddSession(GameSession.Parse(socket));
-                    WebSocketServerWrap.OnOpen(socket.ConnectionInfo.ClientIpAddress + ":" + socket.ConnectionInfo.ClientPort);
+                    WebSocketServerWrappe.OnOpen(socket.ConnectionInfo.ClientIpAddress + ":" + socket.ConnectionInfo.ClientPort);
                 };
                 socket.OnClose = () =>
                 {
                     GameSession session = GameSessionManager.RemoveSession(socket);
 
-                    WebSocketServerWrap.OnClose(socket.ConnectionInfo.ClientIpAddress + ":" + socket.ConnectionInfo.ClientPort);
+                    WebSocketServerWrappe.OnClose(socket.ConnectionInfo.ClientIpAddress + ":" + socket.ConnectionInfo.ClientPort);
 
                 };
                 socket.OnMessage = message =>
                 {
                     try
                     {
-                        WebSocketServerWrap.OnRevice(message);
+                        WebSocketServerWrappe.OnRevice(message);
                         Dictionary<string, string> keyValue = WebSocketPackage.UnPackage(message);
                         ControllerContext context = new ControllerContext(keyValue);
                         context.Session = GameSessionManager.GetSession(socket);
@@ -59,7 +59,7 @@ namespace Free.Dolphin.Core
                                 list.Add((byte)(context.ProtocolId >> 8));
                                 list.Add((byte)(context.ProtocolId & 0xFF));
                                 list.AddRange(sendByte);
-                                WebSocketServerWrap.OnSend(list.ToArray());
+                                WebSocketServerWrappe.OnSend(list.ToArray());
                                 socket.Send(list.ToArray());
                             }
                             else
@@ -76,7 +76,7 @@ namespace Free.Dolphin.Core
                                 list.Add((byte)(context.ProtocolId >> 8));
                                 list.Add((byte)(context.ProtocolId & 0xFF));
                                 list.AddRange(sendByte);
-                                WebSocketServerWrap.OnSend(list.ToArray());
+                                WebSocketServerWrappe.OnSend(list.ToArray());
                                 socket.Send(list.ToArray());
                             }
                         }
@@ -95,7 +95,7 @@ namespace Free.Dolphin.Core
                     }
                     else
                     {
-                        byte[] array = WebSocketServerWrap.OnErrorMessage(error.Message, error);
+                        byte[] array = WebSocketServerWrappe.OnErrorMessage(error.Message, error);
                         List<byte> list = new List<byte>();
                         list.Add((byte)(9999 >> 8));
                         list.Add((byte)(9999 & 0xFF));
