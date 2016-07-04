@@ -29,11 +29,7 @@ namespace DolphinServer.Controller
         /// </summary>
         Controller1005 = 1005,
         /// <summary>
-        /// 发牌
-        /// </summary>
-        Controller1006 = 1006,
-        /// <summary>
-        /// 摸牌
+        /// 打牌
         /// </summary>
         Controller1007 = 1007,
 
@@ -43,19 +39,25 @@ namespace DolphinServer.Controller
         Controller1008 = 1008,
 
         /// <summary>
-        /// 查询日排行榜
+        /// 过牌
         /// </summary>
         Controller1009 = 1009,
 
         /// <summary>
-        /// 查询周排行榜
+        /// 吃牌
         /// </summary>
         Controller1010 = 1010,
 
 
         /// <summary>
-        /// 查询月排行榜
+        /// 碰牌
         /// </summary>
         Controller1011 = 1011,
+
+        /// <summary>
+        /// 杠牌
+        /// </summary>
+        Controller1012 = 1012,
+
     }
 }

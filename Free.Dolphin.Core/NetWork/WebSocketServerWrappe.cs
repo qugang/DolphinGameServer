@@ -45,6 +45,12 @@ namespace Free.Dolphin.Core
                 {
                     try
                     {
+
+                        if (message == "ping")
+                        {
+                            return;
+                        }
+
                         WebSocketServerWrappe.OnRevice(message);
                         Dictionary<string, string> keyValue = WebSocketPackage.UnPackage(message);
                         ControllerContext context = new ControllerContext(keyValue);

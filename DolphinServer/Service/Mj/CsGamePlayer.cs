@@ -130,6 +130,22 @@ namespace DolphinServer.Service.Mj
             return false;
         }
 
+        public Boolean CheckQuanQiuRen()
+        {
+            if (this.tNumber == 2)
+            {
+                return this.tCards.All(p => p.GetItemNumber() == 2);
+            }
+            else if (this.wNumber == 2)
+            {
+                return this.wCards.All(p => p.GetItemNumber() == 2);
+            }
+            else
+            {
+                return this.sCards.All(p => p.GetItemNumber() == 2);
+            }
+        }
+
         public Boolean CheckHu(int card)
         {
             PushCard(card);

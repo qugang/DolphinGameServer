@@ -21,7 +21,5 @@ namespace Free.Dolphin.Core
             }
             return dic;
         }
-
-
     }
 }

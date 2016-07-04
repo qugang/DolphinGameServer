@@ -43,7 +43,15 @@ namespace DolphinServer.Service.Mj
         /// </summary>
         public List<int> tCards { get; set; }
 
+        /// <summary>
+        /// 用于描述手上的牌
+        /// </summary>
         public int tNumber { get; set; }
+
+        /// <summary>
+        /// 用于描述手上加吃加碰的牌的张数，判断清一色时用
+        /// </summary>
+        public int ttNumber { get; set; }
 
         /// <summary>
         /// 索
@@ -53,11 +61,21 @@ namespace DolphinServer.Service.Mj
         public int sNumber { get; set; }
 
         /// <summary>
+        /// 用于描述手上加吃加碰的牌的张数，判断清一色时用
+        /// </summary>
+        public int tsNumber { get; set; }
+
+        /// <summary>
         /// 万
         /// </summary>
         public List<int> wCards { get; set; }
 
         public int wNumber { get; set; }
+
+        /// <summary>
+        /// 用于描述手上加吃加碰的牌的张数，判断清一色时用
+        /// </summary>
+        public int twNumber { get; set; }
 
         public GameUser PlayerUser { get; set; }
 
@@ -72,6 +90,9 @@ namespace DolphinServer.Service.Mj
             this.wCards = new List<int>();
             this.tCards = new List<int>();
             this.sCards = new List<int>();
+            this.ChiCards = new List<int>();
+            this.PengCards = new List<int>();
+            this.GangCards = new List<int>();
             foreach (var row in card)
             {
                 int itemType = row.GetItemType();
@@ -80,16 +101,19 @@ namespace DolphinServer.Service.Mj
                 {
                     this.wCards.AddCardItem(row);
                     this.wNumber++;
+                    this.twNumber++;
                 }
                 else if (itemType == 1)
                 {
                     this.tCards.AddCardItem(row);
                     this.tNumber++;
+                    this.ttNumber++;
                 }
                 else
                 {
                     this.sCards.AddCardItem(row);
                     this.sNumber++;
+                    this.tsNumber++;
                 }
                 SortCards();
             }
@@ -131,6 +155,31 @@ namespace DolphinServer.Service.Mj
             {
                 this.sCards.RemoveCardItem(card);
                 this.sNumber--;
+            }
+            SortCards();
+        }
+
+        public void DaCard(int card)
+        {
+
+            int type = card.GetItemType();
+            if (type == 0)
+            {
+                this.wCards.RemoveCardItem(card);
+                this.wNumber--;
+                this.twNumber--;
+            }
+            else if (type == 1)
+            {
+                this.tCards.RemoveCardItem(card);
+                this.tNumber--;
+                this.ttNumber--;
+            }
+            else
+            {
+                this.sCards.RemoveCardItem(card);
+                this.sNumber--;
+                this.tsNumber--;
             }
             SortCards();
         }
@@ -296,14 +345,16 @@ namespace DolphinServer.Service.Mj
         /// <returns></returns>
         public virtual Boolean CheckHu()
         {
-            
+
 
             if (this.wNumber == 1 || this.tNumber == 1 || this.sNumber == 1)
             {
                 return false;
             }
 
-            if (this.wNumber == 14 || this.tNumber == 14 || this.sNumber == 14)
+            if ((this.twNumber == 0 && this.ttNumber == 0) ||
+                (this.tsNumber == 0 && this.twNumber == 0) ||
+                (this.tsNumber == 0 && this.ttNumber == 0))
             {
                 var result = CheckQingYiSe();
                 return result;
@@ -313,7 +364,7 @@ namespace DolphinServer.Service.Mj
             {
                 return true;
             }
-            
+
 
             int wJiangPos = this.wCards.FindJiang(this.wNumber);
             int tJiangPos = this.tCards.FindJiang(this.tNumber);
@@ -345,11 +396,13 @@ namespace DolphinServer.Service.Mj
         {
 
             List<int> tempArray = new List<int>();
-            if (this.wNumber == 14)
+
+
+            if (this.tsNumber == 0 && this.ttNumber == 0)
             {
                 tempArray = this.wCards;
             }
-            else if (this.tNumber == 14)
+            else if (this.tsNumber == 0 && this.twNumber == 0)
             {
                 tempArray = this.tCards;
             }
@@ -373,10 +426,26 @@ namespace DolphinServer.Service.Mj
             return false;
         }
 
-        public void Chi(int card,int card1,int card2) {
+        public void Chi(int card, int card1, int card2)
+        {
             this.OutCard(card1);
             this.OutCard(card2);
-            this.ChiCards.AddRange(new int[] { card, card1, card2});
+            this.ChiCards.AddRange(new int[] { card, card1, card2 });
+        }
+
+        public void Peng(int card)
+        {
+            this.OutCard(card);
+            this.OutCard(card);
+            this.PengCards.Add(card);
+        }
+
+        public void Gang(int card)
+        {
+            this.OutCard(card);
+            this.OutCard(card);
+            this.OutCard(card);
+            this.GangCards.Add(card);
         }
 
         protected void PushCard(int card)
@@ -435,7 +504,7 @@ namespace DolphinServer.Service.Mj
             }
             else
             {
-                return this.Analyze(this.wCards);
+                return this.Analyze(array);
             }
         }
 
@@ -491,7 +560,8 @@ namespace DolphinServer.Service.Mj
         {
             if (this.wCards.All(p => p.GetItemNumber() == 2 || p.GetItemNumber() == 4)
                 && this.tCards.All(p => p.GetItemNumber() == 2 || p.GetItemNumber() == 4)
-                && this.sCards.All(p => p.GetItemNumber() == 2 || p.GetItemNumber() == 4))
+                && this.sCards.All(p => p.GetItemNumber() == 2 || p.GetItemNumber() == 4)
+                && this.PengCards.Count == 0 && this.GangCards.Count == 0 && this.ChiCards.Count == 0)
             {
                 return true;
             }
@@ -507,7 +577,7 @@ namespace DolphinServer.Service.Mj
                 for (int i = 0; i < row.GetItemNumber(); i++)
                 {
 
-                    sb.Append(row.GetItemValue() );
+                    sb.Append(row.GetItemValue());
                 }
             }
 
@@ -530,7 +600,7 @@ namespace DolphinServer.Service.Mj
                     sb.Append(row.GetItemValue());
                 }
             }
-            sb.Append("总张数: " +(this.wNumber + this.tNumber + this.sNumber));
+            sb.Append("总张数: " + (this.wNumber + this.tNumber + this.sNumber));
             return sb.ToString();
         }
 
