@@ -73,17 +73,7 @@ namespace DolphinServer.Service.Mj
             isFrist = true;
 
         }
-
-
-        /// <summary>
-        /// 开局第一次胡
-        /// </summary>
-        /// <param name="uid"></param>
-        public void FistHu(string uid)
-        {
-            LinkedListNode<CsGamePlayer> node = FindPlayer(uid);
-            node.Value.ResetEvent.Set();
-        }
+        
 
         /// <summary>
         /// 自摸
@@ -129,7 +119,6 @@ namespace DolphinServer.Service.Mj
             leftNode.Value.Score -= subLeftScore;
 
             this.Player.Value.Score += subRigthScore + subTopScore + subLeftScore;
-
 
             A1013Response.Builder response = A1013Response.CreateBuilder();
             response.HuType = huType;

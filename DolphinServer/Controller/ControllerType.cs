@@ -62,6 +62,12 @@ namespace DolphinServer.Controller
         /// <summary>
         /// 自摸
         /// </summary>
-        Controller1013 = 1013
+        Controller1013 = 1013,
+
+
+        /// <summary>
+        /// 捉炮
+        /// </summary>
+        Controller1014 = 1014
     }
 }

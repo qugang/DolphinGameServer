@@ -12,10 +12,14 @@ namespace DolphinServer.Service.Mj
 
     public class CsGamePlayer : MjGamePlayerBase
     {
+
+        public int HuType { get; set; }
+
         public CsGamePlayer(GameUser gameSession) : base(gameSession)
         {
 
         }
+        
 
 
 

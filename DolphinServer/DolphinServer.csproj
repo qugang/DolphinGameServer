@@ -64,6 +64,7 @@
     <Compile Include="Controller\Controller1011bak.cs" />
     <Compile Include="Controller\Controller1012.cs" />
     <Compile Include="Controller\Controller1013.cs" />
+    <Compile Include="Controller\Controller1014.cs" />
     <Compile Include="Controller\ControllerType.cs" />
     <Compile Include="Controller\ErrorInfo.cs" />
     <Compile Include="Entity\GameRank.cs" />
