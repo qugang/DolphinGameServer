@@ -5,7 +5,7 @@
 暂缺
 
 ## Git for samples
-暂缺
+示例代码是关于一款麻将的游戏,客户端为cocos js,现在先集成到服务端里面，以后移出去
 
 ### Platform
 windows
