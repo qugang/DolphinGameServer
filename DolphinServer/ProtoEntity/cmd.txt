@@ -8,6 +8,8 @@ protoc -I=C:\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity --csharp_o
 protoc -I=C:\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity --csharp_out=C:\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\ C:\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\A1010Response.txt
 protoc -I=C:\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity --csharp_out=C:\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\ C:\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\A1011Response.txt
 protoc -I=C:\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity --csharp_out=C:\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\ C:\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\A1012Response.txt
+protoc -I=C:\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity --csharp_out=C:\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\ C:\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\A1013Response.txt
+protoc -I=C:\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity --csharp_out=C:\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\ C:\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\A1014Response.txt
 protoc -I=C:\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity --csharp_out=C:\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\ C:\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\A9999DataErrorResponse.txt
 
 
@@ -23,3 +25,5 @@ protoc -I=C:\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity --csharp_o
 1010 吃牌返回
 1011 碰牌返回
 1012 杠牌返回
+1013 自摸
+1014 捉炮

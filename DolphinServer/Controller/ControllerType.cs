@@ -34,7 +34,7 @@ namespace DolphinServer.Controller
         Controller1007 = 1007,
 
         /// <summary>
-        /// 胡牌
+        /// 未用
         /// </summary>
         Controller1008 = 1008,
 
@@ -59,5 +59,9 @@ namespace DolphinServer.Controller
         /// </summary>
         Controller1012 = 1012,
 
+        /// <summary>
+        /// 自摸
+        /// </summary>
+        Controller1013 = 1013
     }
 }

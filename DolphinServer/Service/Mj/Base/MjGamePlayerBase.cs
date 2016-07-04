@@ -14,6 +14,7 @@ namespace DolphinServer.Service.Mj
         public ManualResetEvent ResetEvent = new ManualResetEvent(false);
 
 
+        
         /// <summary>
         /// 玩家分数
         /// </summary>

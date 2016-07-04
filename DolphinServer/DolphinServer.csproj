@@ -80,6 +80,8 @@
     <Compile Include="ProtoEntity\A1010Response.cs" />
     <Compile Include="ProtoEntity\A1011Response.cs" />
     <Compile Include="ProtoEntity\A1012Response.cs" />
+    <Compile Include="ProtoEntity\A1013Response.cs" />
+    <Compile Include="ProtoEntity\A1014Response.cs" />
     <Compile Include="ProtoEntity\A9999DataErrorResponse.cs" />
     <Compile Include="Service\Mj\CsGamePlayer.cs" />
     <Compile Include="Service\Mj\CsGameRoom.cs" />
@@ -115,6 +117,8 @@
     <Content Include="ProtoEntity\A1012Response.txt" />
     <Content Include="ProtoEntity\A1011Response.txt" />
     <Content Include="ProtoEntity\A1010Response.txt" />
+    <Content Include="ProtoEntity\A1014Response.txt" />
+    <Content Include="ProtoEntity\A1013Response.txt" />
     <Content Include="ProtoEntity\A9999DataErrorResponse.txt" />
     <Content Include="ProtoEntity\cmd.txt" />
   </ItemGroup>

@@ -8,9 +8,7 @@ using System.Threading.Tasks;
 
 namespace DolphinServer.Controller
 {
-    /// <summary>
-    /// 胡牌
-    /// </summary>
+
     [ControllerProtocol((int)ControllerType.Controller1008)]
     [ControllerAuth]
     public class Controller1008 : ControllerBase
@@ -25,7 +23,6 @@ namespace DolphinServer.Controller
             int roomId = int.Parse(Context.HttpQueryString["RoomID"]);
             int huType = int.Parse(Context.HttpQueryString["HuType"]);
             CsMjGameRoom room = CsGameRoomManager.GetRoomById(roomId);
-            room.Hu(uid,);
             return null;
         }
     }
