@@ -32,39 +32,30 @@ namespace DolphinServer.Controller
         /// 打牌
         /// </summary>
         Controller1007 = 1007,
-
         /// <summary>
         /// 未用
         /// </summary>
         Controller1008 = 1008,
-
         /// <summary>
         /// 过牌
         /// </summary>
         Controller1009 = 1009,
-
         /// <summary>
         /// 吃牌
         /// </summary>
         Controller1010 = 1010,
-
-
         /// <summary>
         /// 碰牌
         /// </summary>
         Controller1011 = 1011,
-
         /// <summary>
         /// 杠牌
         /// </summary>
         Controller1012 = 1012,
-
         /// <summary>
         /// 自摸
         /// </summary>
         Controller1013 = 1013,
-
-
         /// <summary>
         /// 捉炮
         /// </summary>
