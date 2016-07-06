@@ -73,7 +73,67 @@ namespace DolphinServer.Service.Mj
             isFrist = true;
 
         }
-        
+
+
+        /// <summary>
+        /// 开局胡
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <param name="huType"></param>
+        public void FistHu(string uid, int huType) {
+            LinkedListNode<CsGamePlayer> node = FindPlayer(uid);
+            int score = 0;
+            int i = 1;
+            while (i <= 16)
+            {
+                //小胡
+                if ((huType & i) == i && i <= 16)
+                {
+                    score++;
+                }
+                i = i * 2;
+            }
+
+            if (node.Value.PlayerUser.Uid == this.Players.First.Value.PlayerUser.Uid)
+            {
+                score++;
+            }
+
+            var rigthNode = node.NextOrFirst();
+            int subRigthScore = rigthNode.Value.PlayerUser.Uid == this.Player.Value.PlayerUser.Uid ? score + 1 : score;
+            var topNode = node.NextOrFirst().NextOrFirst();
+            int subTopScore = topNode.Value.PlayerUser.Uid == this.Player.Value.PlayerUser.Uid ? score + 1 : score;
+            var leftNode = node.NextOrFirst().NextOrFirst().NextOrFirst();
+            int subLeftScore = leftNode.Value.PlayerUser.Uid == this.Player.Value.PlayerUser.Uid ? score + 1 : score;
+
+
+            rigthNode.Value.Score -= subRigthScore;
+            topNode.Value.Score -= subTopScore;
+            leftNode.Value.Score -= subLeftScore;
+
+            this.Player.Value.Score += subRigthScore + subTopScore + subLeftScore;
+
+            A1015Response.Builder response = A1015Response.CreateBuilder();
+            response.HuType = huType;
+            response.Uid = node.Value.PlayerUser.Uid;
+            response.Score = subRigthScore + subTopScore + subLeftScore;
+            var builder = A1015User.CreateBuilder();
+            builder.Uid = rigthNode.Value.PlayerUser.Uid;
+            builder.Score = subRigthScore;
+            response.AddUsers(builder);
+            builder.Uid = topNode.Value.PlayerUser.Uid;
+            builder.Score = subTopScore;
+            response.AddUsers(builder);
+            builder.Uid = leftNode.Value.PlayerUser.Uid;
+            builder.Score = subLeftScore;
+            response.AddUsers(builder);
+
+            var sendByte = response.Build().ToByteArray();
+            foreach (var row in this.Players)
+            {
+                WebSocketServerWrappe.SendPackgeWithUser(row.PlayerUser.Uid, 1015, sendByte);
+            }
+        }
 
         /// <summary>
         /// 自摸
@@ -82,6 +142,7 @@ namespace DolphinServer.Service.Mj
         /// <param name="huType"></param>
         public void Zimo(string uid, int huType)
         {
+            LogManager.Log.Debug("自摸开始");
             LinkedListNode<CsGamePlayer> node = FindPlayer(uid);
             this.Player = this.Player;
             int score = 0;
@@ -105,7 +166,7 @@ namespace DolphinServer.Service.Mj
             {
                 score++;
             }
-            
+
             var rigthNode = node.NextOrFirst();
             int subRigthScore = rigthNode.Value.PlayerUser.Uid == this.Player.Value.PlayerUser.Uid ? score + 1 : score;
             var topNode = node.NextOrFirst().NextOrFirst();
@@ -126,13 +187,13 @@ namespace DolphinServer.Service.Mj
             response.Score = subRigthScore + subTopScore + subLeftScore;
             var builder = A1013User.CreateBuilder();
             builder.Uid = rigthNode.Value.PlayerUser.Uid;
-            builder.Sore = subRigthScore;
+            builder.Score = subRigthScore;
             response.AddUsers(builder);
             builder.Uid = topNode.Value.PlayerUser.Uid;
-            builder.Sore = subTopScore;
+            builder.Score = subTopScore;
             response.AddUsers(builder);
             builder.Uid = leftNode.Value.PlayerUser.Uid;
-            builder.Sore = subLeftScore;
+            builder.Score = subLeftScore;
             response.AddUsers(builder);
 
             var sendByte = response.Build().ToByteArray();
@@ -150,8 +211,9 @@ namespace DolphinServer.Service.Mj
         /// <param name="uid"></param>
         /// <param name="desUid"></param>
         /// <param name="huType"></param>
-        public void ZhuoPao(string uid, string desUid, int huType)
+        public void ZhuoPao(string uid, string desUid, int huType, int card)
         {
+            LogManager.Log.Debug("捉炮开始");
             LinkedListNode<CsGamePlayer> node = FindPlayer(uid);
             this.Player = this.Player;
             int score = 0;
@@ -176,10 +238,10 @@ namespace DolphinServer.Service.Mj
             {
                 score++;
             }
-            var desNode =  FindPlayer(desUid);
+            var desNode = FindPlayer(desUid);
             var desSubScore = desNode.Value.PlayerUser.Uid == this.Players.First.Value.PlayerUser.Uid ? score++ : score;
+            desNode.Value.Score -= desSubScore;
             this.Player.Value.Score += desSubScore;
-
 
             A1014Response.Builder response = A1014Response.CreateBuilder();
             response.Uid = node.Value.PlayerUser.Uid;
@@ -187,6 +249,7 @@ namespace DolphinServer.Service.Mj
             response.HuType = huType;
             response.DesUid = desUid;
             response.DesScore = desSubScore;
+            response.Card = card;
             var sendByte = response.Build().ToByteArray();
             foreach (var row in this.Players)
             {
@@ -194,6 +257,7 @@ namespace DolphinServer.Service.Mj
             }
             this.OutCardState = OutCardState.Hu;
             node.Value.ResetEvent.Set();
+            LogManager.Log.Debug("捉炮结束");
         }
 
         /// <summary>
@@ -205,6 +269,7 @@ namespace DolphinServer.Service.Mj
         /// <param name="card2"></param>
         public void Chi(string uid, int card, int card1, int card2)
         {
+            LogManager.Log.Debug("吃牌开始");
             LinkedListNode<CsGamePlayer> node = FindPlayer(uid);
             foreach (var row in Players)
             {
@@ -219,6 +284,7 @@ namespace DolphinServer.Service.Mj
             //牌未被彭吃杠
             if (this.OutCardState == OutCardState.Normal)
             {
+                LogManager.Log.Debug("牌可以吃");
                 node.Value.Chi(card, card1, card2);
                 A1010Response.Builder response = A1010Response.CreateBuilder();
                 response.Uid = node.Value.PlayerUser.Uid;
@@ -234,6 +300,7 @@ namespace DolphinServer.Service.Mj
             }
             this.Player = node;
             node.Value.ResetEvent.Set();
+            LogManager.Log.Debug("吃牌结束");
         }
 
         /// <summary>

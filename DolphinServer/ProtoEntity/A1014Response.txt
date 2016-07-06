@@ -8,5 +8,6 @@ message A1014Response{
 	optional int32 Score = 5;
 	optional string DesUid = 6;
 	optional int32 DesScore = 7;
+	optional int32 Card = 8;
 }
 

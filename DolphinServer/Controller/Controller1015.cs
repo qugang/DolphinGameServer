@@ -13,11 +13,11 @@ namespace DolphinServer.Controller
     /// <summary>
     /// 捉炮
     /// </summary>
-    [ControllerProtocol((int)ControllerType.Controller1014)]
+    [ControllerProtocol((int)ControllerType.Controller1015)]
     [ControllerAuth]
-    public class Controller1014 : ControllerBase
+    public class Controller1015 : ControllerBase
     {
-        public Controller1014(ControllerContext context) : base(context)
+        public Controller1015(ControllerContext context) : base(context)
         {
         }
 
@@ -25,10 +25,8 @@ namespace DolphinServer.Controller
         {
             int roomId = int.Parse(Context.HttpQueryString["RoomID"]);
             int huType = int.Parse(Context.HttpQueryString["HuType"]);
-            int card = int.Parse(Context.HttpQueryString["Card"]);
-            string desUid = Context.HttpQueryString["DesUid"];
             CsMjGameRoom room = CsGameRoomManager.GetRoomById(roomId);
-            room.ZhuoPao(Context.Session.User.Uid, desUid, huType, card);
+            room.FistHu(Context.Session.User.Uid, huType);
             return null;
         }
     }

@@ -44,8 +44,15 @@ namespace DolphinServer.Controller
                 {
                     WebSocketServerWrappe.SendPackgeWithUser(row.PlayerUser.Uid, 1003, response.Build().ToByteArray());
                 }
+                return null;
             }
-            return null;
+            else
+            {
+                A9999DataErrorResponse.Builder error = A9999DataErrorResponse.CreateBuilder();
+                error.ErrorCode = 2;
+                error.ErrorInfo = ErrorInfo.ErrorDic[2];
+                return error.Build().ToByteArray();
+            }
         }
         
     }

@@ -39,7 +39,8 @@ namespace DolphinServer.Service.Mj
             return Interlocked.Increment(ref maxRoomeId);
         }
 
-        public static CsMjGameRoom GetRoomById(int roomId) {
+        public static CsMjGameRoom GetRoomById(int roomId)
+        {
             CsMjGameRoom room = null;
             rooms.TryGetValue(roomId, out room);
             return room;
@@ -49,7 +50,7 @@ namespace DolphinServer.Service.Mj
         {
             CsMjGameRoom room = null;
             rooms.TryGetValue(roomID, out room);
-            if (room != null)
+            if (room != null && room.Players.Count < 4)
             {
                 room.JoinRoom(user);
                 return room;

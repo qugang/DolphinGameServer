@@ -31,17 +31,17 @@ namespace DolphinServer.ProtoEntity {
       static A1014Response() {
         byte[] descriptorData = global::System.Convert.FromBase64String(
             string.Concat(
-              "ChFBMTAxNFJlc3BvbnNlLnR4dCKDAQoNQTEwMTRSZXNwb25zZRIRCglFcnJv", 
+              "ChFBMTAxNFJlc3BvbnNlLnR4dCKRAQoNQTEwMTRSZXNwb25zZRIRCglFcnJv", 
               "ckluZm8YASABKAkSEQoJRXJyb3JDb2RlGAIgASgFEgsKA1VpZBgDIAEoCRIO", 
               "CgZIdVR5cGUYBCABKAUSDQoFU2NvcmUYBSABKAUSDgoGRGVzVWlkGAYgASgJ", 
-              "EhAKCERlc1Njb3JlGAcgASgFQhyqAhlEb2xwaGluU2VydmVyLlByb3RvRW50", 
-            "aXR5"));
+              "EhAKCERlc1Njb3JlGAcgASgFEgwKBENhcmQYCCABKAVCHKoCGURvbHBoaW5T", 
+            "ZXJ2ZXIuUHJvdG9FbnRpdHk="));
         pbd::FileDescriptor.InternalDescriptorAssigner assigner = delegate(pbd::FileDescriptor root) {
           descriptor = root;
           internal__static_A1014Response__Descriptor = Descriptor.MessageTypes[0];
           internal__static_A1014Response__FieldAccessorTable = 
               new pb::FieldAccess.FieldAccessorTable<global::DolphinServer.ProtoEntity.A1014Response, global::DolphinServer.ProtoEntity.A1014Response.Builder>(internal__static_A1014Response__Descriptor,
-                  new string[] { "ErrorInfo", "ErrorCode", "Uid", "HuType", "Score", "DesUid", "DesScore", });
+                  new string[] { "ErrorInfo", "ErrorCode", "Uid", "HuType", "Score", "DesUid", "DesScore", "Card", });
           pb::ExtensionRegistry registry = pb::ExtensionRegistry.CreateInstance();
           RegisterAllExtensions(registry);
           return registry;
@@ -59,8 +59,8 @@ namespace DolphinServer.ProtoEntity {
   public sealed partial class A1014Response : pb::GeneratedMessage<A1014Response, A1014Response.Builder> {
     private A1014Response() { }
     private static readonly A1014Response defaultInstance = new A1014Response().MakeReadOnly();
-    private static readonly string[] _a1014ResponseFieldNames = new string[] { "DesScore", "DesUid", "ErrorCode", "ErrorInfo", "HuType", "Score", "Uid" };
-    private static readonly uint[] _a1014ResponseFieldTags = new uint[] { 56, 50, 16, 10, 32, 40, 26 };
+    private static readonly string[] _a1014ResponseFieldNames = new string[] { "Card", "DesScore", "DesUid", "ErrorCode", "ErrorInfo", "HuType", "Score", "Uid" };
+    private static readonly uint[] _a1014ResponseFieldTags = new uint[] { 64, 56, 50, 16, 10, 32, 40, 26 };
     public static A1014Response DefaultInstance {
       get { return defaultInstance; }
     }
@@ -151,6 +151,16 @@ namespace DolphinServer.ProtoEntity {
       get { return desScore_; }
     }
 
+    public const int CardFieldNumber = 8;
+    private bool hasCard;
+    private int card_;
+    public bool HasCard {
+      get { return hasCard; }
+    }
+    public int Card {
+      get { return card_; }
+    }
+
     public override bool IsInitialized {
       get {
         return true;
@@ -161,25 +171,28 @@ namespace DolphinServer.ProtoEntity {
       CalcSerializedSize();
       string[] field_names = _a1014ResponseFieldNames;
       if (hasErrorInfo) {
-        output.WriteString(1, field_names[3], ErrorInfo);
+        output.WriteString(1, field_names[4], ErrorInfo);
       }
       if (hasErrorCode) {
-        output.WriteInt32(2, field_names[2], ErrorCode);
+        output.WriteInt32(2, field_names[3], ErrorCode);
       }
       if (hasUid) {
-        output.WriteString(3, field_names[6], Uid);
+        output.WriteString(3, field_names[7], Uid);
       }
       if (hasHuType) {
-        output.WriteInt32(4, field_names[4], HuType);
+        output.WriteInt32(4, field_names[5], HuType);
       }
       if (hasScore) {
-        output.WriteInt32(5, field_names[5], Score);
+        output.WriteInt32(5, field_names[6], Score);
       }
       if (hasDesUid) {
-        output.WriteString(6, field_names[1], DesUid);
+        output.WriteString(6, field_names[2], DesUid);
       }
       if (hasDesScore) {
-        output.WriteInt32(7, field_names[0], DesScore);
+        output.WriteInt32(7, field_names[1], DesScore);
+      }
+      if (hasCard) {
+        output.WriteInt32(8, field_names[0], Card);
       }
       UnknownFields.WriteTo(output);
     }
@@ -218,6 +231,9 @@ namespace DolphinServer.ProtoEntity {
       }
       if (hasDesScore) {
         size += pb::CodedOutputStream.ComputeInt32Size(7, DesScore);
+      }
+      if (hasCard) {
+        size += pb::CodedOutputStream.ComputeInt32Size(8, Card);
       }
       size += UnknownFields.SerializedSize;
       memoizedSerializedSize = size;
@@ -362,6 +378,9 @@ namespace DolphinServer.ProtoEntity {
         if (other.HasDesScore) {
           DesScore = other.DesScore;
         }
+        if (other.HasCard) {
+          Card = other.Card;
+        }
         this.MergeUnknownFields(other.UnknownFields);
         return this;
       }
@@ -431,6 +450,10 @@ namespace DolphinServer.ProtoEntity {
             }
             case 56: {
               result.hasDesScore = input.ReadInt32(ref result.desScore_);
+              break;
+            }
+            case 64: {
+              result.hasCard = input.ReadInt32(ref result.card_);
               break;
             }
           }
@@ -583,6 +606,26 @@ namespace DolphinServer.ProtoEntity {
         PrepareBuilder();
         result.hasDesScore = false;
         result.desScore_ = 0;
+        return this;
+      }
+
+      public bool HasCard {
+        get { return result.hasCard; }
+      }
+      public int Card {
+        get { return result.Card; }
+        set { SetCard(value); }
+      }
+      public Builder SetCard(int value) {
+        PrepareBuilder();
+        result.hasCard = true;
+        result.card_ = value;
+        return this;
+      }
+      public Builder ClearCard() {
+        PrepareBuilder();
+        result.hasCard = false;
+        result.card_ = 0;
         return this;
       }
     }

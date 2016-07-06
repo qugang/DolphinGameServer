@@ -13,7 +13,7 @@ namespace DolphinServer.Controller
             ErrorDic = new Dictionary<int, string>();
 
             ErrorDic.Add(1, "服务器繁忙");
-            ErrorDic.Add(2, "房间号不存在");
+            ErrorDic.Add(2, "房间号不存在或房间已满");
         }
 
         public static Dictionary<int, string> ErrorDic { get; set; }

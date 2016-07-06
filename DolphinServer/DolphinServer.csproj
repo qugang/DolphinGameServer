@@ -65,6 +65,7 @@
     <Compile Include="Controller\Controller1012.cs" />
     <Compile Include="Controller\Controller1013.cs" />
     <Compile Include="Controller\Controller1014.cs" />
+    <Compile Include="Controller\Controller1015.cs" />
     <Compile Include="Controller\ControllerType.cs" />
     <Compile Include="Controller\ErrorInfo.cs" />
     <Compile Include="Entity\GameRank.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="ProtoEntity\A1012Response.cs" />
     <Compile Include="ProtoEntity\A1013Response.cs" />
     <Compile Include="ProtoEntity\A1014Response.cs" />
+    <Compile Include="ProtoEntity\A1015Response.cs" />
     <Compile Include="ProtoEntity\A9999DataErrorResponse.cs" />
     <Compile Include="Service\Mj\CsGamePlayer.cs" />
     <Compile Include="Service\Mj\CsGameRoom.cs" />
@@ -118,6 +120,7 @@
     <Content Include="ProtoEntity\A1012Response.txt" />
     <Content Include="ProtoEntity\A1011Response.txt" />
     <Content Include="ProtoEntity\A1010Response.txt" />
+    <Content Include="ProtoEntity\A1015Response.txt" />
     <Content Include="ProtoEntity\A1014Response.txt" />
     <Content Include="ProtoEntity\A1013Response.txt" />
     <Content Include="ProtoEntity\A9999DataErrorResponse.txt" />

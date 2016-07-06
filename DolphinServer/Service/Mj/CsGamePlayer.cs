@@ -12,8 +12,7 @@ namespace DolphinServer.Service.Mj
 
     public class CsGamePlayer : MjGamePlayerBase
     {
-
-        public int HuType { get; set; }
+        
 
         public CsGamePlayer(GameUser gameSession) : base(gameSession)
         {
@@ -54,8 +53,6 @@ namespace DolphinServer.Service.Mj
             }
             return false;
         }
-
-
         /// <summary>
         /// 检查六六顺
         /// </summary>
@@ -90,7 +87,6 @@ namespace DolphinServer.Service.Mj
             }
             return false;
         }
-
         /// <summary>
         /// 检查缺一色
         /// </summary>
@@ -103,8 +99,6 @@ namespace DolphinServer.Service.Mj
             }
             return false;
         }
-
-
         /// <summary>
         /// 此胡是为了检测开局胡
         /// </summary>
@@ -119,7 +113,6 @@ namespace DolphinServer.Service.Mj
             }
             return false;
         }
-
         public Boolean CheckJiangJiangHu()
         {
             if (this.wCards.All(p => p.GetItemValue() == 2 || p.GetItemValue() == 5 || p.GetItemValue() == 8) &&
