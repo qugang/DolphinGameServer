@@ -84,6 +84,7 @@ namespace DolphinServer.Service.Mj
         {
             this.PlayerUser = user;
             this.IsReady = true;
+            this.Score = 1000;
         }
 
         public void InitCard(int[] card)

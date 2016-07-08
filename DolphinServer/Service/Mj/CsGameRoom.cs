@@ -14,6 +14,9 @@ namespace DolphinServer.Service.Mj
     /// </summary>
     public class CsMjGameRoom : MjGameRoomBase
     {
+        public CsMjGameRoom(int jushu) : base(jushu) {
+
+        }
         /// <summary>
         /// 是否开局，因为开局需要检查碰碰胡等
         /// </summary>
@@ -25,10 +28,10 @@ namespace DolphinServer.Service.Mj
             var topArray = cardArray.Skip(27).Take(13).ToArray();
             var leftArray = cardArray.Skip(40).Take(13).ToArray();
 
-            Player down = ProtoEntity.Player.CreateBuilder().AddRangeCard(downArray).Build();
-            Player rigth = ProtoEntity.Player.CreateBuilder().AddRangeCard(rigthArray).Build();
-            Player top = ProtoEntity.Player.CreateBuilder().AddRangeCard(topArray).Build();
-            Player left = ProtoEntity.Player.CreateBuilder().AddRangeCard(leftArray).Build();
+            Player down = ProtoEntity.Player.CreateBuilder().AddRangeCard(downArray).SetScore(this.Player.Value.Score).Build();
+            Player rigth = ProtoEntity.Player.CreateBuilder().AddRangeCard(rigthArray).SetScore(this.Player.NextOrFirst().Value.Score).Build();
+            Player top = ProtoEntity.Player.CreateBuilder().AddRangeCard(topArray).SetScore(this.Player.NextOrFirst().NextOrFirst().Value.Score).Build();
+            Player left = ProtoEntity.Player.CreateBuilder().AddRangeCard(leftArray).SetScore(this.Player.NextOrFirst().NextOrFirst().NextOrFirst().Value.Score).Build();
 
             Players.First.Value.InitCard(downArray);
             Players.First.Next.Value.InitCard(rigthArray);
@@ -38,6 +41,8 @@ namespace DolphinServer.Service.Mj
 
             var response = A1006Response.CreateBuilder();
             response.ZhuangUid = this.Player.Value.PlayerUser.Uid;
+            response.JuShu = this.JuShu;
+            response.Zhangshu = 55;
             response.Player1 = down;
             response.Player2 = rigth;
             response.Player3 = top;
@@ -46,6 +51,8 @@ namespace DolphinServer.Service.Mj
 
             var response1 = A1006Response.CreateBuilder();
             response1.ZhuangUid = this.Player.Value.PlayerUser.Uid;
+            response1.JuShu = this.JuShu;
+            response1.Zhangshu = 55;
             response1.Player1 = rigth;
             response1.Player2 = top;
             response1.Player3 = left;
@@ -53,6 +60,8 @@ namespace DolphinServer.Service.Mj
 
             var response2 = A1006Response.CreateBuilder();
             response2.ZhuangUid = this.Player.Value.PlayerUser.Uid;
+            response2.JuShu = this.JuShu;
+            response2.Zhangshu = 55;
             response2.Player1 = top;
             response2.Player2 = left;
             response2.Player3 = down;
@@ -60,6 +69,8 @@ namespace DolphinServer.Service.Mj
 
             var response3 = A1006Response.CreateBuilder();
             response3.ZhuangUid = this.Player.Value.PlayerUser.Uid;
+            response3.JuShu = this.JuShu;
+            response3.Zhangshu = 55;
             response3.Player1 = left;
             response3.Player2 = down;
             response3.Player3 = rigth;
@@ -133,6 +144,7 @@ namespace DolphinServer.Service.Mj
             {
                 WebSocketServerWrappe.SendPackgeWithUser(row.PlayerUser.Uid, 1015, sendByte);
             }
+            
         }
 
         /// <summary>
@@ -380,6 +392,13 @@ namespace DolphinServer.Service.Mj
         {
             LogManager.Log.Debug("开始摸牌");
             LinkedListNode<CsGamePlayer> node = FindPlayer(uid);
+
+
+            if (cardIndex == cardArray.Length)
+            {
+                //TODO: 牌已摸完
+                return;
+            }
             int card = this.ReadCard();
 
             LogManager.Log.Debug("摸到牌" + card.GetItemValue() + "牌类型" + card.GetItemType());
@@ -390,7 +409,6 @@ namespace DolphinServer.Service.Mj
             A1008Response.Builder response = A1008Response.CreateBuilder();
             response.Card = card;
             response.Uid = uid;
-            response.ModCard = 108 - cardIndex;
             byte[] responseArray = response.Build().ToByteArray();
 
             foreach (var row in Players)

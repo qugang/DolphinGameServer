@@ -33,22 +33,23 @@ namespace DolphinServer.ProtoEntity {
       static A1006Response() {
         byte[] descriptorData = global::System.Convert.FromBase64String(
             string.Concat(
-              "ChFBMTAwNlJlc3BvbnNlLnR4dCKwAQoNQTEwMDZSZXNwb25zZRIRCglFcnJv", 
+              "ChFBMTAwNlJlc3BvbnNlLnR4dCLRAQoNQTEwMDZSZXNwb25zZRIRCglFcnJv", 
               "ckluZm8YASABKAkSEQoJRXJyb3JDb2RlGAIgASgFEhgKB1BsYXllcjEYAyAB", 
               "KAsyBy5QbGF5ZXISGAoHUGxheWVyMhgEIAEoCzIHLlBsYXllchIYCgdQbGF5", 
               "ZXIzGAUgASgLMgcuUGxheWVyEhgKB1BsYXllcjQYBiABKAsyBy5QbGF5ZXIS", 
-              "EQoJWmh1YW5nVWlkGAcgASgJIhYKBlBsYXllchIMCgRDYXJkGAEgAygFQhyq", 
-            "AhlEb2xwaGluU2VydmVyLlByb3RvRW50aXR5"));
+              "EQoJWmh1YW5nVWlkGAcgASgJEg0KBUp1U2h1GAggASgFEhAKCFpoYW5nc2h1", 
+              "GAkgASgFIiUKBlBsYXllchIMCgRDYXJkGAEgAygFEg0KBVNjb3JlGAIgASgF", 
+            "QhyqAhlEb2xwaGluU2VydmVyLlByb3RvRW50aXR5"));
         pbd::FileDescriptor.InternalDescriptorAssigner assigner = delegate(pbd::FileDescriptor root) {
           descriptor = root;
           internal__static_A1006Response__Descriptor = Descriptor.MessageTypes[0];
           internal__static_A1006Response__FieldAccessorTable = 
               new pb::FieldAccess.FieldAccessorTable<global::DolphinServer.ProtoEntity.A1006Response, global::DolphinServer.ProtoEntity.A1006Response.Builder>(internal__static_A1006Response__Descriptor,
-                  new string[] { "ErrorInfo", "ErrorCode", "Player1", "Player2", "Player3", "Player4", "ZhuangUid", });
+                  new string[] { "ErrorInfo", "ErrorCode", "Player1", "Player2", "Player3", "Player4", "ZhuangUid", "JuShu", "Zhangshu", });
           internal__static_Player__Descriptor = Descriptor.MessageTypes[1];
           internal__static_Player__FieldAccessorTable = 
               new pb::FieldAccess.FieldAccessorTable<global::DolphinServer.ProtoEntity.Player, global::DolphinServer.ProtoEntity.Player.Builder>(internal__static_Player__Descriptor,
-                  new string[] { "Card", });
+                  new string[] { "Card", "Score", });
           pb::ExtensionRegistry registry = pb::ExtensionRegistry.CreateInstance();
           RegisterAllExtensions(registry);
           return registry;
@@ -66,8 +67,8 @@ namespace DolphinServer.ProtoEntity {
   public sealed partial class A1006Response : pb::GeneratedMessage<A1006Response, A1006Response.Builder> {
     private A1006Response() { }
     private static readonly A1006Response defaultInstance = new A1006Response().MakeReadOnly();
-    private static readonly string[] _a1006ResponseFieldNames = new string[] { "ErrorCode", "ErrorInfo", "Player1", "Player2", "Player3", "Player4", "ZhuangUid" };
-    private static readonly uint[] _a1006ResponseFieldTags = new uint[] { 16, 10, 26, 34, 42, 50, 58 };
+    private static readonly string[] _a1006ResponseFieldNames = new string[] { "ErrorCode", "ErrorInfo", "JuShu", "Player1", "Player2", "Player3", "Player4", "Zhangshu", "ZhuangUid" };
+    private static readonly uint[] _a1006ResponseFieldTags = new uint[] { 16, 10, 64, 26, 34, 42, 50, 72, 58 };
     public static A1006Response DefaultInstance {
       get { return defaultInstance; }
     }
@@ -158,6 +159,26 @@ namespace DolphinServer.ProtoEntity {
       get { return zhuangUid_; }
     }
 
+    public const int JuShuFieldNumber = 8;
+    private bool hasJuShu;
+    private int juShu_;
+    public bool HasJuShu {
+      get { return hasJuShu; }
+    }
+    public int JuShu {
+      get { return juShu_; }
+    }
+
+    public const int ZhangshuFieldNumber = 9;
+    private bool hasZhangshu;
+    private int zhangshu_;
+    public bool HasZhangshu {
+      get { return hasZhangshu; }
+    }
+    public int Zhangshu {
+      get { return zhangshu_; }
+    }
+
     public override bool IsInitialized {
       get {
         return true;
@@ -174,19 +195,25 @@ namespace DolphinServer.ProtoEntity {
         output.WriteInt32(2, field_names[0], ErrorCode);
       }
       if (hasPlayer1) {
-        output.WriteMessage(3, field_names[2], Player1);
+        output.WriteMessage(3, field_names[3], Player1);
       }
       if (hasPlayer2) {
-        output.WriteMessage(4, field_names[3], Player2);
+        output.WriteMessage(4, field_names[4], Player2);
       }
       if (hasPlayer3) {
-        output.WriteMessage(5, field_names[4], Player3);
+        output.WriteMessage(5, field_names[5], Player3);
       }
       if (hasPlayer4) {
-        output.WriteMessage(6, field_names[5], Player4);
+        output.WriteMessage(6, field_names[6], Player4);
       }
       if (hasZhuangUid) {
-        output.WriteString(7, field_names[6], ZhuangUid);
+        output.WriteString(7, field_names[8], ZhuangUid);
+      }
+      if (hasJuShu) {
+        output.WriteInt32(8, field_names[2], JuShu);
+      }
+      if (hasZhangshu) {
+        output.WriteInt32(9, field_names[7], Zhangshu);
       }
       UnknownFields.WriteTo(output);
     }
@@ -225,6 +252,12 @@ namespace DolphinServer.ProtoEntity {
       }
       if (hasZhuangUid) {
         size += pb::CodedOutputStream.ComputeStringSize(7, ZhuangUid);
+      }
+      if (hasJuShu) {
+        size += pb::CodedOutputStream.ComputeInt32Size(8, JuShu);
+      }
+      if (hasZhangshu) {
+        size += pb::CodedOutputStream.ComputeInt32Size(9, Zhangshu);
       }
       size += UnknownFields.SerializedSize;
       memoizedSerializedSize = size;
@@ -369,6 +402,12 @@ namespace DolphinServer.ProtoEntity {
         if (other.HasZhuangUid) {
           ZhuangUid = other.ZhuangUid;
         }
+        if (other.HasJuShu) {
+          JuShu = other.JuShu;
+        }
+        if (other.HasZhangshu) {
+          Zhangshu = other.Zhangshu;
+        }
         this.MergeUnknownFields(other.UnknownFields);
         return this;
       }
@@ -458,6 +497,14 @@ namespace DolphinServer.ProtoEntity {
             }
             case 58: {
               result.hasZhuangUid = input.ReadString(ref result.zhuangUid_);
+              break;
+            }
+            case 64: {
+              result.hasJuShu = input.ReadInt32(ref result.juShu_);
+              break;
+            }
+            case 72: {
+              result.hasZhangshu = input.ReadInt32(ref result.zhangshu_);
               break;
             }
           }
@@ -691,6 +738,46 @@ namespace DolphinServer.ProtoEntity {
         result.zhuangUid_ = "";
         return this;
       }
+
+      public bool HasJuShu {
+        get { return result.hasJuShu; }
+      }
+      public int JuShu {
+        get { return result.JuShu; }
+        set { SetJuShu(value); }
+      }
+      public Builder SetJuShu(int value) {
+        PrepareBuilder();
+        result.hasJuShu = true;
+        result.juShu_ = value;
+        return this;
+      }
+      public Builder ClearJuShu() {
+        PrepareBuilder();
+        result.hasJuShu = false;
+        result.juShu_ = 0;
+        return this;
+      }
+
+      public bool HasZhangshu {
+        get { return result.hasZhangshu; }
+      }
+      public int Zhangshu {
+        get { return result.Zhangshu; }
+        set { SetZhangshu(value); }
+      }
+      public Builder SetZhangshu(int value) {
+        PrepareBuilder();
+        result.hasZhangshu = true;
+        result.zhangshu_ = value;
+        return this;
+      }
+      public Builder ClearZhangshu() {
+        PrepareBuilder();
+        result.hasZhangshu = false;
+        result.zhangshu_ = 0;
+        return this;
+      }
     }
     static A1006Response() {
       object.ReferenceEquals(global::DolphinServer.ProtoEntity.Proto.A1006Response.Descriptor, null);
@@ -701,8 +788,8 @@ namespace DolphinServer.ProtoEntity {
   public sealed partial class Player : pb::GeneratedMessage<Player, Player.Builder> {
     private Player() { }
     private static readonly Player defaultInstance = new Player().MakeReadOnly();
-    private static readonly string[] _playerFieldNames = new string[] { "Card" };
-    private static readonly uint[] _playerFieldTags = new uint[] { 8 };
+    private static readonly string[] _playerFieldNames = new string[] { "Card", "Score" };
+    private static readonly uint[] _playerFieldTags = new uint[] { 8, 16 };
     public static Player DefaultInstance {
       get { return defaultInstance; }
     }
@@ -735,6 +822,16 @@ namespace DolphinServer.ProtoEntity {
       return card_[index];
     }
 
+    public const int ScoreFieldNumber = 2;
+    private bool hasScore;
+    private int score_;
+    public bool HasScore {
+      get { return hasScore; }
+    }
+    public int Score {
+      get { return score_; }
+    }
+
     public override bool IsInitialized {
       get {
         return true;
@@ -746,6 +843,9 @@ namespace DolphinServer.ProtoEntity {
       string[] field_names = _playerFieldNames;
       if (card_.Count > 0) {
         output.WriteInt32Array(1, field_names[0], card_);
+      }
+      if (hasScore) {
+        output.WriteInt32(2, field_names[1], Score);
       }
       UnknownFields.WriteTo(output);
     }
@@ -771,6 +871,9 @@ namespace DolphinServer.ProtoEntity {
         }
         size += dataSize;
         size += 1 * card_.Count;
+      }
+      if (hasScore) {
+        size += pb::CodedOutputStream.ComputeInt32Size(2, Score);
       }
       size += UnknownFields.SerializedSize;
       memoizedSerializedSize = size;
@@ -898,6 +1001,9 @@ namespace DolphinServer.ProtoEntity {
         if (other.card_.Count != 0) {
           result.card_.Add(other.card_);
         }
+        if (other.HasScore) {
+          Score = other.Score;
+        }
         this.MergeUnknownFields(other.UnknownFields);
         return this;
       }
@@ -946,6 +1052,10 @@ namespace DolphinServer.ProtoEntity {
               input.ReadInt32Array(tag, field_name, result.card_);
               break;
             }
+            case 16: {
+              result.hasScore = input.ReadInt32(ref result.score_);
+              break;
+            }
           }
         }
 
@@ -983,6 +1093,26 @@ namespace DolphinServer.ProtoEntity {
       public Builder ClearCard() {
         PrepareBuilder();
         result.card_.Clear();
+        return this;
+      }
+
+      public bool HasScore {
+        get { return result.hasScore; }
+      }
+      public int Score {
+        get { return result.Score; }
+        set { SetScore(value); }
+      }
+      public Builder SetScore(int value) {
+        PrepareBuilder();
+        result.hasScore = true;
+        result.score_ = value;
+        return this;
+      }
+      public Builder ClearScore() {
+        PrepareBuilder();
+        result.hasScore = false;
+        result.score_ = 0;
         return this;
       }
     }

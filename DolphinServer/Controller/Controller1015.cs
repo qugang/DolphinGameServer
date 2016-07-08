@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace DolphinServer.Controller
 {
     /// <summary>
-    /// 捉炮
+    /// 第一次胡
     /// </summary>
     [ControllerProtocol((int)ControllerType.Controller1015)]
     [ControllerAuth]

@@ -10,7 +10,15 @@ namespace DolphinServer.Service.Mj
 {
     public abstract class MjGameRoomBase
     {
+        public MjGameRoomBase(int juShu) {
+            this.JuShu = juShu;
+        }
         public int RoomId { get; set; }
+
+        /// <summary>
+        /// 局数
+        /// </summary>
+        public int JuShu { get; set; }
         private SpinLock roomLock = new SpinLock();
         /// <summary>
         /// 玩家集合
@@ -112,11 +120,6 @@ namespace DolphinServer.Service.Mj
         }
         public int ReadCard()
         {
-            if (cardIndex == cardArray.Length)
-            {
-                throw new Exception("牌已经摸完");
-            }
-
             var tempCard = cardArray[cardIndex];
             cardIndex++;
             return tempCard;

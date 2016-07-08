@@ -8,8 +8,11 @@ message A1006Response{
 	optional Player Player3 = 5;
 	optional Player Player4 = 6;
 	optional string ZhuangUid = 7;
+	optional int32 JuShu = 8;
+	optional int32 Zhangshu= 9;
 }
 
 message Player{
 	repeated int32 Card = 1;
+	optional int32 Score = 2;
 }
