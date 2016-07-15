@@ -27,22 +27,31 @@ namespace DolphinServer.Controller
             CsMjGameRoom room = CsGameRoomManager.JoinRoom(Context.Session.User as GameUser, int.Parse(Context.HttpQueryString["RoomID"]));
 
             A1003Response.Builder response = A1003Response.CreateBuilder();
+            response.RoomID = int.Parse(Context.HttpQueryString["RoomID"]);
+            response.RoomType = int.Parse(Context.HttpQueryString["RoomType"]);
 
             if (room != null)
             {
-                foreach (var row in room.Players)
+                var player = room.Players.First;
+                int playerLen = room.Players.Count;
+                for (int i = 0; i < playerLen; i++)
                 {
+
                     var builder = A1003User.CreateBuilder();
-                    builder.Uid = row.PlayerUser.Uid;
+                    builder.Uid = player.Value.PlayerUser.Uid;
                     builder.Sore = 1000;
                     builder.HatImage = "";
                     builder.Sex = 0;
                     response.AddUsers(builder.Build());
+                    player = player.Next;
                 }
 
-                foreach (var row in room.Players)
+                player = room.Players.First;
+
+                for (int i = 0; i < playerLen; i++)
                 {
-                    WebSocketServerWrappe.SendPackgeWithUser(row.PlayerUser.Uid, 1003, response.Build().ToByteArray());
+                    WebSocketServerWrappe.SendPackgeWithUser(player.Value.PlayerUser.Uid, 1003, response.Build().ToByteArray());
+                    player = player.Next;
                 }
                 return null;
             }
@@ -54,6 +63,6 @@ namespace DolphinServer.Controller
                 return error.Build().ToByteArray();
             }
         }
-        
+
     }
 }

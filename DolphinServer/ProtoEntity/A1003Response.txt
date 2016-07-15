@@ -4,6 +4,8 @@ message A1003Response{
 	optional string ErrorInfo = 1;
 	optional int32 ErrorCode = 2;
 	repeated A1003User Users = 3;
+	optional int32 RoomID = 4;
+	optional int32 RoomType = 5;
 }
 
 message A1003User{

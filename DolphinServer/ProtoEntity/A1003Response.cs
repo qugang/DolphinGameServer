@@ -33,17 +33,18 @@ namespace DolphinServer.ProtoEntity {
       static A1003Response() {
         byte[] descriptorData = global::System.Convert.FromBase64String(
             string.Concat(
-              "ChFBMTAwM1Jlc3BvbnNlLnR4dCJQCg1BMTAwM1Jlc3BvbnNlEhEKCUVycm9y", 
+              "ChFBMTAwM1Jlc3BvbnNlLnR4dCJyCg1BMTAwM1Jlc3BvbnNlEhEKCUVycm9y", 
               "SW5mbxgBIAEoCRIRCglFcnJvckNvZGUYAiABKAUSGQoFVXNlcnMYAyADKAsy", 
-              "Ci5BMTAwM1VzZXIiVQoJQTEwMDNVc2VyEgsKA1VpZBgBIAEoCRIQCghIYXRJ", 
-              "bWFnZRgCIAEoCRIMCgRTb3JlGAMgASgFEg4KBlpodWFuZxgEIAEoBRILCgNT", 
-            "ZXgYBSABKAVCHKoCGURvbHBoaW5TZXJ2ZXIuUHJvdG9FbnRpdHk="));
+              "Ci5BMTAwM1VzZXISDgoGUm9vbUlEGAQgASgFEhAKCFJvb21UeXBlGAUgASgF", 
+              "IlUKCUExMDAzVXNlchILCgNVaWQYASABKAkSEAoISGF0SW1hZ2UYAiABKAkS", 
+              "DAoEU29yZRgDIAEoBRIOCgZaaHVhbmcYBCABKAUSCwoDU2V4GAUgASgFQhyq", 
+            "AhlEb2xwaGluU2VydmVyLlByb3RvRW50aXR5"));
         pbd::FileDescriptor.InternalDescriptorAssigner assigner = delegate(pbd::FileDescriptor root) {
           descriptor = root;
           internal__static_A1003Response__Descriptor = Descriptor.MessageTypes[0];
           internal__static_A1003Response__FieldAccessorTable = 
               new pb::FieldAccess.FieldAccessorTable<global::DolphinServer.ProtoEntity.A1003Response, global::DolphinServer.ProtoEntity.A1003Response.Builder>(internal__static_A1003Response__Descriptor,
-                  new string[] { "ErrorInfo", "ErrorCode", "Users", });
+                  new string[] { "ErrorInfo", "ErrorCode", "Users", "RoomID", "RoomType", });
           internal__static_A1003User__Descriptor = Descriptor.MessageTypes[1];
           internal__static_A1003User__FieldAccessorTable = 
               new pb::FieldAccess.FieldAccessorTable<global::DolphinServer.ProtoEntity.A1003User, global::DolphinServer.ProtoEntity.A1003User.Builder>(internal__static_A1003User__Descriptor,
@@ -65,8 +66,8 @@ namespace DolphinServer.ProtoEntity {
   public sealed partial class A1003Response : pb::GeneratedMessage<A1003Response, A1003Response.Builder> {
     private A1003Response() { }
     private static readonly A1003Response defaultInstance = new A1003Response().MakeReadOnly();
-    private static readonly string[] _a1003ResponseFieldNames = new string[] { "ErrorCode", "ErrorInfo", "Users" };
-    private static readonly uint[] _a1003ResponseFieldTags = new uint[] { 16, 10, 26 };
+    private static readonly string[] _a1003ResponseFieldNames = new string[] { "ErrorCode", "ErrorInfo", "RoomID", "RoomType", "Users" };
+    private static readonly uint[] _a1003ResponseFieldTags = new uint[] { 16, 10, 32, 40, 26 };
     public static A1003Response DefaultInstance {
       get { return defaultInstance; }
     }
@@ -119,6 +120,26 @@ namespace DolphinServer.ProtoEntity {
       return users_[index];
     }
 
+    public const int RoomIDFieldNumber = 4;
+    private bool hasRoomID;
+    private int roomID_;
+    public bool HasRoomID {
+      get { return hasRoomID; }
+    }
+    public int RoomID {
+      get { return roomID_; }
+    }
+
+    public const int RoomTypeFieldNumber = 5;
+    private bool hasRoomType;
+    private int roomType_;
+    public bool HasRoomType {
+      get { return hasRoomType; }
+    }
+    public int RoomType {
+      get { return roomType_; }
+    }
+
     public override bool IsInitialized {
       get {
         return true;
@@ -135,7 +156,13 @@ namespace DolphinServer.ProtoEntity {
         output.WriteInt32(2, field_names[0], ErrorCode);
       }
       if (users_.Count > 0) {
-        output.WriteMessageArray(3, field_names[2], users_);
+        output.WriteMessageArray(3, field_names[4], users_);
+      }
+      if (hasRoomID) {
+        output.WriteInt32(4, field_names[2], RoomID);
+      }
+      if (hasRoomType) {
+        output.WriteInt32(5, field_names[3], RoomType);
       }
       UnknownFields.WriteTo(output);
     }
@@ -162,6 +189,12 @@ namespace DolphinServer.ProtoEntity {
       }
       foreach (global::DolphinServer.ProtoEntity.A1003User element in UsersList) {
         size += pb::CodedOutputStream.ComputeMessageSize(3, element);
+      }
+      if (hasRoomID) {
+        size += pb::CodedOutputStream.ComputeInt32Size(4, RoomID);
+      }
+      if (hasRoomType) {
+        size += pb::CodedOutputStream.ComputeInt32Size(5, RoomType);
       }
       size += UnknownFields.SerializedSize;
       memoizedSerializedSize = size;
@@ -295,6 +328,12 @@ namespace DolphinServer.ProtoEntity {
         if (other.users_.Count != 0) {
           result.users_.Add(other.users_);
         }
+        if (other.HasRoomID) {
+          RoomID = other.RoomID;
+        }
+        if (other.HasRoomType) {
+          RoomType = other.RoomType;
+        }
         this.MergeUnknownFields(other.UnknownFields);
         return this;
       }
@@ -348,6 +387,14 @@ namespace DolphinServer.ProtoEntity {
             }
             case 26: {
               input.ReadMessageArray(tag, field_name, result.users_, global::DolphinServer.ProtoEntity.A1003User.DefaultInstance, extensionRegistry);
+              break;
+            }
+            case 32: {
+              result.hasRoomID = input.ReadInt32(ref result.roomID_);
+              break;
+            }
+            case 40: {
+              result.hasRoomType = input.ReadInt32(ref result.roomType_);
               break;
             }
           }
@@ -442,6 +489,46 @@ namespace DolphinServer.ProtoEntity {
       public Builder ClearUsers() {
         PrepareBuilder();
         result.users_.Clear();
+        return this;
+      }
+
+      public bool HasRoomID {
+        get { return result.hasRoomID; }
+      }
+      public int RoomID {
+        get { return result.RoomID; }
+        set { SetRoomID(value); }
+      }
+      public Builder SetRoomID(int value) {
+        PrepareBuilder();
+        result.hasRoomID = true;
+        result.roomID_ = value;
+        return this;
+      }
+      public Builder ClearRoomID() {
+        PrepareBuilder();
+        result.hasRoomID = false;
+        result.roomID_ = 0;
+        return this;
+      }
+
+      public bool HasRoomType {
+        get { return result.hasRoomType; }
+      }
+      public int RoomType {
+        get { return result.RoomType; }
+        set { SetRoomType(value); }
+      }
+      public Builder SetRoomType(int value) {
+        PrepareBuilder();
+        result.hasRoomType = true;
+        result.roomType_ = value;
+        return this;
+      }
+      public Builder ClearRoomType() {
+        PrepareBuilder();
+        result.hasRoomType = false;
+        result.roomType_ = 0;
         return this;
       }
     }

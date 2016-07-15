@@ -1,0 +1,9 @@
+syntax = "proto2";
+option csharp_namespace = "DolphinServer.ProtoEntity";
+message A1019Response{
+	optional string ErrorInfo = 1;
+	optional int32 ErrorCode = 2;
+	optional int32 Card1 = 4;
+	optional int32 Card2 = 5;
+	optional int32 Uid = 6;
+}

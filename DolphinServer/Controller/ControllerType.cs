@@ -63,7 +63,16 @@ namespace DolphinServer.Controller
         /// <summary>
         /// 开局胡
         /// </summary>
-        Controller1015 = 1015
+        Controller1015 = 1015,
+        /// <summary>
+        /// 海底摸牌
+        /// </summary>
+        Controller1016 = 1016,
+     
+        /// <summary>
+        /// 海底过
+        /// </summary>
+        Controller1017 = 1017,
 
     }
 }
