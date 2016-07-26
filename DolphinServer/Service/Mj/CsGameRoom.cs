@@ -14,7 +14,8 @@ namespace DolphinServer.Service.Mj
     /// </summary>
     public class CsMjGameRoom : MjGameRoomBase
     {
-        public CsMjGameRoom(int jushu) : base(jushu) {
+        public CsMjGameRoom(int jushu) : base(jushu)
+        {
 
         }
         /// <summary>
@@ -110,7 +111,8 @@ namespace DolphinServer.Service.Mj
         /// </summary>
         /// <param name="uid"></param>
         /// <param name="huType"></param>
-        public void FistHu(string uid, int huType) {
+        public void FistHu(string uid, int huType)
+        {
             LinkedListNode<CsGamePlayer> node = FindPlayer(uid);
             int score = this.CalculationScore(huType);
 
@@ -163,7 +165,8 @@ namespace DolphinServer.Service.Mj
             {
                 WebSocketServerWrappe.SendPackgeWithUser(row.PlayerUser.Uid, 1015, sendByte);
             }
-            
+            node.Value.ResetEvent.Set();
+
         }
 
         /// <summary>
@@ -194,7 +197,7 @@ namespace DolphinServer.Service.Mj
             rigthNode.Value.Score -= subRigthScore;
             topNode.Value.Score -= subTopScore;
             leftNode.Value.Score -= subLeftScore;
-            
+
             this.Player.Value.Score += subRigthScore + subTopScore + subLeftScore;
 
             A1013Response.Builder response = A1013Response.CreateBuilder();
@@ -231,7 +234,7 @@ namespace DolphinServer.Service.Mj
         {
             foreach (var row in Players)
             {
-                if ((row.CheckHu(card)) && row.PlayerUser.Uid != uid)
+                if ((row.CheckHu(card)) && row.PlayerUser.Uid != uid && row.PlayerUser.Uid != desUid)
                 {
                     LogManager.Log.Debug("捉炮等待" + row.PlayerUser.Uid + "wait");
                     row.ResetEvent.WaitOne();
@@ -276,7 +279,7 @@ namespace DolphinServer.Service.Mj
         /// <param name="card"></param>
         /// <param name="card1"></param>
         /// <param name="card2"></param>
-        public void Chi(string uid, int card, int card1, int card2)
+        public void Chi(string uid, string desUid, int card, int card1, int card2)
         {
             LogManager.Log.Debug("吃牌开始");
             LinkedListNode<CsGamePlayer> node = FindPlayer(uid);
@@ -284,7 +287,7 @@ namespace DolphinServer.Service.Mj
             {
                 if ((row.CheckGang(card) ||
                     row.CheckPeng(card) ||
-                    row.CheckHu(card)) && row.PlayerUser.Uid != uid)
+                    row.CheckHu(card)) && row.PlayerUser.Uid != uid && row.PlayerUser.Uid != desUid)
                 {
                     row.ResetEvent.WaitOne();
                 }
@@ -293,6 +296,7 @@ namespace DolphinServer.Service.Mj
             //牌未被彭吃杠
             if (this.OutCardState == OutCardState.Normal)
             {
+                this.OutCardState = OutCardState.Chi;
                 LogManager.Log.Debug("牌可以吃");
                 node.Value.Chi(card, card1, card2);
                 A1010Response.Builder response = A1010Response.CreateBuilder();
@@ -301,13 +305,12 @@ namespace DolphinServer.Service.Mj
                 response.Card1 = card1;
                 response.Card2 = card2;
                 var array = response.Build().ToByteArray();
+                this.Player = node;
                 foreach (var row in this.Players)
                 {
                     WebSocketServerWrappe.SendPackgeWithUser(row.PlayerUser.Uid, 1010, array);
                 }
-                this.OutCardState = OutCardState.Chi;
             }
-            this.Player = node;
             node.Value.ResetEvent.Set();
             LogManager.Log.Debug("吃牌结束");
         }
@@ -317,23 +320,24 @@ namespace DolphinServer.Service.Mj
         /// </summary>
         /// <param name="uid"></param>
         /// <param name="card"></param>
-        public void Gang(string uid, int card)
+        public void Gang(string uid, string desUid, int card)
         {
             LinkedListNode<CsGamePlayer> node = FindPlayer(uid);
             foreach (var row in Players)
             {
-                if ((row.CheckHu(card)) && row.PlayerUser.Uid != uid)
+                if ((row.CheckHu(card)) && row.PlayerUser.Uid != uid && row.PlayerUser.Uid != desUid)
                 {
                     row.ResetEvent.WaitOne();
                 }
             }
 
-        
+
 
             //牌未被胡
             if (this.OutCardState == OutCardState.Normal)
             {
 
+                this.OutCardState = OutCardState.Gang;
                 int modZhang = 108 - (this.cardIndex + 1);
 
                 int dunshu = modZhang / 2;
@@ -370,7 +374,6 @@ namespace DolphinServer.Service.Mj
                 {
                     WebSocketServerWrappe.SendPackgeWithUser(row.PlayerUser.Uid, 1012, array);
                 }
-                this.OutCardState = OutCardState.Gang;
                 node.Value.Gang(card);
                 this.Player = node;
                 this.OutCardState = OutCardState.Normal;
@@ -424,19 +427,19 @@ namespace DolphinServer.Service.Mj
             node.Value.ResetEvent.Set();
         }
 
-      
+
 
         /// <summary>
         /// 碰牌
         /// </summary>
         /// <param name="uid"></param>
         /// <param name="card"></param>
-        public void Peng(string uid, int card)
+        public void Peng(string uid, string desUid, int card)
         {
             LinkedListNode<CsGamePlayer> node = FindPlayer(uid);
             foreach (var row in Players)
             {
-                if (row.PlayerUser.Uid != uid && (row.CheckGang(card) || row.CheckHu(card)))
+                if (row.PlayerUser.Uid != desUid && row.PlayerUser.Uid != uid && (row.CheckGang(card) || row.CheckHu(card)))
                 {
                     row.ResetEvent.WaitOne();
                 }
@@ -445,19 +448,20 @@ namespace DolphinServer.Service.Mj
             //牌未被杠或胡
             if (this.OutCardState == OutCardState.Normal)
             {
+                this.OutCardState = OutCardState.Peng;
                 A1011Response.Builder response = A1011Response.CreateBuilder();
                 response.Uid = node.Value.PlayerUser.Uid;
                 response.Card = card;
                 var array = response.Build().ToByteArray();
+
+                node.Value.Peng(card);
+                this.Player = node;
                 foreach (var row in this.Players)
                 {
                     WebSocketServerWrappe.SendPackgeWithUser(row.PlayerUser.Uid, 1011, array);
                 }
-                this.OutCardState = OutCardState.Peng;
-                this.Player = node;
-                node.Value.Peng(card);
             }
-            this.SetAllResetEvent();
+            node.Value.ResetEvent.Set();
         }
 
         /// <summary>
@@ -543,6 +547,7 @@ namespace DolphinServer.Service.Mj
 
             if (prePlayer.Value.CheckChi(card))
             {
+                LogManager.Log.Debug(prePlayer.Value.PlayerUser.Uid + "手上的牌" + prePlayer.Value.PrintCards());
                 LogManager.Log.Debug("吃" + prePlayer.Value.PlayerUser.Uid);
                 prePlayer.Value.ResetEvent.WaitOne();
                 if (this.OutCardState != OutCardState.Normal)
@@ -616,7 +621,7 @@ namespace DolphinServer.Service.Mj
             if (node.NextOrFirst().Value.PlayerUser.Uid == this.Player.Value.PlayerUser.Uid)
             {
                 A1018Response.Builder rep1018 = A1018Response.CreateBuilder();
-                rep1018.Card =  this.cardArray[this.cardIndex]; ;
+                rep1018.Card = this.cardArray[this.cardIndex]; ;
                 var rep1018Array = rep1018.Build().ToByteArray();
                 foreach (var row in Players)
                 {
@@ -646,8 +651,8 @@ namespace DolphinServer.Service.Mj
             LogManager.Log.Debug(node.Value.PlayerUser.Uid + "过");
             node.Value.ResetEvent.Set();
         }
-       
-        
+
+
         //1 小胡抓炮
         //10 小胡自摸
         //100 四喜
@@ -667,9 +672,10 @@ namespace DolphinServer.Service.Mj
         //10000000000000000 将将胡
         //100000000000000000 杠上炮
         //1000000000000000000 杠翻倍
-        public int CalculationScore(int huType) {
+        public int CalculationScore(int huType)
+        {
             int score = 0;
-            if ( (huType & 1) == 1)
+            if ((huType & 1) == 1)
             {
                 score += 1;
             }

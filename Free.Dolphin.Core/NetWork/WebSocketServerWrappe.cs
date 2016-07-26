@@ -25,7 +25,7 @@ namespace Free.Dolphin.Core
         public static Action<string> OnClose { get; set; }
         public static void Init(string ip, int port)
         {
-            var server = new WebSocketServer("ws://192.168.0.103:9001");
+            var server = new WebSocketServer(string.Format("ws://{0}:{1}",ip,port));
 
             server.Start(socket =>
             {

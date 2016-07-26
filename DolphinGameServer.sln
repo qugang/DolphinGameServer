@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Blend for Visual Studio 14
+# Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DolphinServer", "DolphinServer\DolphinServer.csproj", "{D3C0D87C-E6F4-424F-BA11-587E13AF5404}"
@@ -8,6 +8,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Free.Dolphin.Core", "Free.Dolphin.Core\Free.Dolphin.Core.csproj", "{099B1703-E9E8-47D9-A851-19AC11C66C4A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Free.Dolphin.Common", "Free.Dolphin.Common\Free.Dolphin.Common.csproj", "{DEEA5DCC-3E77-456A-A745-06B87A8256FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DolphinServerTests", "DolphinServerTests\DolphinServerTests.csproj", "{5CC04AF4-1B6D-4F03-80C4-A592FBE7745D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,14 @@ Global
 		{DEEA5DCC-3E77-456A-A745-06B87A8256FB}.Release_Ubuntu|Any CPU.Build.0 = Release|Any CPU
 		{DEEA5DCC-3E77-456A-A745-06B87A8256FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DEEA5DCC-3E77-456A-A745-06B87A8256FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CC04AF4-1B6D-4F03-80C4-A592FBE7745D}.Debug_Ubuntu|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CC04AF4-1B6D-4F03-80C4-A592FBE7745D}.Debug_Ubuntu|Any CPU.Build.0 = Debug|Any CPU
+		{5CC04AF4-1B6D-4F03-80C4-A592FBE7745D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CC04AF4-1B6D-4F03-80C4-A592FBE7745D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CC04AF4-1B6D-4F03-80C4-A592FBE7745D}.Release_Ubuntu|Any CPU.ActiveCfg = Release|Any CPU
+		{5CC04AF4-1B6D-4F03-80C4-A592FBE7745D}.Release_Ubuntu|Any CPU.Build.0 = Release|Any CPU
+		{5CC04AF4-1B6D-4F03-80C4-A592FBE7745D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CC04AF4-1B6D-4F03-80C4-A592FBE7745D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -25,8 +25,9 @@ namespace DolphinServer.Controller
         {
             int card = int.Parse(Context.HttpQueryString["Card"]);
             int roomId = int.Parse(Context.HttpQueryString["RoomID"]);
+            string desUid = Context.HttpQueryString["DesUid"];
             CsMjGameRoom room = CsGameRoomManager.GetRoomById(roomId);
-            room.Gang(Context.Session.User.Uid, card);
+            room.Gang(Context.Session.User.Uid, desUid, card);
             return null;
         }
     }
