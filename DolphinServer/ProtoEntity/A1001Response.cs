@@ -21,6 +21,8 @@ namespace DolphinServer.ProtoEntity {
       #region Static variables
       internal static pbd::MessageDescriptor internal__static_A1001Response__Descriptor;
       internal static pb::FieldAccess.FieldAccessorTable<global::DolphinServer.ProtoEntity.A1001Response, global::DolphinServer.ProtoEntity.A1001Response.Builder> internal__static_A1001Response__FieldAccessorTable;
+      internal static pbd::MessageDescriptor internal__static_A1001User__Descriptor;
+      internal static pb::FieldAccess.FieldAccessorTable<global::DolphinServer.ProtoEntity.A1001User, global::DolphinServer.ProtoEntity.A1001User.Builder> internal__static_A1001User__FieldAccessorTable;
       #endregion
       #region Descriptor
       public static pbd::FileDescriptor Descriptor {
@@ -31,15 +33,28 @@ namespace DolphinServer.ProtoEntity {
       static A1001Response() {
         byte[] descriptorData = global::System.Convert.FromBase64String(
             string.Concat(
-              "ChFBMTAwMVJlc3BvbnNlLnR4dCJCCg1BMTAwMVJlc3BvbnNlEhEKCUVycm9y", 
-              "SW5mbxgCIAEoCRIRCglFcnJvckNvZGUYAyABKAUSCwoDVWlkGAQgASgJQhyq", 
-            "AhlEb2xwaGluU2VydmVyLlByb3RvRW50aXR5"));
+              "ChFBMTAwMVJlc3BvbnNlLnR4dCKfAQoNQTEwMDFSZXNwb25zZRIRCglFcnJv", 
+              "ckluZm8YASABKAkSEQoJRXJyb3JDb2RlGAIgASgFEgsKA1VpZBgDIAEoCRIO", 
+              "CgZSb29tSWQYBCABKAUSEAoIUm9vbVR5cGUYBSABKAUSEAoIWmhhbmdTaHUY", 
+              "BiABKAUSDQoFSnVTaHUYByABKAUSGAoEVXNlchgIIAMoCzIKLkExMDAxVXNl", 
+              "ciKiAgoJQTEwMDFVc2VyEgsKA1VpZBgBIAEoCRIPCgdDaGlDYXJkGAIgAygF", 
+              "EhAKCEdhbmdDYXJkGAMgAygFEhAKCFBlbmdDYXJkGAQgAygFEg8KB091dENh", 
+              "cmQYBSADKAUSDgoGd0FycmF5GAYgAygFEg8KB3dOdW1iZXIYByABKAUSFAoM", 
+              "d1RvdGFsTnVtYmVyGAggASgFEg4KBnRBcnJheRgJIAMoBRIPCgd0TnVtYmVy", 
+              "GAogASgFEhQKDHRUb3RhbE51bWJlchgLIAEoBRIOCgZzQXJyYXkYDCADKAUS", 
+              "DwoHc051bWJlchgNIAEoBRIUCgxzVG90YWxOdW1iZXIYDiABKAUSDgoGaHVU", 
+              "eXBlGA8gASgFEg0KBXNjb3JlGBAgASgFQhyqAhlEb2xwaGluU2VydmVyLlBy", 
+            "b3RvRW50aXR5"));
         pbd::FileDescriptor.InternalDescriptorAssigner assigner = delegate(pbd::FileDescriptor root) {
           descriptor = root;
           internal__static_A1001Response__Descriptor = Descriptor.MessageTypes[0];
           internal__static_A1001Response__FieldAccessorTable = 
               new pb::FieldAccess.FieldAccessorTable<global::DolphinServer.ProtoEntity.A1001Response, global::DolphinServer.ProtoEntity.A1001Response.Builder>(internal__static_A1001Response__Descriptor,
-                  new string[] { "ErrorInfo", "ErrorCode", "Uid", });
+                  new string[] { "ErrorInfo", "ErrorCode", "Uid", "RoomId", "RoomType", "ZhangShu", "JuShu", "User", });
+          internal__static_A1001User__Descriptor = Descriptor.MessageTypes[1];
+          internal__static_A1001User__FieldAccessorTable = 
+              new pb::FieldAccess.FieldAccessorTable<global::DolphinServer.ProtoEntity.A1001User, global::DolphinServer.ProtoEntity.A1001User.Builder>(internal__static_A1001User__Descriptor,
+                  new string[] { "Uid", "ChiCard", "GangCard", "PengCard", "OutCard", "WArray", "WNumber", "WTotalNumber", "TArray", "TNumber", "TTotalNumber", "SArray", "SNumber", "STotalNumber", "HuType", "Score", });
           pb::ExtensionRegistry registry = pb::ExtensionRegistry.CreateInstance();
           RegisterAllExtensions(registry);
           return registry;
@@ -57,8 +72,8 @@ namespace DolphinServer.ProtoEntity {
   public sealed partial class A1001Response : pb::GeneratedMessage<A1001Response, A1001Response.Builder> {
     private A1001Response() { }
     private static readonly A1001Response defaultInstance = new A1001Response().MakeReadOnly();
-    private static readonly string[] _a1001ResponseFieldNames = new string[] { "ErrorCode", "ErrorInfo", "Uid" };
-    private static readonly uint[] _a1001ResponseFieldTags = new uint[] { 24, 18, 34 };
+    private static readonly string[] _a1001ResponseFieldNames = new string[] { "ErrorCode", "ErrorInfo", "JuShu", "RoomId", "RoomType", "Uid", "User", "ZhangShu" };
+    private static readonly uint[] _a1001ResponseFieldTags = new uint[] { 16, 10, 56, 32, 40, 26, 66, 48 };
     public static A1001Response DefaultInstance {
       get { return defaultInstance; }
     }
@@ -79,7 +94,7 @@ namespace DolphinServer.ProtoEntity {
       get { return global::DolphinServer.ProtoEntity.Proto.A1001Response.internal__static_A1001Response__FieldAccessorTable; }
     }
 
-    public const int ErrorInfoFieldNumber = 2;
+    public const int ErrorInfoFieldNumber = 1;
     private bool hasErrorInfo;
     private string errorInfo_ = "";
     public bool HasErrorInfo {
@@ -89,7 +104,7 @@ namespace DolphinServer.ProtoEntity {
       get { return errorInfo_; }
     }
 
-    public const int ErrorCodeFieldNumber = 3;
+    public const int ErrorCodeFieldNumber = 2;
     private bool hasErrorCode;
     private int errorCode_;
     public bool HasErrorCode {
@@ -99,7 +114,7 @@ namespace DolphinServer.ProtoEntity {
       get { return errorCode_; }
     }
 
-    public const int UidFieldNumber = 4;
+    public const int UidFieldNumber = 3;
     private bool hasUid;
     private string uid_ = "";
     public bool HasUid {
@@ -107,6 +122,58 @@ namespace DolphinServer.ProtoEntity {
     }
     public string Uid {
       get { return uid_; }
+    }
+
+    public const int RoomIdFieldNumber = 4;
+    private bool hasRoomId;
+    private int roomId_;
+    public bool HasRoomId {
+      get { return hasRoomId; }
+    }
+    public int RoomId {
+      get { return roomId_; }
+    }
+
+    public const int RoomTypeFieldNumber = 5;
+    private bool hasRoomType;
+    private int roomType_;
+    public bool HasRoomType {
+      get { return hasRoomType; }
+    }
+    public int RoomType {
+      get { return roomType_; }
+    }
+
+    public const int ZhangShuFieldNumber = 6;
+    private bool hasZhangShu;
+    private int zhangShu_;
+    public bool HasZhangShu {
+      get { return hasZhangShu; }
+    }
+    public int ZhangShu {
+      get { return zhangShu_; }
+    }
+
+    public const int JuShuFieldNumber = 7;
+    private bool hasJuShu;
+    private int juShu_;
+    public bool HasJuShu {
+      get { return hasJuShu; }
+    }
+    public int JuShu {
+      get { return juShu_; }
+    }
+
+    public const int UserFieldNumber = 8;
+    private pbc::PopsicleList<global::DolphinServer.ProtoEntity.A1001User> user_ = new pbc::PopsicleList<global::DolphinServer.ProtoEntity.A1001User>();
+    public scg::IList<global::DolphinServer.ProtoEntity.A1001User> UserList {
+      get { return user_; }
+    }
+    public int UserCount {
+      get { return user_.Count; }
+    }
+    public global::DolphinServer.ProtoEntity.A1001User GetUser(int index) {
+      return user_[index];
     }
 
     public override bool IsInitialized {
@@ -119,13 +186,28 @@ namespace DolphinServer.ProtoEntity {
       CalcSerializedSize();
       string[] field_names = _a1001ResponseFieldNames;
       if (hasErrorInfo) {
-        output.WriteString(2, field_names[1], ErrorInfo);
+        output.WriteString(1, field_names[1], ErrorInfo);
       }
       if (hasErrorCode) {
-        output.WriteInt32(3, field_names[0], ErrorCode);
+        output.WriteInt32(2, field_names[0], ErrorCode);
       }
       if (hasUid) {
-        output.WriteString(4, field_names[2], Uid);
+        output.WriteString(3, field_names[5], Uid);
+      }
+      if (hasRoomId) {
+        output.WriteInt32(4, field_names[3], RoomId);
+      }
+      if (hasRoomType) {
+        output.WriteInt32(5, field_names[4], RoomType);
+      }
+      if (hasZhangShu) {
+        output.WriteInt32(6, field_names[7], ZhangShu);
+      }
+      if (hasJuShu) {
+        output.WriteInt32(7, field_names[2], JuShu);
+      }
+      if (user_.Count > 0) {
+        output.WriteMessageArray(8, field_names[6], user_);
       }
       UnknownFields.WriteTo(output);
     }
@@ -145,13 +227,28 @@ namespace DolphinServer.ProtoEntity {
 
       size = 0;
       if (hasErrorInfo) {
-        size += pb::CodedOutputStream.ComputeStringSize(2, ErrorInfo);
+        size += pb::CodedOutputStream.ComputeStringSize(1, ErrorInfo);
       }
       if (hasErrorCode) {
-        size += pb::CodedOutputStream.ComputeInt32Size(3, ErrorCode);
+        size += pb::CodedOutputStream.ComputeInt32Size(2, ErrorCode);
       }
       if (hasUid) {
-        size += pb::CodedOutputStream.ComputeStringSize(4, Uid);
+        size += pb::CodedOutputStream.ComputeStringSize(3, Uid);
+      }
+      if (hasRoomId) {
+        size += pb::CodedOutputStream.ComputeInt32Size(4, RoomId);
+      }
+      if (hasRoomType) {
+        size += pb::CodedOutputStream.ComputeInt32Size(5, RoomType);
+      }
+      if (hasZhangShu) {
+        size += pb::CodedOutputStream.ComputeInt32Size(6, ZhangShu);
+      }
+      if (hasJuShu) {
+        size += pb::CodedOutputStream.ComputeInt32Size(7, JuShu);
+      }
+      foreach (global::DolphinServer.ProtoEntity.A1001User element in UserList) {
+        size += pb::CodedOutputStream.ComputeMessageSize(8, element);
       }
       size += UnknownFields.SerializedSize;
       memoizedSerializedSize = size;
@@ -188,6 +285,7 @@ namespace DolphinServer.ProtoEntity {
       return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
     }
     private A1001Response MakeReadOnly() {
+      user_.MakeReadOnly();
       return this;
     }
 
@@ -284,6 +382,21 @@ namespace DolphinServer.ProtoEntity {
         if (other.HasUid) {
           Uid = other.Uid;
         }
+        if (other.HasRoomId) {
+          RoomId = other.RoomId;
+        }
+        if (other.HasRoomType) {
+          RoomType = other.RoomType;
+        }
+        if (other.HasZhangShu) {
+          ZhangShu = other.ZhangShu;
+        }
+        if (other.HasJuShu) {
+          JuShu = other.JuShu;
+        }
+        if (other.user_.Count != 0) {
+          result.user_.Add(other.user_);
+        }
         this.MergeUnknownFields(other.UnknownFields);
         return this;
       }
@@ -327,16 +440,36 @@ namespace DolphinServer.ProtoEntity {
               ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
               break;
             }
-            case 18: {
+            case 10: {
               result.hasErrorInfo = input.ReadString(ref result.errorInfo_);
               break;
             }
-            case 24: {
+            case 16: {
               result.hasErrorCode = input.ReadInt32(ref result.errorCode_);
               break;
             }
-            case 34: {
+            case 26: {
               result.hasUid = input.ReadString(ref result.uid_);
+              break;
+            }
+            case 32: {
+              result.hasRoomId = input.ReadInt32(ref result.roomId_);
+              break;
+            }
+            case 40: {
+              result.hasRoomType = input.ReadInt32(ref result.roomType_);
+              break;
+            }
+            case 48: {
+              result.hasZhangShu = input.ReadInt32(ref result.zhangShu_);
+              break;
+            }
+            case 56: {
+              result.hasJuShu = input.ReadInt32(ref result.juShu_);
+              break;
+            }
+            case 66: {
+              input.ReadMessageArray(tag, field_name, result.user_, global::DolphinServer.ProtoEntity.A1001User.DefaultInstance, extensionRegistry);
               break;
             }
           }
@@ -410,8 +543,1186 @@ namespace DolphinServer.ProtoEntity {
         result.uid_ = "";
         return this;
       }
+
+      public bool HasRoomId {
+        get { return result.hasRoomId; }
+      }
+      public int RoomId {
+        get { return result.RoomId; }
+        set { SetRoomId(value); }
+      }
+      public Builder SetRoomId(int value) {
+        PrepareBuilder();
+        result.hasRoomId = true;
+        result.roomId_ = value;
+        return this;
+      }
+      public Builder ClearRoomId() {
+        PrepareBuilder();
+        result.hasRoomId = false;
+        result.roomId_ = 0;
+        return this;
+      }
+
+      public bool HasRoomType {
+        get { return result.hasRoomType; }
+      }
+      public int RoomType {
+        get { return result.RoomType; }
+        set { SetRoomType(value); }
+      }
+      public Builder SetRoomType(int value) {
+        PrepareBuilder();
+        result.hasRoomType = true;
+        result.roomType_ = value;
+        return this;
+      }
+      public Builder ClearRoomType() {
+        PrepareBuilder();
+        result.hasRoomType = false;
+        result.roomType_ = 0;
+        return this;
+      }
+
+      public bool HasZhangShu {
+        get { return result.hasZhangShu; }
+      }
+      public int ZhangShu {
+        get { return result.ZhangShu; }
+        set { SetZhangShu(value); }
+      }
+      public Builder SetZhangShu(int value) {
+        PrepareBuilder();
+        result.hasZhangShu = true;
+        result.zhangShu_ = value;
+        return this;
+      }
+      public Builder ClearZhangShu() {
+        PrepareBuilder();
+        result.hasZhangShu = false;
+        result.zhangShu_ = 0;
+        return this;
+      }
+
+      public bool HasJuShu {
+        get { return result.hasJuShu; }
+      }
+      public int JuShu {
+        get { return result.JuShu; }
+        set { SetJuShu(value); }
+      }
+      public Builder SetJuShu(int value) {
+        PrepareBuilder();
+        result.hasJuShu = true;
+        result.juShu_ = value;
+        return this;
+      }
+      public Builder ClearJuShu() {
+        PrepareBuilder();
+        result.hasJuShu = false;
+        result.juShu_ = 0;
+        return this;
+      }
+
+      public pbc::IPopsicleList<global::DolphinServer.ProtoEntity.A1001User> UserList {
+        get { return PrepareBuilder().user_; }
+      }
+      public int UserCount {
+        get { return result.UserCount; }
+      }
+      public global::DolphinServer.ProtoEntity.A1001User GetUser(int index) {
+        return result.GetUser(index);
+      }
+      public Builder SetUser(int index, global::DolphinServer.ProtoEntity.A1001User value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.user_[index] = value;
+        return this;
+      }
+      public Builder SetUser(int index, global::DolphinServer.ProtoEntity.A1001User.Builder builderForValue) {
+        pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
+        PrepareBuilder();
+        result.user_[index] = builderForValue.Build();
+        return this;
+      }
+      public Builder AddUser(global::DolphinServer.ProtoEntity.A1001User value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.user_.Add(value);
+        return this;
+      }
+      public Builder AddUser(global::DolphinServer.ProtoEntity.A1001User.Builder builderForValue) {
+        pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
+        PrepareBuilder();
+        result.user_.Add(builderForValue.Build());
+        return this;
+      }
+      public Builder AddRangeUser(scg::IEnumerable<global::DolphinServer.ProtoEntity.A1001User> values) {
+        PrepareBuilder();
+        result.user_.Add(values);
+        return this;
+      }
+      public Builder ClearUser() {
+        PrepareBuilder();
+        result.user_.Clear();
+        return this;
+      }
     }
     static A1001Response() {
+      object.ReferenceEquals(global::DolphinServer.ProtoEntity.Proto.A1001Response.Descriptor, null);
+    }
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+  public sealed partial class A1001User : pb::GeneratedMessage<A1001User, A1001User.Builder> {
+    private A1001User() { }
+    private static readonly A1001User defaultInstance = new A1001User().MakeReadOnly();
+    private static readonly string[] _a1001UserFieldNames = new string[] { "ChiCard", "GangCard", "OutCard", "PengCard", "Uid", "huType", "sArray", "sNumber", "sTotalNumber", "score", "tArray", "tNumber", "tTotalNumber", "wArray", "wNumber", "wTotalNumber" };
+    private static readonly uint[] _a1001UserFieldTags = new uint[] { 16, 24, 40, 32, 10, 120, 96, 104, 112, 128, 72, 80, 88, 48, 56, 64 };
+    public static A1001User DefaultInstance {
+      get { return defaultInstance; }
+    }
+
+    public override A1001User DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+
+    protected override A1001User ThisMessage {
+      get { return this; }
+    }
+
+    public static pbd::MessageDescriptor Descriptor {
+      get { return global::DolphinServer.ProtoEntity.Proto.A1001Response.internal__static_A1001User__Descriptor; }
+    }
+
+    protected override pb::FieldAccess.FieldAccessorTable<A1001User, A1001User.Builder> InternalFieldAccessors {
+      get { return global::DolphinServer.ProtoEntity.Proto.A1001Response.internal__static_A1001User__FieldAccessorTable; }
+    }
+
+    public const int UidFieldNumber = 1;
+    private bool hasUid;
+    private string uid_ = "";
+    public bool HasUid {
+      get { return hasUid; }
+    }
+    public string Uid {
+      get { return uid_; }
+    }
+
+    public const int ChiCardFieldNumber = 2;
+    private pbc::PopsicleList<int> chiCard_ = new pbc::PopsicleList<int>();
+    public scg::IList<int> ChiCardList {
+      get { return pbc::Lists.AsReadOnly(chiCard_); }
+    }
+    public int ChiCardCount {
+      get { return chiCard_.Count; }
+    }
+    public int GetChiCard(int index) {
+      return chiCard_[index];
+    }
+
+    public const int GangCardFieldNumber = 3;
+    private pbc::PopsicleList<int> gangCard_ = new pbc::PopsicleList<int>();
+    public scg::IList<int> GangCardList {
+      get { return pbc::Lists.AsReadOnly(gangCard_); }
+    }
+    public int GangCardCount {
+      get { return gangCard_.Count; }
+    }
+    public int GetGangCard(int index) {
+      return gangCard_[index];
+    }
+
+    public const int PengCardFieldNumber = 4;
+    private pbc::PopsicleList<int> pengCard_ = new pbc::PopsicleList<int>();
+    public scg::IList<int> PengCardList {
+      get { return pbc::Lists.AsReadOnly(pengCard_); }
+    }
+    public int PengCardCount {
+      get { return pengCard_.Count; }
+    }
+    public int GetPengCard(int index) {
+      return pengCard_[index];
+    }
+
+    public const int OutCardFieldNumber = 5;
+    private pbc::PopsicleList<int> outCard_ = new pbc::PopsicleList<int>();
+    public scg::IList<int> OutCardList {
+      get { return pbc::Lists.AsReadOnly(outCard_); }
+    }
+    public int OutCardCount {
+      get { return outCard_.Count; }
+    }
+    public int GetOutCard(int index) {
+      return outCard_[index];
+    }
+
+    public const int WArrayFieldNumber = 6;
+    private pbc::PopsicleList<int> wArray_ = new pbc::PopsicleList<int>();
+    public scg::IList<int> WArrayList {
+      get { return pbc::Lists.AsReadOnly(wArray_); }
+    }
+    public int WArrayCount {
+      get { return wArray_.Count; }
+    }
+    public int GetWArray(int index) {
+      return wArray_[index];
+    }
+
+    public const int WNumberFieldNumber = 7;
+    private bool hasWNumber;
+    private int wNumber_;
+    public bool HasWNumber {
+      get { return hasWNumber; }
+    }
+    public int WNumber {
+      get { return wNumber_; }
+    }
+
+    public const int WTotalNumberFieldNumber = 8;
+    private bool hasWTotalNumber;
+    private int wTotalNumber_;
+    public bool HasWTotalNumber {
+      get { return hasWTotalNumber; }
+    }
+    public int WTotalNumber {
+      get { return wTotalNumber_; }
+    }
+
+    public const int TArrayFieldNumber = 9;
+    private pbc::PopsicleList<int> tArray_ = new pbc::PopsicleList<int>();
+    public scg::IList<int> TArrayList {
+      get { return pbc::Lists.AsReadOnly(tArray_); }
+    }
+    public int TArrayCount {
+      get { return tArray_.Count; }
+    }
+    public int GetTArray(int index) {
+      return tArray_[index];
+    }
+
+    public const int TNumberFieldNumber = 10;
+    private bool hasTNumber;
+    private int tNumber_;
+    public bool HasTNumber {
+      get { return hasTNumber; }
+    }
+    public int TNumber {
+      get { return tNumber_; }
+    }
+
+    public const int TTotalNumberFieldNumber = 11;
+    private bool hasTTotalNumber;
+    private int tTotalNumber_;
+    public bool HasTTotalNumber {
+      get { return hasTTotalNumber; }
+    }
+    public int TTotalNumber {
+      get { return tTotalNumber_; }
+    }
+
+    public const int SArrayFieldNumber = 12;
+    private pbc::PopsicleList<int> sArray_ = new pbc::PopsicleList<int>();
+    public scg::IList<int> SArrayList {
+      get { return pbc::Lists.AsReadOnly(sArray_); }
+    }
+    public int SArrayCount {
+      get { return sArray_.Count; }
+    }
+    public int GetSArray(int index) {
+      return sArray_[index];
+    }
+
+    public const int SNumberFieldNumber = 13;
+    private bool hasSNumber;
+    private int sNumber_;
+    public bool HasSNumber {
+      get { return hasSNumber; }
+    }
+    public int SNumber {
+      get { return sNumber_; }
+    }
+
+    public const int STotalNumberFieldNumber = 14;
+    private bool hasSTotalNumber;
+    private int sTotalNumber_;
+    public bool HasSTotalNumber {
+      get { return hasSTotalNumber; }
+    }
+    public int STotalNumber {
+      get { return sTotalNumber_; }
+    }
+
+    public const int HuTypeFieldNumber = 15;
+    private bool hasHuType;
+    private int huType_;
+    public bool HasHuType {
+      get { return hasHuType; }
+    }
+    public int HuType {
+      get { return huType_; }
+    }
+
+    public const int ScoreFieldNumber = 16;
+    private bool hasScore;
+    private int score_;
+    public bool HasScore {
+      get { return hasScore; }
+    }
+    public int Score {
+      get { return score_; }
+    }
+
+    public override bool IsInitialized {
+      get {
+        return true;
+      }
+    }
+
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      CalcSerializedSize();
+      string[] field_names = _a1001UserFieldNames;
+      if (hasUid) {
+        output.WriteString(1, field_names[4], Uid);
+      }
+      if (chiCard_.Count > 0) {
+        output.WriteInt32Array(2, field_names[0], chiCard_);
+      }
+      if (gangCard_.Count > 0) {
+        output.WriteInt32Array(3, field_names[1], gangCard_);
+      }
+      if (pengCard_.Count > 0) {
+        output.WriteInt32Array(4, field_names[3], pengCard_);
+      }
+      if (outCard_.Count > 0) {
+        output.WriteInt32Array(5, field_names[2], outCard_);
+      }
+      if (wArray_.Count > 0) {
+        output.WriteInt32Array(6, field_names[13], wArray_);
+      }
+      if (hasWNumber) {
+        output.WriteInt32(7, field_names[14], WNumber);
+      }
+      if (hasWTotalNumber) {
+        output.WriteInt32(8, field_names[15], WTotalNumber);
+      }
+      if (tArray_.Count > 0) {
+        output.WriteInt32Array(9, field_names[10], tArray_);
+      }
+      if (hasTNumber) {
+        output.WriteInt32(10, field_names[11], TNumber);
+      }
+      if (hasTTotalNumber) {
+        output.WriteInt32(11, field_names[12], TTotalNumber);
+      }
+      if (sArray_.Count > 0) {
+        output.WriteInt32Array(12, field_names[6], sArray_);
+      }
+      if (hasSNumber) {
+        output.WriteInt32(13, field_names[7], SNumber);
+      }
+      if (hasSTotalNumber) {
+        output.WriteInt32(14, field_names[8], STotalNumber);
+      }
+      if (hasHuType) {
+        output.WriteInt32(15, field_names[5], HuType);
+      }
+      if (hasScore) {
+        output.WriteInt32(16, field_names[9], Score);
+      }
+      UnknownFields.WriteTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        return CalcSerializedSize();
+      }
+    }
+
+    private int CalcSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (hasUid) {
+        size += pb::CodedOutputStream.ComputeStringSize(1, Uid);
+      }
+      {
+        int dataSize = 0;
+        foreach (int element in ChiCardList) {
+          dataSize += pb::CodedOutputStream.ComputeInt32SizeNoTag(element);
+        }
+        size += dataSize;
+        size += 1 * chiCard_.Count;
+      }
+      {
+        int dataSize = 0;
+        foreach (int element in GangCardList) {
+          dataSize += pb::CodedOutputStream.ComputeInt32SizeNoTag(element);
+        }
+        size += dataSize;
+        size += 1 * gangCard_.Count;
+      }
+      {
+        int dataSize = 0;
+        foreach (int element in PengCardList) {
+          dataSize += pb::CodedOutputStream.ComputeInt32SizeNoTag(element);
+        }
+        size += dataSize;
+        size += 1 * pengCard_.Count;
+      }
+      {
+        int dataSize = 0;
+        foreach (int element in OutCardList) {
+          dataSize += pb::CodedOutputStream.ComputeInt32SizeNoTag(element);
+        }
+        size += dataSize;
+        size += 1 * outCard_.Count;
+      }
+      {
+        int dataSize = 0;
+        foreach (int element in WArrayList) {
+          dataSize += pb::CodedOutputStream.ComputeInt32SizeNoTag(element);
+        }
+        size += dataSize;
+        size += 1 * wArray_.Count;
+      }
+      if (hasWNumber) {
+        size += pb::CodedOutputStream.ComputeInt32Size(7, WNumber);
+      }
+      if (hasWTotalNumber) {
+        size += pb::CodedOutputStream.ComputeInt32Size(8, WTotalNumber);
+      }
+      {
+        int dataSize = 0;
+        foreach (int element in TArrayList) {
+          dataSize += pb::CodedOutputStream.ComputeInt32SizeNoTag(element);
+        }
+        size += dataSize;
+        size += 1 * tArray_.Count;
+      }
+      if (hasTNumber) {
+        size += pb::CodedOutputStream.ComputeInt32Size(10, TNumber);
+      }
+      if (hasTTotalNumber) {
+        size += pb::CodedOutputStream.ComputeInt32Size(11, TTotalNumber);
+      }
+      {
+        int dataSize = 0;
+        foreach (int element in SArrayList) {
+          dataSize += pb::CodedOutputStream.ComputeInt32SizeNoTag(element);
+        }
+        size += dataSize;
+        size += 1 * sArray_.Count;
+      }
+      if (hasSNumber) {
+        size += pb::CodedOutputStream.ComputeInt32Size(13, SNumber);
+      }
+      if (hasSTotalNumber) {
+        size += pb::CodedOutputStream.ComputeInt32Size(14, STotalNumber);
+      }
+      if (hasHuType) {
+        size += pb::CodedOutputStream.ComputeInt32Size(15, HuType);
+      }
+      if (hasScore) {
+        size += pb::CodedOutputStream.ComputeInt32Size(16, Score);
+      }
+      size += UnknownFields.SerializedSize;
+      memoizedSerializedSize = size;
+      return size;
+    }
+    public static A1001User ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static A1001User ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static A1001User ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static A1001User ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static A1001User ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static A1001User ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    public static A1001User ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    public static A1001User ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    public static A1001User ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static A1001User ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private A1001User MakeReadOnly() {
+      chiCard_.MakeReadOnly();
+      gangCard_.MakeReadOnly();
+      pengCard_.MakeReadOnly();
+      outCard_.MakeReadOnly();
+      wArray_.MakeReadOnly();
+      tArray_.MakeReadOnly();
+      sArray_.MakeReadOnly();
+      return this;
+    }
+
+    public static Builder CreateBuilder() { return new Builder(); }
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    public static Builder CreateBuilder(A1001User prototype) {
+      return new Builder(prototype);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    public sealed partial class Builder : pb::GeneratedBuilder<A1001User, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(A1001User cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+
+      private bool resultIsReadOnly;
+      private A1001User result;
+
+      private A1001User PrepareBuilder() {
+        if (resultIsReadOnly) {
+          A1001User original = result;
+          result = new A1001User();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+
+      protected override A1001User MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+
+      public override pbd::MessageDescriptor DescriptorForType {
+        get { return global::DolphinServer.ProtoEntity.A1001User.Descriptor; }
+      }
+
+      public override A1001User DefaultInstanceForType {
+        get { return global::DolphinServer.ProtoEntity.A1001User.DefaultInstance; }
+      }
+
+      public override A1001User BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+
+      public override Builder MergeFrom(pb::IMessage other) {
+        if (other is A1001User) {
+          return MergeFrom((A1001User) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+
+      public override Builder MergeFrom(A1001User other) {
+        if (other == global::DolphinServer.ProtoEntity.A1001User.DefaultInstance) return this;
+        PrepareBuilder();
+        if (other.HasUid) {
+          Uid = other.Uid;
+        }
+        if (other.chiCard_.Count != 0) {
+          result.chiCard_.Add(other.chiCard_);
+        }
+        if (other.gangCard_.Count != 0) {
+          result.gangCard_.Add(other.gangCard_);
+        }
+        if (other.pengCard_.Count != 0) {
+          result.pengCard_.Add(other.pengCard_);
+        }
+        if (other.outCard_.Count != 0) {
+          result.outCard_.Add(other.outCard_);
+        }
+        if (other.wArray_.Count != 0) {
+          result.wArray_.Add(other.wArray_);
+        }
+        if (other.HasWNumber) {
+          WNumber = other.WNumber;
+        }
+        if (other.HasWTotalNumber) {
+          WTotalNumber = other.WTotalNumber;
+        }
+        if (other.tArray_.Count != 0) {
+          result.tArray_.Add(other.tArray_);
+        }
+        if (other.HasTNumber) {
+          TNumber = other.TNumber;
+        }
+        if (other.HasTTotalNumber) {
+          TTotalNumber = other.TTotalNumber;
+        }
+        if (other.sArray_.Count != 0) {
+          result.sArray_.Add(other.sArray_);
+        }
+        if (other.HasSNumber) {
+          SNumber = other.SNumber;
+        }
+        if (other.HasSTotalNumber) {
+          STotalNumber = other.STotalNumber;
+        }
+        if (other.HasHuType) {
+          HuType = other.HuType;
+        }
+        if (other.HasScore) {
+          Score = other.Score;
+        }
+        this.MergeUnknownFields(other.UnknownFields);
+        return this;
+      }
+
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        pb::UnknownFieldSet.Builder unknownFields = null;
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_a1001UserFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _a1001UserFieldTags[field_ordinal];
+            else {
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                if (unknownFields != null) {
+                  this.UnknownFields = unknownFields.Build();
+                }
+                return this;
+              }
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              break;
+            }
+            case 10: {
+              result.hasUid = input.ReadString(ref result.uid_);
+              break;
+            }
+            case 18:
+            case 16: {
+              input.ReadInt32Array(tag, field_name, result.chiCard_);
+              break;
+            }
+            case 26:
+            case 24: {
+              input.ReadInt32Array(tag, field_name, result.gangCard_);
+              break;
+            }
+            case 34:
+            case 32: {
+              input.ReadInt32Array(tag, field_name, result.pengCard_);
+              break;
+            }
+            case 42:
+            case 40: {
+              input.ReadInt32Array(tag, field_name, result.outCard_);
+              break;
+            }
+            case 50:
+            case 48: {
+              input.ReadInt32Array(tag, field_name, result.wArray_);
+              break;
+            }
+            case 56: {
+              result.hasWNumber = input.ReadInt32(ref result.wNumber_);
+              break;
+            }
+            case 64: {
+              result.hasWTotalNumber = input.ReadInt32(ref result.wTotalNumber_);
+              break;
+            }
+            case 74:
+            case 72: {
+              input.ReadInt32Array(tag, field_name, result.tArray_);
+              break;
+            }
+            case 80: {
+              result.hasTNumber = input.ReadInt32(ref result.tNumber_);
+              break;
+            }
+            case 88: {
+              result.hasTTotalNumber = input.ReadInt32(ref result.tTotalNumber_);
+              break;
+            }
+            case 98:
+            case 96: {
+              input.ReadInt32Array(tag, field_name, result.sArray_);
+              break;
+            }
+            case 104: {
+              result.hasSNumber = input.ReadInt32(ref result.sNumber_);
+              break;
+            }
+            case 112: {
+              result.hasSTotalNumber = input.ReadInt32(ref result.sTotalNumber_);
+              break;
+            }
+            case 120: {
+              result.hasHuType = input.ReadInt32(ref result.huType_);
+              break;
+            }
+            case 128: {
+              result.hasScore = input.ReadInt32(ref result.score_);
+              break;
+            }
+          }
+        }
+
+        if (unknownFields != null) {
+          this.UnknownFields = unknownFields.Build();
+        }
+        return this;
+      }
+
+
+      public bool HasUid {
+        get { return result.hasUid; }
+      }
+      public string Uid {
+        get { return result.Uid; }
+        set { SetUid(value); }
+      }
+      public Builder SetUid(string value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasUid = true;
+        result.uid_ = value;
+        return this;
+      }
+      public Builder ClearUid() {
+        PrepareBuilder();
+        result.hasUid = false;
+        result.uid_ = "";
+        return this;
+      }
+
+      public pbc::IPopsicleList<int> ChiCardList {
+        get { return PrepareBuilder().chiCard_; }
+      }
+      public int ChiCardCount {
+        get { return result.ChiCardCount; }
+      }
+      public int GetChiCard(int index) {
+        return result.GetChiCard(index);
+      }
+      public Builder SetChiCard(int index, int value) {
+        PrepareBuilder();
+        result.chiCard_[index] = value;
+        return this;
+      }
+      public Builder AddChiCard(int value) {
+        PrepareBuilder();
+        result.chiCard_.Add(value);
+        return this;
+      }
+      public Builder AddRangeChiCard(scg::IEnumerable<int> values) {
+        PrepareBuilder();
+        result.chiCard_.Add(values);
+        return this;
+      }
+      public Builder ClearChiCard() {
+        PrepareBuilder();
+        result.chiCard_.Clear();
+        return this;
+      }
+
+      public pbc::IPopsicleList<int> GangCardList {
+        get { return PrepareBuilder().gangCard_; }
+      }
+      public int GangCardCount {
+        get { return result.GangCardCount; }
+      }
+      public int GetGangCard(int index) {
+        return result.GetGangCard(index);
+      }
+      public Builder SetGangCard(int index, int value) {
+        PrepareBuilder();
+        result.gangCard_[index] = value;
+        return this;
+      }
+      public Builder AddGangCard(int value) {
+        PrepareBuilder();
+        result.gangCard_.Add(value);
+        return this;
+      }
+      public Builder AddRangeGangCard(scg::IEnumerable<int> values) {
+        PrepareBuilder();
+        result.gangCard_.Add(values);
+        return this;
+      }
+      public Builder ClearGangCard() {
+        PrepareBuilder();
+        result.gangCard_.Clear();
+        return this;
+      }
+
+      public pbc::IPopsicleList<int> PengCardList {
+        get { return PrepareBuilder().pengCard_; }
+      }
+      public int PengCardCount {
+        get { return result.PengCardCount; }
+      }
+      public int GetPengCard(int index) {
+        return result.GetPengCard(index);
+      }
+      public Builder SetPengCard(int index, int value) {
+        PrepareBuilder();
+        result.pengCard_[index] = value;
+        return this;
+      }
+      public Builder AddPengCard(int value) {
+        PrepareBuilder();
+        result.pengCard_.Add(value);
+        return this;
+      }
+      public Builder AddRangePengCard(scg::IEnumerable<int> values) {
+        PrepareBuilder();
+        result.pengCard_.Add(values);
+        return this;
+      }
+      public Builder ClearPengCard() {
+        PrepareBuilder();
+        result.pengCard_.Clear();
+        return this;
+      }
+
+      public pbc::IPopsicleList<int> OutCardList {
+        get { return PrepareBuilder().outCard_; }
+      }
+      public int OutCardCount {
+        get { return result.OutCardCount; }
+      }
+      public int GetOutCard(int index) {
+        return result.GetOutCard(index);
+      }
+      public Builder SetOutCard(int index, int value) {
+        PrepareBuilder();
+        result.outCard_[index] = value;
+        return this;
+      }
+      public Builder AddOutCard(int value) {
+        PrepareBuilder();
+        result.outCard_.Add(value);
+        return this;
+      }
+      public Builder AddRangeOutCard(scg::IEnumerable<int> values) {
+        PrepareBuilder();
+        result.outCard_.Add(values);
+        return this;
+      }
+      public Builder ClearOutCard() {
+        PrepareBuilder();
+        result.outCard_.Clear();
+        return this;
+      }
+
+      public pbc::IPopsicleList<int> WArrayList {
+        get { return PrepareBuilder().wArray_; }
+      }
+      public int WArrayCount {
+        get { return result.WArrayCount; }
+      }
+      public int GetWArray(int index) {
+        return result.GetWArray(index);
+      }
+      public Builder SetWArray(int index, int value) {
+        PrepareBuilder();
+        result.wArray_[index] = value;
+        return this;
+      }
+      public Builder AddWArray(int value) {
+        PrepareBuilder();
+        result.wArray_.Add(value);
+        return this;
+      }
+      public Builder AddRangeWArray(scg::IEnumerable<int> values) {
+        PrepareBuilder();
+        result.wArray_.Add(values);
+        return this;
+      }
+      public Builder ClearWArray() {
+        PrepareBuilder();
+        result.wArray_.Clear();
+        return this;
+      }
+
+      public bool HasWNumber {
+        get { return result.hasWNumber; }
+      }
+      public int WNumber {
+        get { return result.WNumber; }
+        set { SetWNumber(value); }
+      }
+      public Builder SetWNumber(int value) {
+        PrepareBuilder();
+        result.hasWNumber = true;
+        result.wNumber_ = value;
+        return this;
+      }
+      public Builder ClearWNumber() {
+        PrepareBuilder();
+        result.hasWNumber = false;
+        result.wNumber_ = 0;
+        return this;
+      }
+
+      public bool HasWTotalNumber {
+        get { return result.hasWTotalNumber; }
+      }
+      public int WTotalNumber {
+        get { return result.WTotalNumber; }
+        set { SetWTotalNumber(value); }
+      }
+      public Builder SetWTotalNumber(int value) {
+        PrepareBuilder();
+        result.hasWTotalNumber = true;
+        result.wTotalNumber_ = value;
+        return this;
+      }
+      public Builder ClearWTotalNumber() {
+        PrepareBuilder();
+        result.hasWTotalNumber = false;
+        result.wTotalNumber_ = 0;
+        return this;
+      }
+
+      public pbc::IPopsicleList<int> TArrayList {
+        get { return PrepareBuilder().tArray_; }
+      }
+      public int TArrayCount {
+        get { return result.TArrayCount; }
+      }
+      public int GetTArray(int index) {
+        return result.GetTArray(index);
+      }
+      public Builder SetTArray(int index, int value) {
+        PrepareBuilder();
+        result.tArray_[index] = value;
+        return this;
+      }
+      public Builder AddTArray(int value) {
+        PrepareBuilder();
+        result.tArray_.Add(value);
+        return this;
+      }
+      public Builder AddRangeTArray(scg::IEnumerable<int> values) {
+        PrepareBuilder();
+        result.tArray_.Add(values);
+        return this;
+      }
+      public Builder ClearTArray() {
+        PrepareBuilder();
+        result.tArray_.Clear();
+        return this;
+      }
+
+      public bool HasTNumber {
+        get { return result.hasTNumber; }
+      }
+      public int TNumber {
+        get { return result.TNumber; }
+        set { SetTNumber(value); }
+      }
+      public Builder SetTNumber(int value) {
+        PrepareBuilder();
+        result.hasTNumber = true;
+        result.tNumber_ = value;
+        return this;
+      }
+      public Builder ClearTNumber() {
+        PrepareBuilder();
+        result.hasTNumber = false;
+        result.tNumber_ = 0;
+        return this;
+      }
+
+      public bool HasTTotalNumber {
+        get { return result.hasTTotalNumber; }
+      }
+      public int TTotalNumber {
+        get { return result.TTotalNumber; }
+        set { SetTTotalNumber(value); }
+      }
+      public Builder SetTTotalNumber(int value) {
+        PrepareBuilder();
+        result.hasTTotalNumber = true;
+        result.tTotalNumber_ = value;
+        return this;
+      }
+      public Builder ClearTTotalNumber() {
+        PrepareBuilder();
+        result.hasTTotalNumber = false;
+        result.tTotalNumber_ = 0;
+        return this;
+      }
+
+      public pbc::IPopsicleList<int> SArrayList {
+        get { return PrepareBuilder().sArray_; }
+      }
+      public int SArrayCount {
+        get { return result.SArrayCount; }
+      }
+      public int GetSArray(int index) {
+        return result.GetSArray(index);
+      }
+      public Builder SetSArray(int index, int value) {
+        PrepareBuilder();
+        result.sArray_[index] = value;
+        return this;
+      }
+      public Builder AddSArray(int value) {
+        PrepareBuilder();
+        result.sArray_.Add(value);
+        return this;
+      }
+      public Builder AddRangeSArray(scg::IEnumerable<int> values) {
+        PrepareBuilder();
+        result.sArray_.Add(values);
+        return this;
+      }
+      public Builder ClearSArray() {
+        PrepareBuilder();
+        result.sArray_.Clear();
+        return this;
+      }
+
+      public bool HasSNumber {
+        get { return result.hasSNumber; }
+      }
+      public int SNumber {
+        get { return result.SNumber; }
+        set { SetSNumber(value); }
+      }
+      public Builder SetSNumber(int value) {
+        PrepareBuilder();
+        result.hasSNumber = true;
+        result.sNumber_ = value;
+        return this;
+      }
+      public Builder ClearSNumber() {
+        PrepareBuilder();
+        result.hasSNumber = false;
+        result.sNumber_ = 0;
+        return this;
+      }
+
+      public bool HasSTotalNumber {
+        get { return result.hasSTotalNumber; }
+      }
+      public int STotalNumber {
+        get { return result.STotalNumber; }
+        set { SetSTotalNumber(value); }
+      }
+      public Builder SetSTotalNumber(int value) {
+        PrepareBuilder();
+        result.hasSTotalNumber = true;
+        result.sTotalNumber_ = value;
+        return this;
+      }
+      public Builder ClearSTotalNumber() {
+        PrepareBuilder();
+        result.hasSTotalNumber = false;
+        result.sTotalNumber_ = 0;
+        return this;
+      }
+
+      public bool HasHuType {
+        get { return result.hasHuType; }
+      }
+      public int HuType {
+        get { return result.HuType; }
+        set { SetHuType(value); }
+      }
+      public Builder SetHuType(int value) {
+        PrepareBuilder();
+        result.hasHuType = true;
+        result.huType_ = value;
+        return this;
+      }
+      public Builder ClearHuType() {
+        PrepareBuilder();
+        result.hasHuType = false;
+        result.huType_ = 0;
+        return this;
+      }
+
+      public bool HasScore {
+        get { return result.hasScore; }
+      }
+      public int Score {
+        get { return result.Score; }
+        set { SetScore(value); }
+      }
+      public Builder SetScore(int value) {
+        PrepareBuilder();
+        result.hasScore = true;
+        result.score_ = value;
+        return this;
+      }
+      public Builder ClearScore() {
+        PrepareBuilder();
+        result.hasScore = false;
+        result.score_ = 0;
+        return this;
+      }
+    }
+    static A1001User() {
       object.ReferenceEquals(global::DolphinServer.ProtoEntity.Proto.A1001Response.Descriptor, null);
     }
   }

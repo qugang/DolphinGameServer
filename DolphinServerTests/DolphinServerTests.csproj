@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\Mj\Base\MjGamePlayerBaseTests.cs" />
+    <Compile Include="Service\Mj\CsMjGameRoomTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DolphinServer\DolphinServer.csproj">

@@ -4,4 +4,34 @@ message A1001Response{
 	optional string ErrorInfo = 1;
 	optional int32 ErrorCode = 2;
 	optional string Uid = 3;
+	optional int32 RoomId = 4;
+	optional int32 RoomType = 5;
+	optional int32 ZhangShu = 6;
+	optional int32 JuShu = 7;
+	repeated A1001User User = 8;
+
+}
+
+
+message A1001User{
+	optional string Uid = 1;
+    repeated int32 ChiCard = 2;
+    repeated int32 GangCard = 3;
+    repeated int32 PengCard = 4;
+    repeated int32 OutCard = 5;
+
+	repeated int32 wArray = 6;
+	optional int32 wNumber = 7;
+	optional int32 wTotalNumber = 8;
+
+	repeated int32 tArray = 9;
+	optional int32 tNumber = 10;
+	optional int32 tTotalNumber = 11;
+
+	repeated int32 sArray = 12;
+	optional int32 sNumber = 13;
+	optional int32 sTotalNumber = 14;
+
+	optional int32 huType = 15;
+	optional int32 score = 16;
 }

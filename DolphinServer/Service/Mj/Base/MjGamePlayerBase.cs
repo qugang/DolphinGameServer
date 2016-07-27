@@ -159,6 +159,8 @@ namespace DolphinServer.Service.Mj
                 this.sNumber--;
             }
             SortCards();
+
+            this.zhuoCards.Add(card);
         }
 
         public void DaCard(int card)
@@ -478,6 +480,7 @@ namespace DolphinServer.Service.Mj
 
             if (tempType == 0)
             {
+
                 this.wCards.RemoveCardItem(card);
                 this.wNumber--;
             }

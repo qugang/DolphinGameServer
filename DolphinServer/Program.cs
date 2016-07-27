@@ -1,5 +1,6 @@
 ﻿using DolphinServer.Entity;
 using DolphinServer.ProtoEntity;
+using DolphinServer.Service.Mj;
 using Free.Dolphin.Common;
 using Free.Dolphin.Common.Util;
 using Free.Dolphin.Core;
@@ -27,7 +28,7 @@ namespace LeisureComplexServer
             {
                 LogManager.Log.Error(message, exption);
                 A9999DataErrorResponse.Builder response = A9999DataErrorResponse.CreateBuilder();
-                response.ErrorCode = 999;
+                response.ErrorCode = 9999;
                 response.ErrorInfo = "服务器繁忙!";
                 return response.Build().ToByteArray();
             };
@@ -47,9 +48,29 @@ namespace LeisureComplexServer
                 LogManager.Log.Debug("收到连接:" + message);
             };
 
-            WebSocketServerWrappe.OnClose = (message) =>
+            WebSocketServerWrappe.OnClose = (message,user) =>
             {
                 LogManager.Log.Debug("客户端断开:" + message);
+
+                if (user != null)
+                {
+
+                    CsMjGameRoom room =  CsGameRoomManager.GetRoomByUserId(user.Uid);
+
+                    if (room != null)
+                    {
+                        A9998ClientCloseResponse.Builder response = A9998ClientCloseResponse.CreateBuilder();
+                        response.Uid = user.Uid;
+
+                        var responseArray = response.Build().ToByteArray();
+
+                        foreach (var row in room.Players)
+                        {
+                            WebSocketServerWrappe.SendPackgeWithUser(row.PlayerUser.Uid, 9998, responseArray);
+                        }
+                    }
+                }
+
             };
 
             LogManager.Log.Info("服务器启动成功端口9001");

@@ -91,6 +91,7 @@
     <Compile Include="ProtoEntity\A1017Response.cs" />
     <Compile Include="ProtoEntity\A1018Response.cs" />
     <Compile Include="ProtoEntity\A1019Response.cs" />
+    <Compile Include="ProtoEntity\A9998ClientCloseResponse.cs" />
     <Compile Include="ProtoEntity\A9999DataErrorResponse.cs" />
     <Compile Include="Service\Mj\CsGamePlayer.cs" />
     <Compile Include="Service\Mj\CsGameRoom.cs" />
@@ -133,6 +134,7 @@
     <Content Include="ProtoEntity\A1013Response.txt" />
     <Content Include="ProtoEntity\A1018Response.txt" />
     <Content Include="ProtoEntity\A1019Response.txt" />
+    <Content Include="ProtoEntity\A9998ClientCloseResponse.txt" />
     <Content Include="ProtoEntity\A9999DataErrorResponse.txt" />
     <Content Include="ProtoEntity\cmd.txt" />
   </ItemGroup>

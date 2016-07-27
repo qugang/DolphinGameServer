@@ -14,6 +14,8 @@ namespace DolphinServer.Service.Mj
     {
         static ConcurrentDictionary<int, CsMjGameRoom> rooms = new ConcurrentDictionary<int, CsMjGameRoom>();
 
+        static ConcurrentDictionary<string, CsMjGameRoom> userRooms = new ConcurrentDictionary<string, CsMjGameRoom>();
+
         private static int maxRoomeId = 0;
 
         public static CsMjGameRoom CreateRoom(GameUser user,int jushu)
@@ -23,6 +25,8 @@ namespace DolphinServer.Service.Mj
             room.Players = new LinkedList<CsGamePlayer>();
             room.Players.AddLast(new CsGamePlayer(user));
             rooms.TryAdd(room.RoomId, room);
+
+            userRooms.TryAdd(user.Uid, room);
             return room;
         }
 
@@ -53,6 +57,9 @@ namespace DolphinServer.Service.Mj
             if (room != null && room.Players.Count < 4)
             {
                 room.JoinRoom(user);
+
+                userRooms.TryAdd(user.Uid, room);
+
                 return room;
             }
             else
@@ -65,6 +72,20 @@ namespace DolphinServer.Service.Mj
         {
             CsMjGameRoom room = null;
             rooms.TryRemove(roomID, out room);
+
+            foreach (var row in room.Players)
+            {
+                CsMjGameRoom removeRoom = null;
+                userRooms.TryRemove(row.PlayerUser.Uid, out removeRoom);
+            }
+
+            return room;
+        }
+
+        public static CsMjGameRoom GetRoomByUserId(string userId)
+        {
+            CsMjGameRoom room = null;
+            userRooms.TryGetValue(userId, out room);
             return room;
         }
     }

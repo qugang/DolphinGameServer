@@ -22,7 +22,7 @@ namespace Free.Dolphin.Core
 
         public static Action<string> OnOpen { get; set; }
 
-        public static Action<string> OnClose { get; set; }
+        public static Action<string,IGameUser> OnClose { get; set; }
         public static void Init(string ip, int port)
         {
             var server = new WebSocketServer(string.Format("ws://{0}:{1}",ip,port));
@@ -37,8 +37,9 @@ namespace Free.Dolphin.Core
                 socket.OnClose = () =>
                 {
                     GameSession session = GameSessionManager.RemoveSession(socket);
+                    
 
-                    WebSocketServerWrappe.OnClose(socket.ConnectionInfo.ClientIpAddress + ":" + socket.ConnectionInfo.ClientPort);
+                    WebSocketServerWrappe.OnClose(socket.ConnectionInfo.ClientIpAddress + ":" + socket.ConnectionInfo.ClientPort,session.User);
 
                 };
                 socket.OnMessage = message =>

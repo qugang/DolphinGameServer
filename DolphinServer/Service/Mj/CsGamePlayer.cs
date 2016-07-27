@@ -12,7 +12,7 @@ namespace DolphinServer.Service.Mj
 
     public class CsGamePlayer : MjGamePlayerBase
     {
-        
+        public int HuType { get; set; }
 
         public CsGamePlayer(GameUser gameSession) : base(gameSession)
         {
@@ -142,6 +142,7 @@ namespace DolphinServer.Service.Mj
 
         public Boolean CheckHu(int card)
         {
+            card = card & 0x18F | 0x10;
             PushCard(card);
             this.SortCards();
             var result = CheckJiangJiangHu();

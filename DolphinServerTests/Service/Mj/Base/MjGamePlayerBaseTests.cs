@@ -52,17 +52,15 @@ namespace DolphinServer.Service.Mj.Tests
         [TestMethod()]
         public void CheckChiTest()
         {
+
+            //152207手上的牌万13457筒15688索467总张数: 13
             CsGamePlayer player = new CsGamePlayer(null);
             player.InitCard(new int[] {
-            4|0x10,5|0x10,6|0x10,
-            7|0x10 |0x80, 8|0x10|0x80,
-            0|0x10|0x100,2|0x10|0x100,2|0x10|0x100,6|0x10|0x100,7|0x10|0x100, 8|0x10|0x100,8|0x10|0x100,8|0x10|0x100
+            0|0x10, 2|0x10,3|0x10,4|0x10,6|0x10
             });
-
-            player.Chi(4 | 0x10, 5 | 0x10, 6 | 0x10);
-            player.Chi(6 | 0x10 | 0x80, 7 | 0x10 | 0x80, 8 | 0x10 | 0x80);
-
-            var a = player.PrintCards();
+            
+            player.CheckChi(0x25);
+            
 
         }
 

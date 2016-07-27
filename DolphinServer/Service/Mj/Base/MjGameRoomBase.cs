@@ -15,6 +15,8 @@ namespace DolphinServer.Service.Mj
         }
         public int RoomId { get; set; }
 
+        public int RoomType { get; set; }
+
         /// <summary>
         /// 局数
         /// </summary>
@@ -79,7 +81,7 @@ namespace DolphinServer.Service.Mj
             0 | 0x10 | 0x100,1 | 0x10|0x100,2 | 0x10|0x100,3 | 0x10|0x100,4 | 0x10|0x100,5 | 0x10|0x100,6 | 0x10|0x100,7 | 0x10|0x100,8 | 0x10|0x100,
         };
 
-        protected int cardIndex = 0;
+        public int CardIndex { get; set; }
 
         public virtual void BeginGame(string userId)
         {
@@ -89,7 +91,7 @@ namespace DolphinServer.Service.Mj
 
             if (Players.All(p => p.IsReady) && Players.Count == 4)
             {
-                cardIndex = 0;
+                CardIndex = 0;
                 this.Player = this.Players.First;
                 RandCard();
                 SendCard();
@@ -98,7 +100,7 @@ namespace DolphinServer.Service.Mj
 
         public virtual void ReLoadGame()
         {
-            cardIndex = 0;
+            CardIndex = 0;
             RandCard();
             SendCard();
         }
@@ -120,8 +122,8 @@ namespace DolphinServer.Service.Mj
         }
         public int ReadCard()
         {
-            var tempCard = cardArray[cardIndex];
-            cardIndex++;
+            var tempCard = cardArray[CardIndex];
+            CardIndex++;
             return tempCard;
         }
 

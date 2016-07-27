@@ -93,12 +93,13 @@ namespace DolphinServer.Service.Mj
             WebSocketServerWrappe.SendPackgeWithUser(this.Player.NextOrFirst().Value.PlayerUser.Uid, 1006, response1.Build().ToByteArray());
             WebSocketServerWrappe.SendPackgeWithUser(this.Player.NextOrFirst().NextOrFirst().Value.PlayerUser.Uid, 1006, response2.Build().ToByteArray());
             WebSocketServerWrappe.SendPackgeWithUser(this.Player.NextOrFirst().NextOrFirst().NextOrFirst().Value.PlayerUser.Uid, 1006, response3.Build().ToByteArray());
-            this.cardIndex = 53;
+            this.CardIndex = 53;
             isFrist = true;
 
             foreach (var row in this.Players)
             {
                 row.IsReady = false;
+                row.HuType = 0;
             }
 
             this.JuShu--;
@@ -160,6 +161,8 @@ namespace DolphinServer.Service.Mj
             builder.Score = subLeftScore;
             response.AddUsers(builder);
 
+            node.Value.HuType |= huType;
+
             var sendByte = response.Build().ToByteArray();
             foreach (var row in this.Players)
             {
@@ -220,6 +223,7 @@ namespace DolphinServer.Service.Mj
             {
                 WebSocketServerWrappe.SendPackgeWithUser(row.PlayerUser.Uid, 1013, sendByte);
             }
+            node.Value.HuType |= huType;
             this.OutCardState = OutCardState.Hu;
             node.Value.ResetEvent.Set();
         }
@@ -267,6 +271,7 @@ namespace DolphinServer.Service.Mj
             {
                 WebSocketServerWrappe.SendPackgeWithUser(row.PlayerUser.Uid, 1014, sendByte);
             }
+            node.Value.HuType |= huType;
             this.OutCardState = OutCardState.Hu;
             node.Value.ResetEvent.Set();
             LogManager.Log.Debug("捉炮结束");
@@ -310,6 +315,7 @@ namespace DolphinServer.Service.Mj
                 {
                     WebSocketServerWrappe.SendPackgeWithUser(row.PlayerUser.Uid, 1010, array);
                 }
+                LogManager.Log.Debug(node.Value.PlayerUser.Uid + "吃完手上的牌" + node.Value.PrintCards());
             }
             node.Value.ResetEvent.Set();
             LogManager.Log.Debug("吃牌结束");
@@ -338,7 +344,7 @@ namespace DolphinServer.Service.Mj
             {
 
                 this.OutCardState = OutCardState.Gang;
-                int modZhang = 108 - (this.cardIndex + 1);
+                int modZhang = 108 - (this.CardIndex + 1);
 
                 int dunshu = modZhang / 2;
 
@@ -406,7 +412,7 @@ namespace DolphinServer.Service.Mj
 
                 this.Player = this.Player.NextOrFirst();
                 //是最后一张牌发送海底命令
-                if (this.cardIndex == cardArray.Length - 2)
+                if (this.CardIndex == cardArray.Length - 2)
                 {
                     A1016Response.Builder rep1016 = A1016Response.CreateBuilder();
                     rep1016.Uid = this.Player.Value.PlayerUser.Uid;
@@ -474,7 +480,7 @@ namespace DolphinServer.Service.Mj
             LinkedListNode<CsGamePlayer> node = FindPlayer(uid);
 
 
-            if (cardIndex == cardArray.Length)
+            if (CardIndex == cardArray.Length)
             {
                 //TODO: 牌已摸完
                 return;
@@ -578,7 +584,7 @@ namespace DolphinServer.Service.Mj
 
             this.Player = this.Player.NextOrFirst();
             //是最后一张牌发送海底命令
-            if (this.cardIndex == cardArray.Length - 2)
+            if (this.CardIndex == cardArray.Length - 2)
             {
                 A1016Response.Builder rep1016 = A1016Response.CreateBuilder();
                 rep1016.Uid = this.Player.Value.PlayerUser.Uid;
@@ -599,7 +605,7 @@ namespace DolphinServer.Service.Mj
         public void MoHaidi(string uid)
         {
             LinkedListNode<CsGamePlayer> node = FindPlayer(uid);
-            int card = this.cardArray[this.cardIndex];
+            int card = this.cardArray[this.CardIndex];
 
             A1017Response.Builder rep1017 = A1017Response.CreateBuilder();
             rep1017.Uid = this.Player.Value.PlayerUser.Uid;
@@ -621,7 +627,7 @@ namespace DolphinServer.Service.Mj
             if (node.NextOrFirst().Value.PlayerUser.Uid == this.Player.Value.PlayerUser.Uid)
             {
                 A1018Response.Builder rep1018 = A1018Response.CreateBuilder();
-                rep1018.Card = this.cardArray[this.cardIndex]; ;
+                rep1018.Card = this.cardArray[this.CardIndex]; ;
                 var rep1018Array = rep1018.Build().ToByteArray();
                 foreach (var row in Players)
                 {
