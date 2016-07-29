@@ -93,6 +93,7 @@
     <Compile Include="ProtoEntity\A1019Response.cs" />
     <Compile Include="ProtoEntity\A9998ClientCloseResponse.cs" />
     <Compile Include="ProtoEntity\A9999DataErrorResponse.cs" />
+    <Compile Include="Service\chat\ChatRoom.cs" />
     <Compile Include="Service\Mj\CsGamePlayer.cs" />
     <Compile Include="Service\Mj\CsGameRoom.cs" />
     <Compile Include="Service\Mj\CsGameRoomManager.cs" />
