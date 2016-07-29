@@ -6,10 +6,12 @@ message A1013Response{
 	optional string Uid = 3;
 	optional int32 HuType = 4; 
 	optional int32 Score = 5;
-	repeated A1013User Users = 6;
+	optional int32 TotalScore = 6;
+	repeated A1013User Users = 7;
 }
 
 message A1013User{
 	optional string Uid = 1;
 	optional int32 Score = 2;
+	optional int32 TotalScore = 3;
 }

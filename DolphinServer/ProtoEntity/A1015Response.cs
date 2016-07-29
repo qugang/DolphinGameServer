@@ -33,21 +33,22 @@ namespace DolphinServer.ProtoEntity {
       static A1015Response() {
         byte[] descriptorData = global::System.Convert.FromBase64String(
             string.Concat(
-              "ChFBMTAxNVJlc3BvbnNlLnR4dCJ8Cg1BMTAxNVJlc3BvbnNlEhEKCUVycm9y", 
-              "SW5mbxgBIAEoCRIRCglFcnJvckNvZGUYAiABKAUSCwoDVWlkGAMgASgJEg4K", 
-              "Bkh1VHlwZRgEIAEoBRINCgVTY29yZRgFIAEoBRIZCgVVc2VycxgGIAMoCzIK", 
-              "LkExMDE1VXNlciInCglBMTAxNVVzZXISCwoDVWlkGAEgASgJEg0KBVNjb3Jl", 
-            "GAIgASgFQhyqAhlEb2xwaGluU2VydmVyLlByb3RvRW50aXR5"));
+              "ChFBMTAxNVJlc3BvbnNlLnR4dCKQAQoNQTEwMTVSZXNwb25zZRIRCglFcnJv", 
+              "ckluZm8YASABKAkSEQoJRXJyb3JDb2RlGAIgASgFEgsKA1VpZBgDIAEoCRIO", 
+              "CgZIdVR5cGUYBCABKAUSDQoFU2NvcmUYBSABKAUSEgoKVG90YWxTY29yZRgG", 
+              "IAEoBRIZCgVVc2VycxgHIAMoCzIKLkExMDE1VXNlciI7CglBMTAxNVVzZXIS", 
+              "CwoDVWlkGAEgASgJEg0KBVNjb3JlGAIgASgFEhIKClRvdGFsU2NvcmUYAyAB", 
+            "KAVCHKoCGURvbHBoaW5TZXJ2ZXIuUHJvdG9FbnRpdHk="));
         pbd::FileDescriptor.InternalDescriptorAssigner assigner = delegate(pbd::FileDescriptor root) {
           descriptor = root;
           internal__static_A1015Response__Descriptor = Descriptor.MessageTypes[0];
           internal__static_A1015Response__FieldAccessorTable = 
               new pb::FieldAccess.FieldAccessorTable<global::DolphinServer.ProtoEntity.A1015Response, global::DolphinServer.ProtoEntity.A1015Response.Builder>(internal__static_A1015Response__Descriptor,
-                  new string[] { "ErrorInfo", "ErrorCode", "Uid", "HuType", "Score", "Users", });
+                  new string[] { "ErrorInfo", "ErrorCode", "Uid", "HuType", "Score", "TotalScore", "Users", });
           internal__static_A1015User__Descriptor = Descriptor.MessageTypes[1];
           internal__static_A1015User__FieldAccessorTable = 
               new pb::FieldAccess.FieldAccessorTable<global::DolphinServer.ProtoEntity.A1015User, global::DolphinServer.ProtoEntity.A1015User.Builder>(internal__static_A1015User__Descriptor,
-                  new string[] { "Uid", "Score", });
+                  new string[] { "Uid", "Score", "TotalScore", });
           pb::ExtensionRegistry registry = pb::ExtensionRegistry.CreateInstance();
           RegisterAllExtensions(registry);
           return registry;
@@ -65,8 +66,8 @@ namespace DolphinServer.ProtoEntity {
   public sealed partial class A1015Response : pb::GeneratedMessage<A1015Response, A1015Response.Builder> {
     private A1015Response() { }
     private static readonly A1015Response defaultInstance = new A1015Response().MakeReadOnly();
-    private static readonly string[] _a1015ResponseFieldNames = new string[] { "ErrorCode", "ErrorInfo", "HuType", "Score", "Uid", "Users" };
-    private static readonly uint[] _a1015ResponseFieldTags = new uint[] { 16, 10, 32, 40, 26, 50 };
+    private static readonly string[] _a1015ResponseFieldNames = new string[] { "ErrorCode", "ErrorInfo", "HuType", "Score", "TotalScore", "Uid", "Users" };
+    private static readonly uint[] _a1015ResponseFieldTags = new uint[] { 16, 10, 32, 40, 48, 26, 58 };
     public static A1015Response DefaultInstance {
       get { return defaultInstance; }
     }
@@ -137,7 +138,17 @@ namespace DolphinServer.ProtoEntity {
       get { return score_; }
     }
 
-    public const int UsersFieldNumber = 6;
+    public const int TotalScoreFieldNumber = 6;
+    private bool hasTotalScore;
+    private int totalScore_;
+    public bool HasTotalScore {
+      get { return hasTotalScore; }
+    }
+    public int TotalScore {
+      get { return totalScore_; }
+    }
+
+    public const int UsersFieldNumber = 7;
     private pbc::PopsicleList<global::DolphinServer.ProtoEntity.A1015User> users_ = new pbc::PopsicleList<global::DolphinServer.ProtoEntity.A1015User>();
     public scg::IList<global::DolphinServer.ProtoEntity.A1015User> UsersList {
       get { return users_; }
@@ -165,7 +176,7 @@ namespace DolphinServer.ProtoEntity {
         output.WriteInt32(2, field_names[0], ErrorCode);
       }
       if (hasUid) {
-        output.WriteString(3, field_names[4], Uid);
+        output.WriteString(3, field_names[5], Uid);
       }
       if (hasHuType) {
         output.WriteInt32(4, field_names[2], HuType);
@@ -173,8 +184,11 @@ namespace DolphinServer.ProtoEntity {
       if (hasScore) {
         output.WriteInt32(5, field_names[3], Score);
       }
+      if (hasTotalScore) {
+        output.WriteInt32(6, field_names[4], TotalScore);
+      }
       if (users_.Count > 0) {
-        output.WriteMessageArray(6, field_names[5], users_);
+        output.WriteMessageArray(7, field_names[6], users_);
       }
       UnknownFields.WriteTo(output);
     }
@@ -208,8 +222,11 @@ namespace DolphinServer.ProtoEntity {
       if (hasScore) {
         size += pb::CodedOutputStream.ComputeInt32Size(5, Score);
       }
+      if (hasTotalScore) {
+        size += pb::CodedOutputStream.ComputeInt32Size(6, TotalScore);
+      }
       foreach (global::DolphinServer.ProtoEntity.A1015User element in UsersList) {
-        size += pb::CodedOutputStream.ComputeMessageSize(6, element);
+        size += pb::CodedOutputStream.ComputeMessageSize(7, element);
       }
       size += UnknownFields.SerializedSize;
       memoizedSerializedSize = size;
@@ -349,6 +366,9 @@ namespace DolphinServer.ProtoEntity {
         if (other.HasScore) {
           Score = other.Score;
         }
+        if (other.HasTotalScore) {
+          TotalScore = other.TotalScore;
+        }
         if (other.users_.Count != 0) {
           result.users_.Add(other.users_);
         }
@@ -415,7 +435,11 @@ namespace DolphinServer.ProtoEntity {
               result.hasScore = input.ReadInt32(ref result.score_);
               break;
             }
-            case 50: {
+            case 48: {
+              result.hasTotalScore = input.ReadInt32(ref result.totalScore_);
+              break;
+            }
+            case 58: {
               input.ReadMessageArray(tag, field_name, result.users_, global::DolphinServer.ProtoEntity.A1015User.DefaultInstance, extensionRegistry);
               break;
             }
@@ -531,6 +555,26 @@ namespace DolphinServer.ProtoEntity {
         return this;
       }
 
+      public bool HasTotalScore {
+        get { return result.hasTotalScore; }
+      }
+      public int TotalScore {
+        get { return result.TotalScore; }
+        set { SetTotalScore(value); }
+      }
+      public Builder SetTotalScore(int value) {
+        PrepareBuilder();
+        result.hasTotalScore = true;
+        result.totalScore_ = value;
+        return this;
+      }
+      public Builder ClearTotalScore() {
+        PrepareBuilder();
+        result.hasTotalScore = false;
+        result.totalScore_ = 0;
+        return this;
+      }
+
       public pbc::IPopsicleList<global::DolphinServer.ProtoEntity.A1015User> UsersList {
         get { return PrepareBuilder().users_; }
       }
@@ -584,8 +628,8 @@ namespace DolphinServer.ProtoEntity {
   public sealed partial class A1015User : pb::GeneratedMessage<A1015User, A1015User.Builder> {
     private A1015User() { }
     private static readonly A1015User defaultInstance = new A1015User().MakeReadOnly();
-    private static readonly string[] _a1015UserFieldNames = new string[] { "Score", "Uid" };
-    private static readonly uint[] _a1015UserFieldTags = new uint[] { 16, 10 };
+    private static readonly string[] _a1015UserFieldNames = new string[] { "Score", "TotalScore", "Uid" };
+    private static readonly uint[] _a1015UserFieldTags = new uint[] { 16, 24, 10 };
     public static A1015User DefaultInstance {
       get { return defaultInstance; }
     }
@@ -626,6 +670,16 @@ namespace DolphinServer.ProtoEntity {
       get { return score_; }
     }
 
+    public const int TotalScoreFieldNumber = 3;
+    private bool hasTotalScore;
+    private int totalScore_;
+    public bool HasTotalScore {
+      get { return hasTotalScore; }
+    }
+    public int TotalScore {
+      get { return totalScore_; }
+    }
+
     public override bool IsInitialized {
       get {
         return true;
@@ -636,10 +690,13 @@ namespace DolphinServer.ProtoEntity {
       CalcSerializedSize();
       string[] field_names = _a1015UserFieldNames;
       if (hasUid) {
-        output.WriteString(1, field_names[1], Uid);
+        output.WriteString(1, field_names[2], Uid);
       }
       if (hasScore) {
         output.WriteInt32(2, field_names[0], Score);
+      }
+      if (hasTotalScore) {
+        output.WriteInt32(3, field_names[1], TotalScore);
       }
       UnknownFields.WriteTo(output);
     }
@@ -663,6 +720,9 @@ namespace DolphinServer.ProtoEntity {
       }
       if (hasScore) {
         size += pb::CodedOutputStream.ComputeInt32Size(2, Score);
+      }
+      if (hasTotalScore) {
+        size += pb::CodedOutputStream.ComputeInt32Size(3, TotalScore);
       }
       size += UnknownFields.SerializedSize;
       memoizedSerializedSize = size;
@@ -792,6 +852,9 @@ namespace DolphinServer.ProtoEntity {
         if (other.HasScore) {
           Score = other.Score;
         }
+        if (other.HasTotalScore) {
+          TotalScore = other.TotalScore;
+        }
         this.MergeUnknownFields(other.UnknownFields);
         return this;
       }
@@ -843,6 +906,10 @@ namespace DolphinServer.ProtoEntity {
               result.hasScore = input.ReadInt32(ref result.score_);
               break;
             }
+            case 24: {
+              result.hasTotalScore = input.ReadInt32(ref result.totalScore_);
+              break;
+            }
           }
         }
 
@@ -891,6 +958,26 @@ namespace DolphinServer.ProtoEntity {
         PrepareBuilder();
         result.hasScore = false;
         result.score_ = 0;
+        return this;
+      }
+
+      public bool HasTotalScore {
+        get { return result.hasTotalScore; }
+      }
+      public int TotalScore {
+        get { return result.TotalScore; }
+        set { SetTotalScore(value); }
+      }
+      public Builder SetTotalScore(int value) {
+        PrepareBuilder();
+        result.hasTotalScore = true;
+        result.totalScore_ = value;
+        return this;
+      }
+      public Builder ClearTotalScore() {
+        PrepareBuilder();
+        result.hasTotalScore = false;
+        result.totalScore_ = 0;
         return this;
       }
     }

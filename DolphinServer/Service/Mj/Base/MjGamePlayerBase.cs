@@ -95,6 +95,7 @@ namespace DolphinServer.Service.Mj
             this.ChiCards = new List<int>();
             this.PengCards = new List<int>();
             this.GangCards = new List<int>();
+            this.zhuoCards = new List<int>();
             foreach (var row in card)
             {
                 int itemType = row.GetItemType();
@@ -159,8 +160,6 @@ namespace DolphinServer.Service.Mj
                 this.sNumber--;
             }
             SortCards();
-
-            this.zhuoCards.Add(card);
         }
 
         public void DaCard(int card)
@@ -186,6 +185,7 @@ namespace DolphinServer.Service.Mj
                 this.tsNumber--;
             }
             SortCards();
+            this.zhuoCards.Add(card);
         }
 
         public void AddCard(int card)

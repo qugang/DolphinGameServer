@@ -47,33 +47,62 @@ namespace DolphinServer.Controller
 
                         A1001User.Builder roomUser = A1001User.CreateBuilder();
                         roomUser.Uid = row.PlayerUser.Uid;
-                        roomUser.AddRangeChiCard(row.ChiCards);
-                        roomUser.AddRangePengCard(row.PengCards);
-                        roomUser.AddRangeGangCard(row.GangCards);
 
-                        roomUser.AddRangeWArray(row.wCards);
-                        roomUser.WNumber = row.wNumber;
-                        roomUser.WTotalNumber = row.twNumber;
+                        if (row.ChiCards != null && row.ChiCards.Count > 0)
+                        {
+                            roomUser.AddRangeChiArray(row.ChiCards);
+                        }
+
+                        if (row.PengCards != null && row.PengCards.Count > 0)
+                        {
+                            roomUser.AddRangePengArray(row.PengCards);
+                        }
+                        if (row.GangCards != null && row.GangCards.Count > 0)
+                        {
+                            roomUser.AddRangeGangArray(row.GangCards);
+                        }
+                        if (row.wCards != null && row.wCards.Count > 0)
+                        {
+                            roomUser.AddRangeWArray(row.wCards);
+                            roomUser.WNumber = row.wNumber;
+                            roomUser.WTotalNumber = row.twNumber;
+                        }
+
+                        if (row.tCards != null && row.tCards.Count > 0)
+                        {
+                            roomUser.AddRangeTArray(row.tCards);
+                            roomUser.TNumber = row.tNumber;
+                            roomUser.TTotalNumber = row.ttNumber;
+                        }
 
 
-                        roomUser.AddRangeTArray(row.tCards);
-                        roomUser.TNumber = row.tNumber;
-                        roomUser.TTotalNumber = row.ttNumber;
+                        if (row.sCards != null && row.sCards.Count > 0)
+                        {
+                            roomUser.AddRangeSArray(row.sCards);
+                            roomUser.SNumber = row.sNumber;
+                            roomUser.STotalNumber = row.tsNumber;
+                        }
 
-
-                        roomUser.AddRangeSArray(row.sCards);
-                        roomUser.SNumber = row.sNumber;
-                        roomUser.STotalNumber = row.tsNumber;
+                        if (row.zhuoCards != null && row.zhuoCards.Count > 0)
+                        {
+                            roomUser.AddRangeOutCard(row.sCards);
+                        }
 
                         roomUser.HuType = row.HuType;
                         roomUser.Score = row.Score;
-                        response.AddUser(roomUser);
+                        roomUser.Sore = row.Score;
+                        response.AddUsers(roomUser);
+                    }
+
+                    if (room.JuShu != 0)
+                    {
+                        response.JuShu = room.JuShu;
+                    }
+                    if (room.CardIndex != 0)
+                    {
+                        response.ZhangShu = room.CardIndex + 2;
                     }
                 }
-
-                response.JuShu = room.JuShu;
-                response.ZhangShu = room.CardIndex + 2;
-
             }
             Context.Session.User = user;
             GameUserManager.AddOrUpdateUser(user.Uid, Context.Session);

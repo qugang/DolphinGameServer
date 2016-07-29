@@ -6,8 +6,10 @@ message A1014Response{
 	optional string Uid = 3;
 	optional int32 HuType = 4; 
 	optional int32 Score = 5;
-	optional string DesUid = 6;
-	optional int32 DesScore = 7;
-	optional int32 Card = 8;
+	optional int32 TotalScore = 6;
+	optional string DesUid = 7;
+	optional int32 DesScore = 8;
+	optional int32 Card = 9;
+	optional int32 DesTotalScore = 10;
 }
 

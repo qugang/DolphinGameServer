@@ -8,17 +8,17 @@ message A1001Response{
 	optional int32 RoomType = 5;
 	optional int32 ZhangShu = 6;
 	optional int32 JuShu = 7;
-	repeated A1001User User = 8;
+	repeated A1001User Users = 8;
 
 }
 
 
 message A1001User{
 	optional string Uid = 1;
-    repeated int32 ChiCard = 2;
-    repeated int32 GangCard = 3;
-    repeated int32 PengCard = 4;
-    repeated int32 OutCard = 5;
+    repeated int32 chiArray = 2;
+    repeated int32 gangArray = 3;
+    repeated int32 pengArray = 4;
+    repeated int32 outCard = 5;
 
 	repeated int32 wArray = 6;
 	optional int32 wNumber = 7;
@@ -34,4 +34,7 @@ message A1001User{
 
 	optional int32 huType = 15;
 	optional int32 score = 16;
+	optional string HatImage = 17;
+	optional int32 Sore = 18; 
+	optional int32 Sex = 19;
 }

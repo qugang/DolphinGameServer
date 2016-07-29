@@ -150,15 +150,22 @@ namespace DolphinServer.Service.Mj
             response.HuType = huType;
             response.Uid = node.Value.PlayerUser.Uid;
             response.Score = subRigthScore + subTopScore + subLeftScore;
+            response.TotalScore = this.Player.Value.Score;
+
             var builder = A1015User.CreateBuilder();
             builder.Uid = rigthNode.Value.PlayerUser.Uid;
             builder.Score = subRigthScore;
+            builder.TotalScore = rigthNode.Value.Score;
             response.AddUsers(builder);
+
             builder.Uid = topNode.Value.PlayerUser.Uid;
             builder.Score = subTopScore;
+            builder.TotalScore = topNode.Value.Score;
             response.AddUsers(builder);
+
             builder.Uid = leftNode.Value.PlayerUser.Uid;
             builder.Score = subLeftScore;
+            builder.TotalScore = leftNode.Value.Score;
             response.AddUsers(builder);
 
             node.Value.HuType |= huType;
@@ -207,15 +214,22 @@ namespace DolphinServer.Service.Mj
             response.HuType = huType;
             response.Uid = node.Value.PlayerUser.Uid;
             response.Score = subRigthScore + subTopScore + subLeftScore;
+            response.TotalScore = this.Player.Value.Score;
+
             var builder = A1013User.CreateBuilder();
             builder.Uid = rigthNode.Value.PlayerUser.Uid;
             builder.Score = subRigthScore;
+            builder.TotalScore = rigthNode.Value.Score;
             response.AddUsers(builder);
+
             builder.Uid = topNode.Value.PlayerUser.Uid;
             builder.Score = subTopScore;
+            builder.TotalScore = topNode.Value.Score;
             response.AddUsers(builder);
+
             builder.Uid = leftNode.Value.PlayerUser.Uid;
             builder.Score = subLeftScore;
+            builder.TotalScore = leftNode.Value.Score;
             response.AddUsers(builder);
 
             var sendByte = response.Build().ToByteArray();
@@ -262,9 +276,13 @@ namespace DolphinServer.Service.Mj
             A1014Response.Builder response = A1014Response.CreateBuilder();
             response.Uid = node.Value.PlayerUser.Uid;
             response.Score = desSubScore;
+            response.TotalScore = this.Player.Value.Score;
+
             response.HuType = huType;
             response.DesUid = desUid;
             response.DesScore = desSubScore;
+            response.DesTotalScore = this.Player.Value.Score;
+
             response.Card = card;
             var sendByte = response.Build().ToByteArray();
             foreach (var row in this.Players)

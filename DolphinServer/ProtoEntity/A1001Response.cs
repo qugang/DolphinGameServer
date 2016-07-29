@@ -33,28 +33,29 @@ namespace DolphinServer.ProtoEntity {
       static A1001Response() {
         byte[] descriptorData = global::System.Convert.FromBase64String(
             string.Concat(
-              "ChFBMTAwMVJlc3BvbnNlLnR4dCKfAQoNQTEwMDFSZXNwb25zZRIRCglFcnJv", 
+              "ChFBMTAwMVJlc3BvbnNlLnR4dCKgAQoNQTEwMDFSZXNwb25zZRIRCglFcnJv", 
               "ckluZm8YASABKAkSEQoJRXJyb3JDb2RlGAIgASgFEgsKA1VpZBgDIAEoCRIO", 
               "CgZSb29tSWQYBCABKAUSEAoIUm9vbVR5cGUYBSABKAUSEAoIWmhhbmdTaHUY", 
-              "BiABKAUSDQoFSnVTaHUYByABKAUSGAoEVXNlchgIIAMoCzIKLkExMDAxVXNl", 
-              "ciKiAgoJQTEwMDFVc2VyEgsKA1VpZBgBIAEoCRIPCgdDaGlDYXJkGAIgAygF", 
-              "EhAKCEdhbmdDYXJkGAMgAygFEhAKCFBlbmdDYXJkGAQgAygFEg8KB091dENh", 
-              "cmQYBSADKAUSDgoGd0FycmF5GAYgAygFEg8KB3dOdW1iZXIYByABKAUSFAoM", 
-              "d1RvdGFsTnVtYmVyGAggASgFEg4KBnRBcnJheRgJIAMoBRIPCgd0TnVtYmVy", 
-              "GAogASgFEhQKDHRUb3RhbE51bWJlchgLIAEoBRIOCgZzQXJyYXkYDCADKAUS", 
-              "DwoHc051bWJlchgNIAEoBRIUCgxzVG90YWxOdW1iZXIYDiABKAUSDgoGaHVU", 
-              "eXBlGA8gASgFEg0KBXNjb3JlGBAgASgFQhyqAhlEb2xwaGluU2VydmVyLlBy", 
-            "b3RvRW50aXR5"));
+              "BiABKAUSDQoFSnVTaHUYByABKAUSGQoFVXNlcnMYCCADKAsyCi5BMTAwMVVz", 
+              "ZXIi0gIKCUExMDAxVXNlchILCgNVaWQYASABKAkSEAoIY2hpQXJyYXkYAiAD", 
+              "KAUSEQoJZ2FuZ0FycmF5GAMgAygFEhEKCXBlbmdBcnJheRgEIAMoBRIPCgdv", 
+              "dXRDYXJkGAUgAygFEg4KBndBcnJheRgGIAMoBRIPCgd3TnVtYmVyGAcgASgF", 
+              "EhQKDHdUb3RhbE51bWJlchgIIAEoBRIOCgZ0QXJyYXkYCSADKAUSDwoHdE51", 
+              "bWJlchgKIAEoBRIUCgx0VG90YWxOdW1iZXIYCyABKAUSDgoGc0FycmF5GAwg", 
+              "AygFEg8KB3NOdW1iZXIYDSABKAUSFAoMc1RvdGFsTnVtYmVyGA4gASgFEg4K", 
+              "Bmh1VHlwZRgPIAEoBRINCgVzY29yZRgQIAEoBRIQCghIYXRJbWFnZRgRIAEo", 
+              "CRIMCgRTb3JlGBIgASgFEgsKA1NleBgTIAEoBUIcqgIZRG9scGhpblNlcnZl", 
+            "ci5Qcm90b0VudGl0eQ=="));
         pbd::FileDescriptor.InternalDescriptorAssigner assigner = delegate(pbd::FileDescriptor root) {
           descriptor = root;
           internal__static_A1001Response__Descriptor = Descriptor.MessageTypes[0];
           internal__static_A1001Response__FieldAccessorTable = 
               new pb::FieldAccess.FieldAccessorTable<global::DolphinServer.ProtoEntity.A1001Response, global::DolphinServer.ProtoEntity.A1001Response.Builder>(internal__static_A1001Response__Descriptor,
-                  new string[] { "ErrorInfo", "ErrorCode", "Uid", "RoomId", "RoomType", "ZhangShu", "JuShu", "User", });
+                  new string[] { "ErrorInfo", "ErrorCode", "Uid", "RoomId", "RoomType", "ZhangShu", "JuShu", "Users", });
           internal__static_A1001User__Descriptor = Descriptor.MessageTypes[1];
           internal__static_A1001User__FieldAccessorTable = 
               new pb::FieldAccess.FieldAccessorTable<global::DolphinServer.ProtoEntity.A1001User, global::DolphinServer.ProtoEntity.A1001User.Builder>(internal__static_A1001User__Descriptor,
-                  new string[] { "Uid", "ChiCard", "GangCard", "PengCard", "OutCard", "WArray", "WNumber", "WTotalNumber", "TArray", "TNumber", "TTotalNumber", "SArray", "SNumber", "STotalNumber", "HuType", "Score", });
+                  new string[] { "Uid", "ChiArray", "GangArray", "PengArray", "OutCard", "WArray", "WNumber", "WTotalNumber", "TArray", "TNumber", "TTotalNumber", "SArray", "SNumber", "STotalNumber", "HuType", "Score", "HatImage", "Sore", "Sex", });
           pb::ExtensionRegistry registry = pb::ExtensionRegistry.CreateInstance();
           RegisterAllExtensions(registry);
           return registry;
@@ -72,7 +73,7 @@ namespace DolphinServer.ProtoEntity {
   public sealed partial class A1001Response : pb::GeneratedMessage<A1001Response, A1001Response.Builder> {
     private A1001Response() { }
     private static readonly A1001Response defaultInstance = new A1001Response().MakeReadOnly();
-    private static readonly string[] _a1001ResponseFieldNames = new string[] { "ErrorCode", "ErrorInfo", "JuShu", "RoomId", "RoomType", "Uid", "User", "ZhangShu" };
+    private static readonly string[] _a1001ResponseFieldNames = new string[] { "ErrorCode", "ErrorInfo", "JuShu", "RoomId", "RoomType", "Uid", "Users", "ZhangShu" };
     private static readonly uint[] _a1001ResponseFieldTags = new uint[] { 16, 10, 56, 32, 40, 26, 66, 48 };
     public static A1001Response DefaultInstance {
       get { return defaultInstance; }
@@ -164,16 +165,16 @@ namespace DolphinServer.ProtoEntity {
       get { return juShu_; }
     }
 
-    public const int UserFieldNumber = 8;
-    private pbc::PopsicleList<global::DolphinServer.ProtoEntity.A1001User> user_ = new pbc::PopsicleList<global::DolphinServer.ProtoEntity.A1001User>();
-    public scg::IList<global::DolphinServer.ProtoEntity.A1001User> UserList {
-      get { return user_; }
+    public const int UsersFieldNumber = 8;
+    private pbc::PopsicleList<global::DolphinServer.ProtoEntity.A1001User> users_ = new pbc::PopsicleList<global::DolphinServer.ProtoEntity.A1001User>();
+    public scg::IList<global::DolphinServer.ProtoEntity.A1001User> UsersList {
+      get { return users_; }
     }
-    public int UserCount {
-      get { return user_.Count; }
+    public int UsersCount {
+      get { return users_.Count; }
     }
-    public global::DolphinServer.ProtoEntity.A1001User GetUser(int index) {
-      return user_[index];
+    public global::DolphinServer.ProtoEntity.A1001User GetUsers(int index) {
+      return users_[index];
     }
 
     public override bool IsInitialized {
@@ -206,8 +207,8 @@ namespace DolphinServer.ProtoEntity {
       if (hasJuShu) {
         output.WriteInt32(7, field_names[2], JuShu);
       }
-      if (user_.Count > 0) {
-        output.WriteMessageArray(8, field_names[6], user_);
+      if (users_.Count > 0) {
+        output.WriteMessageArray(8, field_names[6], users_);
       }
       UnknownFields.WriteTo(output);
     }
@@ -247,7 +248,7 @@ namespace DolphinServer.ProtoEntity {
       if (hasJuShu) {
         size += pb::CodedOutputStream.ComputeInt32Size(7, JuShu);
       }
-      foreach (global::DolphinServer.ProtoEntity.A1001User element in UserList) {
+      foreach (global::DolphinServer.ProtoEntity.A1001User element in UsersList) {
         size += pb::CodedOutputStream.ComputeMessageSize(8, element);
       }
       size += UnknownFields.SerializedSize;
@@ -285,7 +286,7 @@ namespace DolphinServer.ProtoEntity {
       return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
     }
     private A1001Response MakeReadOnly() {
-      user_.MakeReadOnly();
+      users_.MakeReadOnly();
       return this;
     }
 
@@ -394,8 +395,8 @@ namespace DolphinServer.ProtoEntity {
         if (other.HasJuShu) {
           JuShu = other.JuShu;
         }
-        if (other.user_.Count != 0) {
-          result.user_.Add(other.user_);
+        if (other.users_.Count != 0) {
+          result.users_.Add(other.users_);
         }
         this.MergeUnknownFields(other.UnknownFields);
         return this;
@@ -469,7 +470,7 @@ namespace DolphinServer.ProtoEntity {
               break;
             }
             case 66: {
-              input.ReadMessageArray(tag, field_name, result.user_, global::DolphinServer.ProtoEntity.A1001User.DefaultInstance, extensionRegistry);
+              input.ReadMessageArray(tag, field_name, result.users_, global::DolphinServer.ProtoEntity.A1001User.DefaultInstance, extensionRegistry);
               break;
             }
           }
@@ -624,47 +625,47 @@ namespace DolphinServer.ProtoEntity {
         return this;
       }
 
-      public pbc::IPopsicleList<global::DolphinServer.ProtoEntity.A1001User> UserList {
-        get { return PrepareBuilder().user_; }
+      public pbc::IPopsicleList<global::DolphinServer.ProtoEntity.A1001User> UsersList {
+        get { return PrepareBuilder().users_; }
       }
-      public int UserCount {
-        get { return result.UserCount; }
+      public int UsersCount {
+        get { return result.UsersCount; }
       }
-      public global::DolphinServer.ProtoEntity.A1001User GetUser(int index) {
-        return result.GetUser(index);
+      public global::DolphinServer.ProtoEntity.A1001User GetUsers(int index) {
+        return result.GetUsers(index);
       }
-      public Builder SetUser(int index, global::DolphinServer.ProtoEntity.A1001User value) {
+      public Builder SetUsers(int index, global::DolphinServer.ProtoEntity.A1001User value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
-        result.user_[index] = value;
+        result.users_[index] = value;
         return this;
       }
-      public Builder SetUser(int index, global::DolphinServer.ProtoEntity.A1001User.Builder builderForValue) {
+      public Builder SetUsers(int index, global::DolphinServer.ProtoEntity.A1001User.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
-        result.user_[index] = builderForValue.Build();
+        result.users_[index] = builderForValue.Build();
         return this;
       }
-      public Builder AddUser(global::DolphinServer.ProtoEntity.A1001User value) {
+      public Builder AddUsers(global::DolphinServer.ProtoEntity.A1001User value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
-        result.user_.Add(value);
+        result.users_.Add(value);
         return this;
       }
-      public Builder AddUser(global::DolphinServer.ProtoEntity.A1001User.Builder builderForValue) {
+      public Builder AddUsers(global::DolphinServer.ProtoEntity.A1001User.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
-        result.user_.Add(builderForValue.Build());
+        result.users_.Add(builderForValue.Build());
         return this;
       }
-      public Builder AddRangeUser(scg::IEnumerable<global::DolphinServer.ProtoEntity.A1001User> values) {
+      public Builder AddRangeUsers(scg::IEnumerable<global::DolphinServer.ProtoEntity.A1001User> values) {
         PrepareBuilder();
-        result.user_.Add(values);
+        result.users_.Add(values);
         return this;
       }
-      public Builder ClearUser() {
+      public Builder ClearUsers() {
         PrepareBuilder();
-        result.user_.Clear();
+        result.users_.Clear();
         return this;
       }
     }
@@ -677,8 +678,8 @@ namespace DolphinServer.ProtoEntity {
   public sealed partial class A1001User : pb::GeneratedMessage<A1001User, A1001User.Builder> {
     private A1001User() { }
     private static readonly A1001User defaultInstance = new A1001User().MakeReadOnly();
-    private static readonly string[] _a1001UserFieldNames = new string[] { "ChiCard", "GangCard", "OutCard", "PengCard", "Uid", "huType", "sArray", "sNumber", "sTotalNumber", "score", "tArray", "tNumber", "tTotalNumber", "wArray", "wNumber", "wTotalNumber" };
-    private static readonly uint[] _a1001UserFieldTags = new uint[] { 16, 24, 40, 32, 10, 120, 96, 104, 112, 128, 72, 80, 88, 48, 56, 64 };
+    private static readonly string[] _a1001UserFieldNames = new string[] { "HatImage", "Sex", "Sore", "Uid", "chiArray", "gangArray", "huType", "outCard", "pengArray", "sArray", "sNumber", "sTotalNumber", "score", "tArray", "tNumber", "tTotalNumber", "wArray", "wNumber", "wTotalNumber" };
+    private static readonly uint[] _a1001UserFieldTags = new uint[] { 138, 152, 144, 10, 16, 24, 120, 40, 32, 96, 104, 112, 128, 72, 80, 88, 48, 56, 64 };
     public static A1001User DefaultInstance {
       get { return defaultInstance; }
     }
@@ -709,40 +710,40 @@ namespace DolphinServer.ProtoEntity {
       get { return uid_; }
     }
 
-    public const int ChiCardFieldNumber = 2;
-    private pbc::PopsicleList<int> chiCard_ = new pbc::PopsicleList<int>();
-    public scg::IList<int> ChiCardList {
-      get { return pbc::Lists.AsReadOnly(chiCard_); }
+    public const int ChiArrayFieldNumber = 2;
+    private pbc::PopsicleList<int> chiArray_ = new pbc::PopsicleList<int>();
+    public scg::IList<int> ChiArrayList {
+      get { return pbc::Lists.AsReadOnly(chiArray_); }
     }
-    public int ChiCardCount {
-      get { return chiCard_.Count; }
+    public int ChiArrayCount {
+      get { return chiArray_.Count; }
     }
-    public int GetChiCard(int index) {
-      return chiCard_[index];
-    }
-
-    public const int GangCardFieldNumber = 3;
-    private pbc::PopsicleList<int> gangCard_ = new pbc::PopsicleList<int>();
-    public scg::IList<int> GangCardList {
-      get { return pbc::Lists.AsReadOnly(gangCard_); }
-    }
-    public int GangCardCount {
-      get { return gangCard_.Count; }
-    }
-    public int GetGangCard(int index) {
-      return gangCard_[index];
+    public int GetChiArray(int index) {
+      return chiArray_[index];
     }
 
-    public const int PengCardFieldNumber = 4;
-    private pbc::PopsicleList<int> pengCard_ = new pbc::PopsicleList<int>();
-    public scg::IList<int> PengCardList {
-      get { return pbc::Lists.AsReadOnly(pengCard_); }
+    public const int GangArrayFieldNumber = 3;
+    private pbc::PopsicleList<int> gangArray_ = new pbc::PopsicleList<int>();
+    public scg::IList<int> GangArrayList {
+      get { return pbc::Lists.AsReadOnly(gangArray_); }
     }
-    public int PengCardCount {
-      get { return pengCard_.Count; }
+    public int GangArrayCount {
+      get { return gangArray_.Count; }
     }
-    public int GetPengCard(int index) {
-      return pengCard_[index];
+    public int GetGangArray(int index) {
+      return gangArray_[index];
+    }
+
+    public const int PengArrayFieldNumber = 4;
+    private pbc::PopsicleList<int> pengArray_ = new pbc::PopsicleList<int>();
+    public scg::IList<int> PengArrayList {
+      get { return pbc::Lists.AsReadOnly(pengArray_); }
+    }
+    public int PengArrayCount {
+      get { return pengArray_.Count; }
+    }
+    public int GetPengArray(int index) {
+      return pengArray_[index];
     }
 
     public const int OutCardFieldNumber = 5;
@@ -873,6 +874,36 @@ namespace DolphinServer.ProtoEntity {
       get { return score_; }
     }
 
+    public const int HatImageFieldNumber = 17;
+    private bool hasHatImage;
+    private string hatImage_ = "";
+    public bool HasHatImage {
+      get { return hasHatImage; }
+    }
+    public string HatImage {
+      get { return hatImage_; }
+    }
+
+    public const int SoreFieldNumber = 18;
+    private bool hasSore;
+    private int sore_;
+    public bool HasSore {
+      get { return hasSore; }
+    }
+    public int Sore {
+      get { return sore_; }
+    }
+
+    public const int SexFieldNumber = 19;
+    private bool hasSex;
+    private int sex_;
+    public bool HasSex {
+      get { return hasSex; }
+    }
+    public int Sex {
+      get { return sex_; }
+    }
+
     public override bool IsInitialized {
       get {
         return true;
@@ -883,52 +914,61 @@ namespace DolphinServer.ProtoEntity {
       CalcSerializedSize();
       string[] field_names = _a1001UserFieldNames;
       if (hasUid) {
-        output.WriteString(1, field_names[4], Uid);
+        output.WriteString(1, field_names[3], Uid);
       }
-      if (chiCard_.Count > 0) {
-        output.WriteInt32Array(2, field_names[0], chiCard_);
+      if (chiArray_.Count > 0) {
+        output.WriteInt32Array(2, field_names[4], chiArray_);
       }
-      if (gangCard_.Count > 0) {
-        output.WriteInt32Array(3, field_names[1], gangCard_);
+      if (gangArray_.Count > 0) {
+        output.WriteInt32Array(3, field_names[5], gangArray_);
       }
-      if (pengCard_.Count > 0) {
-        output.WriteInt32Array(4, field_names[3], pengCard_);
+      if (pengArray_.Count > 0) {
+        output.WriteInt32Array(4, field_names[8], pengArray_);
       }
       if (outCard_.Count > 0) {
-        output.WriteInt32Array(5, field_names[2], outCard_);
+        output.WriteInt32Array(5, field_names[7], outCard_);
       }
       if (wArray_.Count > 0) {
-        output.WriteInt32Array(6, field_names[13], wArray_);
+        output.WriteInt32Array(6, field_names[16], wArray_);
       }
       if (hasWNumber) {
-        output.WriteInt32(7, field_names[14], WNumber);
+        output.WriteInt32(7, field_names[17], WNumber);
       }
       if (hasWTotalNumber) {
-        output.WriteInt32(8, field_names[15], WTotalNumber);
+        output.WriteInt32(8, field_names[18], WTotalNumber);
       }
       if (tArray_.Count > 0) {
-        output.WriteInt32Array(9, field_names[10], tArray_);
+        output.WriteInt32Array(9, field_names[13], tArray_);
       }
       if (hasTNumber) {
-        output.WriteInt32(10, field_names[11], TNumber);
+        output.WriteInt32(10, field_names[14], TNumber);
       }
       if (hasTTotalNumber) {
-        output.WriteInt32(11, field_names[12], TTotalNumber);
+        output.WriteInt32(11, field_names[15], TTotalNumber);
       }
       if (sArray_.Count > 0) {
-        output.WriteInt32Array(12, field_names[6], sArray_);
+        output.WriteInt32Array(12, field_names[9], sArray_);
       }
       if (hasSNumber) {
-        output.WriteInt32(13, field_names[7], SNumber);
+        output.WriteInt32(13, field_names[10], SNumber);
       }
       if (hasSTotalNumber) {
-        output.WriteInt32(14, field_names[8], STotalNumber);
+        output.WriteInt32(14, field_names[11], STotalNumber);
       }
       if (hasHuType) {
-        output.WriteInt32(15, field_names[5], HuType);
+        output.WriteInt32(15, field_names[6], HuType);
       }
       if (hasScore) {
-        output.WriteInt32(16, field_names[9], Score);
+        output.WriteInt32(16, field_names[12], Score);
+      }
+      if (hasHatImage) {
+        output.WriteString(17, field_names[0], HatImage);
+      }
+      if (hasSore) {
+        output.WriteInt32(18, field_names[2], Sore);
+      }
+      if (hasSex) {
+        output.WriteInt32(19, field_names[1], Sex);
       }
       UnknownFields.WriteTo(output);
     }
@@ -952,27 +992,27 @@ namespace DolphinServer.ProtoEntity {
       }
       {
         int dataSize = 0;
-        foreach (int element in ChiCardList) {
+        foreach (int element in ChiArrayList) {
           dataSize += pb::CodedOutputStream.ComputeInt32SizeNoTag(element);
         }
         size += dataSize;
-        size += 1 * chiCard_.Count;
+        size += 1 * chiArray_.Count;
       }
       {
         int dataSize = 0;
-        foreach (int element in GangCardList) {
+        foreach (int element in GangArrayList) {
           dataSize += pb::CodedOutputStream.ComputeInt32SizeNoTag(element);
         }
         size += dataSize;
-        size += 1 * gangCard_.Count;
+        size += 1 * gangArray_.Count;
       }
       {
         int dataSize = 0;
-        foreach (int element in PengCardList) {
+        foreach (int element in PengArrayList) {
           dataSize += pb::CodedOutputStream.ComputeInt32SizeNoTag(element);
         }
         size += dataSize;
-        size += 1 * pengCard_.Count;
+        size += 1 * pengArray_.Count;
       }
       {
         int dataSize = 0;
@@ -1030,6 +1070,15 @@ namespace DolphinServer.ProtoEntity {
       if (hasScore) {
         size += pb::CodedOutputStream.ComputeInt32Size(16, Score);
       }
+      if (hasHatImage) {
+        size += pb::CodedOutputStream.ComputeStringSize(17, HatImage);
+      }
+      if (hasSore) {
+        size += pb::CodedOutputStream.ComputeInt32Size(18, Sore);
+      }
+      if (hasSex) {
+        size += pb::CodedOutputStream.ComputeInt32Size(19, Sex);
+      }
       size += UnknownFields.SerializedSize;
       memoizedSerializedSize = size;
       return size;
@@ -1065,9 +1114,9 @@ namespace DolphinServer.ProtoEntity {
       return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
     }
     private A1001User MakeReadOnly() {
-      chiCard_.MakeReadOnly();
-      gangCard_.MakeReadOnly();
-      pengCard_.MakeReadOnly();
+      chiArray_.MakeReadOnly();
+      gangArray_.MakeReadOnly();
+      pengArray_.MakeReadOnly();
       outCard_.MakeReadOnly();
       wArray_.MakeReadOnly();
       tArray_.MakeReadOnly();
@@ -1162,14 +1211,14 @@ namespace DolphinServer.ProtoEntity {
         if (other.HasUid) {
           Uid = other.Uid;
         }
-        if (other.chiCard_.Count != 0) {
-          result.chiCard_.Add(other.chiCard_);
+        if (other.chiArray_.Count != 0) {
+          result.chiArray_.Add(other.chiArray_);
         }
-        if (other.gangCard_.Count != 0) {
-          result.gangCard_.Add(other.gangCard_);
+        if (other.gangArray_.Count != 0) {
+          result.gangArray_.Add(other.gangArray_);
         }
-        if (other.pengCard_.Count != 0) {
-          result.pengCard_.Add(other.pengCard_);
+        if (other.pengArray_.Count != 0) {
+          result.pengArray_.Add(other.pengArray_);
         }
         if (other.outCard_.Count != 0) {
           result.outCard_.Add(other.outCard_);
@@ -1206,6 +1255,15 @@ namespace DolphinServer.ProtoEntity {
         }
         if (other.HasScore) {
           Score = other.Score;
+        }
+        if (other.HasHatImage) {
+          HatImage = other.HatImage;
+        }
+        if (other.HasSore) {
+          Sore = other.Sore;
+        }
+        if (other.HasSex) {
+          Sex = other.Sex;
         }
         this.MergeUnknownFields(other.UnknownFields);
         return this;
@@ -1256,17 +1314,17 @@ namespace DolphinServer.ProtoEntity {
             }
             case 18:
             case 16: {
-              input.ReadInt32Array(tag, field_name, result.chiCard_);
+              input.ReadInt32Array(tag, field_name, result.chiArray_);
               break;
             }
             case 26:
             case 24: {
-              input.ReadInt32Array(tag, field_name, result.gangCard_);
+              input.ReadInt32Array(tag, field_name, result.gangArray_);
               break;
             }
             case 34:
             case 32: {
-              input.ReadInt32Array(tag, field_name, result.pengCard_);
+              input.ReadInt32Array(tag, field_name, result.pengArray_);
               break;
             }
             case 42:
@@ -1321,6 +1379,18 @@ namespace DolphinServer.ProtoEntity {
               result.hasScore = input.ReadInt32(ref result.score_);
               break;
             }
+            case 138: {
+              result.hasHatImage = input.ReadString(ref result.hatImage_);
+              break;
+            }
+            case 144: {
+              result.hasSore = input.ReadInt32(ref result.sore_);
+              break;
+            }
+            case 152: {
+              result.hasSex = input.ReadInt32(ref result.sex_);
+              break;
+            }
           }
         }
 
@@ -1352,93 +1422,93 @@ namespace DolphinServer.ProtoEntity {
         return this;
       }
 
-      public pbc::IPopsicleList<int> ChiCardList {
-        get { return PrepareBuilder().chiCard_; }
+      public pbc::IPopsicleList<int> ChiArrayList {
+        get { return PrepareBuilder().chiArray_; }
       }
-      public int ChiCardCount {
-        get { return result.ChiCardCount; }
+      public int ChiArrayCount {
+        get { return result.ChiArrayCount; }
       }
-      public int GetChiCard(int index) {
-        return result.GetChiCard(index);
+      public int GetChiArray(int index) {
+        return result.GetChiArray(index);
       }
-      public Builder SetChiCard(int index, int value) {
+      public Builder SetChiArray(int index, int value) {
         PrepareBuilder();
-        result.chiCard_[index] = value;
+        result.chiArray_[index] = value;
         return this;
       }
-      public Builder AddChiCard(int value) {
+      public Builder AddChiArray(int value) {
         PrepareBuilder();
-        result.chiCard_.Add(value);
+        result.chiArray_.Add(value);
         return this;
       }
-      public Builder AddRangeChiCard(scg::IEnumerable<int> values) {
+      public Builder AddRangeChiArray(scg::IEnumerable<int> values) {
         PrepareBuilder();
-        result.chiCard_.Add(values);
+        result.chiArray_.Add(values);
         return this;
       }
-      public Builder ClearChiCard() {
+      public Builder ClearChiArray() {
         PrepareBuilder();
-        result.chiCard_.Clear();
-        return this;
-      }
-
-      public pbc::IPopsicleList<int> GangCardList {
-        get { return PrepareBuilder().gangCard_; }
-      }
-      public int GangCardCount {
-        get { return result.GangCardCount; }
-      }
-      public int GetGangCard(int index) {
-        return result.GetGangCard(index);
-      }
-      public Builder SetGangCard(int index, int value) {
-        PrepareBuilder();
-        result.gangCard_[index] = value;
-        return this;
-      }
-      public Builder AddGangCard(int value) {
-        PrepareBuilder();
-        result.gangCard_.Add(value);
-        return this;
-      }
-      public Builder AddRangeGangCard(scg::IEnumerable<int> values) {
-        PrepareBuilder();
-        result.gangCard_.Add(values);
-        return this;
-      }
-      public Builder ClearGangCard() {
-        PrepareBuilder();
-        result.gangCard_.Clear();
+        result.chiArray_.Clear();
         return this;
       }
 
-      public pbc::IPopsicleList<int> PengCardList {
-        get { return PrepareBuilder().pengCard_; }
+      public pbc::IPopsicleList<int> GangArrayList {
+        get { return PrepareBuilder().gangArray_; }
       }
-      public int PengCardCount {
-        get { return result.PengCardCount; }
+      public int GangArrayCount {
+        get { return result.GangArrayCount; }
       }
-      public int GetPengCard(int index) {
-        return result.GetPengCard(index);
+      public int GetGangArray(int index) {
+        return result.GetGangArray(index);
       }
-      public Builder SetPengCard(int index, int value) {
+      public Builder SetGangArray(int index, int value) {
         PrepareBuilder();
-        result.pengCard_[index] = value;
+        result.gangArray_[index] = value;
         return this;
       }
-      public Builder AddPengCard(int value) {
+      public Builder AddGangArray(int value) {
         PrepareBuilder();
-        result.pengCard_.Add(value);
+        result.gangArray_.Add(value);
         return this;
       }
-      public Builder AddRangePengCard(scg::IEnumerable<int> values) {
+      public Builder AddRangeGangArray(scg::IEnumerable<int> values) {
         PrepareBuilder();
-        result.pengCard_.Add(values);
+        result.gangArray_.Add(values);
         return this;
       }
-      public Builder ClearPengCard() {
+      public Builder ClearGangArray() {
         PrepareBuilder();
-        result.pengCard_.Clear();
+        result.gangArray_.Clear();
+        return this;
+      }
+
+      public pbc::IPopsicleList<int> PengArrayList {
+        get { return PrepareBuilder().pengArray_; }
+      }
+      public int PengArrayCount {
+        get { return result.PengArrayCount; }
+      }
+      public int GetPengArray(int index) {
+        return result.GetPengArray(index);
+      }
+      public Builder SetPengArray(int index, int value) {
+        PrepareBuilder();
+        result.pengArray_[index] = value;
+        return this;
+      }
+      public Builder AddPengArray(int value) {
+        PrepareBuilder();
+        result.pengArray_.Add(value);
+        return this;
+      }
+      public Builder AddRangePengArray(scg::IEnumerable<int> values) {
+        PrepareBuilder();
+        result.pengArray_.Add(values);
+        return this;
+      }
+      public Builder ClearPengArray() {
+        PrepareBuilder();
+        result.pengArray_.Clear();
         return this;
       }
 
@@ -1719,6 +1789,67 @@ namespace DolphinServer.ProtoEntity {
         PrepareBuilder();
         result.hasScore = false;
         result.score_ = 0;
+        return this;
+      }
+
+      public bool HasHatImage {
+        get { return result.hasHatImage; }
+      }
+      public string HatImage {
+        get { return result.HatImage; }
+        set { SetHatImage(value); }
+      }
+      public Builder SetHatImage(string value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasHatImage = true;
+        result.hatImage_ = value;
+        return this;
+      }
+      public Builder ClearHatImage() {
+        PrepareBuilder();
+        result.hasHatImage = false;
+        result.hatImage_ = "";
+        return this;
+      }
+
+      public bool HasSore {
+        get { return result.hasSore; }
+      }
+      public int Sore {
+        get { return result.Sore; }
+        set { SetSore(value); }
+      }
+      public Builder SetSore(int value) {
+        PrepareBuilder();
+        result.hasSore = true;
+        result.sore_ = value;
+        return this;
+      }
+      public Builder ClearSore() {
+        PrepareBuilder();
+        result.hasSore = false;
+        result.sore_ = 0;
+        return this;
+      }
+
+      public bool HasSex {
+        get { return result.hasSex; }
+      }
+      public int Sex {
+        get { return result.Sex; }
+        set { SetSex(value); }
+      }
+      public Builder SetSex(int value) {
+        PrepareBuilder();
+        result.hasSex = true;
+        result.sex_ = value;
+        return this;
+      }
+      public Builder ClearSex() {
+        PrepareBuilder();
+        result.hasSex = false;
+        result.sex_ = 0;
         return this;
       }
     }
