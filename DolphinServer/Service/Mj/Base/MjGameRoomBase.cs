@@ -1,4 +1,6 @@
 ﻿using DolphinServer.Entity;
+using DolphinServer.ProtoEntity;
+using Free.Dolphin.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +24,8 @@ namespace DolphinServer.Service.Mj
         /// </summary>
         public int JuShu { get; set; }
         private SpinLock roomLock = new SpinLock();
+
+
         /// <summary>
         /// 玩家集合
         /// </summary>
@@ -96,6 +100,22 @@ namespace DolphinServer.Service.Mj
                 RandCard();
                 SendCard();
             }
+            else
+            {
+                //断线重连
+                var tempPlayer = Players.First;
+                int playerLen = Players.Count;
+                A1019Response.Builder response = A1019Response.CreateBuilder();
+                response.Uid = userId;
+                byte[] responseArray = response.Build().ToByteArray();
+
+                for (int i = 0; i < playerLen; i++)
+                {
+                    WebSocketServerWrappe.SendPackgeWithUser(tempPlayer.Value.PlayerUser.Uid, 1019, responseArray);
+                    tempPlayer = player.Next;
+                }
+               
+            }
         }
 
         public virtual void ReLoadGame()
@@ -150,6 +170,18 @@ namespace DolphinServer.Service.Mj
             {
                 if (llNodeListLocked)
                     roomLock.Exit();
+            }
+        }
+
+        public void SendMessage(string uid, string message)
+        {
+            A1100Response.Builder response = A1100Response.CreateBuilder();
+            response.Uid = uid;
+            response.Message = message;
+            byte[] responseByte = response.Build().ToByteArray();
+            foreach (var row in this.Players)
+            {
+                WebSocketServerWrappe.SendPackgeWithUser(row.PlayerUser.Uid, 1100, responseByte);
             }
         }
     }

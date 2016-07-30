@@ -74,5 +74,10 @@ namespace DolphinServer.Controller
         /// </summary>
         Controller1017 = 1017,
 
+        /// <summary>
+        /// 聊天接收
+        /// </summary>
+        Controller1100 = 1100
+
     }
 }

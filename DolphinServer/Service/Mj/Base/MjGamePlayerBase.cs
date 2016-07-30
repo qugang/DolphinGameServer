@@ -14,7 +14,10 @@ namespace DolphinServer.Service.Mj
         public ManualResetEvent ResetEvent = new ManualResetEvent(false);
 
 
-        
+        /// <summary>
+        /// 解散房间
+        /// </summary>
+        public Boolean Cancel { get; set; }
         /// <summary>
         /// 玩家分数
         /// </summary>

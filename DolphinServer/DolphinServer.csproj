@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -61,13 +62,13 @@
     <Compile Include="Controller\Controller1009.cs" />
     <Compile Include="Controller\Controller1010.cs" />
     <Compile Include="Controller\Controller1011.cs" />
-    <Compile Include="Controller\Controller1011bak.cs" />
     <Compile Include="Controller\Controller1012.cs" />
     <Compile Include="Controller\Controller1013.cs" />
     <Compile Include="Controller\Controller1014.cs" />
     <Compile Include="Controller\Controller1015.cs" />
     <Compile Include="Controller\Controller1016.cs" />
     <Compile Include="Controller\Controller1017.cs" />
+    <Compile Include="Controller\Controller1100.cs" />
     <Compile Include="Controller\ControllerType.cs" />
     <Compile Include="Controller\ErrorInfo.cs" />
     <Compile Include="Entity\GameRank.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="ProtoEntity\A1001Response.cs" />
     <Compile Include="ProtoEntity\A1002Response.cs" />
     <Compile Include="ProtoEntity\A1003Response.cs" />
+    <Compile Include="ProtoEntity\A1004Response.cs" />
     <Compile Include="ProtoEntity\A1005Response.cs" />
     <Compile Include="ProtoEntity\A1006Response.cs" />
     <Compile Include="ProtoEntity\A1007Response.cs" />
@@ -91,9 +93,10 @@
     <Compile Include="ProtoEntity\A1017Response.cs" />
     <Compile Include="ProtoEntity\A1018Response.cs" />
     <Compile Include="ProtoEntity\A1019Response.cs" />
+    <Compile Include="ProtoEntity\A1100Response.cs" />
+    <Compile Include="ProtoEntity\A9997ClientConnectionResponse.cs" />
     <Compile Include="ProtoEntity\A9998ClientCloseResponse.cs" />
     <Compile Include="ProtoEntity\A9999DataErrorResponse.cs" />
-    <Compile Include="Service\chat\ChatRoom.cs" />
     <Compile Include="Service\Mj\CsGamePlayer.cs" />
     <Compile Include="Service\Mj\CsGameRoom.cs" />
     <Compile Include="Service\Mj\CsGameRoomManager.cs" />
@@ -119,6 +122,7 @@
   <ItemGroup>
     <Content Include="ProtoEntity\A1001Response.txt" />
     <Content Include="ProtoEntity\A1002Response.txt" />
+    <Content Include="ProtoEntity\A1004Response.txt" />
     <Content Include="ProtoEntity\A1003Response.txt" />
     <Content Include="ProtoEntity\A1005Response.txt" />
     <Content Include="ProtoEntity\A1006Response.txt" />
@@ -134,7 +138,9 @@
     <Content Include="ProtoEntity\A1014Response.txt" />
     <Content Include="ProtoEntity\A1013Response.txt" />
     <Content Include="ProtoEntity\A1018Response.txt" />
+    <Content Include="ProtoEntity\A1100Response.txt" />
     <Content Include="ProtoEntity\A1019Response.txt" />
+    <Content Include="ProtoEntity\A9997ClientConnectionResponse.txt" />
     <Content Include="ProtoEntity\A9998ClientCloseResponse.txt" />
     <Content Include="ProtoEntity\A9999DataErrorResponse.txt" />
     <Content Include="ProtoEntity\cmd.txt" />

@@ -1,6 +1,7 @@
 ﻿protoc -I=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity --csharp_out=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\ E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\A1001Response.txt
 protoc -I=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity --csharp_out=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\ E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\A1002Response.txt
 protoc -I=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity --csharp_out=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\ E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\A1003Response.txt
+protoc -I=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity --csharp_out=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\ E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\A1004Response.txt
 protoc -I=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity --csharp_out=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\ E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\A1006Response.txt
 protoc -I=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity --csharp_out=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\ E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\A1007Response.txt
 protoc -I=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity --csharp_out=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\ E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\A1008Response.txt
@@ -15,8 +16,10 @@ protoc -I=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntit
 protoc -I=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity --csharp_out=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\ E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\A1017Response.txt
 protoc -I=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity --csharp_out=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\ E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\A1018Response.txt
 protoc -I=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity --csharp_out=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\ E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\A1019Response.txt
+protoc -I=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity --csharp_out=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\ E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\A1100Response.txt
 protoc -I=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity --csharp_out=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\ E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\A9999DataErrorResponse.txt
 protoc -I=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity --csharp_out=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\ E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\A9998ClientCloseResponse.txt
+protoc -I=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity --csharp_out=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\ E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\A9997ClientConnectionResponse.txt
 
 
 1001 用户登录返回信息
@@ -36,4 +39,7 @@ protoc -I=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntit
 1016 海底
 1017 摸海底
 1018 没人要海底
+1019 准备
+1100 聊天信息返回
+9997 客户端重新连接
 9998 客户端断开连接

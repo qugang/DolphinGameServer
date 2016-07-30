@@ -42,6 +42,14 @@ namespace DolphinServer.Controller
                     response.RoomId = room.RoomId;
                     response.RoomType = room.RoomType;
 
+
+                    A9997ClientConnectionResponse.Builder a9997Response =
+                        A9997ClientConnectionResponse.CreateBuilder();
+
+                    a9997Response.Uid = user.Uid;
+
+                    byte[] a9997Array = a9997Response.Build().ToByteArray();
+
                     foreach (var row in room.Players)
                     {
 
@@ -92,6 +100,9 @@ namespace DolphinServer.Controller
                         roomUser.Score = row.Score;
                         roomUser.Sore = row.Score;
                         response.AddUsers(roomUser);
+
+                        WebSocketServerWrappe.SendPackgeWithUser(row.PlayerUser.Uid, 9997, a9997Array);
+
                     }
 
                     if (room.JuShu != 0)

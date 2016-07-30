@@ -1,4 +1,5 @@
-﻿using Free.Dolphin.Core;
+﻿using DolphinServer.Service.Mj;
+using Free.Dolphin.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,18 @@ namespace DolphinServer.Controller
 
         public override byte[] ProcessAction()
         {
-            throw new NotImplementedException();
+            string uid = Context.Session.User.Uid;
+            int roomId = int.Parse(Context.HttpQueryString["RoomID"]);
+            int cancelType = int.Parse(Context.HttpQueryString["cancelType"]);
+            if (cancelType == 0)
+            {
+                CsGameRoomManager.Cancel(uid, roomId);
+            }
+            else
+            {
+                CsGameRoomManager.RevokeCancel(uid, roomId);
+            }
+            return null;
         }
     }
 }

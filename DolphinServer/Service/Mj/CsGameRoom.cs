@@ -315,9 +315,9 @@ namespace DolphinServer.Service.Mj
                     row.ResetEvent.WaitOne();
                 }
             }
-
-            //牌未被彭吃杠
-            if (this.OutCardState == OutCardState.Normal)
+            
+            //牌未被彭吃杠并且打牌的人为当前吃的玩家的上手
+            if (this.OutCardState == OutCardState.Normal && this.Player.Value.PlayerUser.Uid == node.PreviousOrLast().Value.PlayerUser.Uid)
             {
                 this.OutCardState = OutCardState.Chi;
                 LogManager.Log.Debug("牌可以吃");
@@ -358,7 +358,7 @@ namespace DolphinServer.Service.Mj
 
 
             //牌未被胡
-            if (this.OutCardState == OutCardState.Normal)
+            if (this.OutCardState == OutCardState.Normal )
             {
 
                 this.OutCardState = OutCardState.Gang;
@@ -553,7 +553,6 @@ namespace DolphinServer.Service.Mj
             this.isFrist = false;
             this.Player.Value.DaCard(card);
             this.OutCardState = OutCardState.Normal;
-
             A1007Response.Builder response = A1007Response.CreateBuilder();
             response.Card = card;
             response.Uid = uid;

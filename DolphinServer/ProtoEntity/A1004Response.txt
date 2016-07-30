@@ -1,0 +1,11 @@
+syntax = "proto2";
+option csharp_namespace = "DolphinServer.ProtoEntity";
+message A1004Response{
+	optional string ErrorInfo = 1;
+	optional int32 ErrorCode = 2;
+	optional int32 RoomID = 4;
+	optional int32 RoomType = 5;
+	repeated string Users = 6;
+	optional int32 IsCancel = 7;
+}
+
