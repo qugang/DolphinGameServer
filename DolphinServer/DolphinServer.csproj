@@ -68,6 +68,8 @@
     <Compile Include="Controller\Controller1015.cs" />
     <Compile Include="Controller\Controller1016.cs" />
     <Compile Include="Controller\Controller1017.cs" />
+    <Compile Include="Controller\Controller1018.cs" />
+    <Compile Include="Controller\Controller1019.cs" />
     <Compile Include="Controller\Controller1100.cs" />
     <Compile Include="Controller\ControllerType.cs" />
     <Compile Include="Controller\ErrorInfo.cs" />
@@ -77,10 +79,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProtoEntity\A1001Response.cs" />
     <Compile Include="ProtoEntity\A1002Response.cs" />
-    <Compile Include="ProtoEntity\A1003Response.cs" />
+    <Compile Include="ProtoEntity\A1003AndA1006Response.cs" />
     <Compile Include="ProtoEntity\A1004Response.cs" />
     <Compile Include="ProtoEntity\A1005Response.cs" />
-    <Compile Include="ProtoEntity\A1006Response.cs" />
     <Compile Include="ProtoEntity\A1007Response.cs" />
     <Compile Include="ProtoEntity\A1008Response.cs" />
     <Compile Include="ProtoEntity\A1010Response.cs" />
@@ -93,6 +94,8 @@
     <Compile Include="ProtoEntity\A1017Response.cs" />
     <Compile Include="ProtoEntity\A1018Response.cs" />
     <Compile Include="ProtoEntity\A1019Response.cs" />
+    <Compile Include="ProtoEntity\A1020Response.cs" />
+    <Compile Include="ProtoEntity\A1021Response.cs" />
     <Compile Include="ProtoEntity\A1100Response.cs" />
     <Compile Include="ProtoEntity\A9997ClientConnectionResponse.cs" />
     <Compile Include="ProtoEntity\A9998ClientCloseResponse.cs" />
@@ -123,9 +126,8 @@
     <Content Include="ProtoEntity\A1001Response.txt" />
     <Content Include="ProtoEntity\A1002Response.txt" />
     <Content Include="ProtoEntity\A1004Response.txt" />
-    <Content Include="ProtoEntity\A1003Response.txt" />
+    <Content Include="ProtoEntity\A1003AndA1006Response.txt" />
     <Content Include="ProtoEntity\A1005Response.txt" />
-    <Content Include="ProtoEntity\A1006Response.txt" />
     <Content Include="ProtoEntity\A1007Response.txt" />
     <Content Include="ProtoEntity\A1008Response.txt" />
     <Content Include="ProtoEntity\A1009Responsebak.txt" />
@@ -138,6 +140,8 @@
     <Content Include="ProtoEntity\A1014Response.txt" />
     <Content Include="ProtoEntity\A1013Response.txt" />
     <Content Include="ProtoEntity\A1018Response.txt" />
+    <Content Include="ProtoEntity\A1021Response.txt" />
+    <Content Include="ProtoEntity\A1020Response.txt" />
     <Content Include="ProtoEntity\A1100Response.txt" />
     <Content Include="ProtoEntity\A1019Response.txt" />
     <Content Include="ProtoEntity\A9997ClientConnectionResponse.txt" />

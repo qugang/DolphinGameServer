@@ -1,0 +1,43 @@
+syntax = "proto2";
+option csharp_namespace = "DolphinServer.ProtoEntity";
+
+message A1003AndA1006Response{
+	optional string ErrorInfo = 1;
+	optional int32 ErrorCode = 2;
+	optional A1003Response A1003Req = 3;
+	optional A1006Response A1006Req = 4;
+	optional int32 RoomID = 5;
+	optional int32 RoomType = 6;
+}
+
+message A1006Response{
+    optional Player Player1 = 1;
+	optional Player Player2 = 2;
+	optional Player Player3 = 3;
+	optional Player Player4 = 4;
+	optional string ZhuangUid = 5;
+	optional int32 JuShu = 6;
+	optional int32 Zhangshu= 7;
+}
+
+message A1003Response{
+	repeated A1003User Users = 3;
+	optional int32 RoomID = 4;
+	optional int32 RoomType = 5;
+
+}
+
+message A1003User{
+	optional string Uid = 1;
+	optional string HatImage = 2;
+	optional int32 Sore = 3; 
+	optional int32 Zhuang = 4;
+	optional int32 Sex = 5;
+	optional int32 IsReady = 6;
+}
+
+
+message Player{
+	repeated int32 Card = 1;
+	optional int32 Score = 2;
+}

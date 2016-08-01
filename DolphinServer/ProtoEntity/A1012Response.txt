@@ -8,4 +8,5 @@ message A1012Response{
 	optional int32 Card1 = 5;
 	optional int32 Card2 = 6;
 	optional int32 CardCode = 7;
+	optional int32 GangType = 8;
 }

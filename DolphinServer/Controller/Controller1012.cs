@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace DolphinServer.Controller
 {
     /// <summary>
-    /// 碰
+    /// 杠
     /// </summary>
     [ControllerProtocol((int)ControllerType.Controller1012)]
     [ControllerAuth]
@@ -25,9 +25,16 @@ namespace DolphinServer.Controller
         {
             int card = int.Parse(Context.HttpQueryString["Card"]);
             int roomId = int.Parse(Context.HttpQueryString["RoomID"]);
-            string desUid = Context.HttpQueryString["DesUid"];
+            string desUid = Context.HttpQueryString.ContainsKey("DesUid") ? Context.HttpQueryString["DesUid"] : null;
             CsMjGameRoom room = CsGameRoomManager.GetRoomById(roomId);
-            room.Gang(Context.Session.User.Uid, desUid, card);
+            if (desUid != null)
+            {
+                room.Gang(Context.Session.User.Uid, desUid, card);
+            }
+            else
+            {
+                room.AnGang(Context.Session.User.Uid, card);
+            }
             return null;
         }
     }

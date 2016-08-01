@@ -1,8 +1,7 @@
 syntax = "proto2";
 option csharp_namespace = "DolphinServer.ProtoEntity";
-message A1015Response{
+message A1021Response{
 	optional string ErrorInfo = 1;
 	optional int32 ErrorCode = 2;
-	optional string Uid = 3;
-	optional int32 HuType = 4;
+	optional string Uid = 6;
 }

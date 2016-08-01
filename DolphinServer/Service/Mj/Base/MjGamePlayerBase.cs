@@ -81,6 +81,11 @@ namespace DolphinServer.Service.Mj
         /// </summary>
         public int twNumber { get; set; }
 
+        /// <summary>
+        /// 点炮次数
+        /// </summary>
+        public int DianPaoNumber { get; set; }
+
         public GameUser PlayerUser { get; set; }
 
         public MjGamePlayerBase(GameUser user)

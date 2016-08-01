@@ -68,7 +68,7 @@ namespace DolphinServer.Controller
         /// 海底摸牌
         /// </summary>
         Controller1016 = 1016,
-     
+
         /// <summary>
         /// 海底过
         /// </summary>
@@ -77,7 +77,17 @@ namespace DolphinServer.Controller
         /// <summary>
         /// 聊天接收
         /// </summary>
-        Controller1100 = 1100
+        Controller1100 = 1100,
+
+        /// <summary>
+        /// 杠打牌
+        /// </summary>
+        Controller1018 = 1018,
+
+        /// <summary>
+        /// 抓炮结果
+        /// </summary>
+        Controller1019 = 1019,
 
     }
 }

@@ -31,18 +31,20 @@ namespace DolphinServer.ProtoEntity {
       static A1014Response() {
         byte[] descriptorData = global::System.Convert.FromBase64String(
             string.Concat(
-              "ChFBMTAxNFJlc3BvbnNlLnR4dCK8AQoNQTEwMTRSZXNwb25zZRIRCglFcnJv", 
+              "ChFBMTAxNFJlc3BvbnNlLnR4dCKVAgoNQTEwMTRSZXNwb25zZRIRCglFcnJv", 
               "ckluZm8YASABKAkSEQoJRXJyb3JDb2RlGAIgASgFEgsKA1VpZBgDIAEoCRIO", 
               "CgZIdVR5cGUYBCABKAUSDQoFU2NvcmUYBSABKAUSEgoKVG90YWxTY29yZRgG", 
               "IAEoBRIOCgZEZXNVaWQYByABKAkSEAoIRGVzU2NvcmUYCCABKAUSDAoEQ2Fy", 
-              "ZBgJIAEoBRIVCg1EZXNUb3RhbFNjb3JlGAogASgFQhyqAhlEb2xwaGluU2Vy", 
-            "dmVyLlByb3RvRW50aXR5"));
+              "ZBgJIAEoBRINCgVDYXJkMRgKIAEoBRIVCg1EZXNUb3RhbFNjb3JlGAsgASgF", 
+              "EhEKCU5pYW9DYXJkMRgMIAEoBRIRCglOaWFvQ2FyZDIYDSABKAUSEAoITmlh", 
+              "b1VpZDEYDiABKAkSEAoITmlhb1VpZDIYDyABKAlCHKoCGURvbHBoaW5TZXJ2", 
+            "ZXIuUHJvdG9FbnRpdHk="));
         pbd::FileDescriptor.InternalDescriptorAssigner assigner = delegate(pbd::FileDescriptor root) {
           descriptor = root;
           internal__static_A1014Response__Descriptor = Descriptor.MessageTypes[0];
           internal__static_A1014Response__FieldAccessorTable = 
               new pb::FieldAccess.FieldAccessorTable<global::DolphinServer.ProtoEntity.A1014Response, global::DolphinServer.ProtoEntity.A1014Response.Builder>(internal__static_A1014Response__Descriptor,
-                  new string[] { "ErrorInfo", "ErrorCode", "Uid", "HuType", "Score", "TotalScore", "DesUid", "DesScore", "Card", "DesTotalScore", });
+                  new string[] { "ErrorInfo", "ErrorCode", "Uid", "HuType", "Score", "TotalScore", "DesUid", "DesScore", "Card", "Card1", "DesTotalScore", "NiaoCard1", "NiaoCard2", "NiaoUid1", "NiaoUid2", });
           pb::ExtensionRegistry registry = pb::ExtensionRegistry.CreateInstance();
           RegisterAllExtensions(registry);
           return registry;
@@ -60,8 +62,8 @@ namespace DolphinServer.ProtoEntity {
   public sealed partial class A1014Response : pb::GeneratedMessage<A1014Response, A1014Response.Builder> {
     private A1014Response() { }
     private static readonly A1014Response defaultInstance = new A1014Response().MakeReadOnly();
-    private static readonly string[] _a1014ResponseFieldNames = new string[] { "Card", "DesScore", "DesTotalScore", "DesUid", "ErrorCode", "ErrorInfo", "HuType", "Score", "TotalScore", "Uid" };
-    private static readonly uint[] _a1014ResponseFieldTags = new uint[] { 72, 64, 80, 58, 16, 10, 32, 40, 48, 26 };
+    private static readonly string[] _a1014ResponseFieldNames = new string[] { "Card", "Card1", "DesScore", "DesTotalScore", "DesUid", "ErrorCode", "ErrorInfo", "HuType", "NiaoCard1", "NiaoCard2", "NiaoUid1", "NiaoUid2", "Score", "TotalScore", "Uid" };
+    private static readonly uint[] _a1014ResponseFieldTags = new uint[] { 72, 80, 64, 88, 58, 16, 10, 32, 96, 104, 114, 122, 40, 48, 26 };
     public static A1014Response DefaultInstance {
       get { return defaultInstance; }
     }
@@ -172,7 +174,17 @@ namespace DolphinServer.ProtoEntity {
       get { return card_; }
     }
 
-    public const int DesTotalScoreFieldNumber = 10;
+    public const int Card1FieldNumber = 10;
+    private bool hasCard1;
+    private int card1_;
+    public bool HasCard1 {
+      get { return hasCard1; }
+    }
+    public int Card1 {
+      get { return card1_; }
+    }
+
+    public const int DesTotalScoreFieldNumber = 11;
     private bool hasDesTotalScore;
     private int desTotalScore_;
     public bool HasDesTotalScore {
@@ -180,6 +192,46 @@ namespace DolphinServer.ProtoEntity {
     }
     public int DesTotalScore {
       get { return desTotalScore_; }
+    }
+
+    public const int NiaoCard1FieldNumber = 12;
+    private bool hasNiaoCard1;
+    private int niaoCard1_;
+    public bool HasNiaoCard1 {
+      get { return hasNiaoCard1; }
+    }
+    public int NiaoCard1 {
+      get { return niaoCard1_; }
+    }
+
+    public const int NiaoCard2FieldNumber = 13;
+    private bool hasNiaoCard2;
+    private int niaoCard2_;
+    public bool HasNiaoCard2 {
+      get { return hasNiaoCard2; }
+    }
+    public int NiaoCard2 {
+      get { return niaoCard2_; }
+    }
+
+    public const int NiaoUid1FieldNumber = 14;
+    private bool hasNiaoUid1;
+    private string niaoUid1_ = "";
+    public bool HasNiaoUid1 {
+      get { return hasNiaoUid1; }
+    }
+    public string NiaoUid1 {
+      get { return niaoUid1_; }
+    }
+
+    public const int NiaoUid2FieldNumber = 15;
+    private bool hasNiaoUid2;
+    private string niaoUid2_ = "";
+    public bool HasNiaoUid2 {
+      get { return hasNiaoUid2; }
+    }
+    public string NiaoUid2 {
+      get { return niaoUid2_; }
     }
 
     public override bool IsInitialized {
@@ -192,34 +244,49 @@ namespace DolphinServer.ProtoEntity {
       CalcSerializedSize();
       string[] field_names = _a1014ResponseFieldNames;
       if (hasErrorInfo) {
-        output.WriteString(1, field_names[5], ErrorInfo);
+        output.WriteString(1, field_names[6], ErrorInfo);
       }
       if (hasErrorCode) {
-        output.WriteInt32(2, field_names[4], ErrorCode);
+        output.WriteInt32(2, field_names[5], ErrorCode);
       }
       if (hasUid) {
-        output.WriteString(3, field_names[9], Uid);
+        output.WriteString(3, field_names[14], Uid);
       }
       if (hasHuType) {
-        output.WriteInt32(4, field_names[6], HuType);
+        output.WriteInt32(4, field_names[7], HuType);
       }
       if (hasScore) {
-        output.WriteInt32(5, field_names[7], Score);
+        output.WriteInt32(5, field_names[12], Score);
       }
       if (hasTotalScore) {
-        output.WriteInt32(6, field_names[8], TotalScore);
+        output.WriteInt32(6, field_names[13], TotalScore);
       }
       if (hasDesUid) {
-        output.WriteString(7, field_names[3], DesUid);
+        output.WriteString(7, field_names[4], DesUid);
       }
       if (hasDesScore) {
-        output.WriteInt32(8, field_names[1], DesScore);
+        output.WriteInt32(8, field_names[2], DesScore);
       }
       if (hasCard) {
         output.WriteInt32(9, field_names[0], Card);
       }
+      if (hasCard1) {
+        output.WriteInt32(10, field_names[1], Card1);
+      }
       if (hasDesTotalScore) {
-        output.WriteInt32(10, field_names[2], DesTotalScore);
+        output.WriteInt32(11, field_names[3], DesTotalScore);
+      }
+      if (hasNiaoCard1) {
+        output.WriteInt32(12, field_names[8], NiaoCard1);
+      }
+      if (hasNiaoCard2) {
+        output.WriteInt32(13, field_names[9], NiaoCard2);
+      }
+      if (hasNiaoUid1) {
+        output.WriteString(14, field_names[10], NiaoUid1);
+      }
+      if (hasNiaoUid2) {
+        output.WriteString(15, field_names[11], NiaoUid2);
       }
       UnknownFields.WriteTo(output);
     }
@@ -265,8 +332,23 @@ namespace DolphinServer.ProtoEntity {
       if (hasCard) {
         size += pb::CodedOutputStream.ComputeInt32Size(9, Card);
       }
+      if (hasCard1) {
+        size += pb::CodedOutputStream.ComputeInt32Size(10, Card1);
+      }
       if (hasDesTotalScore) {
-        size += pb::CodedOutputStream.ComputeInt32Size(10, DesTotalScore);
+        size += pb::CodedOutputStream.ComputeInt32Size(11, DesTotalScore);
+      }
+      if (hasNiaoCard1) {
+        size += pb::CodedOutputStream.ComputeInt32Size(12, NiaoCard1);
+      }
+      if (hasNiaoCard2) {
+        size += pb::CodedOutputStream.ComputeInt32Size(13, NiaoCard2);
+      }
+      if (hasNiaoUid1) {
+        size += pb::CodedOutputStream.ComputeStringSize(14, NiaoUid1);
+      }
+      if (hasNiaoUid2) {
+        size += pb::CodedOutputStream.ComputeStringSize(15, NiaoUid2);
       }
       size += UnknownFields.SerializedSize;
       memoizedSerializedSize = size;
@@ -417,8 +499,23 @@ namespace DolphinServer.ProtoEntity {
         if (other.HasCard) {
           Card = other.Card;
         }
+        if (other.HasCard1) {
+          Card1 = other.Card1;
+        }
         if (other.HasDesTotalScore) {
           DesTotalScore = other.DesTotalScore;
+        }
+        if (other.HasNiaoCard1) {
+          NiaoCard1 = other.NiaoCard1;
+        }
+        if (other.HasNiaoCard2) {
+          NiaoCard2 = other.NiaoCard2;
+        }
+        if (other.HasNiaoUid1) {
+          NiaoUid1 = other.NiaoUid1;
+        }
+        if (other.HasNiaoUid2) {
+          NiaoUid2 = other.NiaoUid2;
         }
         this.MergeUnknownFields(other.UnknownFields);
         return this;
@@ -500,7 +597,27 @@ namespace DolphinServer.ProtoEntity {
               break;
             }
             case 80: {
+              result.hasCard1 = input.ReadInt32(ref result.card1_);
+              break;
+            }
+            case 88: {
               result.hasDesTotalScore = input.ReadInt32(ref result.desTotalScore_);
+              break;
+            }
+            case 96: {
+              result.hasNiaoCard1 = input.ReadInt32(ref result.niaoCard1_);
+              break;
+            }
+            case 104: {
+              result.hasNiaoCard2 = input.ReadInt32(ref result.niaoCard2_);
+              break;
+            }
+            case 114: {
+              result.hasNiaoUid1 = input.ReadString(ref result.niaoUid1_);
+              break;
+            }
+            case 122: {
+              result.hasNiaoUid2 = input.ReadString(ref result.niaoUid2_);
               break;
             }
           }
@@ -696,6 +813,26 @@ namespace DolphinServer.ProtoEntity {
         return this;
       }
 
+      public bool HasCard1 {
+        get { return result.hasCard1; }
+      }
+      public int Card1 {
+        get { return result.Card1; }
+        set { SetCard1(value); }
+      }
+      public Builder SetCard1(int value) {
+        PrepareBuilder();
+        result.hasCard1 = true;
+        result.card1_ = value;
+        return this;
+      }
+      public Builder ClearCard1() {
+        PrepareBuilder();
+        result.hasCard1 = false;
+        result.card1_ = 0;
+        return this;
+      }
+
       public bool HasDesTotalScore {
         get { return result.hasDesTotalScore; }
       }
@@ -713,6 +850,88 @@ namespace DolphinServer.ProtoEntity {
         PrepareBuilder();
         result.hasDesTotalScore = false;
         result.desTotalScore_ = 0;
+        return this;
+      }
+
+      public bool HasNiaoCard1 {
+        get { return result.hasNiaoCard1; }
+      }
+      public int NiaoCard1 {
+        get { return result.NiaoCard1; }
+        set { SetNiaoCard1(value); }
+      }
+      public Builder SetNiaoCard1(int value) {
+        PrepareBuilder();
+        result.hasNiaoCard1 = true;
+        result.niaoCard1_ = value;
+        return this;
+      }
+      public Builder ClearNiaoCard1() {
+        PrepareBuilder();
+        result.hasNiaoCard1 = false;
+        result.niaoCard1_ = 0;
+        return this;
+      }
+
+      public bool HasNiaoCard2 {
+        get { return result.hasNiaoCard2; }
+      }
+      public int NiaoCard2 {
+        get { return result.NiaoCard2; }
+        set { SetNiaoCard2(value); }
+      }
+      public Builder SetNiaoCard2(int value) {
+        PrepareBuilder();
+        result.hasNiaoCard2 = true;
+        result.niaoCard2_ = value;
+        return this;
+      }
+      public Builder ClearNiaoCard2() {
+        PrepareBuilder();
+        result.hasNiaoCard2 = false;
+        result.niaoCard2_ = 0;
+        return this;
+      }
+
+      public bool HasNiaoUid1 {
+        get { return result.hasNiaoUid1; }
+      }
+      public string NiaoUid1 {
+        get { return result.NiaoUid1; }
+        set { SetNiaoUid1(value); }
+      }
+      public Builder SetNiaoUid1(string value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasNiaoUid1 = true;
+        result.niaoUid1_ = value;
+        return this;
+      }
+      public Builder ClearNiaoUid1() {
+        PrepareBuilder();
+        result.hasNiaoUid1 = false;
+        result.niaoUid1_ = "";
+        return this;
+      }
+
+      public bool HasNiaoUid2 {
+        get { return result.hasNiaoUid2; }
+      }
+      public string NiaoUid2 {
+        get { return result.NiaoUid2; }
+        set { SetNiaoUid2(value); }
+      }
+      public Builder SetNiaoUid2(string value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasNiaoUid2 = true;
+        result.niaoUid2_ = value;
+        return this;
+      }
+      public Builder ClearNiaoUid2() {
+        PrepareBuilder();
+        result.hasNiaoUid2 = false;
+        result.niaoUid2_ = "";
         return this;
       }
     }

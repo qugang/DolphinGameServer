@@ -35,7 +35,7 @@ namespace DolphinServer.Service.Mj
         {
             CsMjGameRoom room = null;
             rooms.TryGetValue(roomId, out room);
-            room.BeginGame(user.Uid);
+            room.BeginGame(user.Uid,false);
             return room;
         }
 

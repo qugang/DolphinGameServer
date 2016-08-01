@@ -49,6 +49,7 @@ namespace Free.Dolphin.Core
 
                         if (message == "ping")
                         {
+                            Console.WriteLine(message);
                             return;
                         }
 
