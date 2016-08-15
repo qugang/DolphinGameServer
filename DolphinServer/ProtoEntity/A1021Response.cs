@@ -21,6 +21,8 @@ namespace DolphinServer.ProtoEntity {
       #region Static variables
       internal static pbd::MessageDescriptor internal__static_A1021Response__Descriptor;
       internal static pb::FieldAccess.FieldAccessorTable<global::DolphinServer.ProtoEntity.A1021Response, global::DolphinServer.ProtoEntity.A1021Response.Builder> internal__static_A1021Response__FieldAccessorTable;
+      internal static pbd::MessageDescriptor internal__static_A1021User__Descriptor;
+      internal static pb::FieldAccess.FieldAccessorTable<global::DolphinServer.ProtoEntity.A1021User, global::DolphinServer.ProtoEntity.A1021User.Builder> internal__static_A1021User__FieldAccessorTable;
       #endregion
       #region Descriptor
       public static pbd::FileDescriptor Descriptor {
@@ -31,15 +33,23 @@ namespace DolphinServer.ProtoEntity {
       static A1021Response() {
         byte[] descriptorData = global::System.Convert.FromBase64String(
             string.Concat(
-              "ChFBMTAyMVJlc3BvbnNlLnR4dCJCCg1BMTAyMVJlc3BvbnNlEhEKCUVycm9y", 
-              "SW5mbxgBIAEoCRIRCglFcnJvckNvZGUYAiABKAUSCwoDVWlkGAYgASgJQhyq", 
-            "AhlEb2xwaGluU2VydmVyLlByb3RvRW50aXR5"));
+              "ChFBMTAyMVJlc3BvbnNlLnR4dCKaAQoNQTEwMjFSZXNwb25zZRIRCglFcnJv", 
+              "ckluZm8YASABKAkSEQoJRXJyb3JDb2RlGAIgASgFEhEKCU5pYW9DYXJkMRgE", 
+              "IAEoBRIRCglOaWFvQ2FyZDIYBSABKAUSEAoITmlhb1VpZDEYBiABKAkSEAoI", 
+              "Tmlhb1VpZDIYByABKAkSGQoFVXNlcnMYCCADKAsyCi5BMTAyMVVzZXIiSwoJ", 
+              "QTEwMjFVc2VyEgsKA1VpZBgBIAEoCRINCgVTY29yZRgCIAEoBRISCgpUb3Rh", 
+              "bFNjb3JlGAMgASgFEg4KBkh1VHlwZRgEIAEoBUIcqgIZRG9scGhpblNlcnZl", 
+            "ci5Qcm90b0VudGl0eQ=="));
         pbd::FileDescriptor.InternalDescriptorAssigner assigner = delegate(pbd::FileDescriptor root) {
           descriptor = root;
           internal__static_A1021Response__Descriptor = Descriptor.MessageTypes[0];
           internal__static_A1021Response__FieldAccessorTable = 
               new pb::FieldAccess.FieldAccessorTable<global::DolphinServer.ProtoEntity.A1021Response, global::DolphinServer.ProtoEntity.A1021Response.Builder>(internal__static_A1021Response__Descriptor,
-                  new string[] { "ErrorInfo", "ErrorCode", "Uid", });
+                  new string[] { "ErrorInfo", "ErrorCode", "NiaoCard1", "NiaoCard2", "NiaoUid1", "NiaoUid2", "Users", });
+          internal__static_A1021User__Descriptor = Descriptor.MessageTypes[1];
+          internal__static_A1021User__FieldAccessorTable = 
+              new pb::FieldAccess.FieldAccessorTable<global::DolphinServer.ProtoEntity.A1021User, global::DolphinServer.ProtoEntity.A1021User.Builder>(internal__static_A1021User__Descriptor,
+                  new string[] { "Uid", "Score", "TotalScore", "HuType", });
           pb::ExtensionRegistry registry = pb::ExtensionRegistry.CreateInstance();
           RegisterAllExtensions(registry);
           return registry;
@@ -57,8 +67,8 @@ namespace DolphinServer.ProtoEntity {
   public sealed partial class A1021Response : pb::GeneratedMessage<A1021Response, A1021Response.Builder> {
     private A1021Response() { }
     private static readonly A1021Response defaultInstance = new A1021Response().MakeReadOnly();
-    private static readonly string[] _a1021ResponseFieldNames = new string[] { "ErrorCode", "ErrorInfo", "Uid" };
-    private static readonly uint[] _a1021ResponseFieldTags = new uint[] { 16, 10, 50 };
+    private static readonly string[] _a1021ResponseFieldNames = new string[] { "ErrorCode", "ErrorInfo", "NiaoCard1", "NiaoCard2", "NiaoUid1", "NiaoUid2", "Users" };
+    private static readonly uint[] _a1021ResponseFieldTags = new uint[] { 16, 10, 32, 40, 50, 58, 66 };
     public static A1021Response DefaultInstance {
       get { return defaultInstance; }
     }
@@ -99,14 +109,56 @@ namespace DolphinServer.ProtoEntity {
       get { return errorCode_; }
     }
 
-    public const int UidFieldNumber = 6;
-    private bool hasUid;
-    private string uid_ = "";
-    public bool HasUid {
-      get { return hasUid; }
+    public const int NiaoCard1FieldNumber = 4;
+    private bool hasNiaoCard1;
+    private int niaoCard1_;
+    public bool HasNiaoCard1 {
+      get { return hasNiaoCard1; }
     }
-    public string Uid {
-      get { return uid_; }
+    public int NiaoCard1 {
+      get { return niaoCard1_; }
+    }
+
+    public const int NiaoCard2FieldNumber = 5;
+    private bool hasNiaoCard2;
+    private int niaoCard2_;
+    public bool HasNiaoCard2 {
+      get { return hasNiaoCard2; }
+    }
+    public int NiaoCard2 {
+      get { return niaoCard2_; }
+    }
+
+    public const int NiaoUid1FieldNumber = 6;
+    private bool hasNiaoUid1;
+    private string niaoUid1_ = "";
+    public bool HasNiaoUid1 {
+      get { return hasNiaoUid1; }
+    }
+    public string NiaoUid1 {
+      get { return niaoUid1_; }
+    }
+
+    public const int NiaoUid2FieldNumber = 7;
+    private bool hasNiaoUid2;
+    private string niaoUid2_ = "";
+    public bool HasNiaoUid2 {
+      get { return hasNiaoUid2; }
+    }
+    public string NiaoUid2 {
+      get { return niaoUid2_; }
+    }
+
+    public const int UsersFieldNumber = 8;
+    private pbc::PopsicleList<global::DolphinServer.ProtoEntity.A1021User> users_ = new pbc::PopsicleList<global::DolphinServer.ProtoEntity.A1021User>();
+    public scg::IList<global::DolphinServer.ProtoEntity.A1021User> UsersList {
+      get { return users_; }
+    }
+    public int UsersCount {
+      get { return users_.Count; }
+    }
+    public global::DolphinServer.ProtoEntity.A1021User GetUsers(int index) {
+      return users_[index];
     }
 
     public override bool IsInitialized {
@@ -124,8 +176,20 @@ namespace DolphinServer.ProtoEntity {
       if (hasErrorCode) {
         output.WriteInt32(2, field_names[0], ErrorCode);
       }
-      if (hasUid) {
-        output.WriteString(6, field_names[2], Uid);
+      if (hasNiaoCard1) {
+        output.WriteInt32(4, field_names[2], NiaoCard1);
+      }
+      if (hasNiaoCard2) {
+        output.WriteInt32(5, field_names[3], NiaoCard2);
+      }
+      if (hasNiaoUid1) {
+        output.WriteString(6, field_names[4], NiaoUid1);
+      }
+      if (hasNiaoUid2) {
+        output.WriteString(7, field_names[5], NiaoUid2);
+      }
+      if (users_.Count > 0) {
+        output.WriteMessageArray(8, field_names[6], users_);
       }
       UnknownFields.WriteTo(output);
     }
@@ -150,8 +214,20 @@ namespace DolphinServer.ProtoEntity {
       if (hasErrorCode) {
         size += pb::CodedOutputStream.ComputeInt32Size(2, ErrorCode);
       }
-      if (hasUid) {
-        size += pb::CodedOutputStream.ComputeStringSize(6, Uid);
+      if (hasNiaoCard1) {
+        size += pb::CodedOutputStream.ComputeInt32Size(4, NiaoCard1);
+      }
+      if (hasNiaoCard2) {
+        size += pb::CodedOutputStream.ComputeInt32Size(5, NiaoCard2);
+      }
+      if (hasNiaoUid1) {
+        size += pb::CodedOutputStream.ComputeStringSize(6, NiaoUid1);
+      }
+      if (hasNiaoUid2) {
+        size += pb::CodedOutputStream.ComputeStringSize(7, NiaoUid2);
+      }
+      foreach (global::DolphinServer.ProtoEntity.A1021User element in UsersList) {
+        size += pb::CodedOutputStream.ComputeMessageSize(8, element);
       }
       size += UnknownFields.SerializedSize;
       memoizedSerializedSize = size;
@@ -188,6 +264,7 @@ namespace DolphinServer.ProtoEntity {
       return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
     }
     private A1021Response MakeReadOnly() {
+      users_.MakeReadOnly();
       return this;
     }
 
@@ -281,8 +358,20 @@ namespace DolphinServer.ProtoEntity {
         if (other.HasErrorCode) {
           ErrorCode = other.ErrorCode;
         }
-        if (other.HasUid) {
-          Uid = other.Uid;
+        if (other.HasNiaoCard1) {
+          NiaoCard1 = other.NiaoCard1;
+        }
+        if (other.HasNiaoCard2) {
+          NiaoCard2 = other.NiaoCard2;
+        }
+        if (other.HasNiaoUid1) {
+          NiaoUid1 = other.NiaoUid1;
+        }
+        if (other.HasNiaoUid2) {
+          NiaoUid2 = other.NiaoUid2;
+        }
+        if (other.users_.Count != 0) {
+          result.users_.Add(other.users_);
         }
         this.MergeUnknownFields(other.UnknownFields);
         return this;
@@ -335,8 +424,24 @@ namespace DolphinServer.ProtoEntity {
               result.hasErrorCode = input.ReadInt32(ref result.errorCode_);
               break;
             }
+            case 32: {
+              result.hasNiaoCard1 = input.ReadInt32(ref result.niaoCard1_);
+              break;
+            }
+            case 40: {
+              result.hasNiaoCard2 = input.ReadInt32(ref result.niaoCard2_);
+              break;
+            }
             case 50: {
-              result.hasUid = input.ReadString(ref result.uid_);
+              result.hasNiaoUid1 = input.ReadString(ref result.niaoUid1_);
+              break;
+            }
+            case 58: {
+              result.hasNiaoUid2 = input.ReadString(ref result.niaoUid2_);
+              break;
+            }
+            case 66: {
+              input.ReadMessageArray(tag, field_name, result.users_, global::DolphinServer.ProtoEntity.A1021User.DefaultInstance, extensionRegistry);
               break;
             }
           }
@@ -390,6 +495,456 @@ namespace DolphinServer.ProtoEntity {
         return this;
       }
 
+      public bool HasNiaoCard1 {
+        get { return result.hasNiaoCard1; }
+      }
+      public int NiaoCard1 {
+        get { return result.NiaoCard1; }
+        set { SetNiaoCard1(value); }
+      }
+      public Builder SetNiaoCard1(int value) {
+        PrepareBuilder();
+        result.hasNiaoCard1 = true;
+        result.niaoCard1_ = value;
+        return this;
+      }
+      public Builder ClearNiaoCard1() {
+        PrepareBuilder();
+        result.hasNiaoCard1 = false;
+        result.niaoCard1_ = 0;
+        return this;
+      }
+
+      public bool HasNiaoCard2 {
+        get { return result.hasNiaoCard2; }
+      }
+      public int NiaoCard2 {
+        get { return result.NiaoCard2; }
+        set { SetNiaoCard2(value); }
+      }
+      public Builder SetNiaoCard2(int value) {
+        PrepareBuilder();
+        result.hasNiaoCard2 = true;
+        result.niaoCard2_ = value;
+        return this;
+      }
+      public Builder ClearNiaoCard2() {
+        PrepareBuilder();
+        result.hasNiaoCard2 = false;
+        result.niaoCard2_ = 0;
+        return this;
+      }
+
+      public bool HasNiaoUid1 {
+        get { return result.hasNiaoUid1; }
+      }
+      public string NiaoUid1 {
+        get { return result.NiaoUid1; }
+        set { SetNiaoUid1(value); }
+      }
+      public Builder SetNiaoUid1(string value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasNiaoUid1 = true;
+        result.niaoUid1_ = value;
+        return this;
+      }
+      public Builder ClearNiaoUid1() {
+        PrepareBuilder();
+        result.hasNiaoUid1 = false;
+        result.niaoUid1_ = "";
+        return this;
+      }
+
+      public bool HasNiaoUid2 {
+        get { return result.hasNiaoUid2; }
+      }
+      public string NiaoUid2 {
+        get { return result.NiaoUid2; }
+        set { SetNiaoUid2(value); }
+      }
+      public Builder SetNiaoUid2(string value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasNiaoUid2 = true;
+        result.niaoUid2_ = value;
+        return this;
+      }
+      public Builder ClearNiaoUid2() {
+        PrepareBuilder();
+        result.hasNiaoUid2 = false;
+        result.niaoUid2_ = "";
+        return this;
+      }
+
+      public pbc::IPopsicleList<global::DolphinServer.ProtoEntity.A1021User> UsersList {
+        get { return PrepareBuilder().users_; }
+      }
+      public int UsersCount {
+        get { return result.UsersCount; }
+      }
+      public global::DolphinServer.ProtoEntity.A1021User GetUsers(int index) {
+        return result.GetUsers(index);
+      }
+      public Builder SetUsers(int index, global::DolphinServer.ProtoEntity.A1021User value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.users_[index] = value;
+        return this;
+      }
+      public Builder SetUsers(int index, global::DolphinServer.ProtoEntity.A1021User.Builder builderForValue) {
+        pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
+        PrepareBuilder();
+        result.users_[index] = builderForValue.Build();
+        return this;
+      }
+      public Builder AddUsers(global::DolphinServer.ProtoEntity.A1021User value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.users_.Add(value);
+        return this;
+      }
+      public Builder AddUsers(global::DolphinServer.ProtoEntity.A1021User.Builder builderForValue) {
+        pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
+        PrepareBuilder();
+        result.users_.Add(builderForValue.Build());
+        return this;
+      }
+      public Builder AddRangeUsers(scg::IEnumerable<global::DolphinServer.ProtoEntity.A1021User> values) {
+        PrepareBuilder();
+        result.users_.Add(values);
+        return this;
+      }
+      public Builder ClearUsers() {
+        PrepareBuilder();
+        result.users_.Clear();
+        return this;
+      }
+    }
+    static A1021Response() {
+      object.ReferenceEquals(global::DolphinServer.ProtoEntity.Proto.A1021Response.Descriptor, null);
+    }
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+  public sealed partial class A1021User : pb::GeneratedMessage<A1021User, A1021User.Builder> {
+    private A1021User() { }
+    private static readonly A1021User defaultInstance = new A1021User().MakeReadOnly();
+    private static readonly string[] _a1021UserFieldNames = new string[] { "HuType", "Score", "TotalScore", "Uid" };
+    private static readonly uint[] _a1021UserFieldTags = new uint[] { 32, 16, 24, 10 };
+    public static A1021User DefaultInstance {
+      get { return defaultInstance; }
+    }
+
+    public override A1021User DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+
+    protected override A1021User ThisMessage {
+      get { return this; }
+    }
+
+    public static pbd::MessageDescriptor Descriptor {
+      get { return global::DolphinServer.ProtoEntity.Proto.A1021Response.internal__static_A1021User__Descriptor; }
+    }
+
+    protected override pb::FieldAccess.FieldAccessorTable<A1021User, A1021User.Builder> InternalFieldAccessors {
+      get { return global::DolphinServer.ProtoEntity.Proto.A1021Response.internal__static_A1021User__FieldAccessorTable; }
+    }
+
+    public const int UidFieldNumber = 1;
+    private bool hasUid;
+    private string uid_ = "";
+    public bool HasUid {
+      get { return hasUid; }
+    }
+    public string Uid {
+      get { return uid_; }
+    }
+
+    public const int ScoreFieldNumber = 2;
+    private bool hasScore;
+    private int score_;
+    public bool HasScore {
+      get { return hasScore; }
+    }
+    public int Score {
+      get { return score_; }
+    }
+
+    public const int TotalScoreFieldNumber = 3;
+    private bool hasTotalScore;
+    private int totalScore_;
+    public bool HasTotalScore {
+      get { return hasTotalScore; }
+    }
+    public int TotalScore {
+      get { return totalScore_; }
+    }
+
+    public const int HuTypeFieldNumber = 4;
+    private bool hasHuType;
+    private int huType_;
+    public bool HasHuType {
+      get { return hasHuType; }
+    }
+    public int HuType {
+      get { return huType_; }
+    }
+
+    public override bool IsInitialized {
+      get {
+        return true;
+      }
+    }
+
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      CalcSerializedSize();
+      string[] field_names = _a1021UserFieldNames;
+      if (hasUid) {
+        output.WriteString(1, field_names[3], Uid);
+      }
+      if (hasScore) {
+        output.WriteInt32(2, field_names[1], Score);
+      }
+      if (hasTotalScore) {
+        output.WriteInt32(3, field_names[2], TotalScore);
+      }
+      if (hasHuType) {
+        output.WriteInt32(4, field_names[0], HuType);
+      }
+      UnknownFields.WriteTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        return CalcSerializedSize();
+      }
+    }
+
+    private int CalcSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (hasUid) {
+        size += pb::CodedOutputStream.ComputeStringSize(1, Uid);
+      }
+      if (hasScore) {
+        size += pb::CodedOutputStream.ComputeInt32Size(2, Score);
+      }
+      if (hasTotalScore) {
+        size += pb::CodedOutputStream.ComputeInt32Size(3, TotalScore);
+      }
+      if (hasHuType) {
+        size += pb::CodedOutputStream.ComputeInt32Size(4, HuType);
+      }
+      size += UnknownFields.SerializedSize;
+      memoizedSerializedSize = size;
+      return size;
+    }
+    public static A1021User ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static A1021User ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static A1021User ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static A1021User ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static A1021User ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static A1021User ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    public static A1021User ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    public static A1021User ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    public static A1021User ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static A1021User ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private A1021User MakeReadOnly() {
+      return this;
+    }
+
+    public static Builder CreateBuilder() { return new Builder(); }
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    public static Builder CreateBuilder(A1021User prototype) {
+      return new Builder(prototype);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    public sealed partial class Builder : pb::GeneratedBuilder<A1021User, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(A1021User cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+
+      private bool resultIsReadOnly;
+      private A1021User result;
+
+      private A1021User PrepareBuilder() {
+        if (resultIsReadOnly) {
+          A1021User original = result;
+          result = new A1021User();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+
+      protected override A1021User MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+
+      public override pbd::MessageDescriptor DescriptorForType {
+        get { return global::DolphinServer.ProtoEntity.A1021User.Descriptor; }
+      }
+
+      public override A1021User DefaultInstanceForType {
+        get { return global::DolphinServer.ProtoEntity.A1021User.DefaultInstance; }
+      }
+
+      public override A1021User BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+
+      public override Builder MergeFrom(pb::IMessage other) {
+        if (other is A1021User) {
+          return MergeFrom((A1021User) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+
+      public override Builder MergeFrom(A1021User other) {
+        if (other == global::DolphinServer.ProtoEntity.A1021User.DefaultInstance) return this;
+        PrepareBuilder();
+        if (other.HasUid) {
+          Uid = other.Uid;
+        }
+        if (other.HasScore) {
+          Score = other.Score;
+        }
+        if (other.HasTotalScore) {
+          TotalScore = other.TotalScore;
+        }
+        if (other.HasHuType) {
+          HuType = other.HuType;
+        }
+        this.MergeUnknownFields(other.UnknownFields);
+        return this;
+      }
+
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        pb::UnknownFieldSet.Builder unknownFields = null;
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_a1021UserFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _a1021UserFieldTags[field_ordinal];
+            else {
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                if (unknownFields != null) {
+                  this.UnknownFields = unknownFields.Build();
+                }
+                return this;
+              }
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              break;
+            }
+            case 10: {
+              result.hasUid = input.ReadString(ref result.uid_);
+              break;
+            }
+            case 16: {
+              result.hasScore = input.ReadInt32(ref result.score_);
+              break;
+            }
+            case 24: {
+              result.hasTotalScore = input.ReadInt32(ref result.totalScore_);
+              break;
+            }
+            case 32: {
+              result.hasHuType = input.ReadInt32(ref result.huType_);
+              break;
+            }
+          }
+        }
+
+        if (unknownFields != null) {
+          this.UnknownFields = unknownFields.Build();
+        }
+        return this;
+      }
+
+
       public bool HasUid {
         get { return result.hasUid; }
       }
@@ -410,8 +965,68 @@ namespace DolphinServer.ProtoEntity {
         result.uid_ = "";
         return this;
       }
+
+      public bool HasScore {
+        get { return result.hasScore; }
+      }
+      public int Score {
+        get { return result.Score; }
+        set { SetScore(value); }
+      }
+      public Builder SetScore(int value) {
+        PrepareBuilder();
+        result.hasScore = true;
+        result.score_ = value;
+        return this;
+      }
+      public Builder ClearScore() {
+        PrepareBuilder();
+        result.hasScore = false;
+        result.score_ = 0;
+        return this;
+      }
+
+      public bool HasTotalScore {
+        get { return result.hasTotalScore; }
+      }
+      public int TotalScore {
+        get { return result.TotalScore; }
+        set { SetTotalScore(value); }
+      }
+      public Builder SetTotalScore(int value) {
+        PrepareBuilder();
+        result.hasTotalScore = true;
+        result.totalScore_ = value;
+        return this;
+      }
+      public Builder ClearTotalScore() {
+        PrepareBuilder();
+        result.hasTotalScore = false;
+        result.totalScore_ = 0;
+        return this;
+      }
+
+      public bool HasHuType {
+        get { return result.hasHuType; }
+      }
+      public int HuType {
+        get { return result.HuType; }
+        set { SetHuType(value); }
+      }
+      public Builder SetHuType(int value) {
+        PrepareBuilder();
+        result.hasHuType = true;
+        result.huType_ = value;
+        return this;
+      }
+      public Builder ClearHuType() {
+        PrepareBuilder();
+        result.hasHuType = false;
+        result.huType_ = 0;
+        return this;
+      }
     }
-    static A1021Response() {
+    static A1021User() {
       object.ReferenceEquals(global::DolphinServer.ProtoEntity.Proto.A1021Response.Descriptor, null);
     }
   }

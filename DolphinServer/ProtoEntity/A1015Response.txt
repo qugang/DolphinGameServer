@@ -4,5 +4,5 @@ message A1015Response{
 	optional string ErrorInfo = 1;
 	optional int32 ErrorCode = 2;
 	optional string Uid = 3;
-	optional int32 HuType = 4;
+	optional int32 HuType = 4; 
 }

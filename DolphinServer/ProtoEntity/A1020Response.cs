@@ -32,8 +32,8 @@ namespace DolphinServer.ProtoEntity {
         byte[] descriptorData = global::System.Convert.FromBase64String(
             string.Concat(
               "ChFBMTAyMFJlc3BvbnNlLnR4dCJgCg1BMTAyMFJlc3BvbnNlEhEKCUVycm9y", 
-              "SW5mbxgBIAEoCRIRCglFcnJvckNvZGUYAiABKAUSCwoDVWlkGAYgASgJEg0K", 
-              "BUNhcmQxGAcgASgFEg0KBUNhcmQyGAggASgFQhyqAhlEb2xwaGluU2VydmVy", 
+              "SW5mbxgBIAEoCRIRCglFcnJvckNvZGUYAiABKAUSCwoDVWlkGAMgASgJEg0K", 
+              "BUNhcmQxGAQgASgFEg0KBUNhcmQyGAUgASgFQhyqAhlEb2xwaGluU2VydmVy", 
             "LlByb3RvRW50aXR5"));
         pbd::FileDescriptor.InternalDescriptorAssigner assigner = delegate(pbd::FileDescriptor root) {
           descriptor = root;
@@ -59,7 +59,7 @@ namespace DolphinServer.ProtoEntity {
     private A1020Response() { }
     private static readonly A1020Response defaultInstance = new A1020Response().MakeReadOnly();
     private static readonly string[] _a1020ResponseFieldNames = new string[] { "Card1", "Card2", "ErrorCode", "ErrorInfo", "Uid" };
-    private static readonly uint[] _a1020ResponseFieldTags = new uint[] { 56, 64, 16, 10, 50 };
+    private static readonly uint[] _a1020ResponseFieldTags = new uint[] { 32, 40, 16, 10, 26 };
     public static A1020Response DefaultInstance {
       get { return defaultInstance; }
     }
@@ -100,7 +100,7 @@ namespace DolphinServer.ProtoEntity {
       get { return errorCode_; }
     }
 
-    public const int UidFieldNumber = 6;
+    public const int UidFieldNumber = 3;
     private bool hasUid;
     private string uid_ = "";
     public bool HasUid {
@@ -110,7 +110,7 @@ namespace DolphinServer.ProtoEntity {
       get { return uid_; }
     }
 
-    public const int Card1FieldNumber = 7;
+    public const int Card1FieldNumber = 4;
     private bool hasCard1;
     private int card1_;
     public bool HasCard1 {
@@ -120,7 +120,7 @@ namespace DolphinServer.ProtoEntity {
       get { return card1_; }
     }
 
-    public const int Card2FieldNumber = 8;
+    public const int Card2FieldNumber = 5;
     private bool hasCard2;
     private int card2_;
     public bool HasCard2 {
@@ -146,13 +146,13 @@ namespace DolphinServer.ProtoEntity {
         output.WriteInt32(2, field_names[2], ErrorCode);
       }
       if (hasUid) {
-        output.WriteString(6, field_names[4], Uid);
+        output.WriteString(3, field_names[4], Uid);
       }
       if (hasCard1) {
-        output.WriteInt32(7, field_names[0], Card1);
+        output.WriteInt32(4, field_names[0], Card1);
       }
       if (hasCard2) {
-        output.WriteInt32(8, field_names[1], Card2);
+        output.WriteInt32(5, field_names[1], Card2);
       }
       UnknownFields.WriteTo(output);
     }
@@ -178,13 +178,13 @@ namespace DolphinServer.ProtoEntity {
         size += pb::CodedOutputStream.ComputeInt32Size(2, ErrorCode);
       }
       if (hasUid) {
-        size += pb::CodedOutputStream.ComputeStringSize(6, Uid);
+        size += pb::CodedOutputStream.ComputeStringSize(3, Uid);
       }
       if (hasCard1) {
-        size += pb::CodedOutputStream.ComputeInt32Size(7, Card1);
+        size += pb::CodedOutputStream.ComputeInt32Size(4, Card1);
       }
       if (hasCard2) {
-        size += pb::CodedOutputStream.ComputeInt32Size(8, Card2);
+        size += pb::CodedOutputStream.ComputeInt32Size(5, Card2);
       }
       size += UnknownFields.SerializedSize;
       memoizedSerializedSize = size;
@@ -374,15 +374,15 @@ namespace DolphinServer.ProtoEntity {
               result.hasErrorCode = input.ReadInt32(ref result.errorCode_);
               break;
             }
-            case 50: {
+            case 26: {
               result.hasUid = input.ReadString(ref result.uid_);
               break;
             }
-            case 56: {
+            case 32: {
               result.hasCard1 = input.ReadInt32(ref result.card1_);
               break;
             }
-            case 64: {
+            case 40: {
               result.hasCard2 = input.ReadInt32(ref result.card2_);
               break;
             }

@@ -5,16 +5,8 @@ message A1014Response{
 	optional int32 ErrorCode = 2;
 	optional string Uid = 3;
 	optional int32 HuType = 4; 
-	optional int32 Score = 5;
-	optional int32 TotalScore = 6;
-	optional string DesUid = 7;
-	optional int32 DesScore = 8;
-	optional int32 Card = 9;
-	optional int32 Card1 =10;
-	optional int32 DesTotalScore = 11;
-	optional int32 NiaoCard1 = 12;
-	optional int32 NiaoCard2 = 13;
-	optional string NiaoUid1 = 14;
-	optional string NiaoUid2 = 15;
+	optional string DesUid = 5;
+	optional int32 Card1 = 6;
+	optional int32 Card2 = 7;
 }
 

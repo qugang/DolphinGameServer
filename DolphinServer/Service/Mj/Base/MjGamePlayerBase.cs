@@ -80,11 +80,7 @@ namespace DolphinServer.Service.Mj
         /// 用于描述手上加吃加碰的牌的张数，判断清一色时用
         /// </summary>
         public int twNumber { get; set; }
-
-        /// <summary>
-        /// 点炮次数
-        /// </summary>
-        public int DianPaoNumber { get; set; }
+        
 
         public GameUser PlayerUser { get; set; }
 

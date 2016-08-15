@@ -4,14 +4,16 @@ message A1013Response{
 	optional string ErrorInfo = 1;
 	optional int32 ErrorCode = 2;
 	optional string Uid = 3;
-	optional int32 HuType = 4; 
-	optional int32 Score = 5;
-	optional int32 TotalScore = 6;
 	repeated A1013User Users = 7;
+ 	optional int32 NiaoCard1 = 8;
+	optional int32 NiaoCard2 = 9;
+	optional string NiaoUid1 = 10;
+	optional string NiaoUid2 = 11;
 }
 
 message A1013User{
 	optional string Uid = 1;
 	optional int32 Score = 2;
 	optional int32 TotalScore = 3;
+	optional int32 HuType = 4;
 }

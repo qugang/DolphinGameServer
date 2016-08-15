@@ -3,5 +3,16 @@ option csharp_namespace = "DolphinServer.ProtoEntity";
 message A1021Response{
 	optional string ErrorInfo = 1;
 	optional int32 ErrorCode = 2;
-	optional string Uid = 6;
+	optional int32 NiaoCard1 = 4;
+	optional int32 NiaoCard2 = 5;
+	optional string NiaoUid1 = 6;
+	optional string NiaoUid2 = 7;
+	repeated A1021User Users = 8;
+}
+
+message A1021User{
+	optional string Uid = 1;
+	optional int32 Score = 2;
+	optional int32 TotalScore = 3;
+	optional int32 HuType = 4;
 }

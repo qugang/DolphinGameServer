@@ -89,5 +89,10 @@ namespace DolphinServer.Controller
         /// </summary>
         Controller1019 = 1019,
 
+        /// <summary>
+        /// 
+        /// </summary>
+        Controller1020 = 1020,
+
     }
 }

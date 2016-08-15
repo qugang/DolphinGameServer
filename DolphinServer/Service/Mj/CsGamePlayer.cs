@@ -12,7 +12,19 @@ namespace DolphinServer.Service.Mj
 
     public class CsGamePlayer : MjGamePlayerBase
     {
+        public int FirstHuType { get; set; }
+
         public int HuType { get; set; }
+
+        public int GetAllHuType() {
+            return FirstHuType | HuType;
+        }
+
+        public int SubScore { get; set; }
+
+        public int AddScore { get; set; }
+
+        public LinkedListNode<CsGamePlayer> DianPaoPlayer { get; set; }
 
         public CsGamePlayer(GameUser gameSession) : base(gameSession)
         {
