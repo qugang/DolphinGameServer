@@ -33,6 +33,11 @@ namespace DolphinServer.Service.Mj
         public List<int> GangCards { get; set; }
 
         /// <summary>
+        /// 补张
+        /// </summary>
+        public List<int> BuZhangCards { get; set; }
+
+        /// <summary>
         /// 碰的牌
         /// </summary>
         public List<int> PengCards { get; set; }
@@ -99,6 +104,7 @@ namespace DolphinServer.Service.Mj
             this.ChiCards = new List<int>();
             this.PengCards = new List<int>();
             this.GangCards = new List<int>();
+            this.BuZhangCards = new List<int>();
             this.zhuoCards = new List<int>();
             foreach (var row in card)
             {
@@ -454,6 +460,32 @@ namespace DolphinServer.Service.Mj
             this.OutCard(card);
             this.OutCard(card);
             this.GangCards.Add(card);
+        }
+
+        public void AnGang(int card)
+        {
+            this.OutCard(card);
+            this.OutCard(card);
+            this.OutCard(card);
+            this.OutCard(card);
+            this.GangCards.Add(card);
+        }
+
+        public void BuZhang(int card)
+        {
+            this.OutCard(card);
+            this.OutCard(card);
+            this.OutCard(card);
+            this.BuZhangCards.Add(card);
+        }
+
+        public void AnBuZhang(int card)
+        {
+            this.OutCard(card);
+            this.OutCard(card);
+            this.OutCard(card);
+            this.OutCard(card);
+            this.BuZhangCards.Add(card);
         }
 
         protected void PushCard(int card)

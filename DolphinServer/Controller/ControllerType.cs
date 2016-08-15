@@ -90,7 +90,7 @@ namespace DolphinServer.Controller
         Controller1019 = 1019,
 
         /// <summary>
-        /// 
+        /// 补张
         /// </summary>
         Controller1020 = 1020,
 

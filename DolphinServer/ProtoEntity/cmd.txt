@@ -18,6 +18,7 @@ protoc -I=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntit
 protoc -I=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity --csharp_out=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\ E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\A1019Response.txt
 protoc -I=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity --csharp_out=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\ E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\A1020Response.txt
 protoc -I=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity --csharp_out=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\ E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\A1021Response.txt
+protoc -I=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity --csharp_out=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\ E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\A1022Response.txt
 protoc -I=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity --csharp_out=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\ E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\A1100Response.txt
 protoc -I=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity --csharp_out=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\ E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\A9999DataErrorResponse.txt
 protoc -I=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity --csharp_out=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\ E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntity\A9998ClientCloseResponse.txt
@@ -43,6 +44,7 @@ protoc -I=E:\GameProject\LeisureChess\DolphinGameServer\DolphinServer\ProtoEntit
 1019 准备
 1020 杠打牌
 1021 抓炮结果
+1022 补张返回
 1100 聊天信息返回
 9997 客户端重新连接
 9998 客户端断开连接

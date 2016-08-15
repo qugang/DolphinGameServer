@@ -537,7 +537,7 @@ namespace DolphinServer.Service.Mj
             {
                 WebSocketServerWrappe.SendPackgeWithUser(row.PlayerUser.Uid, 1012, array);
             }
-            node.Value.Gang(card);
+            node.Value.AnGang(card);
         }
 
         /// <summary>
@@ -776,6 +776,80 @@ namespace DolphinServer.Service.Mj
                 Mo(this.Player.Value.PlayerUser.Uid);
             }
         }
+
+        /// <summary>
+        /// 暗杠补涨
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <param name="card"></param>
+        public void AnBuZhang(string uid, int card) {
+            if (this.isFrist)
+            {
+                foreach (var row in Players)
+                {
+                    if ((row.CheckKaiJuHu()) && row.PlayerUser.Uid != uid)
+                    {
+                        LogManager.Log.Debug("开局胡等待" + row.PlayerUser.Uid + "wait");
+                        row.ResetEvent.WaitOne();
+                        LogManager.Log.Debug("开局胡等待处理完毕" + row.PlayerUser.Uid + "wait");
+                    }
+                }
+            }
+
+            this.isFrist = false;
+
+            LinkedListNode<CsGamePlayer> node = FindPlayer(uid);
+            node.Value.AnBuZhang(card);
+
+            int mCard = this.ReadCard();
+            A1022Response.Builder response = new A1022Response.Builder();
+            response.Uid = uid;
+            response.Card = mCard;
+            response.BCard = card;
+
+            byte[] responseArray = response.Build().ToByteArray();
+            
+            foreach (var row in this.Players)
+            {
+                WebSocketServerWrappe.SendPackgeWithUser(row.PlayerUser.Uid, 1022, responseArray);
+            }
+           
+        }
+
+        public void MingBuzhang(string uid, int card,string desUid)
+        {
+            LinkedListNode<CsGamePlayer> node = FindPlayer(uid);
+            foreach (var row in Players)
+            {
+                if ((row.CheckHu(card)) && row.PlayerUser.Uid != uid && row.PlayerUser.Uid != desUid)
+                {
+                    row.ResetEvent.WaitOne();
+                }
+            }
+
+            //牌未被胡
+            if (this.OutCardState == OutCardState.Normal)
+            {
+                this.OutCardState = OutCardState.Gang;
+
+                node.Value.BuZhang(card);
+
+                int mCard = this.ReadCard();
+                A1022Response.Builder response = new A1022Response.Builder();
+                response.Uid = uid;
+                response.Card = mCard;
+                response.BCard = card;
+
+                byte[] responseArray = response.Build().ToByteArray();
+
+                foreach (var row in this.Players)
+                {
+                    WebSocketServerWrappe.SendPackgeWithUser(row.PlayerUser.Uid, 1022, responseArray);
+                }
+
+            }
+        }
+
 
         public void MoHaidi(string uid)
         {

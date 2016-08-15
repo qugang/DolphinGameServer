@@ -70,6 +70,7 @@
     <Compile Include="Controller\Controller1017.cs" />
     <Compile Include="Controller\Controller1018.cs" />
     <Compile Include="Controller\Controller1019.cs" />
+    <Compile Include="Controller\Controller1020.cs" />
     <Compile Include="Controller\Controller1100.cs" />
     <Compile Include="Controller\ControllerType.cs" />
     <Compile Include="Controller\ErrorInfo.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="ProtoEntity\A1019Response.cs" />
     <Compile Include="ProtoEntity\A1020Response.cs" />
     <Compile Include="ProtoEntity\A1021Response.cs" />
+    <Compile Include="ProtoEntity\A1022Response.cs" />
     <Compile Include="ProtoEntity\A1100Response.cs" />
     <Compile Include="ProtoEntity\A9997ClientConnectionResponse.cs" />
     <Compile Include="ProtoEntity\A9998ClientCloseResponse.cs" />
@@ -142,6 +144,7 @@
     <Content Include="ProtoEntity\A1018Response.txt" />
     <Content Include="ProtoEntity\A1021Response.txt" />
     <Content Include="ProtoEntity\A1020Response.txt" />
+    <Content Include="ProtoEntity\A1022Response.txt" />
     <Content Include="ProtoEntity\A1100Response.txt" />
     <Content Include="ProtoEntity\A1019Response.txt" />
     <Content Include="ProtoEntity\A9997ClientConnectionResponse.txt" />
