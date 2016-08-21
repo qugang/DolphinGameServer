@@ -162,5 +162,14 @@ namespace DolphinServer.Service.Mj
             PopCard(card);
             return result;
         }
+
+        public void ReLoad() {
+            this.IsReady = false;
+            this.HuType = 0;
+            this.AddScore = 0;
+            this.SubScore = 0;
+            this.DianPaoPlayer = null;
+            this.ResetEvent.Reset();
+        }
     }
 }

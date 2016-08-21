@@ -11,13 +11,10 @@ message A1003AndA1006Response{
 }
 
 message A1006Response{
-    optional Player Player1 = 1;
-	optional Player Player2 = 2;
-	optional Player Player3 = 3;
-	optional Player Player4 = 4;
-	optional string ZhuangUid = 5;
-	optional int32 JuShu = 6;
-	optional int32 Zhangshu= 7;
+    repeated Player Users = 1;
+	optional string ZhuangUid = 2;
+	optional int32 JuShu = 3;
+	optional int32 Zhangshu= 4;
 }
 
 message A1003Response{
@@ -40,4 +37,5 @@ message A1003User{
 message Player{
 	repeated int32 Card = 1;
 	optional int32 Score = 2;
+	optional string Uid = 3;
 }

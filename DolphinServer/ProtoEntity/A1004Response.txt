@@ -5,7 +5,12 @@ message A1004Response{
 	optional int32 ErrorCode = 2;
 	optional int32 RoomID = 4;
 	optional int32 RoomType = 5;
-	repeated string Users = 6;
-	optional int32 IsCancel = 7;
+	repeated A1004User Users = 6;
+	optional int32 CancelType = 7;
+}
+
+message A1004User{
+	optional string Uid = 1;
+	optional int32 IsCancel = 2;
 }
 

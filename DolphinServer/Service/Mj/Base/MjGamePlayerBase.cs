@@ -18,6 +18,11 @@ namespace DolphinServer.Service.Mj
         /// 解散房间
         /// </summary>
         public Boolean Cancel { get; set; }
+
+        /// <summary>
+        /// 解散房间投票状态
+        /// </summary>
+        public Boolean CancelState { get; set; }
         /// <summary>
         /// 玩家分数
         /// </summary>

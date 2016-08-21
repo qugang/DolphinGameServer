@@ -14,7 +14,7 @@ namespace DolphinServer.Service.Mj
     public static class CsGameRoomManager
     {
         static ConcurrentDictionary<int, CsMjGameRoom> rooms = new ConcurrentDictionary<int, CsMjGameRoom>();
-
+        static ConcurrentBag<int> roomRemoveKeyBag = new ConcurrentBag<int>();
         static ConcurrentDictionary<string, CsMjGameRoom> userRooms = new ConcurrentDictionary<string, CsMjGameRoom>();
 
         private static int maxRoomeId = 0;
@@ -35,12 +35,17 @@ namespace DolphinServer.Service.Mj
         {
             CsMjGameRoom room = null;
             rooms.TryGetValue(roomId, out room);
-            room.BeginGame(user.Uid,false);
+            room.ReadyGame(user.Uid);
             return room;
         }
 
         private static int getRoomId()
         {
+            int item;
+            if (roomRemoveKeyBag.TryTake(out item))
+            {
+                return item;
+            }
             return Interlocked.Increment(ref maxRoomeId);
         }
 
@@ -69,72 +74,79 @@ namespace DolphinServer.Service.Mj
             }
         }
 
-        public static CsMjGameRoom Cancel(string uid,int roomID)
+        public static CsMjGameRoom Cancel(string uid,int roomID,int cancelType)
         {
             CsMjGameRoom room = GetRoomById(roomID);
 
             if (room != null)
             {
                 LinkedListNode<CsGamePlayer> player = room.FindPlayer(uid);
-                player.Value.Cancel = true;
+
+                if (cancelType == 0)
+                {
+                    player.Value.Cancel = false;
+                }
+                else
+                {
+                    player.Value.Cancel = true;
+                }
+                player.Value.CancelState = true;
             }
 
             var listPlayer = room.Players.ToList();
 
             int count = listPlayer.Count(p => p.Cancel == true);
 
+            int cancelStateCount = listPlayer.Count(p => p.CancelState == true);
 
-            A1004Response.Builder response = A1004Response.CreateBuilder();
+            //Cancel类型0为通知，1为解散房间，2为不同意取消
+            int isCancel = 0;
 
-            response.AddRangeUsers(listPlayer.FindAll(p => p.Cancel == true).Select(p => p.PlayerUser.Uid));
-            response.IsCancel = 0;
-            response.RoomID = room.RoomId;
-            response.RoomType = room.RoomType;
-
-            if (count >= room.Players.Count / 2)
+            if (count >= listPlayer.Count() / 2 && cancelStateCount >= listPlayer.Count() /2)
             {
                 rooms.TryRemove(roomID, out room);
-                response.IsCancel = 1;
+                roomRemoveKeyBag.Add(roomID);
+
                 foreach (var row in room.Players)
                 {
                     CsMjGameRoom tempRoom = null;
                     userRooms.TryRemove(row.PlayerUser.Uid, out tempRoom);
+                    row.Cancel = false;
+                    row.CancelState = false;
+                }
+                isCancel = 1;
+            }
+            else if (count < listPlayer.Count() / 2 && cancelStateCount >= listPlayer.Count() / 2)
+            {
+                isCancel = 2;
+                foreach (var row in room.Players)
+                {
+                    row.Cancel = false;
+                    row.CancelState = false;
                 }
             }
 
-            byte[] responseArray = response.Build().ToByteArray();
-
-            foreach (var row in room.Players)
-            {
-                WebSocketServerWrappe.SendPackgeWithUser(row.PlayerUser.Uid, 1004, responseArray);
-            }
-
-            return room;
-        }
-
-        public static CsMjGameRoom RevokeCancel(string uid, int roomID) {
-            CsMjGameRoom room = GetRoomById(roomID);
-
-
             A1004Response.Builder response = A1004Response.CreateBuilder();
 
-
-            var listPlayer = room.Players.ToList();
-
-            response.AddRangeUsers(listPlayer.FindAll(p => p.Cancel == true).Select(p => p.PlayerUser.Uid));
-            response.IsCancel = 0;
-            response.RoomID = room.RoomId;
-            response.RoomType = room.RoomType;
+            foreach (var row in listPlayer.FindAll(p => p.CancelState == true))
+            {
+                A1004User.Builder user = A1004User.CreateBuilder();
+                user.SetUid(row.PlayerUser.Uid);
+                user.SetIsCancel(row.Cancel ? 1 : 0);
+                response.AddUsers(user);
+            }
+            response.SetCancelType(isCancel);
 
             byte[] responseArray = response.Build().ToByteArray();
+            
             foreach (var row in room.Players)
             {
                 WebSocketServerWrappe.SendPackgeWithUser(row.PlayerUser.Uid, 1004, responseArray);
             }
 
             return room;
-
         }
+        
 
         public static CsMjGameRoom GetRoomByUserId(string userId)
         {

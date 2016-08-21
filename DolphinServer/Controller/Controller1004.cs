@@ -23,15 +23,9 @@ namespace DolphinServer.Controller
         {
             string uid = Context.Session.User.Uid;
             int roomId = int.Parse(Context.HttpQueryString["RoomID"]);
-            int cancelType = int.Parse(Context.HttpQueryString["cancelType"]);
-            if (cancelType == 0)
-            {
-                CsGameRoomManager.Cancel(uid, roomId);
-            }
-            else
-            {
-                CsGameRoomManager.RevokeCancel(uid, roomId);
-            }
+            int cancelType = int.Parse(Context.HttpQueryString["CancelType"]);
+           
+            CsGameRoomManager.Cancel(uid, roomId,cancelType);
             return null;
         }
     }

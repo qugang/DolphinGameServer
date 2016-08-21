@@ -43,16 +43,15 @@ namespace DolphinServer.ProtoEntity {
               "UmVzcG9uc2USEQoJRXJyb3JJbmZvGAEgASgJEhEKCUVycm9yQ29kZRgCIAEo", 
               "BRIgCghBMTAwM1JlcRgDIAEoCzIOLkExMDAzUmVzcG9uc2USIAoIQTEwMDZS", 
               "ZXEYBCABKAsyDi5BMTAwNlJlc3BvbnNlEg4KBlJvb21JRBgFIAEoBRIQCghS", 
-              "b29tVHlwZRgGIAEoBSKrAQoNQTEwMDZSZXNwb25zZRIYCgdQbGF5ZXIxGAEg", 
-              "ASgLMgcuUGxheWVyEhgKB1BsYXllcjIYAiABKAsyBy5QbGF5ZXISGAoHUGxh", 
-              "eWVyMxgDIAEoCzIHLlBsYXllchIYCgdQbGF5ZXI0GAQgASgLMgcuUGxheWVy", 
-              "EhEKCVpodWFuZ1VpZBgFIAEoCRINCgVKdVNodRgGIAEoBRIQCghaaGFuZ3No", 
-              "dRgHIAEoBSJMCg1BMTAwM1Jlc3BvbnNlEhkKBVVzZXJzGAMgAygLMgouQTEw", 
-              "MDNVc2VyEg4KBlJvb21JRBgEIAEoBRIQCghSb29tVHlwZRgFIAEoBSJmCglB", 
-              "MTAwM1VzZXISCwoDVWlkGAEgASgJEhAKCEhhdEltYWdlGAIgASgJEgwKBFNv", 
-              "cmUYAyABKAUSDgoGWmh1YW5nGAQgASgFEgsKA1NleBgFIAEoBRIPCgdJc1Jl", 
-              "YWR5GAYgASgFIiUKBlBsYXllchIMCgRDYXJkGAEgAygFEg0KBVNjb3JlGAIg", 
-            "ASgFQhyqAhlEb2xwaGluU2VydmVyLlByb3RvRW50aXR5"));
+              "b29tVHlwZRgGIAEoBSJbCg1BMTAwNlJlc3BvbnNlEhYKBVVzZXJzGAEgAygL", 
+              "MgcuUGxheWVyEhEKCVpodWFuZ1VpZBgCIAEoCRINCgVKdVNodRgDIAEoBRIQ", 
+              "CghaaGFuZ3NodRgEIAEoBSJMCg1BMTAwM1Jlc3BvbnNlEhkKBVVzZXJzGAMg", 
+              "AygLMgouQTEwMDNVc2VyEg4KBlJvb21JRBgEIAEoBRIQCghSb29tVHlwZRgF", 
+              "IAEoBSJmCglBMTAwM1VzZXISCwoDVWlkGAEgASgJEhAKCEhhdEltYWdlGAIg", 
+              "ASgJEgwKBFNvcmUYAyABKAUSDgoGWmh1YW5nGAQgASgFEgsKA1NleBgFIAEo", 
+              "BRIPCgdJc1JlYWR5GAYgASgFIjIKBlBsYXllchIMCgRDYXJkGAEgAygFEg0K", 
+              "BVNjb3JlGAIgASgFEgsKA1VpZBgDIAEoCUIcqgIZRG9scGhpblNlcnZlci5Q", 
+            "cm90b0VudGl0eQ=="));
         pbd::FileDescriptor.InternalDescriptorAssigner assigner = delegate(pbd::FileDescriptor root) {
           descriptor = root;
           internal__static_A1003AndA1006Response__Descriptor = Descriptor.MessageTypes[0];
@@ -62,7 +61,7 @@ namespace DolphinServer.ProtoEntity {
           internal__static_A1006Response__Descriptor = Descriptor.MessageTypes[1];
           internal__static_A1006Response__FieldAccessorTable = 
               new pb::FieldAccess.FieldAccessorTable<global::DolphinServer.ProtoEntity.A1006Response, global::DolphinServer.ProtoEntity.A1006Response.Builder>(internal__static_A1006Response__Descriptor,
-                  new string[] { "Player1", "Player2", "Player3", "Player4", "ZhuangUid", "JuShu", "Zhangshu", });
+                  new string[] { "Users", "ZhuangUid", "JuShu", "Zhangshu", });
           internal__static_A1003Response__Descriptor = Descriptor.MessageTypes[2];
           internal__static_A1003Response__FieldAccessorTable = 
               new pb::FieldAccess.FieldAccessorTable<global::DolphinServer.ProtoEntity.A1003Response, global::DolphinServer.ProtoEntity.A1003Response.Builder>(internal__static_A1003Response__Descriptor,
@@ -74,7 +73,7 @@ namespace DolphinServer.ProtoEntity {
           internal__static_Player__Descriptor = Descriptor.MessageTypes[4];
           internal__static_Player__FieldAccessorTable = 
               new pb::FieldAccess.FieldAccessorTable<global::DolphinServer.ProtoEntity.Player, global::DolphinServer.ProtoEntity.Player.Builder>(internal__static_Player__Descriptor,
-                  new string[] { "Card", "Score", });
+                  new string[] { "Card", "Score", "Uid", });
           pb::ExtensionRegistry registry = pb::ExtensionRegistry.CreateInstance();
           RegisterAllExtensions(registry);
           return registry;
@@ -633,8 +632,8 @@ namespace DolphinServer.ProtoEntity {
   public sealed partial class A1006Response : pb::GeneratedMessage<A1006Response, A1006Response.Builder> {
     private A1006Response() { }
     private static readonly A1006Response defaultInstance = new A1006Response().MakeReadOnly();
-    private static readonly string[] _a1006ResponseFieldNames = new string[] { "JuShu", "Player1", "Player2", "Player3", "Player4", "Zhangshu", "ZhuangUid" };
-    private static readonly uint[] _a1006ResponseFieldTags = new uint[] { 48, 10, 18, 26, 34, 56, 42 };
+    private static readonly string[] _a1006ResponseFieldNames = new string[] { "JuShu", "Users", "Zhangshu", "ZhuangUid" };
+    private static readonly uint[] _a1006ResponseFieldTags = new uint[] { 24, 10, 32, 18 };
     public static A1006Response DefaultInstance {
       get { return defaultInstance; }
     }
@@ -655,47 +654,19 @@ namespace DolphinServer.ProtoEntity {
       get { return global::DolphinServer.ProtoEntity.Proto.A1003AndA1006Response.internal__static_A1006Response__FieldAccessorTable; }
     }
 
-    public const int Player1FieldNumber = 1;
-    private bool hasPlayer1;
-    private global::DolphinServer.ProtoEntity.Player player1_;
-    public bool HasPlayer1 {
-      get { return hasPlayer1; }
+    public const int UsersFieldNumber = 1;
+    private pbc::PopsicleList<global::DolphinServer.ProtoEntity.Player> users_ = new pbc::PopsicleList<global::DolphinServer.ProtoEntity.Player>();
+    public scg::IList<global::DolphinServer.ProtoEntity.Player> UsersList {
+      get { return users_; }
     }
-    public global::DolphinServer.ProtoEntity.Player Player1 {
-      get { return player1_ ?? global::DolphinServer.ProtoEntity.Player.DefaultInstance; }
+    public int UsersCount {
+      get { return users_.Count; }
     }
-
-    public const int Player2FieldNumber = 2;
-    private bool hasPlayer2;
-    private global::DolphinServer.ProtoEntity.Player player2_;
-    public bool HasPlayer2 {
-      get { return hasPlayer2; }
-    }
-    public global::DolphinServer.ProtoEntity.Player Player2 {
-      get { return player2_ ?? global::DolphinServer.ProtoEntity.Player.DefaultInstance; }
+    public global::DolphinServer.ProtoEntity.Player GetUsers(int index) {
+      return users_[index];
     }
 
-    public const int Player3FieldNumber = 3;
-    private bool hasPlayer3;
-    private global::DolphinServer.ProtoEntity.Player player3_;
-    public bool HasPlayer3 {
-      get { return hasPlayer3; }
-    }
-    public global::DolphinServer.ProtoEntity.Player Player3 {
-      get { return player3_ ?? global::DolphinServer.ProtoEntity.Player.DefaultInstance; }
-    }
-
-    public const int Player4FieldNumber = 4;
-    private bool hasPlayer4;
-    private global::DolphinServer.ProtoEntity.Player player4_;
-    public bool HasPlayer4 {
-      get { return hasPlayer4; }
-    }
-    public global::DolphinServer.ProtoEntity.Player Player4 {
-      get { return player4_ ?? global::DolphinServer.ProtoEntity.Player.DefaultInstance; }
-    }
-
-    public const int ZhuangUidFieldNumber = 5;
+    public const int ZhuangUidFieldNumber = 2;
     private bool hasZhuangUid;
     private string zhuangUid_ = "";
     public bool HasZhuangUid {
@@ -705,7 +676,7 @@ namespace DolphinServer.ProtoEntity {
       get { return zhuangUid_; }
     }
 
-    public const int JuShuFieldNumber = 6;
+    public const int JuShuFieldNumber = 3;
     private bool hasJuShu;
     private int juShu_;
     public bool HasJuShu {
@@ -715,7 +686,7 @@ namespace DolphinServer.ProtoEntity {
       get { return juShu_; }
     }
 
-    public const int ZhangshuFieldNumber = 7;
+    public const int ZhangshuFieldNumber = 4;
     private bool hasZhangshu;
     private int zhangshu_;
     public bool HasZhangshu {
@@ -734,26 +705,17 @@ namespace DolphinServer.ProtoEntity {
     public override void WriteTo(pb::ICodedOutputStream output) {
       CalcSerializedSize();
       string[] field_names = _a1006ResponseFieldNames;
-      if (hasPlayer1) {
-        output.WriteMessage(1, field_names[1], Player1);
-      }
-      if (hasPlayer2) {
-        output.WriteMessage(2, field_names[2], Player2);
-      }
-      if (hasPlayer3) {
-        output.WriteMessage(3, field_names[3], Player3);
-      }
-      if (hasPlayer4) {
-        output.WriteMessage(4, field_names[4], Player4);
+      if (users_.Count > 0) {
+        output.WriteMessageArray(1, field_names[1], users_);
       }
       if (hasZhuangUid) {
-        output.WriteString(5, field_names[6], ZhuangUid);
+        output.WriteString(2, field_names[3], ZhuangUid);
       }
       if (hasJuShu) {
-        output.WriteInt32(6, field_names[0], JuShu);
+        output.WriteInt32(3, field_names[0], JuShu);
       }
       if (hasZhangshu) {
-        output.WriteInt32(7, field_names[5], Zhangshu);
+        output.WriteInt32(4, field_names[2], Zhangshu);
       }
       UnknownFields.WriteTo(output);
     }
@@ -772,26 +734,17 @@ namespace DolphinServer.ProtoEntity {
       if (size != -1) return size;
 
       size = 0;
-      if (hasPlayer1) {
-        size += pb::CodedOutputStream.ComputeMessageSize(1, Player1);
-      }
-      if (hasPlayer2) {
-        size += pb::CodedOutputStream.ComputeMessageSize(2, Player2);
-      }
-      if (hasPlayer3) {
-        size += pb::CodedOutputStream.ComputeMessageSize(3, Player3);
-      }
-      if (hasPlayer4) {
-        size += pb::CodedOutputStream.ComputeMessageSize(4, Player4);
+      foreach (global::DolphinServer.ProtoEntity.Player element in UsersList) {
+        size += pb::CodedOutputStream.ComputeMessageSize(1, element);
       }
       if (hasZhuangUid) {
-        size += pb::CodedOutputStream.ComputeStringSize(5, ZhuangUid);
+        size += pb::CodedOutputStream.ComputeStringSize(2, ZhuangUid);
       }
       if (hasJuShu) {
-        size += pb::CodedOutputStream.ComputeInt32Size(6, JuShu);
+        size += pb::CodedOutputStream.ComputeInt32Size(3, JuShu);
       }
       if (hasZhangshu) {
-        size += pb::CodedOutputStream.ComputeInt32Size(7, Zhangshu);
+        size += pb::CodedOutputStream.ComputeInt32Size(4, Zhangshu);
       }
       size += UnknownFields.SerializedSize;
       memoizedSerializedSize = size;
@@ -828,6 +781,7 @@ namespace DolphinServer.ProtoEntity {
       return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
     }
     private A1006Response MakeReadOnly() {
+      users_.MakeReadOnly();
       return this;
     }
 
@@ -915,17 +869,8 @@ namespace DolphinServer.ProtoEntity {
       public override Builder MergeFrom(A1006Response other) {
         if (other == global::DolphinServer.ProtoEntity.A1006Response.DefaultInstance) return this;
         PrepareBuilder();
-        if (other.HasPlayer1) {
-          MergePlayer1(other.Player1);
-        }
-        if (other.HasPlayer2) {
-          MergePlayer2(other.Player2);
-        }
-        if (other.HasPlayer3) {
-          MergePlayer3(other.Player3);
-        }
-        if (other.HasPlayer4) {
-          MergePlayer4(other.Player4);
+        if (other.users_.Count != 0) {
+          result.users_.Add(other.users_);
         }
         if (other.HasZhuangUid) {
           ZhuangUid = other.ZhuangUid;
@@ -980,50 +925,18 @@ namespace DolphinServer.ProtoEntity {
               break;
             }
             case 10: {
-              global::DolphinServer.ProtoEntity.Player.Builder subBuilder = global::DolphinServer.ProtoEntity.Player.CreateBuilder();
-              if (result.hasPlayer1) {
-                subBuilder.MergeFrom(Player1);
-              }
-              input.ReadMessage(subBuilder, extensionRegistry);
-              Player1 = subBuilder.BuildPartial();
+              input.ReadMessageArray(tag, field_name, result.users_, global::DolphinServer.ProtoEntity.Player.DefaultInstance, extensionRegistry);
               break;
             }
             case 18: {
-              global::DolphinServer.ProtoEntity.Player.Builder subBuilder = global::DolphinServer.ProtoEntity.Player.CreateBuilder();
-              if (result.hasPlayer2) {
-                subBuilder.MergeFrom(Player2);
-              }
-              input.ReadMessage(subBuilder, extensionRegistry);
-              Player2 = subBuilder.BuildPartial();
-              break;
-            }
-            case 26: {
-              global::DolphinServer.ProtoEntity.Player.Builder subBuilder = global::DolphinServer.ProtoEntity.Player.CreateBuilder();
-              if (result.hasPlayer3) {
-                subBuilder.MergeFrom(Player3);
-              }
-              input.ReadMessage(subBuilder, extensionRegistry);
-              Player3 = subBuilder.BuildPartial();
-              break;
-            }
-            case 34: {
-              global::DolphinServer.ProtoEntity.Player.Builder subBuilder = global::DolphinServer.ProtoEntity.Player.CreateBuilder();
-              if (result.hasPlayer4) {
-                subBuilder.MergeFrom(Player4);
-              }
-              input.ReadMessage(subBuilder, extensionRegistry);
-              Player4 = subBuilder.BuildPartial();
-              break;
-            }
-            case 42: {
               result.hasZhuangUid = input.ReadString(ref result.zhuangUid_);
               break;
             }
-            case 48: {
+            case 24: {
               result.hasJuShu = input.ReadInt32(ref result.juShu_);
               break;
             }
-            case 56: {
+            case 32: {
               result.hasZhangshu = input.ReadInt32(ref result.zhangshu_);
               break;
             }
@@ -1037,163 +950,47 @@ namespace DolphinServer.ProtoEntity {
       }
 
 
-      public bool HasPlayer1 {
-       get { return result.hasPlayer1; }
+      public pbc::IPopsicleList<global::DolphinServer.ProtoEntity.Player> UsersList {
+        get { return PrepareBuilder().users_; }
       }
-      public global::DolphinServer.ProtoEntity.Player Player1 {
-        get { return result.Player1; }
-        set { SetPlayer1(value); }
+      public int UsersCount {
+        get { return result.UsersCount; }
       }
-      public Builder SetPlayer1(global::DolphinServer.ProtoEntity.Player value) {
+      public global::DolphinServer.ProtoEntity.Player GetUsers(int index) {
+        return result.GetUsers(index);
+      }
+      public Builder SetUsers(int index, global::DolphinServer.ProtoEntity.Player value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
-        result.hasPlayer1 = true;
-        result.player1_ = value;
+        result.users_[index] = value;
         return this;
       }
-      public Builder SetPlayer1(global::DolphinServer.ProtoEntity.Player.Builder builderForValue) {
+      public Builder SetUsers(int index, global::DolphinServer.ProtoEntity.Player.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
-        result.hasPlayer1 = true;
-        result.player1_ = builderForValue.Build();
+        result.users_[index] = builderForValue.Build();
         return this;
       }
-      public Builder MergePlayer1(global::DolphinServer.ProtoEntity.Player value) {
+      public Builder AddUsers(global::DolphinServer.ProtoEntity.Player value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
-        if (result.hasPlayer1 &&
-            result.player1_ != global::DolphinServer.ProtoEntity.Player.DefaultInstance) {
-            result.player1_ = global::DolphinServer.ProtoEntity.Player.CreateBuilder(result.player1_).MergeFrom(value).BuildPartial();
-        } else {
-          result.player1_ = value;
-        }
-        result.hasPlayer1 = true;
+        result.users_.Add(value);
         return this;
       }
-      public Builder ClearPlayer1() {
-        PrepareBuilder();
-        result.hasPlayer1 = false;
-        result.player1_ = null;
-        return this;
-      }
-
-      public bool HasPlayer2 {
-       get { return result.hasPlayer2; }
-      }
-      public global::DolphinServer.ProtoEntity.Player Player2 {
-        get { return result.Player2; }
-        set { SetPlayer2(value); }
-      }
-      public Builder SetPlayer2(global::DolphinServer.ProtoEntity.Player value) {
-        pb::ThrowHelper.ThrowIfNull(value, "value");
-        PrepareBuilder();
-        result.hasPlayer2 = true;
-        result.player2_ = value;
-        return this;
-      }
-      public Builder SetPlayer2(global::DolphinServer.ProtoEntity.Player.Builder builderForValue) {
+      public Builder AddUsers(global::DolphinServer.ProtoEntity.Player.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
-        result.hasPlayer2 = true;
-        result.player2_ = builderForValue.Build();
+        result.users_.Add(builderForValue.Build());
         return this;
       }
-      public Builder MergePlayer2(global::DolphinServer.ProtoEntity.Player value) {
-        pb::ThrowHelper.ThrowIfNull(value, "value");
+      public Builder AddRangeUsers(scg::IEnumerable<global::DolphinServer.ProtoEntity.Player> values) {
         PrepareBuilder();
-        if (result.hasPlayer2 &&
-            result.player2_ != global::DolphinServer.ProtoEntity.Player.DefaultInstance) {
-            result.player2_ = global::DolphinServer.ProtoEntity.Player.CreateBuilder(result.player2_).MergeFrom(value).BuildPartial();
-        } else {
-          result.player2_ = value;
-        }
-        result.hasPlayer2 = true;
+        result.users_.Add(values);
         return this;
       }
-      public Builder ClearPlayer2() {
+      public Builder ClearUsers() {
         PrepareBuilder();
-        result.hasPlayer2 = false;
-        result.player2_ = null;
-        return this;
-      }
-
-      public bool HasPlayer3 {
-       get { return result.hasPlayer3; }
-      }
-      public global::DolphinServer.ProtoEntity.Player Player3 {
-        get { return result.Player3; }
-        set { SetPlayer3(value); }
-      }
-      public Builder SetPlayer3(global::DolphinServer.ProtoEntity.Player value) {
-        pb::ThrowHelper.ThrowIfNull(value, "value");
-        PrepareBuilder();
-        result.hasPlayer3 = true;
-        result.player3_ = value;
-        return this;
-      }
-      public Builder SetPlayer3(global::DolphinServer.ProtoEntity.Player.Builder builderForValue) {
-        pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
-        PrepareBuilder();
-        result.hasPlayer3 = true;
-        result.player3_ = builderForValue.Build();
-        return this;
-      }
-      public Builder MergePlayer3(global::DolphinServer.ProtoEntity.Player value) {
-        pb::ThrowHelper.ThrowIfNull(value, "value");
-        PrepareBuilder();
-        if (result.hasPlayer3 &&
-            result.player3_ != global::DolphinServer.ProtoEntity.Player.DefaultInstance) {
-            result.player3_ = global::DolphinServer.ProtoEntity.Player.CreateBuilder(result.player3_).MergeFrom(value).BuildPartial();
-        } else {
-          result.player3_ = value;
-        }
-        result.hasPlayer3 = true;
-        return this;
-      }
-      public Builder ClearPlayer3() {
-        PrepareBuilder();
-        result.hasPlayer3 = false;
-        result.player3_ = null;
-        return this;
-      }
-
-      public bool HasPlayer4 {
-       get { return result.hasPlayer4; }
-      }
-      public global::DolphinServer.ProtoEntity.Player Player4 {
-        get { return result.Player4; }
-        set { SetPlayer4(value); }
-      }
-      public Builder SetPlayer4(global::DolphinServer.ProtoEntity.Player value) {
-        pb::ThrowHelper.ThrowIfNull(value, "value");
-        PrepareBuilder();
-        result.hasPlayer4 = true;
-        result.player4_ = value;
-        return this;
-      }
-      public Builder SetPlayer4(global::DolphinServer.ProtoEntity.Player.Builder builderForValue) {
-        pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
-        PrepareBuilder();
-        result.hasPlayer4 = true;
-        result.player4_ = builderForValue.Build();
-        return this;
-      }
-      public Builder MergePlayer4(global::DolphinServer.ProtoEntity.Player value) {
-        pb::ThrowHelper.ThrowIfNull(value, "value");
-        PrepareBuilder();
-        if (result.hasPlayer4 &&
-            result.player4_ != global::DolphinServer.ProtoEntity.Player.DefaultInstance) {
-            result.player4_ = global::DolphinServer.ProtoEntity.Player.CreateBuilder(result.player4_).MergeFrom(value).BuildPartial();
-        } else {
-          result.player4_ = value;
-        }
-        result.hasPlayer4 = true;
-        return this;
-      }
-      public Builder ClearPlayer4() {
-        PrepareBuilder();
-        result.hasPlayer4 = false;
-        result.player4_ = null;
+        result.users_.Clear();
         return this;
       }
 
@@ -2147,8 +1944,8 @@ namespace DolphinServer.ProtoEntity {
   public sealed partial class Player : pb::GeneratedMessage<Player, Player.Builder> {
     private Player() { }
     private static readonly Player defaultInstance = new Player().MakeReadOnly();
-    private static readonly string[] _playerFieldNames = new string[] { "Card", "Score" };
-    private static readonly uint[] _playerFieldTags = new uint[] { 8, 16 };
+    private static readonly string[] _playerFieldNames = new string[] { "Card", "Score", "Uid" };
+    private static readonly uint[] _playerFieldTags = new uint[] { 8, 16, 26 };
     public static Player DefaultInstance {
       get { return defaultInstance; }
     }
@@ -2191,6 +1988,16 @@ namespace DolphinServer.ProtoEntity {
       get { return score_; }
     }
 
+    public const int UidFieldNumber = 3;
+    private bool hasUid;
+    private string uid_ = "";
+    public bool HasUid {
+      get { return hasUid; }
+    }
+    public string Uid {
+      get { return uid_; }
+    }
+
     public override bool IsInitialized {
       get {
         return true;
@@ -2205,6 +2012,9 @@ namespace DolphinServer.ProtoEntity {
       }
       if (hasScore) {
         output.WriteInt32(2, field_names[1], Score);
+      }
+      if (hasUid) {
+        output.WriteString(3, field_names[2], Uid);
       }
       UnknownFields.WriteTo(output);
     }
@@ -2233,6 +2043,9 @@ namespace DolphinServer.ProtoEntity {
       }
       if (hasScore) {
         size += pb::CodedOutputStream.ComputeInt32Size(2, Score);
+      }
+      if (hasUid) {
+        size += pb::CodedOutputStream.ComputeStringSize(3, Uid);
       }
       size += UnknownFields.SerializedSize;
       memoizedSerializedSize = size;
@@ -2363,6 +2176,9 @@ namespace DolphinServer.ProtoEntity {
         if (other.HasScore) {
           Score = other.Score;
         }
+        if (other.HasUid) {
+          Uid = other.Uid;
+        }
         this.MergeUnknownFields(other.UnknownFields);
         return this;
       }
@@ -2413,6 +2229,10 @@ namespace DolphinServer.ProtoEntity {
             }
             case 16: {
               result.hasScore = input.ReadInt32(ref result.score_);
+              break;
+            }
+            case 26: {
+              result.hasUid = input.ReadString(ref result.uid_);
               break;
             }
           }
@@ -2472,6 +2292,27 @@ namespace DolphinServer.ProtoEntity {
         PrepareBuilder();
         result.hasScore = false;
         result.score_ = 0;
+        return this;
+      }
+
+      public bool HasUid {
+        get { return result.hasUid; }
+      }
+      public string Uid {
+        get { return result.Uid; }
+        set { SetUid(value); }
+      }
+      public Builder SetUid(string value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasUid = true;
+        result.uid_ = value;
+        return this;
+      }
+      public Builder ClearUid() {
+        PrepareBuilder();
+        result.hasUid = false;
+        result.uid_ = "";
         return this;
       }
     }
