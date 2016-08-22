@@ -543,9 +543,26 @@ namespace DolphinServer.Service.Mj
             if (jiangPos != -1)
             {
                 var jiangNumber = array[jiangPos];
-                array[jiangPos] = array[jiangPos].SubItemNumber(2);
+
+                if (jiangNumber.GetItemNumber() > 2)
+                {
+                    array[jiangPos] = array[jiangPos].SubItemNumber(2);
+                }
+                else
+                {
+                    array.RemoveAt(jiangPos);
+                }
                 var result = this.Analyze(array);
-                array[jiangPos] = jiangNumber;
+
+                if (jiangNumber.GetItemNumber() > 2)
+                {
+                    array[jiangPos] = jiangNumber;
+                }
+                else
+                {
+                    array.Insert(jiangPos, jiangNumber);
+                }
+
                 return result;
             }
             else

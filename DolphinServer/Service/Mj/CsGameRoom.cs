@@ -118,7 +118,7 @@ namespace DolphinServer.Service.Mj
 
             }
 
-            this.CardIndex = 108;
+            this.CardIndex = 53;
             isFrist = true;
             dianPaoNumber = 0;
             haiGuoNumber = 0;
@@ -374,6 +374,9 @@ namespace DolphinServer.Service.Mj
                 }
             }
 
+
+            node.Value.Gang(card);
+
             //牌未被胡
             if (this.OutCardState == OutCardState.Normal)
             {
@@ -390,15 +393,13 @@ namespace DolphinServer.Service.Mj
                 if (saizi > dunshu)
                 {
                     this.OutCardState = OutCardState.Gang;
-
-                    A1012Response.Builder response1 = A1012Response.CreateBuilder();
-                    response1.Uid = node.Value.PlayerUser.Uid;
-                    response1.Card = card;
-                    response1.CardCode = 1;
-                    var array1 = response1.Build().ToByteArray();
+                    A9999DataErrorResponse.Builder response1 = A9999DataErrorResponse.CreateBuilder();
+                    response1.ErrorCode = 3;
+                    response1.ErrorInfo = ErrorInfo.ErrorDic[3] + saizi.ToString();
+                    var response1Array = response1.Build().ToByteArray();
                     foreach (var row in this.Players)
                     {
-                        WebSocketServerWrappe.SendPackgeWithUser(row.PlayerUser.Uid, 1012, array1);
+                        WebSocketServerWrappe.SendPackgeWithUser(row.PlayerUser.Uid, 9999, response1Array);
                     }
                     return;
                 }
@@ -415,54 +416,8 @@ namespace DolphinServer.Service.Mj
                 {
                     WebSocketServerWrappe.SendPackgeWithUser(row.PlayerUser.Uid, 1012, array);
                 }
-                node.Value.Gang(card);
-                this.Player = node;
-                this.OutCardState = OutCardState.Normal;
-
-
-                if (node.Value.CheckHu(card1) || node.Value.CheckHu(card2))
-                {
-                    node.Value.ResetEvent.WaitOne();
-                    return;
-                }
-
-
-                foreach (var row in Players)
-                {
-                    LogManager.Log.Debug(row.PlayerUser.Uid + "手上的牌" + row.PrintCards());
-
-                    if (row.PlayerUser.Uid != this.Player.Value.PlayerUser.Uid)
-                    {
-                        if (row.CheckGang(card2) || row.CheckPeng(card2) || row.CheckHu(card1) || row.CheckHu(card2))
-                        {
-                            row.ResetEvent.WaitOne();
-                            if (this.OutCardState != OutCardState.Normal)
-                            {
-                                return;
-                            }
-                            continue;
-                        }
-                    }
-                }
-
-                this.Player = this.Player.NextOrFirst();
-                //是最后一张牌发送海底命令
-                if (this.CardIndex == cardArray.Length - 1)
-                {
-                    A1016Response.Builder rep1016 = A1016Response.CreateBuilder();
-                    rep1016.Uid = this.Player.Value.PlayerUser.Uid;
-                    var rep1016Array = rep1016.Build().ToByteArray();
-                    foreach (var row in Players)
-                    {
-                        WebSocketServerWrappe.SendPackgeWithUser(row.PlayerUser.Uid, 1016, rep1016Array);
-                    }
-
-                }
-                else
-                {
-                    Mo(this.Player.Value.PlayerUser.Uid);
-                }
             }
+            this.Player = node;
             node.Value.ResetEvent.Set();
         }
 
