@@ -31,7 +31,7 @@ namespace DolphinServer.Controller
                 A9999DataErrorResponse.Builder error = A9999DataErrorResponse.CreateBuilder();
                 error.ErrorCode = 2;
                 error.ErrorInfo = ErrorInfo.ErrorDic[2];
-                return error.Build().ToByteArray();
+                WebSocketServerWrappe.SendPackgeWithUser(Context.Session.User.Uid, 9999, error.Build().ToByteArray());
             }
             return null;
         }

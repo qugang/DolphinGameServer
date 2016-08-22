@@ -72,6 +72,7 @@
     <Compile Include="Controller\Controller1019.cs" />
     <Compile Include="Controller\Controller1020.cs" />
     <Compile Include="Controller\Controller1021.cs" />
+    <Compile Include="Controller\Controller1022.cs" />
     <Compile Include="Controller\Controller1100.cs" />
     <Compile Include="Controller\ControllerType.cs" />
     <Compile Include="Controller\ErrorInfo.cs" />

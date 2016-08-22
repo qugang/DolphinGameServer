@@ -19,9 +19,9 @@ namespace DolphinServer.Service.Mj
 
         private static int maxRoomeId = 0;
 
-        public static CsMjGameRoom CreateRoom(GameUser user,int jushu)
+        public static CsMjGameRoom CreateRoom(GameUser user)
         {
-            CsMjGameRoom room = new CsMjGameRoom(jushu);
+            CsMjGameRoom room = new CsMjGameRoom();
             room.RoomId = getRoomId();
             room.Players = new LinkedList<CsGamePlayer>();
             room.Players.AddLast(new CsGamePlayer(user));

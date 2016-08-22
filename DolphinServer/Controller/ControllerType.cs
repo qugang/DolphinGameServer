@@ -97,7 +97,12 @@ namespace DolphinServer.Controller
         /// <summary>
         /// 打海底
         /// </summary>
-        Controller1021 = 1021
+        Controller1021 = 1021,
+
+        /// <summary>
+        /// 从新开始游戏
+        /// </summary>
+        Controller1022 = 1022,
 
     }
 }

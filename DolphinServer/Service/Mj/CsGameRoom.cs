@@ -16,7 +16,7 @@ namespace DolphinServer.Service.Mj
     /// </summary>
     public class CsMjGameRoom : MjGameRoomBase
     {
-        public CsMjGameRoom(int jushu) : base(jushu)
+        public CsMjGameRoom() : base()
         {
 
         }
@@ -36,14 +36,13 @@ namespace DolphinServer.Service.Mj
         private int haiGuoNumber = 0;
         protected override void SendCard(Boolean isReady)
         {
-            if (this.JuShu == 0)
+            if (this.JuShu == 8)
             {
-                A9999DataErrorResponse.Builder errorResponse = A9999DataErrorResponse.CreateBuilder();
-                errorResponse.ErrorCode = 3;
-                errorResponse.ErrorInfo = "茶卷已用完";
-                foreach (var row in this.Players)
-                {
-                    WebSocketServerWrappe.SendPackgeWithUser(row.PlayerUser.Uid, 9999, errorResponse.Build().ToByteArray());
+                foreach (var row in this.Players) {
+                    row.HuType = 0;
+                    row.Score = 0;
+                    row.SubScore = 0;
+                    row.AddScore = 0;
                 }
             }
 
@@ -122,8 +121,7 @@ namespace DolphinServer.Service.Mj
             isFrist = true;
             dianPaoNumber = 0;
             haiGuoNumber = 0;
-            this.JuShu--;
-
+            this.JuShu++;
         }
 
 

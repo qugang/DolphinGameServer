@@ -25,7 +25,7 @@ namespace DolphinServer.Controller
 
         public override byte[] ProcessAction()
         {
-            CsMjGameRoom room = CsGameRoomManager.CreateRoom(Context.Session.User as GameUser,8);
+            CsMjGameRoom room = CsGameRoomManager.CreateRoom(Context.Session.User as GameUser);
             A1002Response.Builder response = A1002Response.CreateBuilder();
             response.RoomID = room.RoomId;
             response.RoomType = int.Parse(Context.HttpQueryString["RoomType"]);

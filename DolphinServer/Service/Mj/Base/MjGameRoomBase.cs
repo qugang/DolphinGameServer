@@ -12,8 +12,8 @@ namespace DolphinServer.Service.Mj
 {
     public abstract class MjGameRoomBase
     {
-        public MjGameRoomBase(int juShu) {
-            this.JuShu = juShu;
+        public MjGameRoomBase() {
+            this.JuShu = 1;
         }
         public int RoomId { get; set; }
 
