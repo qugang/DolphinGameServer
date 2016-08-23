@@ -3,6 +3,7 @@ option csharp_namespace = "DolphinServer.ProtoEntity";
 message A1100Response{
 	optional string ErrorInfo = 1;
 	optional int32 ErrorCode = 2;
-	optional string Uid = 6;
-	optional string Message=7;
+	optional string Uid = 3;
+	optional string Message=4;
+	optional string MessageType=5;
 }

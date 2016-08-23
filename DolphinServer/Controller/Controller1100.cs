@@ -24,10 +24,10 @@ namespace DolphinServer.Controller
         public override byte[] ProcessAction()
         {
             int roomId = int.Parse(Context.HttpQueryString["RoomID"]);
-          
             string message = Context.HttpQueryString["Message"];
+            string messageType = Context.HttpQueryString["MessageType"];
             CsMjGameRoom room = CsGameRoomManager.GetRoomById(roomId);
-            room.SendMessage(Context.HttpQueryString["Uid"], message);
+            room.SendMessage(Context.HttpQueryString["Uid"], message, messageType);
             return null;
         }
     }

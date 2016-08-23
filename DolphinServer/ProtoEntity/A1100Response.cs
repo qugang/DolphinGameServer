@@ -31,15 +31,16 @@ namespace DolphinServer.ProtoEntity {
       static A1100Response() {
         byte[] descriptorData = global::System.Convert.FromBase64String(
             string.Concat(
-              "ChFBMTEwMFJlc3BvbnNlLnR4dCJTCg1BMTEwMFJlc3BvbnNlEhEKCUVycm9y", 
-              "SW5mbxgBIAEoCRIRCglFcnJvckNvZGUYAiABKAUSCwoDVWlkGAYgASgJEg8K", 
-            "B01lc3NhZ2UYByABKAlCHKoCGURvbHBoaW5TZXJ2ZXIuUHJvdG9FbnRpdHk="));
+              "ChFBMTEwMFJlc3BvbnNlLnR4dCJoCg1BMTEwMFJlc3BvbnNlEhEKCUVycm9y", 
+              "SW5mbxgBIAEoCRIRCglFcnJvckNvZGUYAiABKAUSCwoDVWlkGAMgASgJEg8K", 
+              "B01lc3NhZ2UYBCABKAkSEwoLTWVzc2FnZVR5cGUYBSABKAlCHKoCGURvbHBo", 
+            "aW5TZXJ2ZXIuUHJvdG9FbnRpdHk="));
         pbd::FileDescriptor.InternalDescriptorAssigner assigner = delegate(pbd::FileDescriptor root) {
           descriptor = root;
           internal__static_A1100Response__Descriptor = Descriptor.MessageTypes[0];
           internal__static_A1100Response__FieldAccessorTable = 
               new pb::FieldAccess.FieldAccessorTable<global::DolphinServer.ProtoEntity.A1100Response, global::DolphinServer.ProtoEntity.A1100Response.Builder>(internal__static_A1100Response__Descriptor,
-                  new string[] { "ErrorInfo", "ErrorCode", "Uid", "Message", });
+                  new string[] { "ErrorInfo", "ErrorCode", "Uid", "Message", "MessageType", });
           pb::ExtensionRegistry registry = pb::ExtensionRegistry.CreateInstance();
           RegisterAllExtensions(registry);
           return registry;
@@ -57,8 +58,8 @@ namespace DolphinServer.ProtoEntity {
   public sealed partial class A1100Response : pb::GeneratedMessage<A1100Response, A1100Response.Builder> {
     private A1100Response() { }
     private static readonly A1100Response defaultInstance = new A1100Response().MakeReadOnly();
-    private static readonly string[] _a1100ResponseFieldNames = new string[] { "ErrorCode", "ErrorInfo", "Message", "Uid" };
-    private static readonly uint[] _a1100ResponseFieldTags = new uint[] { 16, 10, 58, 50 };
+    private static readonly string[] _a1100ResponseFieldNames = new string[] { "ErrorCode", "ErrorInfo", "Message", "MessageType", "Uid" };
+    private static readonly uint[] _a1100ResponseFieldTags = new uint[] { 16, 10, 34, 42, 26 };
     public static A1100Response DefaultInstance {
       get { return defaultInstance; }
     }
@@ -99,7 +100,7 @@ namespace DolphinServer.ProtoEntity {
       get { return errorCode_; }
     }
 
-    public const int UidFieldNumber = 6;
+    public const int UidFieldNumber = 3;
     private bool hasUid;
     private string uid_ = "";
     public bool HasUid {
@@ -109,7 +110,7 @@ namespace DolphinServer.ProtoEntity {
       get { return uid_; }
     }
 
-    public const int MessageFieldNumber = 7;
+    public const int MessageFieldNumber = 4;
     private bool hasMessage;
     private string message_ = "";
     public bool HasMessage {
@@ -117,6 +118,16 @@ namespace DolphinServer.ProtoEntity {
     }
     public string Message {
       get { return message_; }
+    }
+
+    public const int MessageTypeFieldNumber = 5;
+    private bool hasMessageType;
+    private string messageType_ = "";
+    public bool HasMessageType {
+      get { return hasMessageType; }
+    }
+    public string MessageType {
+      get { return messageType_; }
     }
 
     public override bool IsInitialized {
@@ -135,10 +146,13 @@ namespace DolphinServer.ProtoEntity {
         output.WriteInt32(2, field_names[0], ErrorCode);
       }
       if (hasUid) {
-        output.WriteString(6, field_names[3], Uid);
+        output.WriteString(3, field_names[4], Uid);
       }
       if (hasMessage) {
-        output.WriteString(7, field_names[2], Message);
+        output.WriteString(4, field_names[2], Message);
+      }
+      if (hasMessageType) {
+        output.WriteString(5, field_names[3], MessageType);
       }
       UnknownFields.WriteTo(output);
     }
@@ -164,10 +178,13 @@ namespace DolphinServer.ProtoEntity {
         size += pb::CodedOutputStream.ComputeInt32Size(2, ErrorCode);
       }
       if (hasUid) {
-        size += pb::CodedOutputStream.ComputeStringSize(6, Uid);
+        size += pb::CodedOutputStream.ComputeStringSize(3, Uid);
       }
       if (hasMessage) {
-        size += pb::CodedOutputStream.ComputeStringSize(7, Message);
+        size += pb::CodedOutputStream.ComputeStringSize(4, Message);
+      }
+      if (hasMessageType) {
+        size += pb::CodedOutputStream.ComputeStringSize(5, MessageType);
       }
       size += UnknownFields.SerializedSize;
       memoizedSerializedSize = size;
@@ -303,6 +320,9 @@ namespace DolphinServer.ProtoEntity {
         if (other.HasMessage) {
           Message = other.Message;
         }
+        if (other.HasMessageType) {
+          MessageType = other.MessageType;
+        }
         this.MergeUnknownFields(other.UnknownFields);
         return this;
       }
@@ -354,12 +374,16 @@ namespace DolphinServer.ProtoEntity {
               result.hasErrorCode = input.ReadInt32(ref result.errorCode_);
               break;
             }
-            case 50: {
+            case 26: {
               result.hasUid = input.ReadString(ref result.uid_);
               break;
             }
-            case 58: {
+            case 34: {
               result.hasMessage = input.ReadString(ref result.message_);
+              break;
+            }
+            case 42: {
+              result.hasMessageType = input.ReadString(ref result.messageType_);
               break;
             }
           }
@@ -452,6 +476,27 @@ namespace DolphinServer.ProtoEntity {
         PrepareBuilder();
         result.hasMessage = false;
         result.message_ = "";
+        return this;
+      }
+
+      public bool HasMessageType {
+        get { return result.hasMessageType; }
+      }
+      public string MessageType {
+        get { return result.MessageType; }
+        set { SetMessageType(value); }
+      }
+      public Builder SetMessageType(string value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasMessageType = true;
+        result.messageType_ = value;
+        return this;
+      }
+      public Builder ClearMessageType() {
+        PrepareBuilder();
+        result.hasMessageType = false;
+        result.messageType_ = "";
         return this;
       }
     }

@@ -253,11 +253,12 @@ namespace DolphinServer.Service.Mj
             }
         }
 
-        public void SendMessage(string uid, string message)
+        public void SendMessage(string uid, string message,string messageType)
         {
             A1100Response.Builder response = A1100Response.CreateBuilder();
             response.Uid = uid;
             response.Message = message;
+            response.MessageType = messageType;
             byte[] responseByte = response.Build().ToByteArray();
             foreach (var row in this.Players)
             {
