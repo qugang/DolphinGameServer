@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Free.Dolphin.Common.Util
+namespace Free.Dolphin.Core.Util
 {
     public class ConcurrentLinkedList<T> : LinkedList<T>
     {

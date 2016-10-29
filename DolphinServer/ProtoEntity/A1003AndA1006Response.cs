@@ -47,11 +47,11 @@ namespace DolphinServer.ProtoEntity {
               "MgcuUGxheWVyEhEKCVpodWFuZ1VpZBgCIAEoCRINCgVKdVNodRgDIAEoBRIQ", 
               "CghaaGFuZ3NodRgEIAEoBSJMCg1BMTAwM1Jlc3BvbnNlEhkKBVVzZXJzGAMg", 
               "AygLMgouQTEwMDNVc2VyEg4KBlJvb21JRBgEIAEoBRIQCghSb29tVHlwZRgF", 
-              "IAEoBSJmCglBMTAwM1VzZXISCwoDVWlkGAEgASgJEhAKCEhhdEltYWdlGAIg", 
+              "IAEoBSJ0CglBMTAwM1VzZXISCwoDVWlkGAEgASgJEhAKCEhhdEltYWdlGAIg", 
               "ASgJEgwKBFNvcmUYAyABKAUSDgoGWmh1YW5nGAQgASgFEgsKA1NleBgFIAEo", 
-              "BRIPCgdJc1JlYWR5GAYgASgFIjIKBlBsYXllchIMCgRDYXJkGAEgAygFEg0K", 
-              "BVNjb3JlGAIgASgFEgsKA1VpZBgDIAEoCUIcqgIZRG9scGhpblNlcnZlci5Q", 
-            "cm90b0VudGl0eQ=="));
+              "BRIPCgdJc1JlYWR5GAYgASgFEgwKBE5hbWUYByABKAkiMgoGUGxheWVyEgwK", 
+              "BENhcmQYASADKAUSDQoFU2NvcmUYAiABKAUSCwoDVWlkGAMgASgJQhyqAhlE", 
+            "b2xwaGluU2VydmVyLlByb3RvRW50aXR5"));
         pbd::FileDescriptor.InternalDescriptorAssigner assigner = delegate(pbd::FileDescriptor root) {
           descriptor = root;
           internal__static_A1003AndA1006Response__Descriptor = Descriptor.MessageTypes[0];
@@ -69,7 +69,7 @@ namespace DolphinServer.ProtoEntity {
           internal__static_A1003User__Descriptor = Descriptor.MessageTypes[3];
           internal__static_A1003User__FieldAccessorTable = 
               new pb::FieldAccess.FieldAccessorTable<global::DolphinServer.ProtoEntity.A1003User, global::DolphinServer.ProtoEntity.A1003User.Builder>(internal__static_A1003User__Descriptor,
-                  new string[] { "Uid", "HatImage", "Sore", "Zhuang", "Sex", "IsReady", });
+                  new string[] { "Uid", "HatImage", "Sore", "Zhuang", "Sex", "IsReady", "Name", });
           internal__static_Player__Descriptor = Descriptor.MessageTypes[4];
           internal__static_Player__FieldAccessorTable = 
               new pb::FieldAccess.FieldAccessorTable<global::DolphinServer.ProtoEntity.Player, global::DolphinServer.ProtoEntity.Player.Builder>(internal__static_Player__Descriptor,
@@ -1452,8 +1452,8 @@ namespace DolphinServer.ProtoEntity {
   public sealed partial class A1003User : pb::GeneratedMessage<A1003User, A1003User.Builder> {
     private A1003User() { }
     private static readonly A1003User defaultInstance = new A1003User().MakeReadOnly();
-    private static readonly string[] _a1003UserFieldNames = new string[] { "HatImage", "IsReady", "Sex", "Sore", "Uid", "Zhuang" };
-    private static readonly uint[] _a1003UserFieldTags = new uint[] { 18, 48, 40, 24, 10, 32 };
+    private static readonly string[] _a1003UserFieldNames = new string[] { "HatImage", "IsReady", "Name", "Sex", "Sore", "Uid", "Zhuang" };
+    private static readonly uint[] _a1003UserFieldTags = new uint[] { 18, 48, 58, 40, 24, 10, 32 };
     public static A1003User DefaultInstance {
       get { return defaultInstance; }
     }
@@ -1534,6 +1534,16 @@ namespace DolphinServer.ProtoEntity {
       get { return isReady_; }
     }
 
+    public const int NameFieldNumber = 7;
+    private bool hasName;
+    private string name_ = "";
+    public bool HasName {
+      get { return hasName; }
+    }
+    public string Name {
+      get { return name_; }
+    }
+
     public override bool IsInitialized {
       get {
         return true;
@@ -1544,22 +1554,25 @@ namespace DolphinServer.ProtoEntity {
       CalcSerializedSize();
       string[] field_names = _a1003UserFieldNames;
       if (hasUid) {
-        output.WriteString(1, field_names[4], Uid);
+        output.WriteString(1, field_names[5], Uid);
       }
       if (hasHatImage) {
         output.WriteString(2, field_names[0], HatImage);
       }
       if (hasSore) {
-        output.WriteInt32(3, field_names[3], Sore);
+        output.WriteInt32(3, field_names[4], Sore);
       }
       if (hasZhuang) {
-        output.WriteInt32(4, field_names[5], Zhuang);
+        output.WriteInt32(4, field_names[6], Zhuang);
       }
       if (hasSex) {
-        output.WriteInt32(5, field_names[2], Sex);
+        output.WriteInt32(5, field_names[3], Sex);
       }
       if (hasIsReady) {
         output.WriteInt32(6, field_names[1], IsReady);
+      }
+      if (hasName) {
+        output.WriteString(7, field_names[2], Name);
       }
       UnknownFields.WriteTo(output);
     }
@@ -1595,6 +1608,9 @@ namespace DolphinServer.ProtoEntity {
       }
       if (hasIsReady) {
         size += pb::CodedOutputStream.ComputeInt32Size(6, IsReady);
+      }
+      if (hasName) {
+        size += pb::CodedOutputStream.ComputeStringSize(7, Name);
       }
       size += UnknownFields.SerializedSize;
       memoizedSerializedSize = size;
@@ -1736,6 +1752,9 @@ namespace DolphinServer.ProtoEntity {
         if (other.HasIsReady) {
           IsReady = other.IsReady;
         }
+        if (other.HasName) {
+          Name = other.Name;
+        }
         this.MergeUnknownFields(other.UnknownFields);
         return this;
       }
@@ -1801,6 +1820,10 @@ namespace DolphinServer.ProtoEntity {
             }
             case 48: {
               result.hasIsReady = input.ReadInt32(ref result.isReady_);
+              break;
+            }
+            case 58: {
+              result.hasName = input.ReadString(ref result.name_);
               break;
             }
           }
@@ -1932,6 +1955,27 @@ namespace DolphinServer.ProtoEntity {
         PrepareBuilder();
         result.hasIsReady = false;
         result.isReady_ = 0;
+        return this;
+      }
+
+      public bool HasName {
+        get { return result.hasName; }
+      }
+      public string Name {
+        get { return result.Name; }
+        set { SetName(value); }
+      }
+      public Builder SetName(string value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasName = true;
+        result.name_ = value;
+        return this;
+      }
+      public Builder ClearName() {
+        PrepareBuilder();
+        result.hasName = false;
+        result.name_ = "";
         return this;
       }
     }

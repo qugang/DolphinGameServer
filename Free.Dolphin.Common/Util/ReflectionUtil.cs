@@ -7,7 +7,7 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Free.Dolphin.Common.Util
+namespace Free.Dolphin.Core.Util
 {
     public delegate object MethodDelegate(object target, object[] args);
 

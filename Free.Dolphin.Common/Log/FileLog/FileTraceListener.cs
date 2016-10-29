@@ -5,7 +5,7 @@ using System.Text;
 using System.Diagnostics;
 using System.IO;
 
-namespace Free.Dolphin.Common
+namespace Free.Dolphin.Core
 {
     internal class FileTraceListener : TraceListener
     {

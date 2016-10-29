@@ -1,11 +1,14 @@
-﻿using DolphinServer.Entity;
+﻿using DolphinServer.ProtoEntity;
+using Free.Dolphin.Core;
 using Free.Dolphin.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
+using Free.Dolphin.Core.Util;
+using DolphinServer.Controller;
+using DolphinServer.Entity;
 
 namespace DolphinServer.Service.Mj
 {
@@ -16,8 +19,11 @@ namespace DolphinServer.Service.Mj
 
         public int HuType { get; set; }
 
-        public int GetAllHuType() {
-            return FirstHuType | HuType;
+        public int PaoHuType { get; set; }
+
+        public int GetAllHuType()
+        {
+            return FirstHuType | HuType | PaoHuType;
         }
 
         public int SubScore { get; set; }
@@ -28,9 +34,14 @@ namespace DolphinServer.Service.Mj
 
         public CsGamePlayer(GameUser gameSession) : base(gameSession)
         {
-
+            NeedGangDaPai = new List<int>();
         }
-        
+
+        /// <summary>
+        /// 断线重连重新发送打牌命令
+        /// </summary>
+        public List<int> NeedGangDaPai { get; set; }
+
         /// <summary>
         /// 检查四喜
         /// </summary>
@@ -138,18 +149,13 @@ namespace DolphinServer.Service.Mj
 
         public Boolean CheckQuanQiuRen()
         {
-            if (this.tNumber == 2)
-            {
-                return this.tCards.All(p => p.GetItemNumber() == 2);
-            }
-            else if (this.wNumber == 2)
-            {
-                return this.wCards.All(p => p.GetItemNumber() == 2);
-            }
-            else
-            {
-                return this.sCards.All(p => p.GetItemNumber() == 2);
-            }
+            if (this.tCards.Count == 1 && this.sCards.Count == 0 && this.wCards.Count == 0)
+                return true;
+            if (this.sCards.Count == 1 && this.tCards.Count == 0 && this.wCards.Count == 0)
+                return true;
+            if (this.wCards.Count == 1 && this.tCards.Count == 0 && this.sCards.Count == 0)
+                return true;
+            return false;
         }
 
         public Boolean CheckHu(int card)
@@ -157,15 +163,32 @@ namespace DolphinServer.Service.Mj
             card = card & 0x18F | 0x10;
             PushCard(card);
             this.SortCards();
-            var result = CheckJiangJiangHu();
-            result = base.CheckHu();
-            PopCard(card);
-            return result;
+            if (this.CheckQuanQiuRen())
+            {
+                PopCard(card);
+                return true;
+            }
+            if (this.CheckJiangJiangHu())
+            {
+
+                PopCard(card);
+                return true;
+            }
+            if (base.CheckHu())
+            {
+
+                PopCard(card);
+                return true;
+            }
+            this.PopCard(card);
+            return false;
         }
 
-        public void ReLoad() {
+        public void ReLoad()
+        {
             this.IsReady = false;
             this.HuType = 0;
+            this.PaoHuType = 0;
             this.AddScore = 0;
             this.SubScore = 0;
             this.DianPaoPlayer = null;

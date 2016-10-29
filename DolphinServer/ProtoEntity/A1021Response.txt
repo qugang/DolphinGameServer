@@ -8,6 +8,7 @@ message A1021Response{
 	optional string NiaoUid1 = 6;
 	optional string NiaoUid2 = 7;
 	repeated A1021User Users = 8;
+	optional string DesUid = 9;
 }
 
 message A1021User{

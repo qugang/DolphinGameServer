@@ -12,5 +12,6 @@ message A1004Response{
 message A1004User{
 	optional string Uid = 1;
 	optional int32 IsCancel = 2;
+	optional string Name = 3;
 }
 

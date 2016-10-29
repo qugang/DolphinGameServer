@@ -36,9 +36,9 @@ namespace DolphinServer.ProtoEntity {
               "ChFBMTAwNFJlc3BvbnNlLnR4dCKGAQoNQTEwMDRSZXNwb25zZRIRCglFcnJv", 
               "ckluZm8YASABKAkSEQoJRXJyb3JDb2RlGAIgASgFEg4KBlJvb21JRBgEIAEo", 
               "BRIQCghSb29tVHlwZRgFIAEoBRIZCgVVc2VycxgGIAMoCzIKLkExMDA0VXNl", 
-              "chISCgpDYW5jZWxUeXBlGAcgASgFIioKCUExMDA0VXNlchILCgNVaWQYASAB", 
-              "KAkSEAoISXNDYW5jZWwYAiABKAVCHKoCGURvbHBoaW5TZXJ2ZXIuUHJvdG9F", 
-            "bnRpdHk="));
+              "chISCgpDYW5jZWxUeXBlGAcgASgFIjgKCUExMDA0VXNlchILCgNVaWQYASAB", 
+              "KAkSEAoISXNDYW5jZWwYAiABKAUSDAoETmFtZRgDIAEoCUIcqgIZRG9scGhp", 
+            "blNlcnZlci5Qcm90b0VudGl0eQ=="));
         pbd::FileDescriptor.InternalDescriptorAssigner assigner = delegate(pbd::FileDescriptor root) {
           descriptor = root;
           internal__static_A1004Response__Descriptor = Descriptor.MessageTypes[0];
@@ -48,7 +48,7 @@ namespace DolphinServer.ProtoEntity {
           internal__static_A1004User__Descriptor = Descriptor.MessageTypes[1];
           internal__static_A1004User__FieldAccessorTable = 
               new pb::FieldAccess.FieldAccessorTable<global::DolphinServer.ProtoEntity.A1004User, global::DolphinServer.ProtoEntity.A1004User.Builder>(internal__static_A1004User__Descriptor,
-                  new string[] { "Uid", "IsCancel", });
+                  new string[] { "Uid", "IsCancel", "Name", });
           pb::ExtensionRegistry registry = pb::ExtensionRegistry.CreateInstance();
           RegisterAllExtensions(registry);
           return registry;
@@ -584,8 +584,8 @@ namespace DolphinServer.ProtoEntity {
   public sealed partial class A1004User : pb::GeneratedMessage<A1004User, A1004User.Builder> {
     private A1004User() { }
     private static readonly A1004User defaultInstance = new A1004User().MakeReadOnly();
-    private static readonly string[] _a1004UserFieldNames = new string[] { "IsCancel", "Uid" };
-    private static readonly uint[] _a1004UserFieldTags = new uint[] { 16, 10 };
+    private static readonly string[] _a1004UserFieldNames = new string[] { "IsCancel", "Name", "Uid" };
+    private static readonly uint[] _a1004UserFieldTags = new uint[] { 16, 26, 10 };
     public static A1004User DefaultInstance {
       get { return defaultInstance; }
     }
@@ -626,6 +626,16 @@ namespace DolphinServer.ProtoEntity {
       get { return isCancel_; }
     }
 
+    public const int NameFieldNumber = 3;
+    private bool hasName;
+    private string name_ = "";
+    public bool HasName {
+      get { return hasName; }
+    }
+    public string Name {
+      get { return name_; }
+    }
+
     public override bool IsInitialized {
       get {
         return true;
@@ -636,10 +646,13 @@ namespace DolphinServer.ProtoEntity {
       CalcSerializedSize();
       string[] field_names = _a1004UserFieldNames;
       if (hasUid) {
-        output.WriteString(1, field_names[1], Uid);
+        output.WriteString(1, field_names[2], Uid);
       }
       if (hasIsCancel) {
         output.WriteInt32(2, field_names[0], IsCancel);
+      }
+      if (hasName) {
+        output.WriteString(3, field_names[1], Name);
       }
       UnknownFields.WriteTo(output);
     }
@@ -663,6 +676,9 @@ namespace DolphinServer.ProtoEntity {
       }
       if (hasIsCancel) {
         size += pb::CodedOutputStream.ComputeInt32Size(2, IsCancel);
+      }
+      if (hasName) {
+        size += pb::CodedOutputStream.ComputeStringSize(3, Name);
       }
       size += UnknownFields.SerializedSize;
       memoizedSerializedSize = size;
@@ -792,6 +808,9 @@ namespace DolphinServer.ProtoEntity {
         if (other.HasIsCancel) {
           IsCancel = other.IsCancel;
         }
+        if (other.HasName) {
+          Name = other.Name;
+        }
         this.MergeUnknownFields(other.UnknownFields);
         return this;
       }
@@ -843,6 +862,10 @@ namespace DolphinServer.ProtoEntity {
               result.hasIsCancel = input.ReadInt32(ref result.isCancel_);
               break;
             }
+            case 26: {
+              result.hasName = input.ReadString(ref result.name_);
+              break;
+            }
           }
         }
 
@@ -891,6 +914,27 @@ namespace DolphinServer.ProtoEntity {
         PrepareBuilder();
         result.hasIsCancel = false;
         result.isCancel_ = 0;
+        return this;
+      }
+
+      public bool HasName {
+        get { return result.hasName; }
+      }
+      public string Name {
+        get { return result.Name; }
+        set { SetName(value); }
+      }
+      public Builder SetName(string value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasName = true;
+        result.name_ = value;
+        return this;
+      }
+      public Builder ClearName() {
+        PrepareBuilder();
+        result.hasName = false;
+        result.name_ = "";
         return this;
       }
     }

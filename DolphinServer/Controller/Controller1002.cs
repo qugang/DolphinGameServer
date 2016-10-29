@@ -2,6 +2,7 @@
 using DolphinServer.ProtoEntity;
 using DolphinServer.Service;
 using DolphinServer.Service.Mj;
+using Free.Dolphin.Common;
 using Free.Dolphin.Core;
 using System;
 using System.Collections.Generic;
@@ -25,11 +26,22 @@ namespace DolphinServer.Controller
 
         public override byte[] ProcessAction()
         {
-            CsMjGameRoom room = CsGameRoomManager.CreateRoom(Context.Session.User as GameUser);
+
+            GameUser user = RedisContext.GlobalContext.FindHashEntityByKey<GameUser>(Context.HttpQueryString["Uid"]);
+
+            if(user.RoomCard <=0)
+            {
+                A9999DataErrorResponse.Builder error = A9999DataErrorResponse.CreateBuilder();
+                error.ErrorCode = 4;
+                error.ErrorInfo = ErrorInfo.ErrorDic[4];
+                WebSocketServerWrappe.SendPackgeWithUser(Context.Session.User.Uid, 9999, error.Build().ToByteArray());
+                return null;
+            }
+
+            CsMjGameRoom room = CsGameRoomManager.CreateRoom(user, int.Parse(Context.HttpQueryString["RoomPeopleType"]));
             A1002Response.Builder response = A1002Response.CreateBuilder();
             response.RoomID = room.RoomId;
             response.RoomType = int.Parse(Context.HttpQueryString["RoomType"]);
-            
 
             return response.Build().ToByteArray();
         }

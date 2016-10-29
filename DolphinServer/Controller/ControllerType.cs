@@ -104,5 +104,25 @@ namespace DolphinServer.Controller
         /// </summary>
         Controller1022 = 1022,
 
+        /// <summary>
+        /// 查询战绩
+        /// </summary>
+        Controller1023 = 1023,
+
+        /// <summary>
+        /// 战绩明细
+        /// </summary>
+        Controller1024 = 1024,
+
+        /// <summary>
+        /// 输入邀请码
+        /// </summary>
+        Controller1025 = 1025,
+
+        /// <summary>
+        /// 领取奖励
+        /// </summary>
+        Controller1026 = 1026,
+
     }
 }

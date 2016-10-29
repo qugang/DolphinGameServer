@@ -1,5 +1,5 @@
 ﻿using Fleck;
-using Free.Dolphin.Common.Util;
+using Free.Dolphin.Core.Util;
 using Free.Dolphin.Core.Session;
 using System;
 using System.Collections.Generic;
@@ -13,6 +13,11 @@ namespace Free.Dolphin.Core
 {
     public class WebSocketServerWrappe
     {
+
+        public static string DesKey { get; set; }
+        public static string DesIv { get; set; }
+
+        public static string SignKey { get; set; }
 
         public static Func<string, Exception, byte[]> OnErrorMessage { get; set; }
 
@@ -49,12 +54,20 @@ namespace Free.Dolphin.Core
 
                         if (message == "ping")
                         {
-                            Console.WriteLine(message);
                             return;
                         }
 
+                        message =  Crypto.DESDecrypt(message,DesKey);
+
                         WebSocketServerWrappe.OnRevice(message);
                         Dictionary<string, string> keyValue = WebSocketPackage.UnPackage(message);
+
+                        if (keyValue == null)
+                        {
+                            socket.OnError(new Exception("异常包"));
+                            return;
+                        }
+
                         ControllerContext context = new ControllerContext(keyValue);
                         context.Session = GameSessionManager.GetSession(socket);
                         ControllerBase controller = ControllerFactory.CreateController(context);
@@ -63,6 +76,10 @@ namespace Free.Dolphin.Core
                             if (controller.Login())
                             {
                                 byte[] sendByte = controller.ProcessAction();
+                                if (sendByte == null)
+                                {
+                                    return;
+                                }
                                 List<byte> list = new List<byte>();
                                 list.Add((byte)(context.ProtocolId >> 8));
                                 list.Add((byte)(context.ProtocolId & 0xFF));

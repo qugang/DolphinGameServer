@@ -20,6 +20,13 @@ namespace DolphinServer.Service.Mj
         public Boolean Cancel { get; set; }
 
         /// <summary>
+        /// 杠
+        /// </summary>
+        public Boolean IsGang { get; set; }
+
+
+
+        /// <summary>
         /// 解散房间投票状态
         /// </summary>
         public Boolean CancelState { get; set; }
@@ -36,6 +43,11 @@ namespace DolphinServer.Service.Mj
         /// 杠的牌
         /// </summary>
         public List<int> GangCards { get; set; }
+
+        /// <summary>
+        /// 暗杠
+        /// </summary>
+        public List<int> AnGangCards { get; set; }
 
         /// <summary>
         /// 补张
@@ -84,13 +96,18 @@ namespace DolphinServer.Service.Mj
         /// </summary>
         public List<int> wCards { get; set; }
 
+        /// <summary>
+        /// 断线重连处理:当前有没有海底牌
+        /// </summary>
+        public int HaidiPai { get; set; }
+
         public int wNumber { get; set; }
 
         /// <summary>
         /// 用于描述手上加吃加碰的牌的张数，判断清一色时用
         /// </summary>
         public int twNumber { get; set; }
-        
+
 
         public GameUser PlayerUser { get; set; }
 
@@ -111,6 +128,8 @@ namespace DolphinServer.Service.Mj
             this.GangCards = new List<int>();
             this.BuZhangCards = new List<int>();
             this.zhuoCards = new List<int>();
+            this.AnGangCards = new List<int>();
+            this.HaidiPai = -1;
             foreach (var row in card)
             {
                 int itemType = row.GetItemType();
@@ -211,16 +230,19 @@ namespace DolphinServer.Service.Mj
             {
                 this.wCards.AddCardItem(card);
                 this.wNumber++;
+                this.twNumber++;
             }
             else if (type == 1)
             {
                 this.tCards.AddCardItem(card);
                 this.tNumber++;
+                this.ttNumber++;
             }
             else
             {
                 this.sCards.AddCardItem(card);
                 this.sNumber++;
+                this.tsNumber++;
             }
             SortCards();
         }
@@ -273,7 +295,8 @@ namespace DolphinServer.Service.Mj
         /// <returns></returns>
         public Boolean CheckChi(int card)
         {
-
+            if (this.IsGang)
+                return false;
             int type = card.GetItemType();
             if (type == 0)
             {
@@ -301,15 +324,15 @@ namespace DolphinServer.Service.Mj
             int type = card.GetItemType();
             if (type == 0)
             {
-                return this.wCards.Exists(p => p.GetItemValue() == card.GetItemValue() && card.GetItemNumber() == 3);
+                return this.wCards.Exists(p => p.GetItemValue() == card.GetItemValue() && p.GetItemNumber() == 3);
             }
             else if (type == 1)
             {
-                return this.tCards.Exists(p => p.GetItemValue() == card.GetItemValue() && card.GetItemNumber() == 3);
+                return this.tCards.Exists(p => p.GetItemValue() == card.GetItemValue() && p.GetItemNumber() == 3);
             }
             else
             {
-                return this.sCards.Exists(p => p.GetItemValue() == card.GetItemValue() && card.GetItemNumber() == 3);
+                return this.sCards.Exists(p => p.GetItemValue() == card.GetItemValue() && p.GetItemNumber() == 3);
             }
         }
 
@@ -320,6 +343,8 @@ namespace DolphinServer.Service.Mj
         /// <returns></returns>
         public Boolean CheckPeng(int card)
         {
+            if (this.IsGang)
+                return false;
             int type = card.GetItemType();
             if (type == 0)
             {
@@ -469,11 +494,20 @@ namespace DolphinServer.Service.Mj
 
         public void AnGang(int card)
         {
-            this.OutCard(card);
-            this.OutCard(card);
-            this.OutCard(card);
-            this.OutCard(card);
-            this.GangCards.Add(card);
+            var index = this.PengCards.FindIndex(p => p.GetItemValue() == card.GetItemValue() && p.GetItemType() == card.GetItemType());
+            if (index != -1)
+            {
+                this.OutCard(card);
+                this.PengCards.RemoveAt(index);
+            }
+            else
+            {
+                this.OutCard(card);
+                this.OutCard(card);
+                this.OutCard(card);
+                this.OutCard(card);
+            }
+            this.AnGangCards.Add(card);
         }
 
         public void BuZhang(int card)
@@ -486,10 +520,19 @@ namespace DolphinServer.Service.Mj
 
         public void AnBuZhang(int card)
         {
-            this.OutCard(card);
-            this.OutCard(card);
-            this.OutCard(card);
-            this.OutCard(card);
+            var index = this.PengCards.FindIndex(p => p.GetItemValue() == card.GetItemValue() && p.GetItemType() == card.GetItemType());
+            if (index != -1)
+            {
+                this.OutCard(card);
+                this.PengCards.RemoveAt(index);
+            }
+            else
+            {
+                this.OutCard(card);
+                this.OutCard(card);
+                this.OutCard(card);
+                this.OutCard(card);
+            }
             this.BuZhangCards.Add(card);
         }
 

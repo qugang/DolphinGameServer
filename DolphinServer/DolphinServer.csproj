@@ -27,7 +27,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -43,6 +43,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -73,11 +75,21 @@
     <Compile Include="Controller\Controller1020.cs" />
     <Compile Include="Controller\Controller1021.cs" />
     <Compile Include="Controller\Controller1022.cs" />
+    <Compile Include="Controller\Controller1023.cs" />
+    <Compile Include="Controller\Controller1024.cs" />
+    <Compile Include="Controller\Controller1025.cs" />
+    <Compile Include="Controller\Controller1026.cs" />
     <Compile Include="Controller\Controller1100.cs" />
     <Compile Include="Controller\ControllerType.cs" />
     <Compile Include="Controller\ErrorInfo.cs" />
-    <Compile Include="Entity\GameRank.cs" />
+    <Compile Include="Entity\GameActionStoreage.cs" />
+    <Compile Include="Entity\GameManagerUser.cs" />
+    <Compile Include="Entity\GameResult.cs" />
+    <Compile Include="Entity\GameRoomCard.cs" />
     <Compile Include="Entity\GameUser.cs" />
+    <Compile Include="Entity\GameUserMapping.cs" />
+    <Compile Include="MQMessage\IMQMessage.cs" />
+    <Compile Include="MQMessage\AddUserRoomCard.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProtoEntity\A1001Response.cs" />
@@ -102,19 +114,27 @@
     <Compile Include="ProtoEntity\A1022Response.cs" />
     <Compile Include="ProtoEntity\A1023Response.cs" />
     <Compile Include="ProtoEntity\A1024Response.cs" />
+    <Compile Include="ProtoEntity\A1025Response.cs" />
+    <Compile Include="ProtoEntity\A1026Response.cs" />
+    <Compile Include="ProtoEntity\A1027Response.cs" />
     <Compile Include="ProtoEntity\A1100Response.cs" />
     <Compile Include="ProtoEntity\A9997ClientConnectionResponse.cs" />
     <Compile Include="ProtoEntity\A9998ClientCloseResponse.cs" />
     <Compile Include="ProtoEntity\A9999DataErrorResponse.cs" />
+    <Compile Include="Service\Mj\CalculationScore.cs" />
     <Compile Include="Service\Mj\CsGamePlayer.cs" />
     <Compile Include="Service\Mj\CsGameRoom.cs" />
     <Compile Include="Service\Mj\CsGameRoomManager.cs" />
     <Compile Include="Service\Mj\Base\MjGamePlayerBase.cs" />
     <Compile Include="Service\Mj\Base\MjGameRoomBase.cs" />
+    <Compile Include="Service\Mj\CsGameRoomThree.cs" />
     <Compile Include="Service\Mj\MjUtil.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +171,9 @@
     <Content Include="ProtoEntity\A1022Response.txt" />
     <Content Include="ProtoEntity\A1023Response.txt" />
     <Content Include="ProtoEntity\A1024Response.txt" />
+    <Content Include="ProtoEntity\A1025Response.txt" />
+    <Content Include="ProtoEntity\A1027Response.txt" />
+    <Content Include="ProtoEntity\A1026Response.txt" />
     <Content Include="ProtoEntity\A1100Response.txt" />
     <Content Include="ProtoEntity\A1019Response.txt" />
     <Content Include="ProtoEntity\A9997ClientConnectionResponse.txt" />

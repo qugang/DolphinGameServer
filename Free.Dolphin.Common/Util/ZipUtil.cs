@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Free.Dolphin.Common
+namespace Free.Dolphin.Core
 {
     public class ZipUtil
     {

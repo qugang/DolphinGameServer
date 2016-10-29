@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using System.Xml.Serialization;
 
-namespace Free.Dolphin.Common
+namespace Free.Dolphin.Core
 {
     public class SerializerUtil
     {
@@ -19,7 +19,7 @@ namespace Free.Dolphin.Common
             {
 
                 XmlSerializer serializer = new XmlSerializer(t);
-
+                
                 serializer.Serialize(sw, o);
 
                 return sw.ToString();
@@ -57,6 +57,7 @@ namespace Free.Dolphin.Common
             using (MemoryStream ms = new MemoryStream())
             {
                 BinaryFormatter b = new BinaryFormatter();
+                
                 b.Serialize(ms,o);
                 return ms.ToArray();
             }

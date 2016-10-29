@@ -88,9 +88,9 @@ namespace DolphinServer.Service.Mj
 
         public static int FindJiang(this List<int> array,int number)
         {
-            return array.FindIndex(p => (p.GetItemValue() == 2 ||
+            return array.FindIndex(p => (p.GetItemValue() >= 2 ||
                                    p.GetItemValue() == 5 ||
-                                    p.GetItemValue() == 8) && number % 3 == 2 && p.GetItemNumber() == 2);
+                                    p.GetItemValue() == 8) && number % 3 == 2 && p.GetItemNumber() >= 2);
         }
 
     }

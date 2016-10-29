@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Free.Dolphin.Common.Util
+namespace Free.Dolphin.Core.Util
 {
     public static class StreamUtil
     {

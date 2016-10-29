@@ -56,12 +56,6 @@
     <Compile Include="Service\Mj\Base\MjGamePlayerBaseTests.cs" />
     <Compile Include="Service\Mj\CsMjGameRoomTests.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DolphinServer\DolphinServer.csproj">
-      <Project>{D3C0D87C-E6F4-424F-BA11-587E13AF5404}</Project>
-      <Name>DolphinServer</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

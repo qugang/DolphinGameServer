@@ -19,16 +19,29 @@ namespace DolphinServer.Service.Mj
 
         private static int maxRoomeId = 0;
 
-        public static CsMjGameRoom CreateRoom(GameUser user)
+        public static CsMjGameRoom CreateRoom(GameUser user,int RoomPeopleType)
         {
-            CsMjGameRoom room = new CsMjGameRoom();
-            room.RoomId = getRoomId();
-            room.Players = new LinkedList<CsGamePlayer>();
-            room.Players.AddLast(new CsGamePlayer(user));
-            rooms.TryAdd(room.RoomId, room);
+            if (RoomPeopleType == 0)
+            {
+                CsMjGameRoom room = new CsMjGameRoom(user.Uid);
+                room.RoomId = getRoomId();
+                room.Players = new LinkedList<CsGamePlayer>();
+                room.Players.AddLast(new CsGamePlayer(user));
+                rooms.TryAdd(room.RoomId, room);
 
-            userRooms.TryAdd(user.Uid, room);
-            return room;
+                userRooms.TryAdd(user.Uid, room);
+                return room;
+            }
+            else
+            {
+                CsGameRoomThree room = new CsGameRoomThree(user.Uid);
+                room.RoomId = getRoomId();
+                room.Players = new LinkedList<CsGamePlayer>();
+                room.Players.AddLast(new CsGamePlayer(user));
+                rooms.TryAdd(room.RoomId, room);
+                userRooms.TryAdd(user.Uid, room);
+                return room;
+            }
         }
 
         public static CsMjGameRoom Ready(int roomId, GameUser user)
@@ -60,7 +73,18 @@ namespace DolphinServer.Service.Mj
         {
             CsMjGameRoom room = null;
             rooms.TryGetValue(roomID, out room);
-            if (room != null && room.Players.Count < 4)
+
+
+
+            if (room != null && (room.Players.Count < 4 && room.RoomPeoPleType == 0))
+            {
+                room.JoinRoom(user);
+
+                userRooms.TryAdd(user.Uid, room);
+
+                return room;
+            }
+            else if (room != null && (room.Players.Count < 3 && room.RoomPeoPleType == 1))
             {
                 room.JoinRoom(user);
 
@@ -70,7 +94,7 @@ namespace DolphinServer.Service.Mj
             }
             else
             {
-                return room;
+                return null;
             }
         }
 
@@ -102,7 +126,7 @@ namespace DolphinServer.Service.Mj
             //Cancel类型0为通知，1为解散房间，2为不同意取消
             int isCancel = 0;
 
-            if (count >= listPlayer.Count() / 2 && cancelStateCount >= listPlayer.Count() /2)
+            if (count > listPlayer.Count() / 2 && cancelStateCount > listPlayer.Count() /2)
             {
                 rooms.TryRemove(roomID, out room);
                 roomRemoveKeyBag.Add(roomID);
@@ -116,7 +140,7 @@ namespace DolphinServer.Service.Mj
                 }
                 isCancel = 1;
             }
-            else if (count < listPlayer.Count() / 2 && cancelStateCount >= listPlayer.Count() / 2)
+            else if (count < listPlayer.Count() / 2 && cancelStateCount > listPlayer.Count() / 2)
             {
                 isCancel = 2;
                 foreach (var row in room.Players)
@@ -133,6 +157,7 @@ namespace DolphinServer.Service.Mj
                 A1004User.Builder user = A1004User.CreateBuilder();
                 user.SetUid(row.PlayerUser.Uid);
                 user.SetIsCancel(row.Cancel ? 1 : 0);
+                user.Name = row.PlayerUser.NickName;
                 response.AddUsers(user);
             }
             response.SetCancelType(isCancel);

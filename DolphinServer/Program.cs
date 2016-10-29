@@ -1,8 +1,8 @@
 ﻿using DolphinServer.Entity;
 using DolphinServer.ProtoEntity;
 using DolphinServer.Service.Mj;
-using Free.Dolphin.Common;
-using Free.Dolphin.Common.Util;
+using Free.Dolphin.Core;
+using Free.Dolphin.Core.Util;
 using Free.Dolphin.Core;
 using System;
 using System.Collections.Generic;
@@ -13,6 +13,10 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Configuration;
+using Free.Dolphin.Core.MQ;
+using DolphinServer.MQMessage;
+using Free.Dolphin.Common;
 
 namespace LeisureComplexServer
 {
@@ -23,7 +27,7 @@ namespace LeisureComplexServer
             RedisContext.InitRedisContext("localhost,allowAdmin=true", Assembly.GetAssembly(typeof(Program)));
             ControllerFactory.InitController(Assembly.GetAssembly(typeof(Program)));
             ControllerBase.InitGameUserType<GameUser>();
-            WebSocketServerWrappe.Init("192.168.0.103", 9001);
+            WebSocketServerWrappe.Init(ConfigurationManager.AppSettings["ip"], int.Parse(ConfigurationManager.AppSettings["port"]));
             WebSocketServerWrappe.OnErrorMessage = (message, exption) =>
             {
                 LogManager.Log.Error(message, exption);
@@ -48,14 +52,13 @@ namespace LeisureComplexServer
                 LogManager.Log.Debug("收到连接:" + message);
             };
 
-            WebSocketServerWrappe.OnClose = (message,user) =>
+            WebSocketServerWrappe.OnClose = (message, user) =>
             {
                 LogManager.Log.Debug("客户端断开:" + message);
-
                 if (user != null)
                 {
 
-                    CsMjGameRoom room =  CsGameRoomManager.GetRoomByUserId(user.Uid);
+                    CsMjGameRoom room = CsGameRoomManager.GetRoomByUserId(user.Uid);
 
                     if (room != null)
                     {
@@ -70,10 +73,22 @@ namespace LeisureComplexServer
                         }
                     }
                 }
-
             };
 
+            WebSocketServerWrappe.DesKey = "f1u2c3k4";
+            WebSocketServerWrappe.DesIv = "N1Q2J3C4";
+            WebSocketServerWrappe.SignKey = "3f261d4f2f8941eafffffcf7507f021b";
+
+
+            MQServer.RunMQ((object o) =>
+            {
+                SerializerUtil.JavaScriptJosnDeserialize<AddUserRoomCard>(o.ToString()).Process();
+            });
+
             LogManager.Log.Info("服务器启动成功端口9001");
+
+
+
             Console.ReadKey();
 
         }

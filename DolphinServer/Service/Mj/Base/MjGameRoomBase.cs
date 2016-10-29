@@ -12,13 +12,26 @@ namespace DolphinServer.Service.Mj
 {
     public abstract class MjGameRoomBase
     {
-        public MjGameRoomBase() {
+        public MjGameRoomBase()
+        {
             this.JuShu = 1;
         }
         public int RoomId { get; set; }
 
+        public int RoomPeoPleType { get; set; }
+
         public int RoomType { get; set; }
 
+
+        /// <summary>
+        /// 房主Uid
+        /// </summary>
+        public string RoomMagaerUid { get; set; }
+
+        /// <summary>
+        /// 断线重连记录当前的最后一张牌
+        /// </summary>
+        public List<int> CurrentCard { get; set; }
         /// <summary>
         /// 局数
         /// </summary>
@@ -41,7 +54,7 @@ namespace DolphinServer.Service.Mj
 
 
 
-        protected LinkedListNode<CsGamePlayer> Player { get; set; }
+        public LinkedListNode<CsGamePlayer> Player { get; set; }
 
         public LinkedListNode<CsGamePlayer> FindPlayer(string uid)
         {
@@ -86,80 +99,91 @@ namespace DolphinServer.Service.Mj
         //};
 
         public int[] cardArray = {
-          0 | 0x10,
-0 | 0x10,
-0 | 0x10,
-0 | 0x10,
-1 | 0x10,
-1 | 0x10,
-1 | 0x10,
-1 | 0x10,
-2 | 0x10,
-2 | 0x10,
-2 | 0x10,
-2 | 0x10,
-3 | 0x10,
-3 | 0x10,
-3 | 0x10,
-3 | 0x10,
-4 | 0x10,
-4 | 0x10,
-4 | 0x10,
-4 | 0x10,
-5 | 0x10,
-5 | 0x10,
-5 | 0x10,
-5 | 0x10,
-6 | 0x10,
-6 | 0x10,
-6 | 0x10,
-6 | 0x10,
-7 | 0x10,
-7 | 0x10,
-7 | 0x10,
-7 | 0x10,
-8 | 0x10,
-8 | 0x10,
-8 | 0x10,
-8 | 0x10,
-0 | 0x10 | 0x80,
-1 | 0x10 | 0x80,
-2 | 0x10 | 0x80,
-3 | 0x10 | 0x80,
-4 | 0x10 | 0x80,
-5 | 0x10 | 0x80,
-6 | 0x10 | 0x80,
-7 | 0x10 | 0x80,
-8 | 0x10 | 0x80,
-0 | 0x10 | 0x80,
-1 | 0x10 | 0x80,
-2 | 0x10 | 0x80,
-3 | 0x10 | 0x80,
-4 | 0x10 | 0x80,
-5 | 0x10 | 0x80,
-6 | 0x10 | 0x80,
-7 | 0x10 | 0x80,
-6 | 0x10,
-0 | 0x10 | 0x100,
-0 | 0x10 | 0x80,1 | 0x10 | 0x80,2 | 0x10 | 0x80,3 | 0x10 | 0x80,4 | 0x10 | 0x80,5 | 0x10 | 0x80,6 | 0x10 | 0x80,7 | 0x10 | 0x80,8 | 0x10 | 0x80,
-0 | 0x10 | 0x80,1 | 0x10 | 0x80,2 | 0x10 | 0x80,3 | 0x10 | 0x80,4 | 0x10 | 0x80,5 | 0x10 | 0x80,6 | 0x10 | 0x80,7 | 0x10 | 0x80,8 | 0x10 | 0x80,
-0 | 0x10 | 0x100,1 | 0x10|0x100,2 | 0x10|0x100,3 | 0x10|0x100,4 | 0x10|0x100,5 | 0x10|0x100,6 | 0x10|0x100,7 | 0x10|0x100,8 | 0x10|0x100,
-0 | 0x10 | 0x100,1 | 0x10|0x100,2 | 0x10|0x100,3 | 0x10|0x100,4 | 0x10|0x100,5 | 0x10|0x100,6 | 0x10|0x100,7 | 0x10|0x100,8 | 0x10|0x100,
-0 | 0x10 | 0x100,1 | 0x10|0x100,2 | 0x10|0x100,3 | 0x10|0x100,4 | 0x10|0x100,5 | 0x10|0x100,6 | 0x10|0x100,7 | 0x10|0x100,8 | 0x10|0x100,
-0 | 0x10 | 0x100,1 | 0x10|0x100,2 | 0x10|0x100,3 | 0x10|0x100,4 | 0x10|0x100,5 | 0x10|0x100,6 | 0x10|0x100,7 | 0x10|0x100,3 | 0x10,
-        };
+                  0 | 0x10,
+        0 | 0x10,
+        0 | 0x10,
+        0 | 0x10,
+        1 | 0x10,
+        1 | 0x10,
+        1 | 0x10,
+        1 | 0x10,
+        2 | 0x10,
+        2 | 0x10,
+        2 | 0x10,
+        2 | 0x10,
+        3 | 0x10,
+        3 | 0x10,
+        3 | 0x10,
+        3 | 0x10,
+        4 | 0x10,
+        4 | 0x10,
+        4 | 0x10,
+        4 | 0x10,
+        5 | 0x10,
+        5 | 0x10,
+        5 | 0x10,
+        5 | 0x10,
+        6 | 0x10,
+        6 | 0x10,
+        6 | 0x10,
+        6 | 0x10,
+        7 | 0x10,
+        7 | 0x10,
+        7 | 0x10,
+        7 | 0x10,
+        8 | 0x10,
+        8 | 0x10,
+        8 | 0x10,
+        8 | 0x10,
+        0 | 0x10 | 0x80,
+        1 | 0x10 | 0x80,
+        2 | 0x10 | 0x80,
+        3 | 0x10 | 0x80,
+        4 | 0x10 | 0x80,
+        5 | 0x10 | 0x80,
+        6 | 0x10 | 0x80,
+        7 | 0x10 | 0x80,
+        8 | 0x10 | 0x80,
+        0 | 0x10 | 0x80,
+        1 | 0x10 | 0x80,
+        2 | 0x10 | 0x80,
+        3 | 0x10 | 0x80,
+        4 | 0x10 | 0x80,
+        5 | 0x10 | 0x80,
+        6 | 0x10 | 0x80,
+        7 | 0x10 | 0x80,
+        6 | 0x10,
+        0 | 0x10 | 0x100,
+        0 | 0x10 | 0x80,1 | 0x10 | 0x80,2 | 0x10 | 0x80,3 | 0x10 | 0x80,4 | 0x10 | 0x80,5 | 0x10 | 0x80,6 | 0x10 | 0x80,7 | 0x10 | 0x80,8 | 0x10 | 0x80,
+        0 | 0x10 | 0x80,1 | 0x10 | 0x80,2 | 0x10 | 0x80,3 | 0x10 | 0x80,4 | 0x10 | 0x80,5 | 0x10 | 0x80,6 | 0x10 | 0x80,7 | 0x10 | 0x80,8 | 0x10 | 0x80,
+        0 | 0x10 | 0x100,1 | 0x10|0x100,2 | 0x10|0x100,3 | 0x10|0x100,4 | 0x10|0x100,5 | 0x10|0x100,6 | 0x10|0x100,7 | 0x10|0x100,8 | 0x10|0x100,
+        0 | 0x10 | 0x100,1 | 0x10|0x100,2 | 0x10|0x100,3 | 0x10|0x100,4 | 0x10|0x100,5 | 0x10|0x100,6 | 0x10|0x100,7 | 0x10|0x100,8 | 0x10|0x100,
+        0 | 0x10 | 0x100,1 | 0x10|0x100,2 | 0x10|0x100,3 | 0x10|0x100,4 | 0x10|0x100,5 | 0x10|0x100,6 | 0x10|0x100,7 | 0x10|0x100,8 | 0x10|0x100,
+        0 | 0x10 | 0x100,1 | 0x10|0x100,2 | 0x10|0x100,3 | 0x10|0x100,4 | 0x10|0x100,5 | 0x10|0x100,6 | 0x10|0x100,7 | 0x10|0x100,3 | 0x10,
+                };
 
 
         public int CardIndex { get; set; }
+
+        /// <summary>
+        /// 断线重连处理
+        /// </summary>
+        public Boolean IsEnd { get; set; }
 
         public virtual void BeginGame(string userId)
         {
             LinkedListNode<CsGamePlayer> player = FindPlayer(userId);
 
-            if (Players.All(p => p.IsReady) && Players.Count == 4)
+            if (Players.All(p => p.IsReady) && Players.Count == 4 && this.RoomPeoPleType == 0)
             {
                 CardIndex = 0;
-                // RandCard();
+                RandCard();
+                SendCard(false);
+            }
+            else if (Players.All(p => p.IsReady) && Players.Count == 3 && this.RoomPeoPleType == 1)
+            {
+                CardIndex = 0;
+                RandCard();
                 SendCard(false);
             }
             else
@@ -178,7 +202,6 @@ namespace DolphinServer.Service.Mj
                     WebSocketServerWrappe.SendPackgeWithUser(tempPlayer.Value.PlayerUser.Uid, 10036, responseArray);
                     tempPlayer = tempPlayer.Next;
                 }
-
             }
         }
 
@@ -187,10 +210,10 @@ namespace DolphinServer.Service.Mj
             LinkedListNode<CsGamePlayer> player = FindPlayer(userId);
             player.Value.IsReady = true;
 
-            if (Players.All(p => p.IsReady) && Players.Count == 4)
+            if (Players.All(p => p.IsReady))
             {
                 CardIndex = 0;
-                // RandCard();
+                RandCard();
                 SendCard(true);
             }
             else
@@ -253,7 +276,7 @@ namespace DolphinServer.Service.Mj
             }
         }
 
-        public void SendMessage(string uid, string message,string messageType)
+        public void SendMessage(string uid, string message, string messageType)
         {
             A1100Response.Builder response = A1100Response.CreateBuilder();
             response.Uid = uid;
@@ -266,7 +289,8 @@ namespace DolphinServer.Service.Mj
             }
         }
 
-        protected A1003AndA1006Response.Builder Create1003And1006Req(int playerLen) {
+        protected A1003AndA1006Response.Builder Create1003And1006Req(int playerLen)
+        {
 
             A1003AndA1006Response.Builder responseBase = A1003AndA1006Response.CreateBuilder();
             responseBase.RoomID = this.RoomId;
@@ -281,9 +305,10 @@ namespace DolphinServer.Service.Mj
                 var builder = A1003User.CreateBuilder();
                 builder.Uid = tempPlayer.Value.PlayerUser.Uid;
                 builder.Sore = 1000;
-                builder.HatImage = "";
-                builder.Sex = 0;
-                builder.IsReady = tempPlayer.Value.IsReady ? 1: 0;
+                builder.HatImage = tempPlayer.Value.PlayerUser.HeadImgurl;
+                builder.Sex = tempPlayer.Value.PlayerUser.Sex;
+                builder.IsReady = tempPlayer.Value.IsReady ? 1 : 0;
+                builder.Name = tempPlayer.Value.PlayerUser.NickName;
                 response.AddUsers(builder.Build());
                 tempPlayer = tempPlayer.Next;
             }
@@ -300,5 +325,6 @@ public enum OutCardState
     Chi,
     Peng,
     Gang,
-    Hu
+    Hu,
+    haidi,
 }

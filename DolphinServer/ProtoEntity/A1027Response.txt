@@ -1,0 +1,25 @@
+syntax = "proto2";
+option csharp_namespace = "DolphinServer.ProtoEntity";
+message A1027Response{
+	optional string ErrorInfo = 1;
+	optional int32 ErrorCode = 2;
+	repeated A1027GameUser GameUser=3;
+	repeated A1027CmdList CmdList=4;
+}
+
+message A1027GameUser{
+	optional string Uid = 1;
+	optional string HatImage = 2;
+	optional int32 Sex = 3;
+	optional string Name = 4;
+	repeated int32  Cards = 5;
+}
+
+message A1027CmdList{
+	optional string Uid = 1;
+	optional int32 AType = 2;
+	optional int32 Card =3;
+	optional int32 Card1 = 4;
+	optional int32 Card2 = 5;
+	optional int32 HuType = 6; 
+}

@@ -16,6 +16,7 @@ namespace Free.Dolphin.Core.Session
         {
             _Users.AddOrUpdate(userId, session, (key, oSession) =>
             {
+                oSession.SocketClient.Close();
                 return session;
             });
         }
@@ -25,6 +26,10 @@ namespace Free.Dolphin.Core.Session
         {
             GameSession session = null;
             _Users.TryGetValue(userId, out session);
+
+            if (session == null)
+                return null;
+
             return session.SocketClient;
         }
 

@@ -35,12 +35,10 @@
       <HintPath>..\packages\Fleck.0.13.0.57\lib\net40\Fleck.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="StackExchange.Redis, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\StackExchange.Redis.1.1.603\lib\net46\StackExchange.Redis.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Messaging" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -54,10 +52,7 @@
     <Compile Include="Controller\ControllerBase.cs" />
     <Compile Include="Controller\ControllerContext.cs" />
     <Compile Include="Controller\ControllAttribute\ControllerProtocolAttribute.cs" />
-    <Compile Include="Redis\RedisAttribute\RedisColumnAttribute.cs" />
-    <Compile Include="Redis\RedisAttribute\RedisColumnType.cs" />
-    <Compile Include="Redis\RedisAttribute\RedisTableAttribute.cs" />
-    <Compile Include="Redis\RedisContext.cs" />
+    <Compile Include="MQ\MQServer.cs" />
     <Compile Include="Session\GameSession.cs" />
     <Compile Include="Session\GameSessionManager.cs" />
     <Compile Include="Session\GameUserManager.cs" />

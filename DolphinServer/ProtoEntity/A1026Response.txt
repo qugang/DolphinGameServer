@@ -1,0 +1,12 @@
+syntax = "proto2";
+option csharp_namespace = "DolphinServer.ProtoEntity";
+message A1026Response{
+	optional string ErrorInfo = 1;
+	optional int32 ErrorCode = 2;
+	repeated A1026GameResult GResult = 3;
+}
+message A1026GameResult{
+	optional string ResultActionId = 1;
+	optional int32 Score = 2;
+	optional string DateTime = 3;
+}

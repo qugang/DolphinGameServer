@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Globalization;
 
-namespace Free.Dolphin.Common
+namespace Free.Dolphin.Core
 {
     public class Log
     {

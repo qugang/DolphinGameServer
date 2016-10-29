@@ -1,5 +1,5 @@
-﻿using Free.Dolphin.Common;
-using Free.Dolphin.Common.Util;
+﻿using Free.Dolphin.Core;
+using Free.Dolphin.Core.Util;
 using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Free.Dolphin.Core
+namespace Free.Dolphin.Common
 {
     public class RedisContext
     {
@@ -25,7 +25,7 @@ namespace Free.Dolphin.Core
 
         protected static ConnectionMultiplexer RedisConnection { get; private set; }
 
-        protected static IDatabase RedisDb { get; private set; }
+        public static IDatabase RedisDb { get; private set; }
         public static void InitRedisContext(string redisConnectionString, Assembly assembly)
         {
             InitEntity(assembly);
@@ -85,7 +85,7 @@ namespace Free.Dolphin.Core
                 var key = _keyCache[t].GetValue(entity).ToString();
 
                 RedisDb.HashSet(t.Name, new HashEntry[] {
-                new HashEntry(key, SerializerUtil.BinarySerialize(entity))
+                new HashEntry(key, SerializerUtil.JavaScriptJosnSerialize(entity))
             });
             });
         }
@@ -95,7 +95,7 @@ namespace Free.Dolphin.Core
             var key = _keyCache[t].GetValue(entity).ToString();
 
             RedisDb.HashSet(t.Name, new HashEntry[] {
-                new HashEntry(key, SerializerUtil.BinarySerialize(entity))
+                new HashEntry(key, SerializerUtil.JavaScriptJosnSerialize(entity))
             });
         }
 
@@ -111,7 +111,7 @@ namespace Free.Dolphin.Core
             var entity = RedisDb.HashGet(typeof(T).Name, key);
             if (!entity.IsNull)
             {
-                return (T)SerializerUtil.BinaryDeserialize(RedisDb.HashGet(typeof(T).Name, key));
+                return SerializerUtil.JavaScriptJosnDeserialize<T>(RedisDb.HashGet(typeof(T).Name, key));
             }
             return default(T);
         }
@@ -122,18 +122,15 @@ namespace Free.Dolphin.Core
             Task.WaitAll(task);
             foreach (var row in task.Result)
             {
-                yield return (T)SerializerUtil.BinaryDeserialize(row.Value);
+                yield return SerializerUtil.JavaScriptJosnDeserialize<T>(row.Value);
             }
         }
 
-        public IEnumerable<T> FindSoredEntity<T>(int take) {
-            Type type = typeof(T);
-            foreach (var row in RedisDb.SortedSetRangeByRankWithScores(type.Name,0,take))
+        public IEnumerable<T> FindSoredEntityByKey<T>(string key,int take)
+        {
+            foreach (var row in RedisDb.SortedSetRangeByRankWithScores(key, 0, take))
             {
-                object o = _objectCache[type]();
-                _scoreCache[type].SetValue(o, row.Score);
-                _keyCache[type].SetValue(o, row.Element.ToString());
-                yield return (T)o;
+                yield return SerializerUtil.JavaScriptJosnDeserialize<T>(row.Element);
             }
         }
 
@@ -141,10 +138,12 @@ namespace Free.Dolphin.Core
         public void AddSortedSetEntity(object entity)
         {
             Type t = entity.GetType();
-            var element = _keyCache[t].GetValue(entity).ToString();
-            var score = (int)_scoreCache[t].GetValue(entity);
-            RedisDb.SortedSetAdd(t.Name,new SortedSetEntry[] {
-                new SortedSetEntry(element,score)
+            double score = (double)_scoreCache[t].GetValue(entity);
+
+            string key = _keyCache[t].GetValue(entity).ToString();
+
+            RedisDb.SortedSetAdd(key, new SortedSetEntry[] {
+                new SortedSetEntry(SerializerUtil.JavaScriptJosnSerialize(entity),score)
             });
         }
 
@@ -155,11 +154,31 @@ namespace Free.Dolphin.Core
             RedisDb.HashDelete(t.Name, key);
         }
 
+        public void DeleteAllHashKey(string key)
+        {
+            RedisDb.KeyDelete(key);
+        }
+        public void DeleteHashEntity<T>(string key)
+        {
+            Type type = typeof(T);
+
+            RedisDb.HashDelete(type.Name, key);
+
+        }
+
         public void DeleteSortedSetEntity(object entity)
         {
             Type t = entity.GetType();
             var key = _keyCache[t].GetValue(entity).ToString();
             RedisDb.SortedSetRemove(t.Name, key);
+
+        }
+
+        public long HashLength(object entity)
+        {
+            Type t = entity.GetType();
+            var key = _keyCache[t].GetValue(entity).ToString();
+            return RedisDb.HashLength(t.Name);
         }
     }
 }

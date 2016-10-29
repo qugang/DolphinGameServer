@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Diagnostics;
 
-namespace Free.Dolphin.Common
+namespace Free.Dolphin.Core
 {
     internal class ConsoleTraceListener : TraceListener
     {
